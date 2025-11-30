@@ -78,7 +78,7 @@
 
 <tr><td>
 
-<img align = "right" width='400' src="https://github.com/ayaya114514/ayaya114514.github.io/blob/main/IMG_6269.jpeg">
+<img align = "right" width='400' src="https://github.com/ayaya114514/ayaya114514.github.io/blob/main/IMG_6929.jpeg">
 
 - 摄于2025年7月23日。乘胜追击、购入了ps5slim。此时我已经近乎满足了我那强大的物欲黑洞、在奇点裸露、我踏入进事件视界后、一切的光芒却都消失了。我装模作样的思考会不会是黑洞……但心上的破洞早已将我毁灭的破绽不堪。我什么都做不到、什么都不想做、只想逃跑。灰溜溜的逃跑、飞快的逃跑、几步一回头的逃跑。怕有什么追上我、怕有什么追不上我。
 
