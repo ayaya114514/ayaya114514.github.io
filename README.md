@@ -54,3 +54,18 @@
 <li>🎧EDIFIER W820NB <kbd>08/01/2022</kbd></li>
 </ul>
 </li>
+<!-- feed end -->
+
+</td></tr>
+
+<tr><td>
+
+## 🧑🏼‍💻 桌搭环境
+
+<img align = "right" width='400' src="https://github.com/ayaya114514/ayaya114514.github.io/blob/main/IMG_3850.jpeg">
+
+- 摄于2024年8月11日、高三伊始、高中最后的暑假————我非常喜欢那段时光、尽管我不想回去
+
+</td></tr>
+
+<tr><td>
