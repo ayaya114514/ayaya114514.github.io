@@ -1,4 +1,4 @@
-# 😋有关ayaya114514的一切
+# 😋关于ayaya114514的一切
 
 <table>
 
@@ -19,6 +19,38 @@
 ## 🙋 数码设备
 
 <!-- feed start -->
-- iPhone 14 (a15 chip 6 + 5)
-> 5/3/2023
-- 
+<ul>
+
+<li>📱iPhone 14 (A15 chip 6 + 5) <kbd>05/03/2023</kbd>
+<ul>
+<li>⌚️Apple Watch Series 10 (S10 chip) <kbd>03/15/2025</kbd></li>
+<li>🎧Beats Fit Pro (H1 chip) <kbd>11/05/2024</kbd></li>
+</ul>
+</li>
+<br>
+
+<li>📱iPad Air (7th generation) 11 inch (M3 chip 8 + 9) <kbd>10/21/2025</kbd>
+<ul>
+<li>✏️Apple Pencil Pro <kbd>10/23/2025</kbd></li>
+</ul>
+</li>
+<br>
+
+<li>💻MacBook Pro 14 inch (M3 Pro chip 11 + 14) <kbd>10/01/2024</kbd>
+<ul>
+<li>⌨️Rainy75 <kbd>07/30/2025</kbd></li>
+<li>🖱️Langtu M8 (wireless) <kbd>12/01/2025</kbd></li>
+<li>🖥️KTC G27P6s 26.5 inch 2K OLED 240Hz <kbd>06/14/2025</kbd></li>
+<li>🎧DUNU TITAN S2 <kbd>12/20/2024</kbd></li>
+<li>🎧FINITE MIND OM10000 <kbd>11/28/2025</kbd></li>
+</ul>
+</li>
+<br>
+
+<li>💻Lenovo Yangtian V15 15.6 inch (i5-1135G7)</li> <kbd>11/01/2022</kbd>
+<ul>
+<li>⌨️VARMILO minilo 67 <kbd>09/11/2024</kbd></li>
+<li>🖱️logitech G102 <kbd>12/16/2023</kbd></li>
+<li>🎧EDIFIER W820NB <kbd>08/01/2022</kbd></li>
+</ul>
+</li>
