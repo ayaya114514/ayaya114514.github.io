@@ -1,4 +1,87 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Ayaya114514</title><description>有关ayaya的一切</description><link>https://ayaya114514.github.io/</link><language>zh_CN</language><item><title>Markdown Tutorial</title><link>https://ayaya114514.github.io/posts/markdown-tutorial/</link><guid isPermaLink="true">https://ayaya114514.github.io/posts/markdown-tutorial/</guid><description>A simple example of a Markdown blog post.</description><pubDate>Mon, 20 Jan 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Markdown Tutorial&lt;/h1&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Ayaya114514</title><description>有关ayaya的一切</description><link>https://ayaya114514.github.io/</link><language>zh_CN</language><item><title>第一篇文章：如何搭建此个人网站</title><link>https://ayaya114514.github.io/posts/114514/</link><guid isPermaLink="true">https://ayaya114514.github.io/posts/114514/</guid><description>ayaya在此的第一篇文章、希望不是最后一篇</description><pubDate>Wed, 03 Dec 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;基于Astro的Mizuki主题，羊羊零基础手把手带你&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA&quot;&gt;环境搭建&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E9%A1%B9%E7%9B%AE%E5%90%AF%E5%8A%A8&quot;&gt;项目启动&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E6%84%89%E5%BF%AB%E7%BC%96%E8%AF%91&quot;&gt;愉快编译&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E9%87%8D%E4%B8%AD%E4%B9%8B%E9%87%8D&quot;&gt;重中之重&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;环境搭建&lt;/h2&gt;
+&lt;h3&gt;安装vscode&lt;/h3&gt;
+&lt;p&gt;找到&lt;strong&gt;官网&lt;/strong&gt;下载vscode（我相信你有）。英文看着难受就去下拓展，这里不必多说。&lt;/p&gt;
+&lt;h3&gt;注册github&lt;/h3&gt;
+&lt;p&gt;挂🪜（我相信你有）去注册github账号（我仍相信你有）。创建一个new repository。命名为&lt;code&gt;你的id.github.io&lt;/code&gt;，如我的id是ayaya114514，那么我的项目名字为&lt;code&gt;ayaya114514.github.io&lt;/code&gt;。&lt;/p&gt;
+&lt;h3&gt;安装node&lt;/h3&gt;
+&lt;p&gt;Windows环境下请自行前往官网下载Node.js。&lt;/p&gt;
+&lt;p&gt;macOS环境下打开“终端”app，复制以下指令：&lt;/p&gt;
+&lt;p&gt;Code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;brew install node
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;win/mac，验证 Node.js 是否安装成功：&lt;/p&gt;
+&lt;p&gt;Code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;node -v
+npm -v
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;若成功显示版本号，则安装成功。&lt;/p&gt;
+&lt;h3&gt;安装pnpm&lt;/h3&gt;
+&lt;p&gt;无论是 Windows 还是 macOS ，打开终端或命令提示符，输入：&lt;/p&gt;
+&lt;p&gt;Code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;npm install -g pnpm
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;验证 pnpm 是否安装成功：&lt;/p&gt;
+&lt;p&gt;Code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pnpm -v
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;若成功显示版本号，则安装成功。&lt;/p&gt;
+&lt;h3&gt;安装Git&lt;/h3&gt;
+&lt;p&gt;Windows前往**http://msysgit.github.com/**下载exe文件安装&lt;/p&gt;
+&lt;p&gt;macOS直接输入：&lt;/p&gt;
+&lt;p&gt;Code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ sudo port install git-core +svn +doc +bash_completion +gitweb
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;验证是否成功：&lt;/p&gt;
+&lt;p&gt;Code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git --version
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;项目启动&lt;/h2&gt;
+&lt;p&gt;以下命令win/mac均可使用：&lt;/p&gt;
+&lt;p&gt;克隆项目到本地：&lt;/p&gt;
+&lt;p&gt;Code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/matsuzaka-yuki/mizuki.git
+cd Mizuki
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;安装项目依赖：&lt;/p&gt;
+&lt;p&gt;Code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pnpm install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;启动开发服务器：&lt;/p&gt;
+&lt;p&gt;Code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pnpm dev
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;⚠️⚠️一定不要关闭此终端进程！！&lt;/p&gt;
+&lt;p&gt;打开浏览器，输入：&lt;code&gt;http://localhost:4321&lt;/code&gt;此时打开的界面就是你接下来工作的预览。&lt;/p&gt;
+&lt;p&gt;如果你关闭了终端进程，这个预览网站你就进不去了，不小心关闭的话你就重新复制刚从git clone的两行指令（用来定位），然后再启动开发服务器即可。&lt;/p&gt;
+&lt;p&gt;使用你电脑自带的搜索功能，&lt;strong&gt;务必&lt;/strong&gt;检索到名为&lt;code&gt;mizuki&lt;/code&gt;的文件夹！！！！&lt;/p&gt;
+&lt;p&gt;进入文件夹，打开&lt;code&gt;src&lt;/code&gt;文件夹，点击&lt;code&gt;config.ts&lt;/code&gt;文件，用vscode打开。项目，启动！&lt;/p&gt;
+&lt;h2&gt;愉快编译&lt;/h2&gt;
+&lt;p&gt;进入之后你会发现有许多的备注，因而我不必一一教你了，你可以参考以下的网站：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;https://docs.mizuki.mysqil.com/&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;里面的很多内容我仍在研究，基本都是很清晰的概念和教程。&lt;/p&gt;
+&lt;p&gt;每次改完一部分内容，你可以保存文件，网站的内容会瞬时更新，所以最好来一个双屏，比较方便。&lt;/p&gt;
+&lt;h2&gt;重中之重&lt;/h2&gt;
+&lt;p&gt;当你觉得编译的差不多了，想要真正上到你的网站时，请务必完成以下步骤：&lt;/p&gt;
+&lt;p&gt;首先，终端定位到mizuki文件夹（你可以复制git clone那两行命令来直接定位）。&lt;/p&gt;
+&lt;p&gt;然后，输入：&lt;/p&gt;
+&lt;p&gt;Code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pnpm build
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;此时会生成一个名为&lt;code&gt;dist&lt;/code&gt;的文件夹。&lt;/p&gt;
+&lt;p&gt;这个文件夹需要每次在你编译完本地内容后删除再build，即需要更新。&lt;/p&gt;
+&lt;p&gt;下载&lt;code&gt;github desktop&lt;/code&gt;应用程序，登陆你的github账号。&lt;/p&gt;
+&lt;p&gt;进入dist文件夹（不要直接拖拽dist文件），在你的id.github.io的&lt;code&gt;项目里！！&lt;/code&gt;上传文件，同步到网站（这里我说的有些模糊，具体做法你可以问ai，会有更详细的教程）。&lt;/p&gt;
+&lt;p&gt;上传文件后，到github网站里进入你的项目之中，然后创造一个新文件（add file ➡️ create new file）。&lt;/p&gt;
+&lt;p&gt;文件名命名为&lt;code&gt;.nojekyll&lt;/code&gt;，内容为空。本步是重中之重，是原作者在网站里并未提到的一步，一定要这么做！！&lt;/p&gt;
+&lt;p&gt;然后在手机或者电脑或者什么设备上输入你的&lt;code&gt;id.github.io&lt;/code&gt;，你会发现你的伟大果实。&lt;/p&gt;
+</content:encoded></item><item><title>Markdown Tutorial</title><link>https://ayaya114514.github.io/posts/markdown-tutorial/</link><guid isPermaLink="true">https://ayaya114514.github.io/posts/markdown-tutorial/</guid><description>A simple example of a Markdown blog post.</description><pubDate>Mon, 20 Jan 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Markdown Tutorial&lt;/h1&gt;
 &lt;p&gt;A markdown example shows how to write a markdown file. This document integrates core syntax and extensions (GMF).&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;#block-elements&quot;&gt;Block Elements&lt;/a&gt;
@@ -708,298 +791,4 @@ This is another regular paragraph.
 &lt;strong&gt;No Work&lt;/strong&gt;
 &amp;lt;/div&amp;gt;&lt;/p&gt;
 &lt;hr /&gt;
-</content:encoded></item><item><title>Markdown Extended Features</title><link>https://ayaya114514.github.io/posts/markdown-extended/</link><guid isPermaLink="true">https://ayaya114514.github.io/posts/markdown-extended/</guid><description>Read more about Markdown features in Mizuki</description><pubDate>Wed, 01 May 2024 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;GitHub Repository Cards&lt;/h2&gt;
-&lt;p&gt;You can add dynamic cards that link to GitHub repositories, on page load, the repository information is pulled from the GitHub API.&lt;/p&gt;
-&lt;p&gt;::github{repo=&quot;matsuzaka-yuki/Mizuki&quot;}&lt;/p&gt;
-&lt;p&gt;Create a GitHub repository card with the code &lt;code&gt;::github{repo=&quot;matsuzaka-yuki/Mizuki&quot;}&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;::github{repo=&quot;matsuzaka-yuki/Mizuki&quot;}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;Admonitions&lt;/h2&gt;
-&lt;p&gt;Following types of admonitions are supported: &lt;code&gt;note&lt;/code&gt; &lt;code&gt;tip&lt;/code&gt; &lt;code&gt;important&lt;/code&gt; &lt;code&gt;warning&lt;/code&gt; &lt;code&gt;caution&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;:::note
-Highlights information that users should take into account, even when skimming.
-:::&lt;/p&gt;
-&lt;p&gt;:::tip
-Optional information to help a user be more successful.
-:::&lt;/p&gt;
-&lt;p&gt;:::important
-Crucial information necessary for users to succeed.
-:::&lt;/p&gt;
-&lt;p&gt;:::warning
-Critical content demanding immediate user attention due to potential risks.
-:::&lt;/p&gt;
-&lt;p&gt;:::caution
-Negative potential consequences of an action.
-:::&lt;/p&gt;
-&lt;h3&gt;Basic Syntax&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;:::note
-Highlights information that users should take into account, even when skimming.
-:::
-
-:::tip
-Optional information to help a user be more successful.
-:::
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;Custom Titles&lt;/h3&gt;
-&lt;p&gt;The title of the admonition can be customized.&lt;/p&gt;
-&lt;p&gt;:::note[MY CUSTOM TITLE]
-This is a note with a custom title.
-:::&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::note[MY CUSTOM TITLE]
-This is a note with a custom title.
-:::
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;GitHub Syntax&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;[!TIP]
-&lt;a href=&quot;https://github.com/orgs/community/discussions/16925&quot;&gt;The GitHub syntax&lt;/a&gt; is also supported.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre&gt;&lt;code&gt;&amp;gt; [!NOTE]
-&amp;gt; The GitHub syntax is also supported.
-
-&amp;gt; [!TIP]
-&amp;gt; The GitHub syntax is also supported.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;Spoiler&lt;/h3&gt;
-&lt;p&gt;You can add spoilers to your text. The text also supports &lt;strong&gt;Markdown&lt;/strong&gt; syntax.&lt;/p&gt;
-&lt;p&gt;The content :spoiler[is hidden &lt;strong&gt;ayyy&lt;/strong&gt;]!&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;The content :spoiler[is hidden **ayyy**]!&lt;/code&gt;&lt;/pre&gt;
-</content:encoded></item><item><title>Simple Guides for Mizuki</title><link>https://ayaya114514.github.io/posts/guide/</link><guid isPermaLink="true">https://ayaya114514.github.io/posts/guide/</guid><description>How to use this blog template.</description><pubDate>Mon, 01 Apr 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;This blog template is built with &lt;a href=&quot;https://astro.build/&quot;&gt;Astro&lt;/a&gt;. For the things that are not mentioned in this guide, you may find the answers in the &lt;a href=&quot;https://docs.astro.build/&quot;&gt;Astro Docs&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;Front-matter of Posts&lt;/h2&gt;
-&lt;pre&gt;&lt;code&gt;---
-title: My First Blog Post
-published: 2023-09-09
-description: This is the first post of my new Astro blog.
-image: ./cover.jpg
-tags: [Foo, Bar]
-category: Front-end
-draft: false
----
-&lt;/code&gt;&lt;/pre&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Attribute&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;title&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The title of the post.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;published&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The date the post was published.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;pinned&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Whether this post is pinned to the top of the post list.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;description&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;A short description of the post. Displayed on index page.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;image&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The cover image path of the post.&amp;lt;br/&amp;gt;1. Start with &lt;code&gt;http://&lt;/code&gt; or &lt;code&gt;https://&lt;/code&gt;: Use web image&amp;lt;br/&amp;gt;2. Start with &lt;code&gt;/&lt;/code&gt;: For image in &lt;code&gt;public&lt;/code&gt; dir&amp;lt;br/&amp;gt;3. With none of the prefixes: Relative to the markdown file&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;tags&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The tags of the post.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;category&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The category of the post.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;licenseName&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The license name for the post content.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;author&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The author of the post.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;sourceLink&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The source link or reference for the post content.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;draft&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;If this post is still a draft, which won&apos;t be displayed.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2&gt;Where to Place the Post Files&lt;/h2&gt;
-&lt;p&gt;Your post files should be placed in &lt;code&gt;src/content/posts/&lt;/code&gt; directory. You can also create sub-directories to better organize your posts and assets.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;src/content/posts/
-├── post-1.md
-└── post-2/
-    ├── cover.png
-    └── index.md
-&lt;/code&gt;&lt;/pre&gt;
-</content:encoded></item><item><title>Markdown Mermaid</title><link>https://ayaya114514.github.io/posts/markdown-mermaid/</link><guid isPermaLink="true">https://ayaya114514.github.io/posts/markdown-mermaid/</guid><description>A simple example of a Markdown blog post with Mermaid.</description><pubDate>Sun, 01 Oct 2023 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Complete Guide to Markdown with Mermaid Diagrams&lt;/h1&gt;
-&lt;p&gt;This article demonstrates how to create various complex diagrams using Mermaid in Markdown documents, including flowcharts, sequence diagrams, Gantt charts, class diagrams, and state diagrams.&lt;/p&gt;
-&lt;h2&gt;Flowchart Example&lt;/h2&gt;
-&lt;p&gt;Flowcharts are excellent for representing processes or algorithm steps.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;graph TD
-    A[Start] --&amp;gt; B{Condition Check}
-    B --&amp;gt;|Yes| C[Process Step 1]
-    B --&amp;gt;|No| D[Process Step 2]
-    C --&amp;gt; E[Subprocess]
-    D --&amp;gt; E
-    subgraph E [Subprocess Details]
-        E1[Substep 1] --&amp;gt; E2[Substep 2]
-        E2 --&amp;gt; E3[Substep 3]
-    end
-    E --&amp;gt; F{Another Decision}
-    F --&amp;gt;|Option 1| G[Result 1]
-    F --&amp;gt;|Option 2| H[Result 2]
-    F --&amp;gt;|Option 3| I[Result 3]
-    G --&amp;gt; J[End]
-    H --&amp;gt; J
-    I --&amp;gt; J
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;Sequence Diagram Example&lt;/h2&gt;
-&lt;p&gt;Sequence diagrams show interactions between objects over time.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sequenceDiagram
-    participant User
-    participant WebApp
-    participant Server
-    participant Database
-
-    User-&amp;gt;&amp;gt;WebApp: Submit Login Request
-    WebApp-&amp;gt;&amp;gt;Server: Send Auth Request
-    Server-&amp;gt;&amp;gt;Database: Query User Credentials
-    Database--&amp;gt;&amp;gt;Server: Return User Data
-    Server--&amp;gt;&amp;gt;WebApp: Return Auth Result
-    
-    alt Auth Successful
-        WebApp-&amp;gt;&amp;gt;User: Show Welcome Page
-        WebApp-&amp;gt;&amp;gt;Server: Request User Data
-        Server-&amp;gt;&amp;gt;Database: Get User Preferences
-        Database--&amp;gt;&amp;gt;Server: Return Preferences
-        Server--&amp;gt;&amp;gt;WebApp: Return User Data
-        WebApp-&amp;gt;&amp;gt;User: Load Personalized Interface
-    else Auth Failed
-        WebApp-&amp;gt;&amp;gt;User: Show Error Message
-        WebApp-&amp;gt;&amp;gt;User: Prompt Re-entry
-    end
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;Gantt Chart Example&lt;/h2&gt;
-&lt;p&gt;Gantt charts are perfect for displaying project schedules and timelines.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;gantt
-    title Website Development Project Timeline
-    dateFormat  YYYY-MM-DD
-    axisFormat  %m/%d
-    
-    section Design Phase
-    Requirements Analysis      :a1, 2023-10-01, 7d
-    UI Design                 :a2, after a1, 10d
-    Prototype Creation        :a3, after a2, 5d
-    
-    section Development Phase
-    Frontend Development      :b1, 2023-10-20, 15d
-    Backend Development       :b2, after a2, 18d
-    Database Design           :b3, after a1, 12d
-    
-    section Testing Phase
-    Unit Testing              :c1, after b1, 8d
-    Integration Testing       :c2, after b2, 10d
-    User Acceptance Testing   :c3, after c2, 7d
-    
-    section Deployment
-    Production Deployment     :d1, after c3, 3d
-    Launch                    :milestone, after d1, 0d
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;Class Diagram Example&lt;/h2&gt;
-&lt;p&gt;Class diagrams show the static structure of a system, including classes, attributes, methods, and their relationships.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;classDiagram
-    class User {
-        +String username
-        +String password
-        +String email
-        +Boolean active
-        +login()
-        +logout()
-        +updateProfile()
-    }
-    
-    class Article {
-        +String title
-        +String content
-        +Date publishDate
-        +Boolean published
-        +publish()
-        +edit()
-        +delete()
-    }
-    
-    class Comment {
-        +String content
-        +Date commentDate
-        +addComment()
-        +deleteComment()
-    }
-    
-    class Category {
-        +String name
-        +String description
-        +addArticle()
-        +removeArticle()
-    }
-    
-    User &quot;1&quot; -- &quot;*&quot; Article : writes
-    User &quot;1&quot; -- &quot;*&quot; Comment : posts
-    Article &quot;1&quot; -- &quot;*&quot; Comment : has
-    Article &quot;1&quot; -- &quot;*&quot; Category : belongs to
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;State Diagram Example&lt;/h2&gt;
-&lt;p&gt;State diagrams show the sequence of states an object goes through during its life cycle.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;stateDiagram-v2
-    [*] --&amp;gt; Draft
-    
-    Draft --&amp;gt; UnderReview : submit
-    UnderReview --&amp;gt; Draft : reject
-    UnderReview --&amp;gt; Approved : approve
-    Approved --&amp;gt; Published : publish
-    Published --&amp;gt; Archived : archive
-    Published --&amp;gt; Draft : retract
-    
-    state Published {
-        [*] --&amp;gt; Active
-        Active --&amp;gt; Hidden : temporarily hide
-        Hidden --&amp;gt; Active : restore
-        Active --&amp;gt; [*]
-        Hidden --&amp;gt; [*]
-    }
-    
-    Archived --&amp;gt; [*]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;Pie Chart Example&lt;/h2&gt;
-&lt;p&gt;Pie charts are ideal for displaying proportions and percentage data.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;pie title Website Traffic Sources Analysis
-    &quot;Search Engines&quot; : 45.6
-    &quot;Direct Access&quot; : 30.1
-    &quot;Social Media&quot; : 15.3
-    &quot;Referral Links&quot; : 6.4
-    &quot;Other Sources&quot; : 2.6
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Mermaid is a powerful tool for creating various types of diagrams in Markdown documents. This article demonstrated how to use flowcharts, sequence diagrams, Gantt charts, class diagrams, state diagrams, and pie charts. These diagrams can help you express complex concepts, processes, and data structures more clearly.&lt;/p&gt;
-&lt;p&gt;To use Mermaid, simply specify the mermaid language in a code block and describe the diagram using concise text syntax. Mermaid will automatically convert these descriptions into beautiful visual diagrams.&lt;/p&gt;
-&lt;p&gt;Try using Mermaid diagrams in your next technical blog post or project documentation - they will make your content more professional and easier to understand!&lt;/p&gt;
-</content:encoded></item><item><title>Include Video in the Posts</title><link>https://ayaya114514.github.io/posts/video/</link><guid isPermaLink="true">https://ayaya114514.github.io/posts/video/</guid><description>This post demonstrates how to include embedded video in a blog post.</description><pubDate>Mon, 01 Aug 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Just copy the embed code from YouTube or other platforms, and paste it in the markdown file.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;---
-title: Include Video in the Post
-published: 2023-10-19
-// ...
----
-
-&amp;lt;iframe width=&quot;100%&quot; height=&quot;468&quot; src=&quot;https://www.youtube.com/embed/5gIf0_xpFPI?si=N1WTorLKL0uwLsU_&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allowfullscreen&amp;gt;&amp;lt;/iframe&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;YouTube&lt;/h2&gt;
-&lt;p&gt;&amp;lt;iframe width=&quot;100%&quot; height=&quot;468&quot; src=&quot;https://www.youtube.com/embed/5gIf0_xpFPI?si=N1WTorLKL0uwLsU_&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; allowfullscreen&amp;gt;&amp;lt;/iframe&amp;gt;&lt;/p&gt;
-&lt;h2&gt;Bilibili&lt;/h2&gt;
-&lt;p&gt;&amp;lt;iframe width=&quot;100%&quot; height=&quot;468&quot; src=&quot;//player.bilibili.com/player.html?bvid=BV1fK4y1s7Qf&amp;amp;p=1&amp;amp;autoplay=0&quot; scrolling=&quot;no&quot; border=&quot;0&quot; frameborder=&quot;no&quot; framespacing=&quot;0&quot; allowfullscreen=&quot;true&quot; &amp;amp;autoplay=0&amp;gt; &amp;lt;/iframe&amp;gt;&lt;/p&gt;
 </content:encoded></item></channel></rss>
