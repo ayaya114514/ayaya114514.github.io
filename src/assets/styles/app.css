@@ -1,0 +1,48 @@
+/* Theme — Claude-style warm light */
+:root {
+  /* Primary */
+  --primary: 16 25% 38%;
+  /* Foreground */
+  --foreground: 30 10% 12%;
+  --muted-foreground: 30 5% 38%;
+  /* Background — warm off-white close to #faf9f5 */
+  --background: 48 33% 97%;
+  --muted: 45 22% 92%;
+  --card: 42 18% 88%;
+
+  /* Basic */
+  --border: 40 12% 84%;
+  --input: 40 12% 88%;
+  --ring: 30 10% 20%;
+  --radius: 0.5rem;
+}
+.dark {
+  /* Primary */
+  --primary: 195 95% 85%;
+  /* Foreground */
+  --foreground: 0 0% 98%;
+  --muted-foreground: 240 5% 74.9%;
+  /* Background */
+  --background: 240 20.54% 5.2%;
+  --muted: 240 5.9% 13%;
+  --card: 240 3.7% 24.9%;
+
+  /* Basic */
+  --border: 240 3.7% 22.9%;
+  --input: 240 3.7% 17.9%;
+  --ring: 240 4.9% 83.9%;
+}
+:root {
+  --un-default-border-color: hsl(var(--border) / 1);
+}
+html.dark {
+  color-scheme: dark;
+}
+
+/* Global */
+a {
+  transition: color 0.2s ease;
+  &:hover {
+    color: hsl(var(--primary) / var(--un-text-opacity, 1));
+  }
+}

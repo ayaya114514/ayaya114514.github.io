@@ -1,0 +1,175 @@
+---
+import PageLayout from '@/layouts/CommonPage.astro'
+
+const headings = [
+  { depth: 2, slug: 'apple', text: '🍎 Apple' },
+  { depth: 2, slug: 'peripherals', text: '🖥️ 外设' },
+  { depth: 2, slug: 'audio', text: '🎧 发烧' }
+]
+
+type Device = {
+  name: string
+  image: string
+  specs: string
+  date: string
+  link: string
+}
+
+const apple: Device[] = [
+  {
+    name: 'Apple Watch Series 10',
+    image: '/images/device/watch.jpeg',
+    specs: 'S10 chip',
+    date: '2025-03-15',
+    link: 'https://support.apple.com/zh-cn/121202/'
+  },
+  {
+    name: 'iPhone 14',
+    image: '/images/device/iphone.jpeg',
+    specs: 'A15 chip · 6 + 5',
+    date: '2023-05-03',
+    link: 'https://support.apple.com/zh-cn/111850/'
+  },
+  {
+    name: 'iPad Air 7',
+    image: '/images/device/ipad.jpeg',
+    specs: 'M3 chip · 8 + 9',
+    date: '2025-10-21',
+    link: 'https://support.apple.com/zh-cn/122241/'
+  },
+  {
+    name: 'MacBook Pro (2023)',
+    image: '/images/device/macbook.jpeg',
+    specs: 'M3 Pro chip · 11 + 14',
+    date: '2024-10-01',
+    link: 'https://support.apple.com/zh-cn/117736/'
+  }
+]
+
+const peripherals: Device[] = [
+  {
+    name: 'KTC G27P6s',
+    image: '/images/device/monitor.jpeg',
+    specs: '26.5 inch · 2K OLED · 240Hz',
+    date: '2025-06-14',
+    link: 'https://www.ithome.com/0/854/646.htm/'
+  },
+  {
+    name: 'Rainy75',
+    image: '/images/device/keyboard1.jpeg',
+    specs: '风信子 v2u + 风信子 v1',
+    date: '2025-07-30',
+    link: 'https://manuals.plus/zh-CN/reddit/rainy75-aluminum-keyboard-manual/'
+  },
+  {
+    name: '狼途 M8',
+    image: '/images/device/mouse1.jpeg',
+    specs: 'PAW 3311',
+    date: '2025-12-01',
+    link: 'https://www.bilibili.com/video/BV1xd1hBLEdz/'
+  },
+  {
+    name: 'Lenovo 扬天 V15',
+    image: '/images/device/computer.jpeg',
+    specs: 'i5-1135G7',
+    date: '2022-11-01',
+    link: 'https://detail.zol.com.cn/1469/1468032/param.shtml/'
+  },
+  {
+    name: 'VARMILO minilo 67',
+    image: '/images/device/keyboard2.jpeg',
+    specs: '静电容 · 昙花白轴',
+    date: '2024-09-08',
+    link: 'https://post.smzdm.com/p/am8gz594/'
+  },
+  {
+    name: 'Logitech G102',
+    image: '/images/device/mouse2.jpeg',
+    specs: '有线鼠',
+    date: '2023-12-16',
+    link: 'https://detail.zol.com.cn/1159/1158706/param.shtml/'
+  }
+]
+
+const audio: Device[] = [
+  {
+    name: 'EarPods',
+    image: '/images/device/earpods.jpeg',
+    specs: 'Lightning 接口',
+    date: '2022-08-13',
+    link: 'https://www.apple.com.cn/shop/product/mwty3fe/a/'
+  },
+  {
+    name: 'EDIFIER W820NB',
+    image: '/images/device/w820nb.jpeg',
+    specs: '有线 Hi-Res 金标',
+    date: '2022-08-01',
+    link: 'https://www.edifier.com/cn/instruction/W820NB.html/'
+  },
+  {
+    name: 'Beats Fit Pro',
+    image: '/images/device/beats.jpeg',
+    specs: 'H1 chip',
+    date: '2024-11-05',
+    link: 'https://support.apple.com/zh-hk/guide/beats/dev6f7b5266d/web/'
+  },
+  {
+    name: 'DUNU TITAN S2',
+    image: '/images/device/titans2.jpeg',
+    specs: '塞子',
+    date: '2024-12-20',
+    link: 'https://www.dunu-topsound.com/titans2/'
+  },
+  {
+    name: 'FINITE MIND OM10000',
+    image: '/images/device/om10000.jpeg',
+    specs: '封闭式大耳',
+    date: '2025-11-28',
+    link: 'https://www.bilibili.com/video/BV1WiNhzoEff/'
+  }
+]
+
+const sections: { id: string; title: string; items: Device[] }[] = [
+  { id: 'apple', title: '🍎 Apple', items: apple },
+  { id: 'peripherals', title: '🖥️ 外设', items: peripherals },
+  { id: 'audio', title: '🎧 发烧', items: audio }
+]
+---
+
+<PageLayout title='设备' {headings}>
+  <p>这里展示我日常使用的各类设备。</p>
+
+  {
+    sections.map((section) => (
+      <section>
+        <h2 id={section.id}>{section.title}</h2>
+        <div class='not-prose grid grid-cols-2 gap-3 sm:grid-cols-3'>
+          {section.items.map((d) => (
+            <a
+              href={d.link}
+              target='_blank'
+              rel='noopener'
+              class='group flex flex-col overflow-hidden rounded-lg border bg-background/60 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md'
+            >
+              <div class='aspect-square overflow-hidden bg-muted'>
+                <img
+                  src={d.image}
+                  alt={d.name}
+                  loading='lazy'
+                  class='h-full w-full object-cover transition-transform duration-300 group-hover:scale-105'
+                />
+              </div>
+              <div class='flex flex-1 flex-col gap-y-1 p-3'>
+                <h3 class='text-sm font-medium leading-snug group-hover:text-[var(--primary)]'>
+                  {d.name}
+                </h3>
+                <p class='text-xs text-muted-foreground'>{d.specs}</p>
+                <p class='mt-auto text-xs text-muted-foreground/80'>{d.date}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))
+  }
+</PageLayout>
