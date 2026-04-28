@@ -1,0 +1,20 @@
+---
+import PageLayout from '@/layouts/CommonPage.astro'
+
+const headings = [
+  { depth: 2, slug: 'intro', text: '介绍' },
+  { depth: 2, slug: 'about-blog', text: '关于本站' }
+]
+---
+
+<PageLayout title='关于' {headings}>
+  <h2 id='intro'>介绍</h2>
+  <p>这里是 ayaya 的小角落，主要用来存放笔记和日记。</p>
+
+  <h2 id='about-blog'>关于本站</h2>
+  <ul>
+    <li>框架：<a href='https://astro.build/' target='_blank'>Astro</a></li>
+    <li>主题：<a href='https://github.com/cworld1/astro-theme-pure' target='_blank'>Astro Theme Pure</a></li>
+    <li>托管：GitHub Pages</li>
+  </ul>
+</PageLayout>
