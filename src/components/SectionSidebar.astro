@@ -1,0 +1,31 @@
+---
+import config from '@/site-config'
+
+const sections = config.header.menu
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
+---
+
+<aside
+  class='hidden lg:flex sticky top-4 self-start w-48 shrink-0 me-8 mt-4 flex-col gap-y-1 max-h-[calc(100vh-2rem)] overflow-y-auto bg-transparent'
+  aria-label='Section navigation'
+>
+  {
+    sections.map((s) => {
+      const active =
+        s.link === '/'
+          ? currentPath === '/'
+          : currentPath === s.link || currentPath.startsWith(s.link + '/')
+      return (
+        <a
+          href={s.link}
+          class={`px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-muted ${
+            active ? 'bg-muted text-[var(--primary)]' : 'text-muted-foreground'
+          }`}
+        >
+          {s.title}
+        </a>
+      )
+    })
+  }
+</aside>
