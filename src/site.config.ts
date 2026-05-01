@@ -34,6 +34,7 @@ export const theme: ThemeUserConfig = {
     menu: [
       { title: '首页', link: '/' },
       { title: '笔记', link: '/blog' },
+      { title: '娱乐', link: '/entertainment' },
       { title: '桌搭', link: '/desksetup' },
       { title: '设备', link: '/devices' },
       { title: '关于', link: '/about' }
