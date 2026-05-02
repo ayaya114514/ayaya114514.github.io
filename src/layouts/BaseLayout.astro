@@ -14,11 +14,13 @@ import '@/assets/styles/app.css'
 interface Props {
   meta: SiteMeta
   highlightColor?: string
+  showSidebar?: boolean
 }
 
 const {
   meta: { articleDate, description = config.description, ogImage, title },
   highlightColor,
+  showSidebar = true,
   ...props
 } = Astro.props
 ---
@@ -29,7 +31,7 @@ const {
     <ThemeProvider />
   </head>
 
-  <body class='flex justify-center bg-background text-foreground' {...props}>
+  <body class='flex justify-center bg-background text-foreground site-bg' {...props}>
     {
       highlightColor && (
         <div
@@ -41,9 +43,9 @@ const {
     }
     <div
       id='main-container'
-      class='w-full max-w-[80rem] min-h-[100dvh] flex'
+      class='w-full max-w-[96rem] min-h-[100dvh] flex'
     >
-      <SectionSidebar />
+      {showSidebar && <SectionSidebar />}
       <div class='flex-1 min-w-0 flex flex-col justify-between'>
         <Header />
         <div class='flex-1 w-full'>
