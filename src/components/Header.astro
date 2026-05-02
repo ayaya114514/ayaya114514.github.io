@@ -24,7 +24,7 @@ import config from '@/site-config'
           config.header.menu.map((item) => (
             <a
               href={item.link}
-              class='w-full flex-none grow py-2 text-right font-medium transition-none hover:text-primary sm:w-fit sm:px-3'
+              class='w-full flex-none grow py-2 max-sm:text-center sm:text-right font-medium transition-none hover:text-primary sm:w-fit sm:px-3'
               aria-label='Nav menu item'
               data-astro-prefetch
             >
@@ -32,7 +32,7 @@ import config from '@/site-config'
             </a>
           ))
         }
-        <div class='flex w-full grow flex-row justify-end gap-x-3 sm:w-fit sm:gap-x-5'>
+        <div class='flex w-full grow flex-row max-sm:justify-center sm:justify-end gap-x-3 sm:w-fit sm:gap-x-5'>
           <a class='px-1 py-2 transition-none sm:px-2' href='/search' title='Search'>
             <span class='sr-only'>Search</span>
             <Icon name='search' class='size-5' />

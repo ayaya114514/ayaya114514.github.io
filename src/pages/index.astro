@@ -1,6 +1,5 @@
 ---
 import { Image } from 'astro:assets'
-import { getCollection, render } from 'astro:content'
 
 import { PostPreview } from 'astro-pure/components/pages'
 import { getBlogCollection, sortMDByDate } from 'astro-pure/server'
@@ -8,20 +7,19 @@ import { Button, Icon, Label } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import Section from '@/components/home/Section.astro'
 import config from '@/site-config'
+import bandsData from '../data/bands.json'
 
 const MAX_POSTS = 5
 const allPosts = await getBlogCollection()
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 
-const desksetupEntries = (
-  await getCollection('desksetup', ({ data }) => !data.draft)
-).sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-const recentDesksetup = desksetupEntries.slice(0, 3)
-const dateFmt = new Intl.DateTimeFormat('zh-CN', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric'
-})
+type Band = {
+  slug: string
+  display: string
+  link: string
+  avatar: string | null
+}
+const bands = bandsData as { count: number; updated_at: string; items: Band[] }
 
 const imagePath = config.logo.src
 const images = import.meta.glob<{ default: ImageMetadata }>(
@@ -33,7 +31,7 @@ if (!images[imagePath])
   )
 ---
 
-<PageLayout meta={{ title: 'Home' }}>
+<PageLayout meta={{ title: 'Home' }} showSidebar={false}>
   <main class='flex w-full flex-col items-center'>
     {/* Hero */}
     <section class='animate mb-10 flex flex-col items-center gap-y-7' id='content-header'>
@@ -48,27 +46,59 @@ if (!images[imagePath])
       <div class='flex flex-col items-center gap-y-4'>
         <h1 class='text-3xl font-medium'>{config.author}</h1>
         <div class='flex flex-wrap justify-center gap-x-7 gap-y-3'>
-          <Label title='Somewhere'>
-            <Icon name='location' class='size-5' slot='icon' />
-          </Label>
-          <Label title='学生'>
-            <Icon name='user' class='size-5' slot='icon' />
-          </Label>
           <Label title='GitHub' as='a' href='https://github.com/ayaya114514' target='_blank'>
             <Icon name='github' class='size-5' slot='icon' />
           </Label>
+          <Label
+            title='Instagram'
+            as='a'
+            href='https://www.instagram.com/luanzhui1/'
+            target='_blank'
+          >
+            <Icon name='instagram' class='size-5' slot='icon' />
+          </Label>
         </div>
-        <p class='italic text-muted-foreground text-sm'>{config.description}</p>
       </div>
     </section>
 
-    <div id='content' class='animate flex flex-col gap-y-10 md:w-4/5 lg:w-5/6'>
+    <div id='content' class='animate flex flex-col gap-y-10 w-full md:w-11/12 xl:w-full max-w-5xl'>
       {/* About */}
       <Section title='关于'>
         <p class='text-muted-foreground'>
-          这里是 ayaya 的小角落，主要用来存放笔记和日常碎念。
+          家庭、学业、音乐——这是我目前最重视的三项。在把所有的注意力倾之于以上时，如果怠惰或者有余力，我会把挤出来的注意力献给：朋友、书籍、电影。
         </p>
-        <Button title='了解更多...' class='w-fit self-end' href='/about' variant='ahead' />
+      </Section>
+
+      {/* Help */}
+      <Section title='有什么可以帮助到你'>
+        <p class='text-muted-foreground leading-relaxed'>
+          日本帝大情报修考的情报、直连 / 中转 / IEPL 专线机场的推荐、亚太 / 美西等地区的线路机 / 落地机 VPS 厂家的推荐、链式代理 / 分流规则 / 代理软件的使用教程、主流 LLM 模型不同版本的斗蛐蛐、正价订阅 Claude / ChatGPT 全流程等，如有需要请务必联络我，我会耐心免费为您解答的！
+        </p>
+      </Section>
+
+      {/* Contact */}
+      <Section title='联络先'>
+        <span
+          class='inline-flex w-fit items-center gap-x-2 rounded-lg border bg-background/60 px-3 py-2 text-sm shadow-sm select-all'
+        >
+          <Icon name='email' class='size-4' />
+          anyangyang2022@gmail.com
+        </span>
+      </Section>
+
+      {/* Hobbies */}
+      <Section title='爱好'>
+        <p class='text-muted-foreground'>音乐上极度痴迷 J-POP</p>
+        <p class='text-muted-foreground'>饮食上几乎每天都要摄取一瓶碳酸饮料</p>
+        <p class='text-muted-foreground'>
+          读书上中国作家最喜欢莫言、外国作家最喜欢村上春树（其几乎每一本长篇小说我都看过）
+        </p>
+        <p class='text-muted-foreground'>
+          流媒体上不知何时起开始关注 hololive，jp / en 甚至 id 我都有关注。我毫无疑问是一个 35p（笑）
+        </p>
+        <p class='text-muted-foreground'>
+          极度厌恶 MBTI，请务必不要在我面前提到你的 mbti 人格测试结果
+        </p>
       </Section>
 
       {/* Recent posts */}
@@ -87,46 +117,41 @@ if (!images[imagePath])
         )
       }
 
-      {/* Recent desk setup */}
-      {
-        recentDesksetup.length > 0 && (
-          <Section title='桌搭'>
-            <ul class='flex flex-col gap-y-3'>
-              {recentDesksetup.map((entry) => (
-                <li>
-                  <a
-                    href='/desksetup'
-                    class='flex items-center gap-x-4 rounded-lg border bg-background/40 p-3 transition-colors hover:bg-muted'
-                  >
-                    {entry.data.image && (
-                      <img
-                        src={entry.data.image}
-                        alt={`桌搭 ${dateFmt.format(entry.data.publishDate)}`}
-                        class='size-16 shrink-0 rounded object-cover'
-                        loading='lazy'
-                      />
-                    )}
-                    <div class='min-w-0 flex-1'>
-                      <p class='text-sm font-medium'>
-                        {dateFmt.format(entry.data.publishDate)}
-                      </p>
-                      <p class='line-clamp-2 text-xs text-muted-foreground mt-1'>
-                        {entry.body?.slice(0, 60)}
-                      </p>
+      {/* Favorite bands */}
+      <Section title='目前最喜欢的十个乐队（歌手）'>
+        <div class='not-prose grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
+          {
+            bands.items.map((b) => (
+              <a
+                href={b.link}
+                target='_blank'
+                rel='noopener noreferrer'
+                class='group flex flex-col items-center gap-y-2 rounded-lg border bg-background/60 p-3 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md'
+              >
+                <div class='aspect-square w-20 overflow-hidden rounded-full bg-muted'>
+                  {b.avatar ? (
+                    <img
+                      src={b.avatar}
+                      alt={b.display}
+                      loading='lazy'
+                      class='h-full w-full object-cover transition-transform duration-300 group-hover:scale-105'
+                    />
+                  ) : (
+                    <div class='flex h-full w-full items-center justify-center text-xs text-muted-foreground'>
+                      无头像
                     </div>
-                  </a>
-                </li>
-              ))}
-            </ul>
-            <Button title='更多桌搭' class='w-fit self-end' href='/desksetup' variant='ahead' />
-          </Section>
-        )
-      }
-
-      {/* Devices */}
-      <Section title='设备'>
-        <p class='text-muted-foreground text-sm'>日常使用的各种数码 / 外设 / 音频设备。</p>
-        <Button title='查看设备' class='w-fit self-end' href='/devices' variant='ahead' />
+                  )}
+                </div>
+                <h3
+                  class='line-clamp-2 text-center text-sm font-medium leading-snug group-hover:text-[var(--primary)]'
+                  title={b.display}
+                >
+                  {b.display}
+                </h3>
+              </a>
+            ))
+          }
+        </div>
       </Section>
     </div>
   </main>

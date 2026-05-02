@@ -1,0 +1,66 @@
+{
+  "count": 10,
+  "updated_at": "2026-05-02 14:22:22",
+  "items": [
+    {
+      "slug": "zutomayo",
+      "display": "ZUTOMAYO",
+      "link": "https://zutomayo.net/",
+      "avatar": "/band-avatars/zutomayo.jpg"
+    },
+    {
+      "slug": "yorushika",
+      "display": "ヨルシカ",
+      "link": "https://yorushika.com/",
+      "avatar": "/band-avatars/yorushika.jpg"
+    },
+    {
+      "slug": "n-buna",
+      "display": "n-buna",
+      "link": "https://twitter.com/nbuna_staff",
+      "avatar": "/band-avatars/n-buna.jpg"
+    },
+    {
+      "slug": "mrs-green-apple",
+      "display": "Mrs.GREEN APPLE",
+      "link": "https://mrsgreenapple.com/",
+      "avatar": "/band-avatars/mrs-green-apple.jpg"
+    },
+    {
+      "slug": "sakanaction",
+      "display": "鱼韵",
+      "link": "https://sakanaction.jp/",
+      "avatar": "/band-avatars/sakanaction.jpg"
+    },
+    {
+      "slug": "the-beatles",
+      "display": "The Beatles",
+      "link": "https://www.thebeatles.com/",
+      "avatar": "/band-avatars/the-beatles.jpg"
+    },
+    {
+      "slug": "fujii-kaze",
+      "display": "藤井 风",
+      "link": "https://fujiikaze.com/",
+      "avatar": "/band-avatars/fujii-kaze.jpg"
+    },
+    {
+      "slug": "orangestar",
+      "display": "Orangestar",
+      "link": "https://www.youtube.com/user/OrangestarAS/videos",
+      "avatar": "/band-avatars/orangestar.jpg"
+    },
+    {
+      "slug": "radwimps",
+      "display": "RADWIMPS",
+      "link": "https://radwimps.jp/",
+      "avatar": "/band-avatars/radwimps.jpg"
+    },
+    {
+      "slug": "jj-lin",
+      "display": "林俊杰",
+      "link": "https://www.jjlin.com/",
+      "avatar": "/band-avatars/jj-lin.jpg"
+    }
+  ]
+}
