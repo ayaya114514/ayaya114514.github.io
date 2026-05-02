@@ -2,6 +2,7 @@
 import PageLayout from '@/layouts/CommonPage.astro'
 import moviesData from '../../data/douban/movies.json'
 import booksData from '../../data/douban/books.json'
+import ytSubsData from '../../data/youtube-subs.json'
 
 type DoubanItem = {
   title: string
@@ -21,8 +22,22 @@ type DoubanPayload = {
   items: DoubanItem[]
 }
 
+type YoutubeSubItem = {
+  id: string
+  url: string
+  title: string
+  avatar: string | null
+}
+
+type YoutubeSubsPayload = {
+  count: number
+  updated_at: string
+  items: YoutubeSubItem[]
+}
+
 const movies = moviesData as DoubanPayload
 const books = booksData as DoubanPayload
+const ytSubs = ytSubsData as YoutubeSubsPayload
 
 // 豆瓣图片有 referer 防盗链，浏览器直连大概率 403。
 // 脚本里已经把封面下到 public/images/douban/，cover 字段是站内相对路径
@@ -35,6 +50,7 @@ function resolveCover(url: string | null | undefined): string | null {
 }
 
 const headings = [
+  { depth: 2, slug: 'youtube', text: '📺 YouTube 订阅频道' },
   { depth: 2, slug: 'movies', text: '🎬 电影' },
   { depth: 2, slug: 'books', text: '📚 书籍' }
 ]
@@ -56,12 +72,53 @@ const sections: { id: string; title: string; payload: DoubanPayload; emptyHint: 
 ---
 
 <PageLayout title='娱乐' {headings}>
-  <p>
-    从豆瓣同步而来的看过 / 读过记录。数据更新于
-    <span class='text-muted-foreground'>
-      {movies.updated_at || books.updated_at || '尚未同步'}
-    </span>。
-  </p>
+  {/* YouTube 订阅频道 */}
+  <section>
+    <h2 id='youtube'>
+      📺 YouTube 订阅频道
+      <span class='ml-2 text-sm font-normal text-muted-foreground'>
+        共 {ytSubs.count} 个
+      </span>
+    </h2>
+
+    {ytSubs.items.length === 0 ? (
+      <p class='text-sm text-muted-foreground'>
+        还没有数据。运行 <code>node scripts/import_youtube_subs.mjs</code> 同步。
+      </p>
+    ) : (
+      <div class='not-prose grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
+        {ytSubs.items.map((c) => (
+          <a
+            href={c.url}
+            target='_blank'
+            rel='noopener noreferrer'
+            class='group flex flex-col items-center gap-y-2 rounded-lg border bg-background/60 p-3 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md'
+          >
+            <div class='aspect-square w-20 overflow-hidden rounded-full bg-muted'>
+              {c.avatar ? (
+                <img
+                  src={c.avatar}
+                  alt={c.title}
+                  loading='lazy'
+                  class='h-full w-full object-cover transition-transform duration-300 group-hover:scale-105'
+                />
+              ) : (
+                <div class='flex h-full w-full items-center justify-center text-xs text-muted-foreground'>
+                  无头像
+                </div>
+              )}
+            </div>
+            <h3
+              class='line-clamp-2 text-center text-sm font-medium leading-snug group-hover:text-[var(--primary)]'
+              title={c.title}
+            >
+              {c.title}
+            </h3>
+          </a>
+        ))}
+      </div>
+    )}
+  </section>
 
   {
     sections.map(({ id, title, payload, emptyHint }) => (
