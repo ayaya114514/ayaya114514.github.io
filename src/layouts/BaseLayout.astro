@@ -45,7 +45,13 @@ const {
       id='main-container'
       class='w-full max-w-[96rem] min-h-[100dvh] flex'
     >
-      {showSidebar && <SectionSidebar />}
+      {
+        showSidebar && (
+          <SectionSidebar>
+            <slot name='nav-sub' slot='nav-sub' />
+          </SectionSidebar>
+        )
+      }
       <div class='flex-1 min-w-0 flex flex-col justify-between'>
         <Header />
         <div class='flex-1 w-full'>

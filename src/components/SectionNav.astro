@@ -1,0 +1,162 @@
+---
+import type { MarkdownHeading } from 'astro'
+
+import { generateToc } from '@/utils/toc'
+
+interface Props {
+  /** 当前板块名，仅作 aria-label，左侧栏外层菜单已经显示过一次 */
+  title: string
+  /** 当前页 markdown 的标题列表（CommonPage 调用方传入） */
+  headings?: MarkdownHeading[]
+  class?: string
+}
+
+const { title, headings = [], class: className } = Astro.props
+
+// 把扁平 headings 组装成嵌套树。子板块通常是 h2，h3 会作为孙节点缩进展示。
+const tocTree = headings.length ? generateToc(headings) : []
+---
+
+{
+  tocTree.length > 0 && (
+    <section-nav class:list={['relative block text-sm', className]} data-section-nav>
+      {/* 浮动高亮块：随当前可见的 h2 滚动联动，CSS transition 实现「滑动」效果 */}
+      <span
+        aria-hidden='true'
+        data-section-indicator
+        class='pointer-events-none absolute start-0 end-0 rounded-md bg-muted opacity-0 transition-[transform,height,opacity] duration-300 ease-out'
+        style='transform:translateY(0px);height:0px;'
+      />
+
+      <ul class='relative flex flex-col gap-y-1' aria-label={`${title} 目录`}>
+        {tocTree.map((h) => (
+          <li>
+            <a
+              href={`#${h.slug}`}
+              data-section-anchor={h.slug}
+              class='relative block rounded-md px-2 py-1 text-muted-foreground transition-colors hover:text-foreground'
+            >
+              {h.text}
+            </a>
+            {h.subheadings.length > 0 && (
+              <ul class='ms-1 mt-0.5 flex flex-col gap-y-0.5 border-l border-muted-foreground/15 ps-2'>
+                {h.subheadings.map((sub) => (
+                  <li>
+                    <a
+                      href={`#${sub.slug}`}
+                      data-section-anchor={sub.slug}
+                      class='relative block rounded px-2 py-0.5 text-xs text-muted-foreground transition-colors hover:text-foreground'
+                    >
+                      {sub.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section-nav>
+  )
+}
+
+<script>
+  /**
+   * SectionNav 自定义元素：
+   * 1. 点击锚点 → 平滑滚动并更新 hash
+   * 2. 滚动时根据正文中各 heading 的位置，找到「当前最靠上、且仍在视口顶端区上方的」一个，
+   *    把高亮块的 transform/height 设为对应 sidebar item 的位置，借助 CSS transition
+   *    形成滑动效果。
+   */
+  class SectionNav extends HTMLElement {
+    private indicator!: HTMLElement
+    private items: HTMLAnchorElement[] = []
+    private targets: { anchor: HTMLAnchorElement; heading: HTMLElement }[] = []
+    private rafId: number | null = null
+    private currentSlug: string | null = null
+
+    connectedCallback() {
+      const indicator = this.querySelector<HTMLElement>('[data-section-indicator]')
+      if (!indicator) return
+      this.indicator = indicator
+
+      this.items = Array.from(this.querySelectorAll<HTMLAnchorElement>('[data-section-anchor]'))
+      this.targets = this.items
+        .map((a) => {
+          const slug = a.dataset.sectionAnchor!
+          const heading = document.getElementById(slug)
+          return heading ? { anchor: a, heading } : null
+        })
+        .filter((x): x is { anchor: HTMLAnchorElement; heading: HTMLElement } => !!x)
+
+      // 点击：平滑滚动
+      this.items.forEach((a) => {
+        a.addEventListener('click', (e) => {
+          const slug = a.dataset.sectionAnchor
+          if (!slug) return
+          const target = document.getElementById(slug)
+          if (!target) return
+          e.preventDefault()
+          history.pushState(null, '', `#${slug}`)
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        })
+      })
+
+      // 滚动联动（rAF 节流避免抖动）
+      const onScroll = () => {
+        if (this.rafId !== null) return
+        this.rafId = requestAnimationFrame(() => {
+          this.rafId = null
+          this.updateIndicator()
+        })
+      }
+      window.addEventListener('scroll', onScroll, { passive: true })
+      window.addEventListener('resize', onScroll)
+      // 等首屏布局稳定再放置一次，避免 indicator 初始位置错乱
+      requestAnimationFrame(() => this.updateIndicator())
+    }
+
+    private updateIndicator() {
+      if (!this.targets.length) return
+
+      // 把视口顶端的「触发线」放在 30%，比纯 0 更符合阅读直觉
+      const triggerLine = window.scrollY + window.innerHeight * 0.3
+
+      // 找最后一个 offsetTop <= triggerLine 的 heading；都在下方时取第一个
+      let activeIdx = 0
+      for (let i = 0; i < this.targets.length; i++) {
+        if (this.targets[i].heading.offsetTop <= triggerLine) {
+          activeIdx = i
+        } else {
+          break
+        }
+      }
+
+      const active = this.targets[activeIdx]
+      const slug = active.anchor.dataset.sectionAnchor!
+
+      // 同 slug 不重复重排（仍然要更新位置以应对 resize / 折叠展开等）
+      if (slug !== this.currentSlug) {
+        this.targets.forEach(({ anchor }) => {
+          anchor.classList.remove('text-foreground', 'font-medium')
+        })
+        active.anchor.classList.add('text-foreground', 'font-medium')
+        this.currentSlug = slug
+      }
+
+      // 计算高亮块相对 section-nav 容器的偏移
+      const navRect = this.getBoundingClientRect()
+      const itemRect = active.anchor.getBoundingClientRect()
+      const top = itemRect.top - navRect.top
+      const height = itemRect.height
+
+      this.indicator.style.transform = `translateY(${top}px)`
+      this.indicator.style.height = `${height}px`
+      this.indicator.style.opacity = '1'
+    }
+  }
+
+  if (!customElements.get('section-nav')) {
+    customElements.define('section-nav', SectionNav)
+  }
+</script>

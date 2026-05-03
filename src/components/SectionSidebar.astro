@@ -2,12 +2,15 @@
 import config from '@/site-config'
 
 const sections = config.header.menu
-
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
+
+// 仅当调用方真的传入了 nav-sub 内容时才渲染下方的子树容器，
+// 否则会出现一个空的缩进框。
+const hasSubNav = Astro.slots.has('nav-sub')
 ---
 
 <aside
-  class='hidden lg:flex sticky top-20 self-start w-48 shrink-0 me-8 mt-20 flex-col gap-y-1 max-h-[calc(100vh-6rem)] overflow-y-auto bg-transparent'
+  class='hidden lg:flex sticky top-20 self-start w-56 shrink-0 me-8 mt-20 flex-col gap-y-1 max-h-[calc(100vh-6rem)] overflow-y-auto bg-transparent'
   aria-label='Section navigation'
 >
   {
@@ -17,14 +20,23 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
           ? currentPath === '/'
           : currentPath === s.link || currentPath.startsWith(s.link + '/')
       return (
-        <a
-          href={s.link}
-          class={`px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-muted ${
-            active ? 'bg-muted text-[var(--primary)]' : 'text-muted-foreground'
-          }`}
-        >
-          {s.title}
-        </a>
+        <div class='flex flex-col'>
+          <a
+            href={s.link}
+            class={`px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-muted ${
+              active ? 'bg-muted text-[var(--primary)]' : 'text-muted-foreground'
+            }`}
+          >
+            {s.title}
+          </a>
+
+          {/* 当前激活的板块下方展开「子板块」内容（笔记目录 / TOC 等） */}
+          {active && hasSubNav && (
+            <div class='mt-1 mb-2 ms-3 ps-3 border-l border-muted-foreground/20'>
+              <slot name='nav-sub' />
+            </div>
+          )}
+        </div>
       )
     })
   }
