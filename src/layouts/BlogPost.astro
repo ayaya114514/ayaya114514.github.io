@@ -6,10 +6,10 @@ import type { CollectionEntry } from 'astro:content'
 import 'katex/dist/katex.min.css'
 
 import { MediumZoom } from 'astro-pure/advanced'
-import { ArticleBottom, Copyright, Hero, TOC } from 'astro-pure/components/pages'
+import { ArticleBottom, Hero } from 'astro-pure/components/pages'
 import config from 'virtual:config'
 import PageLayout from '@/layouts/ContentLayout.astro'
-import { Comment, PageInfo } from '@/components/waline'
+import BlogDirectory from '@/components/blog/Directory.astro'
 
 interface Props {
   post: CollectionEntry<'blog'>
@@ -21,19 +21,10 @@ interface Props {
 const {
   post: { id, data },
   posts,
-  headings,
   remarkPluginFrontmatter
 } = Astro.props
 
-const {
-  description,
-  heroImage,
-  publishDate,
-  title,
-  updatedDate,
-  draft: isDraft,
-  comment: enableComment
-} = data
+const { description, heroImage, publishDate, title, updatedDate } = data
 
 const socialImage = heroImage
   ? typeof heroImage.src === 'string'
@@ -47,28 +38,33 @@ const primaryColor = data.heroImage?.color ?? 'hsl(var(--primary) / var(--un-tex
 <PageLayout
   meta={{ articleDate, description, ogImage: socialImage, title }}
   highlightColor={primaryColor}
-  back='/blog'
+  back='/'
 >
-  {!!headings.length && <TOC {headings} slot='sidebar' />}
+  <BlogDirectory {posts} currentId={id} slot='sidebar' />
 
-  <Hero {data} {remarkPluginFrontmatter} slot='header'>
-    <Fragment slot='description'>
-      {!isDraft && enableComment && <PageInfo comment class='mt-1' />}
-    </Fragment>
-  </Hero>
+  <Hero {data} {remarkPluginFrontmatter} slot='header' />
 
   <slot />
 
   <Fragment slot='bottom'>
-    {/* Copyright */}
-    <Copyright {data} />
     {/* Article recommend */}
     <ArticleBottom collections={posts} {id} class='mt-3 sm:mt-6' />
-    { /* Comment */
-    !isDraft && enableComment && <Comment class='mt-3 sm:mt-6' />}
   </Fragment>
 
   <slot name='bottom-sidebar' slot='bottom-sidebar' />
 </PageLayout>
+
+{/*
+  隐藏 Hero 自带的「斜体描述区」与 Hero 之外的元数据栏 / 分隔线相关元素：
+  - .article-info > .italic.mt-3：标题下面的斜体引用块（来自 frontmatter description），
+    用户希望标题下直接接正文，按正常格式来；
+  - 其余 view / comment 已通过不渲染 PageInfo 与 Comment 组件而移除，无需 CSS。
+  采用 is:global 是因为 Hero 来自 node_modules，无法直接修改其样式作用域。
+*/}
+<style is:global>
+  .article-info > .italic.mt-3 {
+    display: none;
+  }
+</style>
 
 {config.integ.mediumZoom.enable && <MediumZoom />}

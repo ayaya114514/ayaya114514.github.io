@@ -1,0 +1,31 @@
+---
+import { getBlogCollection } from 'astro-pure/server'
+
+export const prerender = true
+
+// 取所有笔记并按 id 升序排列：形如 "machine-learning/00-prelude" 的会先于 "01-..."；
+// 这与文章页右侧目录的展示顺序一致，保证「点进笔记 → 第一篇」的语义。
+const posts = (await getBlogCollection()).sort((a, b) => a.id.localeCompare(b.id))
+const first = posts[0]
+
+// 兜底：尚未撰写任何笔记时，回到首页，避免 target 为 undefined
+const target = first ? `/blog/${first.id}` : '/'
+---
+
+<!doctype html>
+<html lang='zh-CN'>
+  <head>
+    <meta charset='utf-8' />
+    <title>跳转中…</title>
+    {/* 立即跳转：meta refresh 兜底（无 JS 时也生效），script 优先（不留下中间历史项） */}
+    <meta http-equiv='refresh' content={`0;url=${target}`} />
+    <link rel='canonical' href={target} />
+    <meta name='robots' content='noindex' />
+    <script is:inline define:vars={{ target }}>
+      window.location.replace(target)
+    </script>
+  </head>
+  <body>
+    <a href={target}>跳转到 {target}</a>
+  </body>
+</html>

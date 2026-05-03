@@ -1,0 +1,76 @@
+---
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+  posts: CollectionEntry<'blog'>[]
+  currentId?: string
+  class?: string
+}
+
+const { posts, currentId, class: className } = Astro.props
+
+// 按 id 升序排，确保形如 "00-prelude" 这类带序号的笔记排在前面
+const sortedPosts = [...posts].sort((a, b) => a.id.localeCompare(b.id))
+
+// 子项目展示名映射：原始目录 slug -> 中文名。若未配置则回退到原 slug
+const groupNameMap: Record<string, string> = {
+  'machine-learning': '机器学习'
+}
+const ROOT_GROUP = '__root__'
+
+// 按一级目录分组：machine-learning/00-prelude -> 组 "machine-learning"；
+// 顶层文件（无子目录）放入特殊根分组，渲染时单独处理
+type Group = { key: string; items: CollectionEntry<'blog'>[] }
+const groups: Group[] = []
+for (const p of sortedPosts) {
+  const segments = p.id.split('/')
+  const key = segments.length > 1 ? segments[0] : ROOT_GROUP
+  let g = groups.find((x) => x.key === key)
+  if (!g) {
+    g = { key, items: [] }
+    groups.push(g)
+  }
+  g.items.push(p)
+}
+
+const displayName = (key: string) => groupNameMap[key] ?? key
+---
+
+<nav class:list={['text-sm', className]} aria-label='笔记目录'>
+  <ul class='flex flex-col gap-y-5'>
+    {
+      groups.map((g) => (
+        <li>
+          {g.key !== ROOT_GROUP && (
+            <div class='mb-2 text-base font-medium text-foreground'>{displayName(g.key)}</div>
+          )}
+          <ul
+            class:list={[
+              'flex flex-col gap-y-1',
+              g.key !== ROOT_GROUP && 'border-l border-muted-foreground/20 ps-3'
+            ]}
+          >
+            {g.items.map((p) => {
+              const isCurrent = currentId === p.id
+              return (
+                <li>
+                  <a
+                    href={`/blog/${p.id}`}
+                    class:list={[
+                      'block rounded-md px-2 py-1 transition-colors hover:bg-muted hover:text-foreground',
+                      isCurrent
+                        ? 'bg-muted font-medium text-[var(--primary)]'
+                        : 'text-muted-foreground'
+                    ]}
+                  >
+                    {p.data.title}
+                  </a>
+                </li>
+              )
+            })}
+          </ul>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

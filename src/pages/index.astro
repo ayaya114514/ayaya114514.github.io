@@ -1,17 +1,11 @@
 ---
 import { Image } from 'astro:assets'
 
-import { PostPreview } from 'astro-pure/components/pages'
-import { getBlogCollection, sortMDByDate } from 'astro-pure/server'
-import { Button, Icon, Label } from 'astro-pure/user'
+import { Icon, Label } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import Section from '@/components/home/Section.astro'
 import config from '@/site-config'
 import bandsData from '../data/bands.json'
-
-const MAX_POSTS = 5
-const allPosts = await getBlogCollection()
-const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 
 type Band = {
   slug: string
@@ -100,22 +94,6 @@ if (!images[imagePath])
           极度厌恶 MBTI，请务必不要在我面前提到你的 mbti 人格测试结果
         </p>
       </Section>
-
-      {/* Recent posts */}
-      {
-        allPostsByDate.length > 0 && (
-          <Section title='笔记'>
-            <ul class='flex flex-col gap-y-1.5 sm:gap-y-2'>
-              {allPostsByDate.map((p) => (
-                <li class='flex flex-col gap-x-2 sm:flex-row'>
-                  <PostPreview post={p} />
-                </li>
-              ))}
-            </ul>
-            <Button title='更多笔记' class='w-fit self-end' href='/blog' variant='ahead' />
-          </Section>
-        )
-      }
 
       {/* Favorite bands */}
       <Section title='目前最喜欢的十个乐队（歌手）'>
