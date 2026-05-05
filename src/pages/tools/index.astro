@@ -1,0 +1,51 @@
+---
+import PageLayout from '@/layouts/CommonPage.astro'
+
+// 工具栏数据：后续要加新工具，往下面这个数组里追加一项即可。
+// description 不是必填——没写就不在卡片里显示描述行。
+type Tool = {
+  title: string
+  href: string
+  description?: string
+}
+
+const tools: Tool[] = [
+  {
+    title: 'Markdown 编辑器',
+    href: 'https://markdown-editor-opal-pi.vercel.app/',
+    description: '在线 Markdown 实时预览编辑器'
+  }
+]
+
+const headings = [{ depth: 2, slug: 'tools', text: '🛠 工具' }]
+---
+
+<PageLayout title='工具' {headings}>
+  <section>
+    <h2 id='tools'>
+      🛠 工具
+      <span class='ml-2 text-sm font-normal text-muted-foreground'>共 {tools.length} 个</span>
+    </h2>
+
+    <div class='not-prose grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3'>
+      {
+        tools.map((t) => (
+          <a
+            href={t.href}
+            target='_blank'
+            rel='noopener noreferrer'
+            class='group flex flex-col gap-y-1.5 rounded-lg border bg-background/60 p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md'
+          >
+            <h3 class='text-base font-medium leading-snug group-hover:text-[var(--primary)]'>
+              {t.title}
+            </h3>
+            {t.description && (
+              <p class='text-sm text-muted-foreground'>{t.description}</p>
+            )}
+            <p class='mt-auto truncate pt-1 text-xs text-muted-foreground/70'>{t.href}</p>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</PageLayout>
