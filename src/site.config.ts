@@ -33,10 +33,10 @@ export const theme: ThemeUserConfig = {
   header: {
     menu: [
       { title: '首页', link: '/' },
+      { title: '工具', link: '/tools' },
       { title: '笔记', link: '/blog' },
       { title: '娱乐', link: '/entertainment' },
-      { title: '桌搭', link: '/desksetup' },
-      { title: '关于', link: '/about' }
+      { title: '桌搭', link: '/desksetup' }
     ]
   },
 
@@ -64,7 +64,7 @@ export const theme: ThemeUserConfig = {
 
 export const integ: IntegrationUserConfig = {
   // [Search]
-  pagefind: true,
+  pagefind: false,
   // [Quote]
   quote: {
     server: 'https://dummyjson.com/quotes/random',

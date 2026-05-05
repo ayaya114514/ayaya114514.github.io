@@ -26,6 +26,12 @@ const {
 
 const { description, heroImage, publishDate, title, updatedDate } = data
 
+// ArticleBottom 取 collections[index-1] 当作 prev、index+1 当作 next。
+// 但传入的 posts 由 sortMDByDate 按日期倒序排，对带序号的章节笔记（00-、01-）会让"序号大的"反而排在前，
+// 导致页面底部的"上一篇 / 下一篇"指向反向。这里改用 id 升序（与左侧 Directory 一致），
+// 让 prev = 上一章（更早的序号），next = 下一章（更晚的序号）。
+const orderedPosts = [...posts].sort((a, b) => a.id.localeCompare(b.id))
+
 const socialImage = heroImage
   ? typeof heroImage.src === 'string'
     ? heroImage.src
@@ -48,7 +54,7 @@ const primaryColor = data.heroImage?.color ?? 'hsl(var(--primary) / var(--un-tex
 
   <Fragment slot='bottom'>
     {/* Article recommend */}
-    <ArticleBottom collections={posts} {id} class='mt-3 sm:mt-6' />
+    <ArticleBottom collections={orderedPosts} {id} class='mt-3 sm:mt-6' />
   </Fragment>
 
   <slot name='bottom-sidebar' slot='bottom-sidebar' />

@@ -1,5 +1,5 @@
 ---
-import { Footer, ThemeProvider } from 'astro-pure/components/basic'
+import { Footer } from 'astro-pure/components/basic'
 import type { SiteMeta } from 'astro-pure/types'
 import BaseHead from '@/components/BaseHead.astro'
 import Header from '@/components/Header.astro'
@@ -28,7 +28,22 @@ const {
 <html lang={config.locale.lang}>
   <head>
     <BaseHead {articleDate} {description} {ogImage} {title} />
-    <ThemeProvider />
+    {/*
+      强制锁定为暗色主题：原 ThemeProvider 会读 localStorage / 系统偏好来决定明暗，
+      用户希望只用暗色，所以这里直接给 <html> 加 dark class 并清掉可能残留的旧偏好，
+      避免页面在加载时短暂 flash 成亮色。
+    */}
+    <script is:inline>
+      ;(function () {
+        document.documentElement.classList.add('dark')
+        try {
+          localStorage.setItem('theme', 'dark')
+        } catch (e) {}
+        document
+          .querySelector('meta[name="theme-color"]')
+          ?.setAttribute('content', '#0B0B10')
+      })()
+    </script>
   </head>
 
   <body class='flex justify-center bg-background text-foreground site-bg' {...props}>

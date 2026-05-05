@@ -32,26 +32,11 @@ import config from '@/site-config'
             </a>
           ))
         }
-        <div class='flex w-full grow flex-row max-sm:justify-center sm:justify-end gap-x-3 sm:w-fit sm:gap-x-5'>
-          <a class='px-1 py-2 transition-none sm:px-2' href='/search' title='Search'>
-            <span class='sr-only'>Search</span>
-            <Icon name='search' class='size-5' />
-          </a>
-        </div>
       </div>
     </div>
 
     {/* buttons */}
     <div class='z-30 flex gap-x-4 group-[.not-top]:gap-x-2' style='transition:gap 0.3s'>
-      <button
-        id='toggleDarkMode'
-        class='group/dark box-content size-5 rounded-md border p-1.5 transition-colors hover:bg-border sm:group-[.not-top]:rounded-xl'
-        aria-label='Toggle theme'
-      >
-        <span class='sr-only'>Toggle theme</span>
-        <Icon class='light size-5 group-hover/dark:text-primary' name='sun' />
-        <Icon class='dark hidden size-5 group-hover/dark:text-primary' name='moon' />
-      </button>
       <button
         id='toggleMenu'
         class='rounded-md border p-1.5 transition-colors hover:bg-border sm:hidden sm:group-[.not-top]:rounded-xl'
@@ -63,19 +48,6 @@ import config from '@/site-config'
   </div>
 </header-component>
 
-{/* Init theme icon state from localStorage / system preference */}
-<script is:inline>
-  ;(function () {
-    const btn = document.getElementById('toggleDarkMode')
-    if (!btn) return
-    let theme = localStorage.getItem('theme')
-    // Drop legacy 'system' value, fall back to system preference at first paint
-    if (theme === 'system' || !theme) {
-      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-    }
-    btn.dataset.theme = theme
-  })()
-</script>
 <script>
   class HeaderComponent extends HTMLElement {
     connectedCallback() {
@@ -86,19 +58,6 @@ import config from '@/site-config'
         this.classList.toggle('not-top', window.scrollY > 20)
         this.dataset.show = (window.scrollY < 350 || window.scrollY < preScrollY).toString()
         preScrollY = window.scrollY
-      })
-
-      // Two-state theme toggle: light <-> dark
-      const darkModeBtn = this.querySelector('#toggleDarkMode') as HTMLElement
-      darkModeBtn?.addEventListener('click', () => {
-        const current = darkModeBtn.dataset.theme === 'dark' ? 'dark' : 'light'
-        const next = current === 'dark' ? 'light' : 'dark'
-        localStorage.setItem('theme', next)
-        document.documentElement.classList.toggle('dark', next === 'dark')
-        document
-          .querySelector('meta[name="theme-color"]')
-          ?.setAttribute('content', next === 'dark' ? '#0B0B10' : '#FAF9F5')
-        darkModeBtn.dataset.theme = next
       })
 
       // Mobile menu
@@ -188,19 +147,4 @@ import config from '@/site-config'
     }
   }
 
-  /* Two-state toggle: show sun in light mode, moon in dark */
-  #toggleDarkMode {
-    &[data-theme='dark'] .light {
-      display: none;
-    }
-    &[data-theme='dark'] .dark {
-      display: block;
-    }
-    &[data-theme='light'] .light {
-      display: block;
-    }
-    &[data-theme='light'] .dark {
-      display: none;
-    }
-  }
 </style>
