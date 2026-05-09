@@ -7,6 +7,7 @@ const typographyCustom = integ.typography || {}
 
 const fg = 'hsl(var(--foreground) / var(--un-text-opacity, 1))'
 const fgMuted = 'hsl(var(--muted-foreground) / var(--un-text-opacity, 1))'
+const fgBold = 'hsl(var(--bold) / var(--un-text-opacity, 1))'
 const bgMuted = 'hsl(var(--muted) / var(--un-bg-opacity, 1))'
 const border = 'var(--un-default-border-color)'
 const radius = 'var(--radius)'
@@ -17,7 +18,7 @@ const typographyConfig: TypographyOptions = {
     headings: fg,
     // "lead": [600, 400],
     links: fg,
-    bold: fg,
+    bold: fgBold,
     counters: 'hsl(var(--muted-foreground) / 0.6)',
     bullets: 'hsl(var(--muted-foreground) / 0.4)',
     hr: 'hsl(var(--muted-foreground) / 0.4)',

@@ -24,7 +24,7 @@ const {
   remarkPluginFrontmatter
 } = Astro.props
 
-const { description, heroImage, publishDate, title, updatedDate } = data
+const { heroImage, publishDate, title, updatedDate } = data
 
 // ArticleBottom 取 collections[index-1] 当作 prev、index+1 当作 next。
 // 但传入的 posts 由 sortMDByDate 按日期倒序排，对带序号的章节笔记（00-、01-）会让"序号大的"反而排在前，
@@ -42,7 +42,7 @@ const primaryColor = data.heroImage?.color ?? 'hsl(var(--primary) / var(--un-tex
 ---
 
 <PageLayout
-  meta={{ articleDate, description, ogImage: socialImage, title }}
+  meta={{ articleDate, ogImage: socialImage, title }}
   highlightColor={primaryColor}
   back='/'
 >
@@ -61,11 +61,10 @@ const primaryColor = data.heroImage?.color ?? 'hsl(var(--primary) / var(--un-tex
 </PageLayout>
 
 {/*
-  隐藏 Hero 自带的「斜体描述区」与 Hero 之外的元数据栏 / 分隔线相关元素：
-  - .article-info > .italic.mt-3：标题下面的斜体引用块（来自 frontmatter description），
-    用户希望标题下直接接正文，按正常格式来；
-  - 其余 view / comment 已通过不渲染 PageInfo 与 Comment 组件而移除，无需 CSS。
-  采用 is:global 是因为 Hero 来自 node_modules，无法直接修改其样式作用域。
+  Hero 组件无条件渲染 <blockquote><q>{description}</q></blockquote>，浏览器对 <q> 默认
+  添加 open-quote / close-quote 引号符号；当 description 为空时会显示成一对空引号 ""。
+  我们已从 schema 中移除 description，所以这里直接隐藏整个斜体块。is:global 是因为
+  Hero 来自 node_modules，无法直接修改其作用域样式。
 */}
 <style is:global>
   .article-info > .italic.mt-3 {

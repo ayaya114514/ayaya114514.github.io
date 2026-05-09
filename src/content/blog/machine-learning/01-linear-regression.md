@@ -1,8 +1,6 @@
 ---
 title: 01. 线性回归
-description: 机器学习笔记之线性回归——单/多元线性回归模型、代价函数、梯度下降的推导与代码实现
 publishDate: 2026-05-05
-tags: [machine-learning, 线性回归]
 ---
 
 ## 1.1 单自变量线性回归模型
