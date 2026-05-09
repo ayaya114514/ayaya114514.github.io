@@ -14,7 +14,8 @@ const sortedPosts = [...posts].sort((a, b) => a.id.localeCompare(b.id))
 
 // 子项目展示名映射：原始目录 slug -> 中文名。若未配置则回退到原 slug
 const groupNameMap: Record<string, string> = {
-  'machine-learning': '机器学习'
+  'machine-learning': '机器学习',
+  miscellaneous: '杂项'
 }
 const ROOT_GROUP = '__root__'
 
@@ -37,13 +38,11 @@ const displayName = (key: string) => groupNameMap[key] ?? key
 ---
 
 <nav class:list={['text-sm', className]} aria-label='笔记目录'>
-  <ul class='flex flex-col gap-y-5'>
+  <ul class='flex flex-col gap-y-3'>
     {
-      groups.map((g) => (
-        <li>
-          {g.key !== ROOT_GROUP && (
-            <div class='mb-2 text-base font-medium text-foreground'>{displayName(g.key)}</div>
-          )}
+      groups.map((g) => {
+        // 渲染分组下的链接列表，避免根分组与具名分组各写一遍
+        const linkList = (
           <ul
             class:list={[
               'flex flex-col gap-y-1',
@@ -69,8 +68,46 @@ const displayName = (key: string) => groupNameMap[key] ?? key
               )
             })}
           </ul>
-        </li>
-      ))
+        )
+        // 根分组（顶层散文件）没有可折叠的容器，直接铺开
+        if (g.key === ROOT_GROUP) {
+          return <li>{linkList}</li>
+        }
+        // 仅当当前所在文章属于此分组时默认展开（保留位置感），其他分组保持收起
+        const isCurrentGroup = g.items.some((p) => p.id === currentId)
+        return (
+          <li>
+            <details open={isCurrentGroup} class='note-group'>
+              <summary class='mb-2 flex cursor-pointer select-none items-center gap-1.5 text-base font-medium text-foreground'>
+                <svg
+                  class='chevron h-3.5 w-3.5 shrink-0 transition-transform'
+                  viewBox='0 0 20 20'
+                  fill='currentColor'
+                  aria-hidden='true'
+                >
+                  <path d='M7.05 4.55a.75.75 0 0 1 1.06 0l4.9 4.9a.75.75 0 0 1 0 1.06l-4.9 4.9a.75.75 0 0 1-1.06-1.06L11.38 10 7.05 5.61a.75.75 0 0 1 0-1.06Z' />
+                </svg>
+                {displayName(g.key)}
+              </summary>
+              {linkList}
+            </details>
+          </li>
+        )
+      })
     }
   </ul>
 </nav>
+
+<style>
+  /* 去掉 details/summary 默认的展开三角（不同浏览器实现不同），统一用上面的 SVG 图标 */
+  .note-group > summary {
+    list-style: none;
+  }
+  .note-group > summary::-webkit-details-marker {
+    display: none;
+  }
+  /* 展开时把 chevron 从指向右旋转到指向下 */
+  .note-group[open] > summary .chevron {
+    transform: rotate(90deg);
+  }
+</style>

@@ -5,6 +5,8 @@
   /* Foreground */
   --foreground: 30 10% 12%;
   --muted-foreground: 30 5% 38%;
+  /* 粗体专用色：用与正文 / 链接 不同的色相，让 **重点** 在暗色背景下一眼跳出来 */
+  --bold: 28 75% 40%;
   /* Background — warm off-white close to #faf9f5 */
   --background: 48 33% 97%;
   --muted: 45 22% 92%;
@@ -21,7 +23,9 @@
   --primary: 195 95% 85%;
   /* Foreground */
   --foreground: 0 0% 98%;
-  --muted-foreground: 240 5% 74.9%;
+  --muted-foreground: 240 5% 88%;
+  /* 暖琥珀色 — 与冷蓝主色形成对比，与正文白色区分，避免和链接 hover 撞色 */
+  --bold: 38 95% 75%;
   /* Background */
   --background: 240 20.54% 5.2%;
   --muted: 240 5.9% 13%;
