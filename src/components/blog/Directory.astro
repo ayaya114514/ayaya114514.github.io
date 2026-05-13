@@ -15,8 +15,13 @@ const sortedPosts = [...posts].sort((a, b) => a.id.localeCompare(b.id))
 // 子项目展示名映射：原始目录 slug -> 中文名。若未配置则回退到原 slug
 const groupNameMap: Record<string, string> = {
   'machine-learning': '机器学习',
+  'paper-digest': '论文抓取',
   miscellaneous: '杂项'
 }
+// 分组手动显示顺序。未列出的分组按字典序排到末尾。
+// 这里手动指定是为了让"论文抓取"能夹在"机器学习"和"杂项"之间
+// （单凭字典序 paper-digest > miscellaneous，会排到最后）。
+const groupOrder = ['machine-learning', 'paper-digest', 'miscellaneous']
 const ROOT_GROUP = '__root__'
 
 // 按一级目录分组：machine-learning/00-prelude -> 组 "machine-learning"；
@@ -33,6 +38,18 @@ for (const p of sortedPosts) {
   }
   g.items.push(p)
 }
+
+// 把分组按 groupOrder 重排；根分组（顶层散文件）始终放最前
+groups.sort((a, b) => {
+  if (a.key === ROOT_GROUP) return -1
+  if (b.key === ROOT_GROUP) return 1
+  const ai = groupOrder.indexOf(a.key)
+  const bi = groupOrder.indexOf(b.key)
+  if (ai === -1 && bi === -1) return a.key.localeCompare(b.key)
+  if (ai === -1) return 1
+  if (bi === -1) return -1
+  return ai - bi
+})
 
 const displayName = (key: string) => groupNameMap[key] ?? key
 ---
