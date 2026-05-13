@@ -27,10 +27,20 @@ const {
 const { heroImage, publishDate, title, updatedDate } = data
 
 // ArticleBottom 取 collections[index-1] 当作 prev、index+1 当作 next。
-// 但传入的 posts 由 sortMDByDate 按日期倒序排，对带序号的章节笔记（00-、01-）会让"序号大的"反而排在前，
-// 导致页面底部的"上一篇 / 下一篇"指向反向。这里改用 id 升序（与左侧 Directory 一致），
-// 让 prev = 上一章（更早的序号），next = 下一章（更晚的序号）。
-const orderedPosts = [...posts].sort((a, b) => a.id.localeCompare(b.id))
+// 1) 传入的 posts 由 sortMDByDate 按日期倒序排，对带序号的章节笔记（00-、01-）会让"序号大的"
+//    反而排在前，导致页面底部的"上一篇 / 下一篇"指向反向。这里改用 id 升序（与左侧 Directory 一致），
+//    让 prev = 上一章（更早的序号），next = 下一章（更晚的序号）。
+// 2) 仅在"同一个子板块"内做前后翻页（id 第一段相同，例如都属于 machine-learning），避免
+//    在 ML 末章点"下一篇"直接跳到 miscellaneous 或 paper-digest 这种跨主题的尴尬切换。
+//    没有子目录的顶层文件归到一个独立的根分组，互相之间也不串。
+const groupKey = (postId: string) => {
+  const segments = postId.split('/')
+  return segments.length > 1 ? segments[0] : '__root__'
+}
+const currentGroup = groupKey(id)
+const orderedPosts = [...posts]
+  .filter((p) => groupKey(p.id) === currentGroup)
+  .sort((a, b) => a.id.localeCompare(b.id))
 
 const socialImage = heroImage
   ? typeof heroImage.src === 'string'
