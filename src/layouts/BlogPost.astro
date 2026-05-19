@@ -10,6 +10,7 @@ import { ArticleBottom, Hero } from 'astro-pure/components/pages'
 import config from 'virtual:config'
 import PageLayout from '@/layouts/ContentLayout.astro'
 import BlogDirectory from '@/components/blog/Directory.astro'
+import BlogToc from '@/components/blog/Toc.astro'
 
 interface Props {
   post: CollectionEntry<'blog'>
@@ -21,6 +22,7 @@ interface Props {
 const {
   post: { id, data },
   posts,
+  headings,
   remarkPluginFrontmatter
 } = Astro.props
 
@@ -42,6 +44,11 @@ const orderedPosts = [...posts]
   .filter((p) => groupKey(p.id) === currentGroup)
   .sort((a, b) => a.id.localeCompare(b.id))
 
+// 右侧「本页目录」只收录 h2 / h3：h1 在笔记正文里基本不出现；h4 在论文速读里是
+// 「核心贡献 / 技术栈 …」这类成组重复的小标题，收进来目录会长到上百条。
+// 标题不足 2 个的笔记（如 00-prelude、纯无标题的笔记）则不渲染目录。
+const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3)
+
 const socialImage = heroImage
   ? typeof heroImage.src === 'string'
     ? heroImage.src
@@ -57,6 +64,8 @@ const primaryColor = data.heroImage?.color ?? 'hsl(var(--primary) / var(--un-tex
   back='/'
 >
   <BlogDirectory {posts} currentId={id} slot='sidebar' />
+
+  {tocHeadings.length > 1 && <BlogToc headings={tocHeadings} title='本页目录' slot='toc' />}
 
   <Hero {data} {remarkPluginFrontmatter} slot='header' />
 

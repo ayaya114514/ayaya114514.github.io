@@ -15,6 +15,10 @@ interface Props {
 // 调用方仍按 `slot='sidebar'` 传入子导航内容（保持历史 API 兼容），
 // 这里只负责把这部分内容透传到 BaseLayout 的 `nav-sub` 槽。
 const { meta, highlightColor, back = '/', ...props } = Astro.props
+
+// 仅当调用方传入 toc slot（只有笔记页 BlogPost 会传）时，正文区才切成
+// 「正文 + 右侧目录」两栏。CommonPage 不传该 slot，因此保持原来的单栏。
+const hasToc = Astro.slots.has('toc')
 ---
 
 <PageLayout {meta} {highlightColor} {...props}>
@@ -22,7 +26,7 @@ const { meta, highlightColor, back = '/', ...props } = Astro.props
   <slot name='sidebar' slot='nav-sub' />
 
   <Button title='Back' href={back} variant='back' />
-  <main class='mt-6'>
+  <main class:list={['mt-6', hasToc && 'xl:flex xl:items-start xl:gap-x-8']}>
     <article class='min-w-0 grow'>
       {/* Content header */}
       <div id='content-header' class='animate'>
@@ -40,6 +44,19 @@ const { meta, highlightColor, back = '/', ...props } = Astro.props
         <slot />
       </div>
     </article>
+
+    {
+      /* 右侧「本页目录」：仅笔记页（传入 toc slot 时）渲染，且只在宽屏显示。
+         sticky 跟随滚动、过长时内部滚动。 */
+      hasToc && (
+        <aside
+          aria-label='本页目录'
+          class='animate sticky top-24 hidden max-h-[calc(100vh-7rem)] w-60 shrink-0 self-start overflow-y-auto xl:block'
+        >
+          <slot name='toc' />
+        </aside>
+      )
+    }
   </main>
 
   <div class='bottom mt-6'>

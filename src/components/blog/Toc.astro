@@ -1,0 +1,166 @@
+---
+import type { MarkdownHeading } from 'astro'
+
+import { generateToc } from '@/utils/toc'
+
+interface Props {
+  /** 当前笔记的标题列表，调用方（BlogPost）已筛成只剩 h2 / h3 */
+  headings: MarkdownHeading[]
+  /** 目录栏顶部显示的标题文字 */
+  title?: string
+  class?: string
+}
+
+const { headings, title = '本页目录', class: className } = Astro.props
+
+// 把扁平的 [h2, h3, h3, h2, …] 组装成嵌套树：每个 h3 挂到它前面那个 h2 下面。
+const tocTree = generateToc(headings)
+
+// rehypeAutolinkHeadings 会给每个标题追加一个 `#` 锚点链接，个别情况下标题纯文本
+// 会因此带上尾随的 `#`，这里防御性地去掉（与 astro-pure 内部 TOCHeading 的处理一致）。
+const cleanText = (text: string) => (text.endsWith('#') ? text.slice(0, -1) : text)
+---
+
+{
+  tocTree.length > 0 && (
+    <toc-nav class:list={['block text-sm', className]}>
+      <h2 class='mb-3 text-sm font-semibold text-foreground'>{title}</h2>
+
+      {/* <ul> 的 border-l 是贯穿整列的浅色竖线；当前项的 <a> 会用主题色左边框
+          盖在这条线上，形成「当前所在标题」的高亮指示。 */}
+      <ul class='flex flex-col border-l border-muted-foreground/20'>
+        {tocTree.map((h) => (
+          <li>
+            <a
+              href={`#${h.slug}`}
+              data-toc-anchor={h.slug}
+              class='toc-link block py-1 pe-2 ps-4 text-muted-foreground'
+            >
+              {cleanText(h.text)}
+            </a>
+            {h.subheadings.length > 0 && (
+              <ul class='flex flex-col'>
+                {h.subheadings.map((sub) => (
+                  <li>
+                    <a
+                      href={`#${sub.slug}`}
+                      data-toc-anchor={sub.slug}
+                      class='toc-link block py-1 pe-2 ps-8 text-xs text-muted-foreground'
+                    >
+                      {cleanText(sub.text)}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    </toc-nav>
+  )
+}
+
+<script>
+  /**
+   * <toc-nav>：右侧「本页目录」的交互逻辑。
+   *   1) 点击目录项 → 平滑滚动到对应标题，并把 hash 写进地址栏；
+   *   2) 页面滚动时 → 标出「当前正在阅读」的标题，给对应目录项加 .toc-active 高亮。
+   */
+  class TocNav extends HTMLElement {
+    connectedCallback() {
+      // 收集目录项，并和正文里对应的标题元素配对；配不上的项直接丢弃（防御，正常不会发生）。
+      const entries = Array.from(this.querySelectorAll<HTMLAnchorElement>('a[data-toc-anchor]'))
+        .map((link) => {
+          const heading = document.getElementById(link.dataset.tocAnchor ?? '')
+          return heading ? { link, heading } : null
+        })
+        .filter((e): e is { link: HTMLAnchorElement; heading: HTMLElement } => e !== null)
+      if (entries.length === 0) return
+
+      // 尊重系统「减少动态效果」设置：这类用户跳转时不做平滑滚动动画。
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+      // 点击目录项 → 平滑滚动到标题。标题已有 scroll-margin-top: 4rem，
+      // 会自动给 sticky 顶栏让出空间，这里无需再手动计算偏移量。
+      for (const { link, heading } of entries) {
+        link.addEventListener('click', (event) => {
+          event.preventDefault()
+          history.pushState(null, '', `#${heading.id}`)
+          heading.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' })
+        })
+      }
+
+      // 记住当前高亮项，避免每帧重复增删 class。
+      let activeLink: HTMLAnchorElement | null = null
+      const setActive = (link: HTMLAnchorElement) => {
+        if (link === activeLink) return
+        activeLink?.classList.remove('toc-active')
+        link.classList.add('toc-active')
+        activeLink = link
+        // 目录很长（如论文速读 20+ 条）、内部出现滚动条时，让当前项保持可见。
+        link.scrollIntoView({ block: 'nearest' })
+      }
+
+      // 判定「当前阅读位置」：判定线设在视口顶端往下 1/4 处，取最后一个已经滚过
+      // 判定线的标题；若全部都还在判定线下方（停在页面最顶端），则取第一个。
+      const updateActive = () => {
+        const triggerLine = window.innerHeight * 0.25
+        let current = entries[0].link
+        for (const { link, heading } of entries) {
+          if (heading.getBoundingClientRect().top <= triggerLine) {
+            current = link
+          } else {
+            break
+          }
+        }
+        setActive(current)
+      }
+
+      // scroll 事件用 requestAnimationFrame 节流，避免一帧内重复计算。
+      let ticking = false
+      const onScroll = () => {
+        if (ticking) return
+        ticking = true
+        requestAnimationFrame(() => {
+          ticking = false
+          updateActive()
+        })
+      }
+      window.addEventListener('scroll', onScroll, { passive: true })
+      window.addEventListener('resize', onScroll, { passive: true })
+      updateActive()
+    }
+  }
+
+  // 防止 HMR / 客户端路由切换时重复 define 抛错。
+  if (!customElements.get('toc-nav')) {
+    customElements.define('toc-nav', TocNav)
+  }
+</script>
+
+<style>
+  /* 每个目录项预留 1px 透明左边框，并用 -1px 外边距把它压在 <ul> 的竖线上：
+     这样高亮当前项时只需把该边框染成主题色，文字不会发生 1px 的水平抖动。 */
+  toc-nav .toc-link {
+    border-inline-start: 1px solid transparent;
+    margin-inline-start: -1px;
+    line-height: 1.4;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease;
+    /* 论文标题这类很长的标题，限制为最多两行、超出省略。 */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+  toc-nav .toc-link:hover {
+    color: hsl(var(--foreground) / var(--un-text-opacity, 1));
+  }
+  /* 当前阅读到的标题：文字提亮 + 左侧竖线染成主题色。 */
+  toc-nav .toc-link.toc-active {
+    color: hsl(var(--foreground) / var(--un-text-opacity, 1));
+    border-inline-start-color: hsl(var(--primary) / var(--un-text-opacity, 1));
+    font-weight: 500;
+  }
+</style>
