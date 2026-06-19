@@ -39,7 +39,7 @@ import config from '@/site-config'
     <div class='z-30 flex gap-x-4 group-[.not-top]:gap-x-2' style='transition:gap 0.3s'>
       <button
         id='toggleMenu'
-        class='rounded-md border p-1.5 transition-colors hover:bg-border sm:hidden sm:group-[.not-top]:rounded-xl'
+        class='rounded-md border p-1.5 transition-colors hover:bg-border lg:hidden lg:group-[.not-top]:rounded-xl'
       >
         <span class='sr-only'>Menu</span>
         <Icon class='size-5' name='menu' />
@@ -62,7 +62,11 @@ import config from '@/site-config'
 
       // Mobile menu
       this.querySelector('#toggleMenu')?.addEventListener('click', () => {
-        this.classList.toggle('expanded')
+        if (window.__openMobileSidebar) {
+          window.__openMobileSidebar()
+        } else {
+          this.classList.toggle('expanded')
+        }
       })
     }
   }
