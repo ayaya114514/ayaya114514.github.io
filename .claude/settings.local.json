@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(python3 -c \"import ast; ast.parse\\(open\\('/Users/ayaya/Downloads/blog/scripts/douban_sync.py'\\).read\\(\\)\\); print\\('python OK'\\)\")",
+      "Bash(git check-ignore *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(npx astro *)",
+      "Bash(md5 /Users/ayaya/Documents/blog/src/assets/avatar.jpg \"/Users/ayaya/Desktop/memories/头壁/微信图片_20230130185803.jpg\")",
+      "Read(//Users/ayaya/Downloads/Takeout/YouTube 和 YouTube Music/订阅内容/**)",
+      "Bash(node *)",
+      "Bash(awk 'END{print NR}' \"/Users/ayaya/Downloads/Takeout/YouTube 和 YouTube Music/订阅内容/订阅内容.csv\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://www.last.fm/music/n-buna\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://lastfm.freetls.fastly.net/i/u/ar0/f91e4aa187f003ad2a943cf729164d38.jpg\" -o /Users/ayaya/Documents/blog/public/band-avatars/n-buna.jpg)",
+      "Bash(git commit *)",
+      "Read(//Users/ayaya/Downloads/**)"
+    ]
+  }
+}
