@@ -9,6 +9,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
 const hasSubNav = Astro.slots.has('nav-sub')
 ---
 
+<!-- ===== 桌面端侧边栏 ===== -->
 <aside
   class='hidden lg:flex sticky top-20 self-start w-56 shrink-0 me-8 mt-20 flex-col gap-y-1 max-h-[calc(100vh-6rem)] overflow-y-auto bg-transparent'
   aria-label='Section navigation'
@@ -41,3 +42,104 @@ const hasSubNav = Astro.slots.has('nav-sub')
     })
   }
 </aside>
+
+<!-- ===== 移动端：滑出抽屉（由 Header 的汉堡按钮触发） ===== -->
+<div id='mobile-sidebar-root' class='lg:hidden'>
+  <!-- 半透明遮罩 -->
+  <div
+    id='mobile-sidebar-backdrop'
+    class='fixed inset-0 z-40 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300'
+    aria-hidden='true'
+  >
+  </div>
+
+  <!-- 抽屉面板 -->
+  <div
+    id='mobile-sidebar-drawer'
+    class='fixed inset-y-0 start-0 z-50 flex w-72 max-w-[85vw] flex-col bg-background border-e border-border shadow-2xl -translate-x-full transition-transform duration-300 ease-out'
+    role='dialog'
+    aria-modal='true'
+    aria-label='导航菜单'
+  >
+    <!-- 抽屉头部：标题 + 关闭按钮 -->
+    <div class='flex items-center justify-between px-4 py-3 border-b border-border'>
+      <span class='text-sm font-medium text-muted-foreground'>导航</span>
+      <button
+        id='mobile-sidebar-close'
+        class='rounded-md p-1.5 transition-colors hover:bg-muted'
+        aria-label='关闭侧边栏'
+      >
+        <svg class='h-4 w-4' viewBox='0 0 20 20' fill='currentColor' aria-hidden='true'>
+          <path d='M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 0 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 0 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z' />
+        </svg>
+      </button>
+    </div>
+
+    <!-- 抽屉内容：与桌面侧边栏相同的导航 + 子板块 -->
+    <nav class='flex-1 overflow-y-auto px-3 py-4' aria-label='Section navigation'>
+      {
+        sections.map((s) => {
+          const active =
+            s.link === '/'
+              ? currentPath === '/'
+              : currentPath === s.link || currentPath.startsWith(s.link + '/')
+          return (
+            <div class='flex flex-col'>
+              <a
+                href={s.link}
+                class={`px-3 py-2.5 rounded-md text-sm font-medium transition-colors hover:bg-muted ${
+                  active ? 'bg-muted text-[var(--primary)]' : 'text-muted-foreground'
+                }`}
+              >
+                {s.title}
+              </a>
+
+              {active && hasSubNav && (
+                <div class='mt-1 mb-2 ms-3 ps-3 border-l border-muted-foreground/20'>
+                  <slot name='nav-sub' />
+                </div>
+              )}
+            </div>
+          )
+        })
+      }
+    </nav>
+  </div>
+</div>
+
+<script>
+  function initMobileSidebar() {
+    const close = document.getElementById('mobile-sidebar-close')
+    const backdrop = document.getElementById('mobile-sidebar-backdrop')
+    const drawer = document.getElementById('mobile-sidebar-drawer')
+
+    if (!close || !backdrop || !drawer) return
+
+    function open() {
+      drawer.classList.remove('-translate-x-full')
+      backdrop.classList.remove('opacity-0', 'pointer-events-none')
+      document.body.style.overflow = 'hidden'
+    }
+
+    function close_() {
+      drawer.classList.add('-translate-x-full')
+      backdrop.classList.add('opacity-0', 'pointer-events-none')
+      document.body.style.overflow = ''
+    }
+
+    // 暴露给 Header 的汉堡按钮调用
+    window.__openMobileSidebar = open
+
+    close.addEventListener('click', close_)
+    backdrop.addEventListener('click', close_)
+
+    // 按 Escape 关闭
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !drawer.classList.contains('-translate-x-full')) {
+        close_()
+      }
+    })
+  }
+
+  initMobileSidebar()
+</script>
