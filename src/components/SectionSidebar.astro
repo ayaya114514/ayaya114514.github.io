@@ -1,7 +1,7 @@
 ---
 import config from '@/site-config'
 
-const sections = config.header.menu
+const sections = config.header.menu ?? []
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
 
 // 仅当调用方真的传入了 nav-sub 内容时才渲染下方的子树容器，
@@ -114,28 +114,31 @@ const hasSubNav = Astro.slots.has('nav-sub')
     const drawer = document.getElementById('mobile-sidebar-drawer')
 
     if (!close || !backdrop || !drawer) return
+    const closeButton = close
+    const backdropEl = backdrop
+    const drawerEl = drawer
 
     function open() {
-      drawer.classList.remove('-translate-x-full')
-      backdrop.classList.remove('opacity-0', 'pointer-events-none')
+      drawerEl.classList.remove('-translate-x-full')
+      backdropEl.classList.remove('opacity-0', 'pointer-events-none')
       document.body.style.overflow = 'hidden'
     }
 
     function close_() {
-      drawer.classList.add('-translate-x-full')
-      backdrop.classList.add('opacity-0', 'pointer-events-none')
+      drawerEl.classList.add('-translate-x-full')
+      backdropEl.classList.add('opacity-0', 'pointer-events-none')
       document.body.style.overflow = ''
     }
 
     // 暴露给 Header 的汉堡按钮调用
     window.__openMobileSidebar = open
 
-    close.addEventListener('click', close_)
-    backdrop.addEventListener('click', close_)
+    closeButton.addEventListener('click', close_)
+    backdropEl.addEventListener('click', close_)
 
     // 按 Escape 关闭
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !drawer.classList.contains('-translate-x-full')) {
+      if (e.key === 'Escape' && !drawerEl.classList.contains('-translate-x-full')) {
         close_()
       }
     })

@@ -8,6 +8,7 @@
     "preview": "astro preview",
     "sync": "astro sync",
     "check": "astro check",
+    "lint": "eslint .",
     "astro": "astro"
   },
   "dependencies": {
@@ -22,5 +23,10 @@
     "remark-math": "^6.0.0",
     "sharp": "^0.34.5",
     "typescript": "^5.6.3"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^8.61.1",
+    "eslint": "^10.5.0",
+    "eslint-plugin-astro": "^1.7.0"
   }
 }
