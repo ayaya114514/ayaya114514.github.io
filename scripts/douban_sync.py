@@ -15,12 +15,11 @@
     经常被重定向到登录页，或者只能看到很少的几页。登录后没问题。
 
 使用方法：
-    1. cd scripts
-    2. python -m venv .venv && source .venv/bin/activate
-    3. pip install -r requirements.txt
-    4. 把豆瓣 Cookie 放到 scripts/cookie.txt（详见 README 注释）
-    5. python douban_sync.py
-       脚本会输出到 ../src/data/douban/movies.json 和 books.json
+    1. python3 -m venv scripts/.venv
+    2. scripts/.venv/bin/pip install -r scripts/requirements.txt
+    3. 把豆瓣 Cookie 放到 repo 外的安全配置目录（详见 README）
+    4. npm run sync:douban
+       脚本会输出到 src/data/douban/movies.json 和 books.json
 """
 
 import json
@@ -38,12 +37,20 @@ from bs4 import BeautifulSoup
 # ---------- 配置 ----------
 
 # 你的豆瓣用户 ID（从 profile URL 取，如 https://www.douban.com/people/290893353/）
-USER_ID = "290893353"
+USER_ID = os.environ.get("DOUBAN_USER_ID", "290893353")
 
-# Cookie 文件路径。把整段 Cookie（一行）放进去
+# Cookie 默认保存在 repo 外。把整段 Cookie（一行）放进去
 # 怎么拿 Cookie：浏览器登录豆瓣后 → F12 → Network → 选任意 douban.com 请求
 #               → Headers → Request Headers → 复制 Cookie 整行
-COOKIE_FILE = Path(__file__).parent / "cookie.txt"
+CONFIG_DIR = Path(
+    os.environ.get(
+        "DOUBAN_SYNC_CONFIG_DIR",
+        Path.home() / "Library" / "Application Support" / "ayaya-blog",
+    )
+).expanduser()
+COOKIE_FILE = Path(
+    os.environ.get("DOUBAN_COOKIE_FILE", CONFIG_DIR / "douban-cookie.txt")
+).expanduser()
 
 # 输出目录（相对脚本所在目录）
 OUTPUT_DIR = Path(__file__).parent.parent / "src" / "data" / "douban"
@@ -83,11 +90,11 @@ HEADERS_BASE = {
 
 
 def load_cookie() -> str:
-    """读 cookie.txt。文件不存在或为空时直接退出，避免发出无效请求。"""
+    """读取 Cookie。文件不存在或为空时直接退出，避免发出无效请求。"""
     if not COOKIE_FILE.exists():
         sys.exit(
             f"[!] 找不到 cookie 文件：{COOKIE_FILE}\n"
-            "    请先把浏览器里登录豆瓣后的 Cookie 整行复制到这个文件。"
+            "    请先把浏览器里登录豆瓣后的 Cookie 整行保存到这个文件。"
         )
     cookie = COOKIE_FILE.read_text(encoding="utf-8").strip()
     if not cookie:
@@ -271,7 +278,10 @@ def fetch_movies(sess: requests.Session) -> list[dict[str, Any]]:
         if not page_items:
             if page_no == 1:
                 p = dump_debug(html, "movies-page1-empty")
-                print(f"[!] 第一页没解析到任何条目，HTML 已存到 {p}")
+                sys.exit(
+                    "电影第一页没解析到任何条目；为避免覆盖旧数据，本次停止。"
+                    f"HTML 已存到 {p}"
+                )
             break
         for li in page_items:
             row = parse_movie_item(li)
@@ -389,10 +399,9 @@ def fetch_books(sess: requests.Session) -> list[dict[str, Any]]:
         if not page_items:
             if page_no == 1:
                 p = dump_debug(html, "books-page1-empty")
-                print(
-                    f"[!] 图书第一页没解析到条目，HTML 已存到 {p}\n"
-                    "    可能：(a) 你确实没标记过任何'读过'的书；"
-                    "(b) 豆瓣 DOM 又变了，把这个 HTML 发过来我调整 parser"
+                sys.exit(
+                    "图书第一页没解析到任何条目；为避免覆盖旧数据，本次停止。"
+                    f"HTML 已存到 {p}"
                 )
             break
 
@@ -432,7 +441,7 @@ def localize_covers(
 
 
 def dump_json(items: list[dict[str, Any]], path: Path) -> None:
-    """把数据写成漂亮缩进的 JSON，方便 git diff 看变化。"""
+    """Atomic 写入 JSON，避免同步中断留下半个文件。"""
     path.parent.mkdir(parents=True, exist_ok=True)
     payload = {
         "user_id": USER_ID,
@@ -440,10 +449,12 @@ def dump_json(items: list[dict[str, Any]], path: Path) -> None:
         "updated_at": time.strftime("%Y-%m-%d %H:%M:%S"),
         "items": items,
     }
-    path.write_text(
+    temporary = path.with_suffix(f"{path.suffix}.tmp")
+    temporary.write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
+    os.replace(temporary, path)
     print(f"  -> 已写入 {path}（{len(items)} 条）")
 
 
@@ -455,6 +466,9 @@ def main() -> None:
     sess = make_session(cookie)
 
     target = sys.argv[1] if len(sys.argv) > 1 else "all"
+    valid_targets = {"all", "movie", "movies", "book", "books"}
+    if target not in valid_targets:
+        sys.exit("用法：douban_sync.py [all|movie|book]")
 
     if target in ("all", "movie", "movies"):
         print("=== 抓取电影 ===")

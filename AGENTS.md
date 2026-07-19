@@ -56,8 +56,9 @@
 娱乐板块有两条长期同步链路，详细用法统一看 `scripts/README.md`：
 
 - 豆瓣：`scripts/douban_sync.py` 把"看过的电影 / 读过的书"写入
-  `src/data/douban/{movies,books}.json`。`scripts/cookie.txt` 是登录态，
-  已经在 `.gitignore` 里，绝对不要提交。
+  `src/data/douban/{movies,books}.json`。日常运行 `npm run sync:douban`；Cookie
+  默认只保存在 `~/Library/Application Support/ayaya-blog/douban-cookie.txt`，
+  不得复制进 repo、打印或提交。抓取失败或第一页为空时必须保留旧数据。
 - YouTube：`npm run sync:youtube` 使用 YouTube Data API v3 的
   `youtube.readonly` scope，更新 `src/data/youtube-subs.json` 并下载缺失头像到
   `public/youtube-avatars/`。OAuth client 和 token 默认只保存在
@@ -66,6 +67,7 @@
 
 `scripts/import_youtube_subs.mjs` 只保留为 Google Takeout CSV 的 fallback。
 其它 `.mjs` 脚本（`gen_favicon` / `import_bands`）是一次性导入工具。
+需要同时更新娱乐板块的两类账号数据时运行 `npm run sync:entertainment`。
 
 > paper-digest 目录下的论文速读 Markdown 目前是外部生成后手动放进来的，
 > repo 里没有抓取脚本——如果以后要做自动化，需要新增。
