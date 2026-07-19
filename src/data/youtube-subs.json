@@ -1,142 +1,238 @@
 {
-  "count": 23,
-  "updated_at": "2026-05-02 13:54:21",
+  "count": 39,
+  "updated_at": "2026-07-20 00:15:56",
   "items": [
     {
+      "id": "UCD_cg9Tak9SvlPHRsWxUIpA",
+      "url": "https://www.youtube.com/channel/UCD_cg9Tak9SvlPHRsWxUIpA",
+      "title": "大耳朵TV",
+      "avatar": "/youtube-avatars/UCD_cg9Tak9SvlPHRsWxUIpA.jpg"
+    },
+    {
+      "id": "UCX6fKN_3fpg5aq_G9WinaBg",
+      "url": "https://www.youtube.com/channel/UCX6fKN_3fpg5aq_G9WinaBg",
+      "title": "單推的DD烤肉Man",
+      "avatar": "/youtube-avatars/UCX6fKN_3fpg5aq_G9WinaBg.jpg"
+    },
+    {
       "id": "UC6ShY5V93ep-XzcB6mTDW1Q",
-      "url": "http://www.youtube.com/channel/UC6ShY5V93ep-XzcB6mTDW1Q",
+      "url": "https://www.youtube.com/channel/UC6ShY5V93ep-XzcB6mTDW1Q",
       "title": "黑貓的野望 BlackCat's Studio",
       "avatar": "/youtube-avatars/UC6ShY5V93ep-XzcB6mTDW1Q.jpg"
     },
     {
+      "id": "UC6VKHP606ee6ffKwKmBHSig",
+      "url": "https://www.youtube.com/channel/UC6VKHP606ee6ffKwKmBHSig",
+      "title": "人生肥宅x尊",
+      "avatar": "/youtube-avatars/UC6VKHP606ee6ffKwKmBHSig.jpg"
+    },
+    {
+      "id": "UC-ujeda5rDgCe-910J5keTg",
+      "url": "https://www.youtube.com/channel/UC-ujeda5rDgCe-910J5keTg",
+      "title": "人生魯宅x尊-第2頻道",
+      "avatar": "/youtube-avatars/UC-ujeda5rDgCe-910J5keTg.jpg"
+    },
+    {
       "id": "UCVjmBo22Mimyc4NR4Nz89MA",
-      "url": "http://www.youtube.com/channel/UCVjmBo22Mimyc4NR4Nz89MA",
+      "url": "https://www.youtube.com/channel/UCVjmBo22Mimyc4NR4Nz89MA",
       "title": "錫蘭Ceylan",
       "avatar": "/youtube-avatars/UCVjmBo22Mimyc4NR4Nz89MA.jpg"
     },
     {
       "id": "UCaIpvkwJK1MnSNqAhGzvxiw",
-      "url": "http://www.youtube.com/channel/UCaIpvkwJK1MnSNqAhGzvxiw",
+      "url": "https://www.youtube.com/channel/UCaIpvkwJK1MnSNqAhGzvxiw",
       "title": "錫片",
       "avatar": "/youtube-avatars/UCaIpvkwJK1MnSNqAhGzvxiw.jpg"
     },
     {
       "id": "UC1QxOK5YpyAyFCN_xiPfgHw",
-      "url": "http://www.youtube.com/channel/UC1QxOK5YpyAyFCN_xiPfgHw",
+      "url": "https://www.youtube.com/channel/UC1QxOK5YpyAyFCN_xiPfgHw",
       "title": "新官场",
       "avatar": "/youtube-avatars/UC1QxOK5YpyAyFCN_xiPfgHw.jpg"
     },
     {
+      "id": "UCD-miitqNY3nyukJ4Fnf4_A",
+      "url": "https://www.youtube.com/channel/UCD-miitqNY3nyukJ4Fnf4_A",
+      "title": "月ノ美兎",
+      "avatar": "/youtube-avatars/UCD-miitqNY3nyukJ4Fnf4_A.jpg"
+    },
+    {
       "id": "UC1opHUrw8rvnsadT-iGp7Cg",
-      "url": "http://www.youtube.com/channel/UC1opHUrw8rvnsadT-iGp7Cg",
+      "url": "https://www.youtube.com/channel/UC1opHUrw8rvnsadT-iGp7Cg",
       "title": "Aqua Ch. 湊あくあ",
       "avatar": "/youtube-avatars/UC1opHUrw8rvnsadT-iGp7Cg.jpg"
     },
     {
       "id": "UCO_aKKYxn4tvrqPjcTzZ6EQ",
-      "url": "http://www.youtube.com/channel/UCO_aKKYxn4tvrqPjcTzZ6EQ",
+      "url": "https://www.youtube.com/channel/UCO_aKKYxn4tvrqPjcTzZ6EQ",
       "title": "Ceres Fauna Ch. hololive-EN",
       "avatar": "/youtube-avatars/UCO_aKKYxn4tvrqPjcTzZ6EQ.jpg"
     },
     {
       "id": "UCl1BFmAQ6Fuql7sJQCpRymw",
-      "url": "http://www.youtube.com/channel/UCl1BFmAQ6Fuql7sJQCpRymw",
+      "url": "https://www.youtube.com/channel/UCl1BFmAQ6Fuql7sJQCpRymw",
       "title": "Dar烤肉!",
       "avatar": "/youtube-avatars/UCl1BFmAQ6Fuql7sJQCpRymw.jpg"
     },
     {
+      "id": "UCDSQC_AwS35z81Qyh3qcOCw",
+      "url": "https://www.youtube.com/channel/UCDSQC_AwS35z81Qyh3qcOCw",
+      "title": "DD烤烤薑餅人【烤肉man】",
+      "avatar": "/youtube-avatars/UCDSQC_AwS35z81Qyh3qcOCw.jpg"
+    },
+    {
       "id": "UCvjNdLLy5sinqD92Axk8w-g",
-      "url": "http://www.youtube.com/channel/UCvjNdLLy5sinqD92Axk8w-g",
+      "url": "https://www.youtube.com/channel/UCvjNdLLy5sinqD92Axk8w-g",
       "title": "filian",
       "avatar": "/youtube-avatars/UCvjNdLLy5sinqD92Axk8w-g.jpg"
     },
     {
       "id": "UCoSrY_IQQVpmIRZ9Xf-y93g",
-      "url": "http://www.youtube.com/channel/UCoSrY_IQQVpmIRZ9Xf-y93g",
+      "url": "https://www.youtube.com/channel/UCoSrY_IQQVpmIRZ9Xf-y93g",
       "title": "Gawr Gura Ch. hololive-EN",
       "avatar": "/youtube-avatars/UCoSrY_IQQVpmIRZ9Xf-y93g.jpg"
     },
     {
       "id": "UC1iA6_NT4mtAcIII6ygrvCw",
-      "url": "http://www.youtube.com/channel/UC1iA6_NT4mtAcIII6ygrvCw",
+      "url": "https://www.youtube.com/channel/UC1iA6_NT4mtAcIII6ygrvCw",
       "title": "Hajime Ch. 轟はじめ ‐ ReGLOSS",
       "avatar": "/youtube-avatars/UC1iA6_NT4mtAcIII6ygrvCw.jpg"
     },
     {
       "id": "UCWQtYtq9EOB4-I5P-3fh8lA",
-      "url": "http://www.youtube.com/channel/UCWQtYtq9EOB4-I5P-3fh8lA",
+      "url": "https://www.youtube.com/channel/UCWQtYtq9EOB4-I5P-3fh8lA",
       "title": "Kanade Ch. 音乃瀬奏 ‐ ReGLOSS",
       "avatar": "/youtube-avatars/UCWQtYtq9EOB4-I5P-3fh8lA.jpg"
     },
     {
+      "id": "UCjLEmnpCNeisMxy134KPwWw",
+      "url": "https://www.youtube.com/channel/UCjLEmnpCNeisMxy134KPwWw",
+      "title": "Kobo Kanaeru Ch. hololive-ID",
+      "avatar": "/youtube-avatars/UCjLEmnpCNeisMxy134KPwWw.jpg"
+    },
+    {
+      "id": "UChAnqc_AY5_I3Px5dig3X1Q",
+      "url": "https://www.youtube.com/channel/UChAnqc_AY5_I3Px5dig3X1Q",
+      "title": "Korone Ch. 戌神ころね",
+      "avatar": "/youtube-avatars/UChAnqc_AY5_I3Px5dig3X1Q.jpg"
+    },
+    {
+      "id": "UCCzUftO8KOVkV4wQG1vkUvg",
+      "url": "https://www.youtube.com/channel/UCCzUftO8KOVkV4wQG1vkUvg",
+      "title": "Marine Ch. 宝鐘マリン",
+      "avatar": "/youtube-avatars/UCCzUftO8KOVkV4wQG1vkUvg.jpg"
+    },
+    {
       "id": "UC-hM6YJuNYVAmUWxeIr9FeA",
-      "url": "http://www.youtube.com/channel/UC-hM6YJuNYVAmUWxeIr9FeA",
+      "url": "https://www.youtube.com/channel/UC-hM6YJuNYVAmUWxeIr9FeA",
       "title": "Miko Ch. さくらみこ",
       "avatar": "/youtube-avatars/UC-hM6YJuNYVAmUWxeIr9FeA.jpg"
     },
     {
       "id": "UCAWSyEs_Io8MtpY3m-zqILA",
-      "url": "http://www.youtube.com/channel/UCAWSyEs_Io8MtpY3m-zqILA",
+      "url": "https://www.youtube.com/channel/UCAWSyEs_Io8MtpY3m-zqILA",
       "title": "Nene Ch.桃鈴ねね",
       "avatar": "/youtube-avatars/UCAWSyEs_Io8MtpY3m-zqILA.jpg"
     },
     {
       "id": "UCMwGHR0BTZuLsmjY_NT5Pwg",
-      "url": "http://www.youtube.com/channel/UCMwGHR0BTZuLsmjY_NT5Pwg",
+      "url": "https://www.youtube.com/channel/UCMwGHR0BTZuLsmjY_NT5Pwg",
       "title": "Ninomae Ina'nis Ch. hololive-EN",
       "avatar": "/youtube-avatars/UCMwGHR0BTZuLsmjY_NT5Pwg.jpg"
     },
     {
       "id": "UCvaTdHTWBGv3MKj3KVqJVCw",
-      "url": "http://www.youtube.com/channel/UCvaTdHTWBGv3MKj3KVqJVCw",
+      "url": "https://www.youtube.com/channel/UCvaTdHTWBGv3MKj3KVqJVCw",
       "title": "Okayu Ch. 猫又おかゆ",
       "avatar": "/youtube-avatars/UCvaTdHTWBGv3MKj3KVqJVCw.jpg"
     },
     {
       "id": "UCgBPuTX7crv_2jKAkH5z7bA",
-      "url": "http://www.youtube.com/channel/UCgBPuTX7crv_2jKAkH5z7bA",
+      "url": "https://www.youtube.com/channel/UCgBPuTX7crv_2jKAkH5z7bA",
       "title": "Orangestar",
       "avatar": "/youtube-avatars/UCgBPuTX7crv_2jKAkH5z7bA.jpg"
     },
     {
+      "id": "UC1DCedRgGHBdm81E1llLhOQ",
+      "url": "https://www.youtube.com/channel/UC1DCedRgGHBdm81E1llLhOQ",
+      "title": "Pekora Ch. 兎田ぺこら",
+      "avatar": "/youtube-avatars/UC1DCedRgGHBdm81E1llLhOQ.jpg"
+    },
+    {
       "id": "UCxsZ6NCzjU_t4YSxQLBcM5A",
-      "url": "http://www.youtube.com/channel/UCxsZ6NCzjU_t4YSxQLBcM5A",
+      "url": "https://www.youtube.com/channel/UCxsZ6NCzjU_t4YSxQLBcM5A",
       "title": "saba",
       "avatar": "/youtube-avatars/UCxsZ6NCzjU_t4YSxQLBcM5A.jpg"
     },
     {
+      "id": "UCrV1Hf5r8P148idjoSfrGEQ",
+      "url": "https://www.youtube.com/channel/UCrV1Hf5r8P148idjoSfrGEQ",
+      "title": "Sakuna Ch. 結城さくな",
+      "avatar": "/youtube-avatars/UCrV1Hf5r8P148idjoSfrGEQ.jpg"
+    },
+    {
+      "id": "UCp6993wxpyDPHUpavwDFqgg",
+      "url": "https://www.youtube.com/channel/UCp6993wxpyDPHUpavwDFqgg",
+      "title": "SoraCh. ときのそらチャンネル",
+      "avatar": "/youtube-avatars/UCp6993wxpyDPHUpavwDFqgg.jpg"
+    },
+    {
+      "id": "UCvzGlP9oQwU--Y0r9id_jnA",
+      "url": "https://www.youtube.com/channel/UCvzGlP9oQwU--Y0r9id_jnA",
+      "title": "Subaru Ch. 大空スバル",
+      "avatar": "/youtube-avatars/UCvzGlP9oQwU--Y0r9id_jnA.jpg"
+    },
+    {
+      "id": "UC5CwaMl1eIgY8h02uZw7u8A",
+      "url": "https://www.youtube.com/channel/UC5CwaMl1eIgY8h02uZw7u8A",
+      "title": "Suisei Channel",
+      "avatar": "/youtube-avatars/UC5CwaMl1eIgY8h02uZw7u8A.jpg"
+    },
+    {
+      "id": "UCTvHWSfBZgtxE4sILOaurIQ",
+      "url": "https://www.youtube.com/channel/UCTvHWSfBZgtxE4sILOaurIQ",
+      "title": "Vestia Zeta Ch. hololive-ID",
+      "avatar": "/youtube-avatars/UCTvHWSfBZgtxE4sILOaurIQ.jpg"
+    },
+    {
       "id": "UCqm3BQLlJfvkTsX_hvm0UmA",
-      "url": "http://www.youtube.com/channel/UCqm3BQLlJfvkTsX_hvm0UmA",
+      "url": "https://www.youtube.com/channel/UCqm3BQLlJfvkTsX_hvm0UmA",
       "title": "Watame Ch. 角巻わため",
       "avatar": "/youtube-avatars/UCqm3BQLlJfvkTsX_hvm0UmA.jpg"
     },
     {
+      "id": "UC9SQ59h0T3_bhR_rQWKuGRg",
+      "url": "https://www.youtube.com/channel/UC9SQ59h0T3_bhR_rQWKuGRg",
+      "title": "Weee desu",
+      "avatar": "/youtube-avatars/UC9SQ59h0T3_bhR_rQWKuGRg.jpg"
+    },
+    {
       "id": "UCYKP16oMX9KKPbrNgo_Kgag",
-      "url": "http://www.youtube.com/channel/UCYKP16oMX9KKPbrNgo_Kgag",
+      "url": "https://www.youtube.com/channel/UCYKP16oMX9KKPbrNgo_Kgag",
       "title": "える / Elu【にじさんじ】",
       "avatar": "/youtube-avatars/UCYKP16oMX9KKPbrNgo_Kgag.jpg"
     },
     {
       "id": "UCt30jJgChL8qeT9VPadidSw",
-      "url": "http://www.youtube.com/channel/UCt30jJgChL8qeT9VPadidSw",
+      "url": "https://www.youtube.com/channel/UCt30jJgChL8qeT9VPadidSw",
       "title": "しぐれうい",
       "avatar": "/youtube-avatars/UCt30jJgChL8qeT9VPadidSw.jpg"
     },
     {
       "id": "UCv6P5nsS9rP4tDtFlqLU_QQ",
-      "url": "http://www.youtube.com/channel/UCv6P5nsS9rP4tDtFlqLU_QQ",
+      "url": "https://www.youtube.com/channel/UCv6P5nsS9rP4tDtFlqLU_QQ",
       "title": "ずっと真夜中でいいのに。 ZUTOMAYO",
       "avatar": "/youtube-avatars/UCv6P5nsS9rP4tDtFlqLU_QQ.jpg"
     },
     {
       "id": "UCdn5BQ06XqgXoAxIhbqw5Rg",
-      "url": "http://www.youtube.com/channel/UCdn5BQ06XqgXoAxIhbqw5Rg",
+      "url": "https://www.youtube.com/channel/UCdn5BQ06XqgXoAxIhbqw5Rg",
       "title": "フブキCh。白上フブキ",
       "avatar": "/youtube-avatars/UCdn5BQ06XqgXoAxIhbqw5Rg.jpg"
     },
     {
       "id": "UCRIgIJQWuBJ0Cv_VlU3USNA",
-      "url": "http://www.youtube.com/channel/UCRIgIJQWuBJ0Cv_VlU3USNA",
+      "url": "https://www.youtube.com/channel/UCRIgIJQWuBJ0Cv_VlU3USNA",
       "title": "ヨルシカ / n-buna Official",
       "avatar": "/youtube-avatars/UCRIgIJQWuBJ0Cv_VlU3USNA.jpg"
     }
