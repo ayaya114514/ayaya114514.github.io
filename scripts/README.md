@@ -44,36 +44,48 @@ npm run sync:youtube -- --refresh-avatars
 
 把豆瓣"看过的电影 / 读过的书"同步到博客的 `娱乐` 板块。
 
-## 第一次使用
+### 第一次使用
 
 ```bash
-cd scripts
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+python3 -m venv scripts/.venv
+scripts/.venv/bin/pip install -r scripts/requirements.txt
 ```
 
-## 准备 Cookie（必需）
+### 准备 Cookie（必需）
 
 1. 用浏览器登录 <https://www.douban.com>
 2. 打开 DevTools（F12）→ Network 面板
 3. 刷新一下首页，点列表里任意 `douban.com` 的请求
 4. 右侧 Headers → Request Headers → 找到 `Cookie:` 这一整行
-5. **只复制冒号后面的值**，粘贴到 `scripts/cookie.txt`（一行，不要换行）
+5. **只复制冒号后面的值**，保存到下列路径（一行，不要换行）：
 
-`cookie.txt` 已经在 `.gitignore` 里，不会被提交。
+   ```text
+   ~/Library/Application Support/ayaya-blog/douban-cookie.txt
+   ```
 
-## 跑
+6. 限制文件权限：
+
+   ```bash
+   chmod 600 ~/Library/Application\ Support/ayaya-blog/douban-cookie.txt
+   ```
+
+Cookie 保存在 repo 外，不会被提交。环境变量 `DOUBAN_SYNC_CONFIG_DIR`、
+`DOUBAN_COOKIE_FILE` 和 `DOUBAN_USER_ID` 可以覆盖默认设置。
+
+### 同步
 
 ```bash
 # 抓全部（电影 + 图书）
-python douban_sync.py
+npm run sync:douban
 
 # 只抓电影
-python douban_sync.py movie
+npm run sync:douban -- movie
 
 # 只抓图书
-python douban_sync.py book
+npm run sync:douban -- book
+
+# 一次同步 YouTube + 豆瓣
+npm run sync:entertainment
 ```
 
 输出文件：
@@ -81,9 +93,10 @@ python douban_sync.py book
 - `src/data/douban/movies.json`
 - `src/data/douban/books.json`
 
-确认数据无误后再 `git add` / `git commit` / `git push`。
+同步会增量复用已下载封面；如果 Cookie 失效或第一页解析为空，会立即停止并
+保留原 JSON，避免把博客数据误清空。
 
-## 可能的问题
+### 可能的问题
 
 - **被重定向到登录页**：Cookie 失效，重新复制
 - **抓到空列表**：豆瓣 DOM 结构变了，需要更新 `parse_movie_item` / `parse_book_item`
