@@ -69,5 +69,19 @@
 其它 `.mjs` 脚本（`gen_favicon` / `import_bands`）是一次性导入工具。
 需要同时更新娱乐板块的两类账号数据时运行 `npm run sync:entertainment`。
 
+## 娱乐数据的自然语言触发约定
+
+下面这些请求已经足够明确，视为用户同时授权数据同步、博客更新、scoped
+commit 和 `git push`，无需再复述方案或要求二次确认：
+
+- “同步油管” / “更新 YouTube”：运行 `npm run sync:youtube`。
+- “同步豆瓣” / “更新电影和书籍”：运行 `npm run sync:douban`。
+- “同步油管和豆瓣” / “同步娱乐数据”：运行 `npm run sync:entertainment`。
+
+同步完成后必须核对 JSON 条目数、重复 URL、本地图片缺失和 credential
+isolation，再运行 `npm run lint`、`npm run check`、`npm run build`。只 stage
+本次同步产生的数据、图片和必要代码/文档，commit 后 push 当前分支。OAuth
+或 Cookie 失效时停止，不得覆盖旧数据；只有需要重新登录或授权时才询问用户。
+
 > paper-digest 目录下的论文速读 Markdown 目前是外部生成后手动放进来的，
 > repo 里没有抓取脚本——如果以后要做自动化，需要新增。
