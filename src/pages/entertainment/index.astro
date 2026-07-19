@@ -83,7 +83,7 @@ const sections: { id: string; title: string; payload: DoubanPayload; emptyHint: 
 
     {ytSubs.items.length === 0 ? (
       <p class='text-sm text-muted-foreground'>
-        还没有数据。运行 <code>node scripts/import_youtube_subs.mjs</code> 同步。
+        还没有数据。运行 <code>npm run sync:youtube</code> 同步。
       </p>
     ) : (
       <div class='not-prose grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>

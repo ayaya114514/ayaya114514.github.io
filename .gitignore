@@ -42,6 +42,8 @@ bunfig.toml
 
 ### Scripts ###
 scripts/cookie.txt
+scripts/youtube-client*.json
+scripts/youtube-token*.json
 scripts/.venv/
 scripts/__pycache__/
 scripts/debug/
