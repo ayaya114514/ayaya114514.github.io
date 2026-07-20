@@ -5,15 +5,6 @@ import { Icon, Label } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import Section from '@/components/home/Section.astro'
 import config from '@/site-config'
-import bandsData from '../data/bands.json'
-
-type Band = {
-  slug: string
-  display: string
-  link: string
-  avatar: string | null
-}
-const bands = bandsData as { count: number; updated_at: string; items: Band[] }
 
 const imagePath = config.logo.src
 const images = import.meta.glob<{ default: ImageMetadata }>(
@@ -37,12 +28,62 @@ if (!images[imagePath])
         fetchpriority='high'
       />
 
-      <div class='flex flex-col items-center gap-y-4'>
+      <div class='flex w-full flex-col items-center gap-y-4'>
         <h1 class='text-3xl font-medium'>{config.author}</h1>
-        <div class='flex flex-wrap justify-center gap-x-7 gap-y-3'>
-          <Label title='GitHub' as='a' href='https://github.com/ayaya114514' target='_blank'>
-            <Icon name='github' class='size-5' slot='icon' />
+        <div class='grid w-full max-w-lg grid-cols-4 gap-x-2 text-[11px] sm:flex sm:w-auto sm:gap-x-7 sm:text-base'>
+          <Label
+            title='GitHub'
+            as='a'
+            href='https://github.com/ayaya114514'
+            target='_blank'
+            class='min-w-0 gap-x-1 sm:gap-x-2'
+          >
+            <Icon name='github' class='size-4 sm:size-5' slot='icon' />
           </Label>
+          <Label
+            title='Linux.do'
+            as='a'
+            href='https://linux.do/u/ayaya114514/summary'
+            target='_blank'
+            class='min-w-0 gap-x-1 sm:gap-x-2'
+          >
+            <img
+              src='/link-icons/linux-do.svg'
+              alt=''
+              class='size-4 shrink-0 sm:size-5'
+              slot='icon'
+            />
+          </Label>
+          <Label
+            title='IDC Flare'
+            as='a'
+            href='https://idcflare.com/u/ayaya114514/summary'
+            target='_blank'
+            class='min-w-0 gap-x-1 sm:gap-x-2'
+          >
+            <img
+              src='/link-icons/idcflare.svg'
+              alt=''
+              class='size-4 shrink-0 sm:size-5'
+              slot='icon'
+            />
+          </Label>
+          <Label
+            title='NodeSeek'
+            as='a'
+            href='https://www.nodeseek.com/space/50733#/general'
+            target='_blank'
+            class='min-w-0 gap-x-1 sm:gap-x-2'
+          >
+            <img
+              src='/link-icons/nodeseek.png'
+              alt=''
+              class='size-4 shrink-0 sm:size-5'
+              slot='icon'
+            />
+          </Label>
+        </div>
+        <div class='flex justify-center gap-x-7'>
           <Label
             title='Instagram'
             as='a'
@@ -50,6 +91,14 @@ if (!images[imagePath])
             target='_blank'
           >
             <Icon name='instagram' class='size-5' slot='icon' />
+          </Label>
+          <Label
+            title='Bilibili'
+            as='a'
+            href='https://space.bilibili.com/431279208'
+            target='_blank'
+          >
+            <Icon name='bilibili' class='size-5' slot='icon' />
           </Label>
         </div>
       </div>
@@ -73,57 +122,6 @@ if (!images[imagePath])
         </span>
       </Section>
 
-      {/* Hobbies */}
-      <Section title='兴趣'>
-        <p class='text-muted-foreground'>音乐上极度痴迷 J-POP</p>
-        <p class='text-muted-foreground'>饮食上几乎每天都要摄取一瓶碳酸饮料</p>
-        <p class='text-muted-foreground'>
-          读书上中国作家最喜欢莫言、外国作家最喜欢村上春树（其几乎每一本长篇小说我都看过）
-        </p>
-        <p class='text-muted-foreground'>
-          流媒体上不知何时起开始关注 hololive，jp / en 甚至 id 我都有关注。我毫无疑问是一个 35p（笑）
-        </p>
-        <p class='text-muted-foreground'>
-          极度厌恶 MBTI，请务必不要在我面前提到你的 mbti 人格测试结果
-        </p>
-      </Section>
-
-      {/* Favorite bands */}
-      <Section title='目前最喜欢的十个乐队（歌手）'>
-        <div class='not-prose grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
-          {
-            bands.items.map((b) => (
-              <a
-                href={b.link}
-                target='_blank'
-                rel='noopener noreferrer'
-                class='group flex flex-col items-center gap-y-2 rounded-lg border bg-background/60 p-3 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md'
-              >
-                <div class='aspect-square w-20 overflow-hidden rounded-full bg-muted'>
-                  {b.avatar ? (
-                    <img
-                      src={b.avatar}
-                      alt={b.display}
-                      loading='lazy'
-                      class='h-full w-full object-cover transition-transform duration-300 group-hover:scale-105'
-                    />
-                  ) : (
-                    <div class='flex h-full w-full items-center justify-center text-xs text-muted-foreground'>
-                      无头像
-                    </div>
-                  )}
-                </div>
-                <h3
-                  class='line-clamp-2 text-center text-sm font-medium leading-snug group-hover:text-[var(--primary)]'
-                  title={b.display}
-                >
-                  {b.display}
-                </h3>
-              </a>
-            ))
-          }
-        </div>
-      </Section>
     </div>
   </main>
 </PageLayout>
