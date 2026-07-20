@@ -93,12 +93,12 @@ npm run sync:entertainment
 - `src/data/douban/movies.json`
 - `src/data/douban/books.json`
 
-同步会增量复用已下载封面；如果 Cookie 失效或第一页解析为空，会立即停止并
-保留原 JSON，避免把博客数据误清空。
+同步会增量复用已下载封面；如果 Cookie 失效、任意分页解析为空、关键字段缺失
+或结果重复，会立即停止并保留原 JSON，避免用空数据或不完整数据覆盖博客。
 
 ### 可能的问题
 
 - **被重定向到登录页**：Cookie 失效，重新复制
 - **抓到空列表**：豆瓣 DOM 结构变了，需要更新 `parse_movie_item` / `parse_book_item`
-- **海报加载不出来**：博客模板里 `<img>` 已经加了 `referrerpolicy="no-referrer"`，
-  如果还有问题，可能是豆瓣图片 CDN 临时抽风
+- **海报加载不出来**：同步脚本会把封面下载到 `public/images/douban/`；检查 JSON
+  中的本地路径是否存在，以及图片下载阶段是否出现 HTTP 错误

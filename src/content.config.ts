@@ -11,6 +11,7 @@ const blog = defineCollection({
     z.object({
       // Required
       title: z.string().max(60),
+      description: z.string().max(160),
       publishDate: z.coerce.date(),
       // Optional
       updatedDate: z.coerce.date().optional(),
@@ -26,6 +27,7 @@ const blog = defineCollection({
         })
         .optional(),
       language: z.string().optional(),
+      tags: z.array(z.string()).optional(),
       draft: z.boolean().default(false),
       // Special fields
       comment: z.boolean().default(true)

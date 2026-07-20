@@ -5,9 +5,10 @@ import type { CollectionEntry } from 'astro:content'
 // Plugin styles
 import 'katex/dist/katex.min.css'
 
+import config from 'virtual:config'
+
 import { MediumZoom } from 'astro-pure/advanced'
 import { ArticleBottom, Hero } from 'astro-pure/components/pages'
-import config from 'virtual:config'
 import PageLayout from '@/layouts/ContentLayout.astro'
 import BlogDirectory from '@/components/blog/Directory.astro'
 import BlogToc from '@/components/blog/Toc.astro'
@@ -26,7 +27,7 @@ const {
   remarkPluginFrontmatter
 } = Astro.props
 
-const { heroImage, publishDate, title, updatedDate } = data
+const { description, heroImage, publishDate, title, updatedDate } = data
 
 // ArticleBottom 取 collections[index-1] 当作 prev、index+1 当作 next。
 // 1) 传入的 posts 由 sortMDByDate 按日期倒序排，对带序号的章节笔记（00-、01-）会让"序号大的"
@@ -54,12 +55,13 @@ const socialImage = heroImage
     ? heroImage.src
     : heroImage.src.src
   : config.socialCard
-const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString()
+const articleDate = publishDate.toISOString()
+const modifiedDate = updatedDate?.toISOString()
 const primaryColor = data.heroImage?.color ?? 'hsl(var(--primary) / var(--un-text-opacity))'
 ---
 
 <PageLayout
-  meta={{ articleDate, ogImage: socialImage, title }}
+  meta={{ articleDate, description, modifiedDate, ogImage: socialImage, title }}
   highlightColor={primaryColor}
   back='/'
 >
@@ -79,12 +81,12 @@ const primaryColor = data.heroImage?.color ?? 'hsl(var(--primary) / var(--un-tex
   <slot name='bottom-sidebar' slot='bottom-sidebar' />
 </PageLayout>
 
-{/*
-  Hero 组件无条件渲染 <blockquote><q>{description}</q></blockquote>，浏览器对 <q> 默认
-  添加 open-quote / close-quote 引号符号；当 description 为空时会显示成一对空引号 ""。
-  我们已从 schema 中移除 description，所以这里直接隐藏整个斜体块。is:global 是因为
-  Hero 来自 node_modules，无法直接修改其作用域样式。
-*/}
+{
+  /*
+  description 保留给 SEO / RSS，但文章标题下不重复展示摘要。is:global 是因为 Hero
+  来自 node_modules，无法直接修改其作用域样式。
+*/
+}
 <style is:global>
   .article-info > .italic.mt-3 {
     display: none;

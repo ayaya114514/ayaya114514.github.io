@@ -4,7 +4,6 @@
 //
 // 数据来源：Wikipedia REST API summary（多语言回退）。
 // 用法：node scripts/import_bands.mjs
-
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -17,8 +16,7 @@ const OUT_JSON = path.join(ROOT, 'src/data/bands.json')
 const AVATAR_DIR = path.join(ROOT, 'public/band-avatars')
 const AVATAR_PUBLIC_PREFIX = '/band-avatars'
 
-const UA =
-  'ayaya-blog/1.0 (https://github.com/ayaya114514; anyangyang2022@gmail.com) Node-fetch'
+const UA = 'ayaya-blog/1.0 (https://github.com/ayaya114514; anyangyang2022@gmail.com) Node-fetch'
 
 // slug：本地文件名；display：卡片上显示的名字；links：可点击跳转的 URL；
 // titles：Wikipedia 标题候选（按 lang 匹配，依次尝试）。
@@ -108,7 +106,7 @@ async function findArtistImage(titles) {
       if (data.type === 'disambiguation') continue
       const img = data.originalimage?.source || data.thumbnail?.source
       if (img) return { lang, title, img }
-    } catch (e) {
+    } catch {
       // 404 或网络错，换下一个
     }
   }
@@ -121,7 +119,9 @@ async function processArtist(a) {
   try {
     await fs.access(dest)
     exists = true
-  } catch {}
+  } catch {
+    // 文件不存在时继续下载。
+  }
 
   let avatar = null
   if (exists) {

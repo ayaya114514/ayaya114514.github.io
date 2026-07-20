@@ -3,6 +3,7 @@ import { Icon } from 'astro-pure/user'
 import config from '@/site-config'
 
 const sections = config.header.menu ?? []
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
 ---
 
 <header-component
@@ -13,6 +14,8 @@ const sections = config.header.menu ?? []
       id='toggleMenu'
       class='rounded-md border p-1.5 transition-colors hover:bg-border lg:hidden lg:group-[.not-top]:rounded-xl'
       aria-label='打开导航菜单'
+      aria-controls='mobile-sidebar-drawer'
+      aria-expanded='false'
     >
       <Icon class='size-5' name='menu' />
     </button>
@@ -21,23 +24,28 @@ const sections = config.header.menu ?? []
       class='hidden text-xl font-medium group-[.not-top]:ms-2 lg:block sm:group-[.not-top]:ms-3'
       style='transition:margin-inline 0.3s'
       href='/'
-      aria-label='Home'>ayaya</a
+      aria-label='返回首页'>ayaya</a
     >
   </div>
 
   <div class='flex items-center gap-x-2'>
     {/* Menu links */}
-    <div
-      id='headerExpandContent'
-      class='end-0 start-0 top-12 grid border border-transparent group-[.not-top]:rounded-xl group-[.expanded]:opacity-100 dark:group-[.expanded.not-top]:bg-muted max-lg:absolute max-lg:opacity-0 max-lg:group-[.not-top]:border-border max-lg:group-[.expanded.not-top]:bg-background max-lg:group-[.not-top]:px-4 max-lg:group-[.not-top]:py-2 lg:grid-rows-1'
-    >
+    <nav id='headerExpandContent' class='hidden lg:grid lg:grid-rows-1' aria-label='主导航'>
       <div class='flex flex-col items-center justify-center overflow-hidden lg:flex-row'>
         {
           sections.map((item) => (
             <a
               href={item.link}
               class='w-full flex-none grow py-2 max-lg:text-center lg:text-right font-medium transition-none hover:text-primary lg:w-fit lg:px-3'
-              aria-label='Nav menu item'
+              aria-current={
+                item.link === '/'
+                  ? currentPath === '/'
+                    ? 'page'
+                    : undefined
+                  : currentPath === item.link || currentPath.startsWith(item.link + '/')
+                    ? 'page'
+                    : undefined
+              }
               data-astro-prefetch
             >
               {item.title}
@@ -45,7 +53,7 @@ const sections = config.header.menu ?? []
           ))
         }
       </div>
-    </div>
+    </nav>
   </div>
 </header-component>
 
@@ -63,11 +71,7 @@ const sections = config.header.menu ?? []
 
       // Mobile menu
       this.querySelector('#toggleMenu')?.addEventListener('click', () => {
-        if (window.__openMobileSidebar) {
-          window.__openMobileSidebar()
-        } else {
-          this.classList.toggle('expanded')
-        }
+        window.__openMobileSidebar?.()
       })
     }
   }
@@ -99,7 +103,7 @@ const sections = config.header.menu ?? []
         rgba(39, 39, 42, 0.08) 0px 10px 15px -3px,
         rgba(39, 39, 42, 0.08) 0px 4px 6px -4px;
     }
-    &[data-show='false']:not(.expanded) {
+    &[data-show='false'] {
       transform: translateY(-5rem);
     }
   }
@@ -111,47 +115,4 @@ const sections = config.header.menu ?? []
   :global(.dark) header-component.not-top {
     background-color: hsl(var(--muted) / var(--un-bg-opacity));
   }
-
-  @media (max-width: 1023px) {
-    #headerExpandContent {
-      grid-template-rows: 0fr;
-      transition:
-        opacity 0.3s,
-        padding 0.3s,
-        border-color 0.15s,
-        grid-template-rows 0.3s;
-    }
-    .expanded #headerExpandContent {
-      grid-template-rows: 1fr;
-    }
-    .expanded.not-top #headerExpandContent {
-      box-shadow:
-        rgb(255, 255, 255) 0px 0px 0px 0px,
-        rgba(24, 24, 27, 0.08) 0px 0px 0px 1px,
-        rgba(39, 39, 42, 0.08) 0px 10px 15px -3px,
-        rgba(39, 39, 42, 0.08) 0px 4px 6px -4px;
-    }
-
-    header-component #headerExpandContent::after {
-      box-sizing: content-box;
-      content: '';
-      position: absolute;
-      inset-inline: calc(-1rem - 1px);
-      bottom: 0;
-      top: -5rem;
-      z-index: -1;
-      transition: 0.3s;
-      visibility: hidden;
-      opacity: 0;
-      border-bottom: 1px solid transparent;
-    }
-    header-component:not(.not-top) #headerExpandContent::after {
-      visibility: visible;
-      bottom: -1rem;
-      opacity: 1;
-      background-color: hsl(var(--muted) / var(--un-bg-opacity, 1));
-      border-bottom-color: hsl(var(--border) / var(--un-border-opacity, 1));
-    }
-  }
-
 </style>

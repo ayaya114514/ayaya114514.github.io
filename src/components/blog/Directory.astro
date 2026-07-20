@@ -72,6 +72,7 @@ const displayName = (key: string) => groupNameMap[key] ?? key
                 <li>
                   <a
                     href={`/blog/${p.id}`}
+                    aria-current={isCurrent ? 'page' : undefined}
                     class:list={[
                       'block rounded-md px-2 py-1 transition-colors hover:bg-muted hover:text-foreground',
                       isCurrent

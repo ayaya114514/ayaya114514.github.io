@@ -30,7 +30,7 @@ const tools: Tool[] = [
 const headings = [{ depth: 2, slug: 'tools', text: '🛠 工具' }]
 ---
 
-<PageLayout title='工具' {headings}>
+<PageLayout title='工具' description='收集和分享我制作或常用的在线小工具。' {headings}>
   <section>
     <h2 id='tools'>
       🛠 工具
@@ -49,9 +49,7 @@ const headings = [{ depth: 2, slug: 'tools', text: '🛠 工具' }]
             <h3 class='text-base font-medium leading-snug group-hover:text-[var(--primary)]'>
               {t.title}
             </h3>
-            {t.description && (
-              <p class='text-sm text-muted-foreground'>{t.description}</p>
-            )}
+            {t.description && <p class='text-sm text-muted-foreground'>{t.description}</p>}
             <p class='mt-auto truncate pt-1 text-xs text-muted-foreground/70'>{t.href}</p>
           </a>
         ))

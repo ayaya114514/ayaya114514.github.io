@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content'
+
 import PageLayout from '@/layouts/CommonPage.astro'
 
 const entries = (await getCollection('desksetup', ({ data }) => !data.draft)).sort(
@@ -161,7 +162,11 @@ const headings = [
 ]
 ---
 
-<PageLayout title='桌搭' {headings}>
+<PageLayout
+  title='桌搭'
+  description='记录桌面布置、Apple 设备、电脑外设与音频器材的使用时间线。'
+  {headings}
+>
   <h2 id='timeline'>🪴 时间线</h2>
   <p class='text-muted-foreground'>共 {entries.length} 条 · 按日期时间线排列</p>
 
