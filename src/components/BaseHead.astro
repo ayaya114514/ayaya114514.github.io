@@ -1,13 +1,13 @@
 ---
 import { Font } from 'astro:assets'
+import config from 'virtual:config'
 
 import { prod } from 'astro-pure/server'
 import type { SiteMeta } from 'astro-pure/types'
-import config from 'virtual:config'
 
-type Props = SiteMeta
+type Props = SiteMeta & { modifiedDate?: string }
 
-const { articleDate, description, ogImage, title } = Astro.props
+const { articleDate, description, modifiedDate, ogImage, title } = Astro.props
 
 const siteTitle = `${title} ${config.titleDelimiter} ${config.title}`
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
@@ -15,7 +15,10 @@ const socialImageURL = new URL(ogImage ? ogImage : config.socialCard, Astro.url)
 ---
 
 <meta charset='utf-8' />
-<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover' name='viewport' />
+<meta
+  content='width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover'
+  name='viewport'
+/>
 <meta content='IE=edge' http-equiv='X-UA-Compatible' />
 <title>{siteTitle}</title>
 
@@ -44,8 +47,8 @@ const socialImageURL = new URL(ogImage ? ogImage : config.socialCard, Astro.url)
 <meta content={config.author} name='author' />
 
 {/* Theme Color */}
-{/* <meta content='' name='theme-color' /> */}
-<meta name='color-scheme' content='light dark' />
+<meta content='#0B0B10' name='theme-color' />
+<meta name='color-scheme' content='dark' />
 
 {/* Open Graph / Facebook */}
 <meta content={articleDate ? 'article' : 'website'} property='og:type' />
@@ -57,11 +60,13 @@ const socialImageURL = new URL(ogImage ? ogImage : config.socialCard, Astro.url)
 <meta content={socialImageURL} property='og:image' />
 <meta content='1200' property='og:image:width' />
 <meta content='630' property='og:image:height' />
+<meta content={`${title} social card`} property='og:image:alt' />
 {
   articleDate && (
     <>
       <meta content={config.author} property='article:author' />
       <meta content={articleDate} property='article:published_time' />
+      {modifiedDate && <meta content={modifiedDate} property='article:modified_time' />}
     </>
   )
 }
@@ -72,6 +77,7 @@ const socialImageURL = new URL(ogImage ? ogImage : config.socialCard, Astro.url)
 <meta content={title} property='twitter:title' />
 <meta content={description} property='twitter:description' />
 <meta content={socialImageURL} property='twitter:image' />
+<meta content={`${title} social card`} property='twitter:image:alt' />
 
 {/* Sitemap */}
 <link href='/sitemap-index.xml' rel='sitemap' />

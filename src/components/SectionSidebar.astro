@@ -14,7 +14,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
 <!-- ===== 桌面端侧边栏 ===== -->
 <aside
   class={`hidden ${showDesktop ? 'lg:flex' : ''} sticky top-20 self-start w-56 shrink-0 me-8 mt-20 flex-col gap-y-1 max-h-[calc(100vh-6rem)] overflow-y-auto bg-transparent`}
-  aria-label='Section navigation'
+  aria-label='桌面侧栏导航'
 >
   {
     sections.map((s) => {
@@ -26,6 +26,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
         <div class='flex flex-col'>
           <a
             href={s.link}
+            aria-current={active ? 'page' : undefined}
             class={`px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-muted ${
               active ? 'bg-muted text-[var(--primary)]' : 'text-muted-foreground'
             }`}
@@ -52,6 +53,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
     id='mobile-sidebar-backdrop'
     class='fixed inset-0 z-40 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300'
     aria-hidden='true'
+    hidden
   >
   </div>
 
@@ -62,6 +64,9 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
     role='dialog'
     aria-modal='true'
     aria-label='导航菜单'
+    aria-hidden='true'
+    inert
+    hidden
   >
     <!-- 抽屉头部：标题 + 关闭按钮 -->
     <div class='flex items-center justify-between px-4 py-3 border-b border-border'>
@@ -72,13 +77,15 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
         aria-label='关闭侧边栏'
       >
         <svg class='h-4 w-4' viewBox='0 0 20 20' fill='currentColor' aria-hidden='true'>
-          <path d='M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 0 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 0 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z' />
+          <path
+            d='M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 0 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 0 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z'
+          ></path>
         </svg>
       </button>
     </div>
 
     <!-- 抽屉内容：与桌面侧边栏相同的导航 + 子板块 -->
-    <nav class='flex-1 overflow-y-auto px-3 py-4' aria-label='Section navigation'>
+    <nav class='flex-1 overflow-y-auto px-3 py-4' aria-label='移动侧栏导航'>
       {
         sections.map((s) => {
           const active =
@@ -89,6 +96,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
             <div class='flex flex-col'>
               <a
                 href={s.link}
+                aria-current={active ? 'page' : undefined}
                 class={`px-3 py-2.5 rounded-md text-sm font-medium transition-colors hover:bg-muted ${
                   active ? 'bg-muted text-[var(--primary)]' : 'text-muted-foreground'
                 }`}
@@ -114,34 +122,99 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
     const close = document.getElementById('mobile-sidebar-close')
     const backdrop = document.getElementById('mobile-sidebar-backdrop')
     const drawer = document.getElementById('mobile-sidebar-drawer')
+    const root = document.getElementById('mobile-sidebar-root')
+    const toggle = document.getElementById('toggleMenu')
 
-    if (!close || !backdrop || !drawer) return
+    if (!close || !backdrop || !drawer || !root || !toggle) return
     const closeButton = close
     const backdropEl = backdrop
     const drawerEl = drawer
+    const rootEl = root
+    const toggleButton = toggle
+    const inertSiblings: HTMLElement[] = []
+    let lastFocused: HTMLElement | null = null
+    let hideTimer: number | undefined
 
-    function open() {
-      drawerEl.classList.remove('-translate-x-full')
-      backdropEl.classList.remove('opacity-0', 'pointer-events-none')
-      document.body.style.overflow = 'hidden'
+    const focusableSelector =
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+
+    function setBackgroundInert(value: boolean) {
+      if (value) {
+        inertSiblings.length = 0
+        for (const sibling of Array.from(rootEl.parentElement?.children ?? [])) {
+          if (sibling !== rootEl && sibling instanceof HTMLElement && !sibling.inert) {
+            sibling.inert = true
+            inertSiblings.push(sibling)
+          }
+        }
+        return
+      }
+      for (const sibling of inertSiblings) sibling.inert = false
+      inertSiblings.length = 0
     }
 
-    function close_() {
+    function open() {
+      if (hideTimer) window.clearTimeout(hideTimer)
+      lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null
+      backdropEl.hidden = false
+      drawerEl.hidden = false
+      drawerEl.removeAttribute('inert')
+      drawerEl.setAttribute('aria-hidden', 'false')
+      toggleButton.setAttribute('aria-expanded', 'true')
+      setBackgroundInert(true)
+      document.body.style.overflow = 'hidden'
+      requestAnimationFrame(() => {
+        drawerEl.classList.remove('-translate-x-full')
+        backdropEl.classList.remove('opacity-0', 'pointer-events-none')
+        closeButton.focus()
+      })
+    }
+
+    function close_(restoreFocus = true) {
+      drawerEl.setAttribute('inert', '')
+      drawerEl.setAttribute('aria-hidden', 'true')
       drawerEl.classList.add('-translate-x-full')
       backdropEl.classList.add('opacity-0', 'pointer-events-none')
+      toggleButton.setAttribute('aria-expanded', 'false')
+      setBackgroundInert(false)
       document.body.style.overflow = ''
+      if (restoreFocus) lastFocused?.focus()
+      hideTimer = window.setTimeout(() => {
+        if (drawerEl.getAttribute('aria-hidden') === 'true') {
+          drawerEl.hidden = true
+          backdropEl.hidden = true
+        }
+      }, 300)
     }
 
     // 暴露给 Header 的汉堡按钮调用
     window.__openMobileSidebar = open
 
-    closeButton.addEventListener('click', close_)
-    backdropEl.addEventListener('click', close_)
+    closeButton.addEventListener('click', () => close_())
+    backdropEl.addEventListener('click', () => close_())
+    drawerEl.querySelectorAll('a[href]').forEach((link) => {
+      link.addEventListener('click', () => close_(false))
+    })
 
-    // 按 Escape 关闭
+    // 按 Escape 关闭；Tab / Shift+Tab 始终限制在 modal drawer 内。
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !drawerEl.classList.contains('-translate-x-full')) {
+      if (drawerEl.classList.contains('-translate-x-full')) return
+      if (e.key === 'Escape') {
         close_()
+        return
+      }
+      if (e.key !== 'Tab') return
+
+      const focusable = Array.from(drawerEl.querySelectorAll<HTMLElement>(focusableSelector))
+      if (focusable.length === 0) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
       }
     })
   }

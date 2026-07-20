@@ -1,8 +1,9 @@
 ---
 import PageLayout from '@/layouts/CommonPage.astro'
+
 import bandsData from '../../data/bands.json'
-import moviesData from '../../data/douban/movies.json'
 import booksData from '../../data/douban/books.json'
+import moviesData from '../../data/douban/movies.json'
 import ytSubsData from '../../data/youtube-subs.json'
 
 type DoubanItem = {
@@ -87,7 +88,11 @@ const sections: { id: string; title: string; payload: DoubanPayload; emptyHint: 
 ]
 ---
 
-<PageLayout title='娱乐' {headings}>
+<PageLayout
+  title='娱乐'
+  description='浏览我的 YouTube 订阅、喜欢的乐队、看过的电影和读过的书。'
+  {headings}
+>
   {/* YouTube 订阅频道 */}
   <section>
     <h2 id='youtube'>
@@ -97,43 +102,45 @@ const sections: { id: string; title: string; payload: DoubanPayload; emptyHint: 
       </span>
     </h2>
 
-    {ytSubs.items.length === 0 ? (
-      <p class='text-sm text-muted-foreground'>
-        还没有数据。运行 <code>npm run sync:youtube</code> 同步。
-      </p>
-    ) : (
-      <div class='not-prose grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
-        {ytSubs.items.map((c) => (
-          <a
-            href={c.url}
-            target='_blank'
-            rel='noopener noreferrer'
-            class='group flex flex-col items-center gap-y-2 rounded-lg border bg-background/60 p-3 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md'
-          >
-            <div class='aspect-square w-20 overflow-hidden rounded-full bg-muted'>
-              {c.avatar ? (
-                <img
-                  src={c.avatar}
-                  alt={c.title}
-                  loading='lazy'
-                  class='h-full w-full object-cover transition-transform duration-300 group-hover:scale-105'
-                />
-              ) : (
-                <div class='flex h-full w-full items-center justify-center text-xs text-muted-foreground'>
-                  无头像
-                </div>
-              )}
-            </div>
-            <h3
-              class='line-clamp-2 text-center text-sm font-medium leading-snug group-hover:text-[var(--primary)]'
-              title={c.title}
+    {
+      ytSubs.items.length === 0 ? (
+        <p class='text-sm text-muted-foreground'>
+          还没有数据。运行 <code>npm run sync:youtube</code> 同步。
+        </p>
+      ) : (
+        <div class='not-prose grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
+          {ytSubs.items.map((c) => (
+            <a
+              href={c.url}
+              target='_blank'
+              rel='noopener noreferrer'
+              class='group flex flex-col items-center gap-y-2 rounded-lg border bg-background/60 p-3 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md'
             >
-              {c.title}
-            </h3>
-          </a>
-        ))}
-      </div>
-    )}
+              <div class='aspect-square w-20 overflow-hidden rounded-full bg-muted'>
+                {c.avatar ? (
+                  <img
+                    src={c.avatar}
+                    alt={c.title}
+                    loading='lazy'
+                    class='h-full w-full object-cover transition-transform duration-300 group-hover:scale-105'
+                  />
+                ) : (
+                  <div class='flex h-full w-full items-center justify-center text-xs text-muted-foreground'>
+                    无头像
+                  </div>
+                )}
+              </div>
+              <h3
+                class='line-clamp-2 text-center text-sm font-medium leading-snug group-hover:text-[var(--primary)]'
+                title={c.title}
+              >
+                {c.title}
+              </h3>
+            </a>
+          ))}
+        </div>
+      )
+    }
   </section>
 
   {/* 乐队 */}
@@ -183,9 +190,7 @@ const sections: { id: string; title: string; payload: DoubanPayload; emptyHint: 
       <section>
         <h2 id={id}>
           {title}
-          <span class='ml-2 text-sm font-normal text-muted-foreground'>
-            共 {payload.count} 条
-          </span>
+          <span class='ml-2 text-sm font-normal text-muted-foreground'>共 {payload.count} 条</span>
         </h2>
 
         {payload.items.length === 0 ? (
@@ -229,17 +234,13 @@ const sections: { id: string; title: string; payload: DoubanPayload; emptyHint: 
                       title={`${it.rating} / 5`}
                     >
                       {'★'.repeat(it.rating)}
-                      <span class='text-muted-foreground/40'>
-                        {'★'.repeat(5 - it.rating)}
-                      </span>
+                      <span class='text-muted-foreground/40'>{'★'.repeat(5 - it.rating)}</span>
                     </div>
                   ) : (
                     <div class='text-xs text-muted-foreground/60'>未评分</div>
                   )}
 
-                  {it.date && (
-                    <p class='mt-auto text-xs text-muted-foreground/80'>{it.date}</p>
-                  )}
+                  {it.date && <p class='mt-auto text-xs text-muted-foreground/80'>{it.date}</p>}
                 </div>
               </a>
             ))}

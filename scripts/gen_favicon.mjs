@@ -32,8 +32,8 @@ async function pngBuffer(size) {
 //   接着是各张图片的原始字节（这里直接塞 PNG）
 function buildIco(pngs /* [{size, data}] */) {
   const header = Buffer.alloc(6)
-  header.writeUInt16LE(0, 0)          // reserved
-  header.writeUInt16LE(1, 2)          // type: 1 = ICO
+  header.writeUInt16LE(0, 0) // reserved
+  header.writeUInt16LE(1, 2) // type: 1 = ICO
   header.writeUInt16LE(pngs.length, 4) // 图片数量
 
   const entrySize = 16
@@ -47,12 +47,12 @@ function buildIco(pngs /* [{size, data}] */) {
     // 256 在 ICO 里用 0 表示
     entry.writeUInt8(size >= 256 ? 0 : size, 0) // width
     entry.writeUInt8(size >= 256 ? 0 : size, 1) // height
-    entry.writeUInt8(0, 2)               // 调色板色数（0=无调色板）
-    entry.writeUInt8(0, 3)               // 保留位
-    entry.writeUInt16LE(1, 4)            // color planes
-    entry.writeUInt16LE(32, 6)           // 每像素位数
-    entry.writeUInt32LE(data.length, 8)  // 图像数据大小
-    entry.writeUInt32LE(offset, 12)      // 偏移
+    entry.writeUInt8(0, 2) // 调色板色数（0=无调色板）
+    entry.writeUInt8(0, 3) // 保留位
+    entry.writeUInt16LE(1, 4) // color planes
+    entry.writeUInt16LE(32, 6) // 每像素位数
+    entry.writeUInt32LE(data.length, 8) // 图像数据大小
+    entry.writeUInt32LE(offset, 12) // 偏移
     entries.push(entry)
     blobs.push(data)
     offset += data.length
