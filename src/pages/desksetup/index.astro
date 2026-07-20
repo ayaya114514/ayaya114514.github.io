@@ -27,6 +27,12 @@ type Device = {
   link: string
 }
 
+function thumbnailPath(image: string): string {
+  return image
+    .replace(/^\/images\/(device|desksetup)\//, '/images/$1/thumbs/')
+    .replace(/\.[^.]+$/, '.webp')
+}
+
 const apple: Device[] = [
   {
     name: 'Apple Watch Series 10',
@@ -175,10 +181,13 @@ const headings = [
                 class='block shrink-0 md:w-40'
               >
                 <img
-                  src={entry.data.image}
+                  src={thumbnailPath(entry.data.image)}
                   alt={`桌搭 ${label}`}
+                  width='1200'
+                  height='900'
                   class='h-32 w-full object-cover md:h-full'
                   loading='lazy'
+                  decoding='async'
                 />
               </a>
             )}
@@ -207,9 +216,12 @@ const headings = [
             >
               <div class='aspect-square overflow-hidden bg-muted'>
                 <img
-                  src={d.image}
+                  src={thumbnailPath(d.image)}
                   alt={d.name}
+                  width='480'
+                  height='480'
                   loading='lazy'
+                  decoding='async'
                   class='h-full w-full object-cover transition-transform duration-300 group-hover:scale-105'
                 />
               </div>
