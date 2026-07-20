@@ -23,6 +23,7 @@ const {
   showSidebar = true,
   ...props
 } = Astro.props
+const hasSubNav = Astro.slots.has('nav-sub')
 ---
 
 <html lang={config.locale.lang}>
@@ -60,13 +61,10 @@ const {
       id='main-container'
       class='w-full max-w-[96rem] min-h-[100dvh] flex'
     >
-      {
-        showSidebar && (
-          <SectionSidebar>
-            <slot name='nav-sub' slot='nav-sub' />
-          </SectionSidebar>
-        )
-      }
+      {/* 移动抽屉始终存在；showSidebar 只控制桌面侧栏。 */}
+      <SectionSidebar showDesktop={showSidebar} {hasSubNav}>
+        {hasSubNav && <slot name='nav-sub' slot='nav-sub' />}
+      </SectionSidebar>
       <div class='flex-1 min-w-0 flex flex-col justify-between'>
         <Header />
         <div class='flex-1 w-full'>

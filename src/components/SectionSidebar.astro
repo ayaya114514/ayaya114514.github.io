@@ -1,17 +1,19 @@
 ---
 import config from '@/site-config'
 
+interface Props {
+  showDesktop?: boolean
+  hasSubNav?: boolean
+}
+
+const { showDesktop = true, hasSubNav = Astro.slots.has('nav-sub') } = Astro.props
 const sections = config.header.menu ?? []
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
-
-// 仅当调用方真的传入了 nav-sub 内容时才渲染下方的子树容器，
-// 否则会出现一个空的缩进框。
-const hasSubNav = Astro.slots.has('nav-sub')
 ---
 
 <!-- ===== 桌面端侧边栏 ===== -->
 <aside
-  class='hidden lg:flex sticky top-20 self-start w-56 shrink-0 me-8 mt-20 flex-col gap-y-1 max-h-[calc(100vh-6rem)] overflow-y-auto bg-transparent'
+  class={`hidden ${showDesktop ? 'lg:flex' : ''} sticky top-20 self-start w-56 shrink-0 me-8 mt-20 flex-col gap-y-1 max-h-[calc(100vh-6rem)] overflow-y-auto bg-transparent`}
   aria-label='Section navigation'
 >
   {
