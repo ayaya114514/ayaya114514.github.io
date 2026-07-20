@@ -1,5 +1,6 @@
 ---
 import PageLayout from '@/layouts/CommonPage.astro'
+import bandsData from '../../data/bands.json'
 import moviesData from '../../data/douban/movies.json'
 import booksData from '../../data/douban/books.json'
 import ytSubsData from '../../data/youtube-subs.json'
@@ -13,6 +14,19 @@ type DoubanItem = {
   rating?: number | null
   date?: string | null
   comment?: string | null
+}
+
+type Band = {
+  slug: string
+  display: string
+  link: string
+  avatar: string | null
+}
+
+type BandsPayload = {
+  count: number
+  updated_at: string
+  items: Band[]
 }
 
 type DoubanPayload = {
@@ -38,6 +52,7 @@ type YoutubeSubsPayload = {
 const movies = moviesData as DoubanPayload
 const books = booksData as DoubanPayload
 const ytSubs = ytSubsData as YoutubeSubsPayload
+const bands = bandsData as BandsPayload
 
 // 豆瓣图片有 referer 防盗链，浏览器直连大概率 403。
 // 脚本里已经把封面下到 public/images/douban/，cover 字段是站内相对路径
@@ -51,6 +66,7 @@ function resolveCover(url: string | null | undefined): string | null {
 
 const headings = [
   { depth: 2, slug: 'youtube', text: '📺 YouTube 订阅频道' },
+  { depth: 2, slug: 'bands', text: '🎵 乐队' },
   { depth: 2, slug: 'movies', text: '🎬 电影' },
   { depth: 2, slug: 'books', text: '📚 书籍' }
 ]
@@ -118,6 +134,48 @@ const sections: { id: string; title: string; payload: DoubanPayload; emptyHint: 
         ))}
       </div>
     )}
+  </section>
+
+  {/* 乐队 */}
+  <section>
+    <h2 id='bands'>
+      🎵 乐队
+      <span class='ml-2 text-sm font-normal text-muted-foreground'>共 {bands.count} 个</span>
+    </h2>
+
+    <div class='not-prose grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
+      {
+        bands.items.map((b) => (
+          <a
+            href={b.link}
+            target='_blank'
+            rel='noopener noreferrer'
+            class='group flex flex-col items-center gap-y-2 rounded-lg border bg-background/60 p-3 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md'
+          >
+            <div class='aspect-square w-20 overflow-hidden rounded-full bg-muted'>
+              {b.avatar ? (
+                <img
+                  src={b.avatar}
+                  alt={b.display}
+                  loading='lazy'
+                  class='h-full w-full object-cover transition-transform duration-300 group-hover:scale-105'
+                />
+              ) : (
+                <div class='flex h-full w-full items-center justify-center text-xs text-muted-foreground'>
+                  无头像
+                </div>
+              )}
+            </div>
+            <h3
+              class='line-clamp-2 text-center text-sm font-medium leading-snug group-hover:text-[var(--primary)]'
+              title={b.display}
+            >
+              {b.display}
+            </h3>
+          </a>
+        ))
+      }
+    </div>
   </section>
 
   {
