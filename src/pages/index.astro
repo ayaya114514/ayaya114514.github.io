@@ -16,7 +16,7 @@ if (!images[imagePath])
   )
 ---
 
-<PageLayout meta={{ title: 'Home' }} showSidebar={false}>
+<PageLayout meta={{ description: config.description, title: '首页' }} showSidebar={false}>
   <main class='flex w-full flex-col items-center'>
     {/* Hero */}
     <section class='animate mb-10 flex flex-col items-center gap-y-7' id='content-header'>
@@ -30,12 +30,15 @@ if (!images[imagePath])
 
       <div class='flex w-full flex-col items-center gap-y-4'>
         <h1 class='text-3xl font-medium'>{config.author}</h1>
-        <div class='grid w-full max-w-lg grid-cols-4 gap-x-2 text-[11px] sm:flex sm:w-auto sm:gap-x-7 sm:text-base'>
+        <div
+          class='grid w-full max-w-lg grid-cols-4 gap-x-2 text-[11px] sm:flex sm:w-auto sm:gap-x-7 sm:text-base'
+        >
           <Label
             title='GitHub'
             as='a'
             href='https://github.com/ayaya114514'
             target='_blank'
+            rel='noopener noreferrer'
             class='min-w-0 gap-x-1 sm:gap-x-2'
           >
             <Icon name='github' class='size-4 sm:size-5' slot='icon' />
@@ -45,6 +48,7 @@ if (!images[imagePath])
             as='a'
             href='https://linux.do/u/ayaya114514/summary'
             target='_blank'
+            rel='noopener noreferrer'
             class='min-w-0 gap-x-1 sm:gap-x-2'
           >
             <svg
@@ -58,8 +62,8 @@ if (!images[imagePath])
               stroke-linejoin='round'
               aria-hidden='true'
             >
-              <circle cx='12' cy='12' r='9' />
-              <path d='M3.9 8.5h16.2M3.9 15.5h16.2' />
+              <circle cx='12' cy='12' r='9'></circle>
+              <path d='M3.9 8.5h16.2M3.9 15.5h16.2'></path>
             </svg>
           </Label>
           <Label
@@ -67,6 +71,7 @@ if (!images[imagePath])
             as='a'
             href='https://idcflare.com/u/ayaya114514/summary'
             target='_blank'
+            rel='noopener noreferrer'
             class='min-w-0 gap-x-1 sm:gap-x-2'
           >
             <svg
@@ -80,8 +85,8 @@ if (!images[imagePath])
               stroke-linejoin='round'
               aria-hidden='true'
             >
-              <circle cx='12' cy='12' r='9' />
-              <path d='M7.5 8v8M11 16V8h5.5M11 12h4.5' />
+              <circle cx='12' cy='12' r='9'></circle>
+              <path d='M7.5 8v8M11 16V8h5.5M11 12h4.5'></path>
             </svg>
           </Label>
           <Label
@@ -89,6 +94,7 @@ if (!images[imagePath])
             as='a'
             href='https://www.nodeseek.com/space/50733#/general'
             target='_blank'
+            rel='noopener noreferrer'
             class='min-w-0 gap-x-1 sm:gap-x-2'
           >
             <svg
@@ -101,9 +107,9 @@ if (!images[imagePath])
               stroke-linecap='round'
               aria-hidden='true'
             >
-              <circle cx='12' cy='12' r='1.4' fill='currentColor' stroke='none' />
-              <path d='M8.6 8.4a5.1 5.1 0 0 0 0 7.2M15.4 8.4a5.1 5.1 0 0 1 0 7.2' />
-              <path d='M5.8 6.2a8.2 8.2 0 0 0 0 11.6M18.2 6.2a8.2 8.2 0 0 1 0 11.6' />
+              <circle cx='12' cy='12' r='1.4' fill='currentColor' stroke='none'></circle>
+              <path d='M8.6 8.4a5.1 5.1 0 0 0 0 7.2M15.4 8.4a5.1 5.1 0 0 1 0 7.2'></path>
+              <path d='M5.8 6.2a8.2 8.2 0 0 0 0 11.6M18.2 6.2a8.2 8.2 0 0 1 0 11.6'></path>
             </svg>
           </Label>
         </div>
@@ -113,6 +119,7 @@ if (!images[imagePath])
             as='a'
             href='https://www.instagram.com/luanzhui1/'
             target='_blank'
+            rel='noopener noreferrer'
           >
             <Icon name='instagram' class='size-5' slot='icon' />
           </Label>
@@ -121,6 +128,7 @@ if (!images[imagePath])
             as='a'
             href='https://space.bilibili.com/431279208'
             target='_blank'
+            rel='noopener noreferrer'
           >
             <Icon name='bilibili' class='size-5' slot='icon' />
           </Label>
@@ -132,20 +140,23 @@ if (!images[imagePath])
       {/* Help */}
       <Section title='有什么可以帮助到你'>
         <p class='text-muted-foreground leading-relaxed'>
-          日本帝大情报修考的情报、直连 / 中转 / IEPL 专线机场的推荐、亚太 / 美西等地区的线路机 / 落地机 VPS 厂家的推荐、链式代理 / 分流规则 / 代理软件的使用教程、主流 LLM 模型不同版本的斗蛐蛐、正价订阅 Claude / ChatGPT 全流程等，如有需要请务必联络我，我会耐心免费为您解答的！
+          日本帝大情报修考的情报、直连 / 中转 / IEPL 专线机场的推荐、亚太 / 美西等地区的线路机 /
+          落地机 VPS 厂家的推荐、链式代理 / 分流规则 / 代理软件的使用教程、主流 LLM
+          模型不同版本的斗蛐蛐、正价订阅 Claude / ChatGPT
+          全流程等，如有需要请务必联络我，我会耐心免费为您解答的！
         </p>
       </Section>
 
       {/* Contact */}
       <Section title='联络先'>
-        <span
+        <a
+          href='mailto:anyangyang2022@gmail.com'
           class='inline-flex w-fit items-center gap-x-2 rounded-lg border bg-background/60 px-3 py-2 text-sm shadow-sm select-all'
         >
           <Icon name='email' class='size-4' />
           anyangyang2022@gmail.com
-        </span>
+        </a>
       </Section>
-
     </div>
   </main>
 </PageLayout>

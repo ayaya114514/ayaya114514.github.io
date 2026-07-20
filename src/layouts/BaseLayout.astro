@@ -12,13 +12,13 @@ import '@/assets/styles/global.css'
 import '@/assets/styles/app.css'
 
 interface Props {
-  meta: SiteMeta
+  meta: SiteMeta & { modifiedDate?: string }
   highlightColor?: string
   showSidebar?: boolean
 }
 
 const {
-  meta: { articleDate, description = config.description, ogImage, title },
+  meta: { articleDate, description = config.description, modifiedDate, ogImage, title },
   highlightColor,
   showSidebar = true,
   ...props
@@ -28,21 +28,21 @@ const hasSubNav = Astro.slots.has('nav-sub')
 
 <html lang={config.locale.lang}>
   <head>
-    <BaseHead {articleDate} {description} {ogImage} {title} />
-    {/*
+    <BaseHead {articleDate} {description} {modifiedDate} {ogImage} {title} />
+    {
+      /*
       强制锁定为暗色主题：原 ThemeProvider 会读 localStorage / 系统偏好来决定明暗，
       用户希望只用暗色，所以这里直接给 <html> 加 dark class 并清掉可能残留的旧偏好，
       避免页面在加载时短暂 flash 成亮色。
-    */}
+    */
+    }
     <script is:inline>
       ;(function () {
         document.documentElement.classList.add('dark')
         try {
           localStorage.setItem('theme', 'dark')
         } catch (e) {}
-        document
-          .querySelector('meta[name="theme-color"]')
-          ?.setAttribute('content', '#0B0B10')
+        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#0B0B10')
       })()
     </script>
   </head>
@@ -57,10 +57,7 @@ const hasSubNav = Astro.slots.has('nav-sub')
         />
       )
     }
-    <div
-      id='main-container'
-      class='w-full max-w-[96rem] min-h-[100dvh] flex'
-    >
+    <div id='main-container' class='w-full max-w-[96rem] min-h-[100dvh] flex'>
       {/* 移动抽屉始终存在；showSidebar 只控制桌面侧栏。 */}
       <SectionSidebar showDesktop={showSidebar} {hasSubNav}>
         {hasSubNav && <slot name='nav-sub' slot='nav-sub' />}

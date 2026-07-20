@@ -1,4 +1,4 @@
-import { rehypeHeadingIds } from '@astrojs/markdown-remark'
+import { rehypeHeadingIds, unified } from '@astrojs/markdown-remark'
 import AstroPureIntegration from 'astro-pure'
 import { defineConfig, fontProviders } from 'astro/config'
 import rehypeKatex from 'rehype-katex'
@@ -26,7 +26,6 @@ export default defineConfig({
   // [Basic]
   site: 'https://ayaya114514.github.io',
   trailingSlash: 'never',
-  server: { host: true },
   prefetch: {
     defaultStrategy: 'viewport'
   },
@@ -55,19 +54,21 @@ export default defineConfig({
 
   // [Markdown]
   markdown: {
-    remarkPlugins: [remarkMath],
-    rehypePlugins: [
-      [rehypeKatex, {}],
-      rehypeHeadingIds,
-      [
-        rehypeAutolinkHeadings,
-        {
-          behavior: 'append',
-          properties: { className: ['anchor'] },
-          content: { type: 'text', value: '#' }
-        }
+    processor: unified({
+      remarkPlugins: [remarkMath],
+      rehypePlugins: [
+        [rehypeKatex, {}],
+        rehypeHeadingIds,
+        [
+          rehypeAutolinkHeadings,
+          {
+            behavior: 'append',
+            properties: { className: ['anchor'] },
+            content: { type: 'text', value: '#' }
+          }
+        ]
       ]
-    ],
+    }),
     shikiConfig: {
       themes: {
         light: 'github-light',
@@ -100,8 +101,6 @@ export default defineConfig({
   // [Experimental]
   experimental: {
     contentIntellisense: true,
-    svgo: true,
-    clientPrerender: true,
-    rustCompiler: false
+    clientPrerender: true
   }
 })

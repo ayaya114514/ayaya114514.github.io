@@ -35,6 +35,7 @@ export const theme: ThemeUserConfig = {
       { title: '首页', link: '/' },
       { title: '工具', link: '/tools' },
       { title: '笔记', link: '/blog' },
+      { title: '归档', link: '/archives' },
       { title: '娱乐', link: '/entertainment' },
       { title: '桌搭', link: '/desksetup' }
     ]

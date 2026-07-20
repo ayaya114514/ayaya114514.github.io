@@ -1,5 +1,6 @@
 ---
 title: 判断抑郁症程度的 metrics.py 文件解答
+description: 逐步解释抑郁程度评估 metrics.py 中的 NumPy 指标计算、核心思想与实现逻辑。
 publishDate: 2026-05-09
 ---
 

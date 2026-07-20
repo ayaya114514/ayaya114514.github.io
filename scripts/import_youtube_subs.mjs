@@ -5,7 +5,6 @@
 // 用法：
 //   node scripts/import_youtube_subs.mjs [csv_path]
 // 默认读取用户 Takeout 路径，没传参时用它。
-
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -14,8 +13,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const ROOT = path.resolve(__dirname, '..')
 
-const DEFAULT_CSV =
-  '/Users/ayaya/Downloads/Takeout/YouTube 和 YouTube Music/订阅内容/订阅内容.csv'
+const DEFAULT_CSV = '/Users/ayaya/Downloads/Takeout/YouTube 和 YouTube Music/订阅内容/订阅内容.csv'
 const OUT_JSON = path.join(ROOT, 'src/data/youtube-subs.json')
 const AVATAR_DIR = path.join(ROOT, 'public/youtube-avatars')
 const AVATAR_PUBLIC_PREFIX = '/youtube-avatars'
@@ -101,7 +99,9 @@ async function processChannel({ id, url, title }) {
   try {
     await fs.access(localPath)
     exists = true
-  } catch {}
+  } catch {
+    // 文件不存在时继续下载。
+  }
 
   if (exists) {
     return { id, url, title, avatar: publicPath }

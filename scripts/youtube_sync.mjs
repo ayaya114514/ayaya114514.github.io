@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 import { spawn } from 'node:child_process'
 import crypto from 'node:crypto'
 import fs from 'node:fs/promises'
@@ -15,10 +14,8 @@ const ROOT = path.resolve(__dirname, '..')
 const CONFIG_DIR =
   process.env.YOUTUBE_SYNC_CONFIG_DIR ||
   path.join(os.homedir(), 'Library', 'Application Support', 'ayaya-blog')
-const CLIENT_PATH =
-  process.env.YOUTUBE_OAUTH_CLIENT || path.join(CONFIG_DIR, 'youtube-client.json')
-const TOKEN_PATH =
-  process.env.YOUTUBE_OAUTH_TOKEN || path.join(CONFIG_DIR, 'youtube-token.json')
+const CLIENT_PATH = process.env.YOUTUBE_OAUTH_CLIENT || path.join(CONFIG_DIR, 'youtube-client.json')
+const TOKEN_PATH = process.env.YOUTUBE_OAUTH_TOKEN || path.join(CONFIG_DIR, 'youtube-token.json')
 const OUT_JSON = path.join(ROOT, 'src/data/youtube-subs.json')
 const AVATAR_DIR = path.join(ROOT, 'public/youtube-avatars')
 const AVATAR_PUBLIC_PREFIX = '/youtube-avatars'
@@ -43,11 +40,7 @@ OAuth token:  ${TOKEN_PATH}`)
 }
 
 function base64Url(buffer) {
-  return buffer
-    .toString('base64')
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_')
-    .replace(/=+$/g, '')
+  return buffer.toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '')
 }
 
 async function readJson(filePath) {
@@ -93,7 +86,8 @@ async function loadClient() {
         `找不到 YouTube OAuth client: ${CLIENT_PATH}`,
         '请在 Google Cloud 创建 Desktop OAuth client，并把下载的 JSON 放到上面的路径。',
         '只需启用 YouTube Data API v3；OAuth scope 由本脚本固定为 youtube.readonly。'
-      ].join('\n')
+      ].join('\n'),
+      { cause: error }
     )
   }
 }
@@ -190,9 +184,12 @@ async function authorize(client) {
   console.log('[*] 正在浏览器中请求 YouTube read-only 授权…')
   openBrowser(authUrl.toString())
 
-  const timeout = setTimeout(() => {
-    callbackReject(new Error('等待 OAuth 授权超时，请重新运行同步命令'))
-  }, 5 * 60 * 1000)
+  const timeout = setTimeout(
+    () => {
+      callbackReject(new Error('等待 OAuth 授权超时，请重新运行同步命令'))
+    },
+    5 * 60 * 1000
+  )
 
   try {
     const code = await callback
@@ -250,7 +247,8 @@ async function getToken(client) {
   } catch (error) {
     if (error.message.includes('invalid_grant')) {
       throw new Error(
-        `YouTube OAuth token 已失效，请运行 npm run sync:youtube -- --reauthorize\n${error.message}`
+        `YouTube OAuth token 已失效，请运行 npm run sync:youtube -- --reauthorize\n${error.message}`,
+        { cause: error }
       )
     }
     throw error
@@ -369,6 +367,19 @@ async function syncSubscriptions(accessToken) {
     }
   })
 
+  const channelIds = new Set()
+  for (const item of items) {
+    if (channelIds.has(item.id)) {
+      throw new Error(`YouTube API 返回重复 channelId：${item.id}；为避免覆盖旧数据，本次停止`)
+    }
+    channelIds.add(item.id)
+  }
+
+  const previous = await readJsonIfPresent(OUT_JSON)
+  if (items.length === 0 && Array.isArray(previous?.items) && previous.items.length > 0) {
+    throw new Error('YouTube API 意外返回空订阅列表；为避免覆盖旧数据，本次停止')
+  }
+
   items.sort((a, b) => a.title.localeCompare(b.title, 'zh-Hans-CN'))
   const now = new Date()
   const localTime = new Date(now.getTime() - now.getTimezoneOffset() * 60_000)
@@ -377,7 +388,9 @@ async function syncSubscriptions(accessToken) {
     updated_at: localTime.toISOString().replace('T', ' ').slice(0, 19),
     items
   }
-  await fs.writeFile(OUT_JSON, `${JSON.stringify(payload, null, 2)}\n`, 'utf8')
+  const temporary = `${OUT_JSON}.tmp`
+  await fs.writeFile(temporary, `${JSON.stringify(payload, null, 2)}\n`, 'utf8')
+  await fs.rename(temporary, OUT_JSON)
   console.log(`[*] 写入 ${OUT_JSON}（${items.length} 条）`)
 }
 
@@ -393,7 +406,9 @@ async function main() {
   if (channels.length === 0) {
     throw new Error('当前 Google 账号没有可访问的 YouTube channel')
   }
-  console.log(`[*] 已授权频道: ${channels.map((item) => item.snippet?.title || item.id).join(', ')}`)
+  console.log(
+    `[*] 已授权频道: ${channels.map((item) => item.snippet?.title || item.id).join(', ')}`
+  )
 
   if (!AUTH_ONLY) await syncSubscriptions(token.access_token)
 }

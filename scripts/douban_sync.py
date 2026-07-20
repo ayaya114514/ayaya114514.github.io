@@ -276,13 +276,11 @@ def fetch_movies(sess: requests.Session) -> list[dict[str, Any]]:
         soup, html = fetch_page(sess, url)
         page_items = soup.select("div.grid-view div.item")
         if not page_items:
-            if page_no == 1:
-                p = dump_debug(html, "movies-page1-empty")
-                sys.exit(
-                    "电影第一页没解析到任何条目；为避免覆盖旧数据，本次停止。"
-                    f"HTML 已存到 {p}"
-                )
-            break
+            p = dump_debug(html, f"movies-page{page_no}-empty")
+            sys.exit(
+                f"电影第 {page_no} 页没解析到任何条目；为避免用不完整结果覆盖旧数据，"
+                f"本次停止。HTML 已存到 {p}"
+            )
         for li in page_items:
             row = parse_movie_item(li)
             if row:
@@ -383,9 +381,9 @@ def fetch_books(sess: requests.Session) -> list[dict[str, Any]]:
 
         # 先看是不是 grid 视图
         grid_items = soup.select("div.grid-view div.item")
-        list_items = soup.select("ul.list-view li.subject-item") + soup.select(
-            "li.subject-item"
-        )
+        # `ul.list-view li.subject-item` 是 `li.subject-item` 的子集，不能把两个
+        # selector 的结果拼起来，否则 list view 下每本书会被解析两次。
+        list_items = soup.select("li.subject-item")
 
         if grid_items:
             page_items = [parse_book_item_grid(it) for it in grid_items]
@@ -397,13 +395,11 @@ def fetch_books(sess: requests.Session) -> list[dict[str, Any]]:
         page_items = [x for x in page_items if x]
 
         if not page_items:
-            if page_no == 1:
-                p = dump_debug(html, "books-page1-empty")
-                sys.exit(
-                    "图书第一页没解析到任何条目；为避免覆盖旧数据，本次停止。"
-                    f"HTML 已存到 {p}"
-                )
-            break
+            p = dump_debug(html, f"books-page{page_no}-empty")
+            sys.exit(
+                f"图书第 {page_no} 页没解析到任何条目；为避免用不完整结果覆盖旧数据，"
+                f"本次停止。HTML 已存到 {p}"
+            )
 
         items.extend(page_items)
         next_link = soup.select_one("span.next a")
@@ -416,6 +412,25 @@ def fetch_books(sess: requests.Session) -> list[dict[str, Any]]:
 
 
 # ---------- 写出 ----------
+
+
+def dedupe_items(items: list[dict[str, Any]], label: str) -> list[dict[str, Any]]:
+    """按 URL 去重并拒绝缺少关键字段的结果，防止异常响应污染正式数据。"""
+    seen: set[str] = set()
+    result: list[dict[str, Any]] = []
+    for item in items:
+        url = item.get("url")
+        title = item.get("title")
+        if not isinstance(url, str) or not url or not isinstance(title, str) or not title:
+            sys.exit(f"[!] {label} 抓取结果缺少 title/url；为避免覆盖旧数据，本次停止")
+        if url in seen:
+            print(f"    [{label}] 跳过重复条目：{title}  {url}")
+            continue
+        seen.add(url)
+        result.append(item)
+    if not result:
+        sys.exit(f"[!] {label} 抓取结果为空；为避免覆盖旧数据，本次停止")
+    return result
 
 
 def localize_covers(
@@ -472,7 +487,7 @@ def main() -> None:
 
     if target in ("all", "movie", "movies"):
         print("=== 抓取电影 ===")
-        movies = fetch_movies(sess)
+        movies = dedupe_items(fetch_movies(sess), "movie")
         print(f"=== 下载电影封面（共 {len(movies)} 张） ===")
         localize_covers(movies, sess, "movie")
         dump_json(movies, OUTPUT_DIR / "movies.json")
@@ -480,7 +495,7 @@ def main() -> None:
 
     if target in ("all", "book", "books"):
         print("=== 抓取图书 ===")
-        books = fetch_books(sess)
+        books = dedupe_items(fetch_books(sess), "book")
         print(f"=== 下载图书封面（共 {len(books)} 张） ===")
         localize_covers(books, sess, "book")
         dump_json(books, OUTPUT_DIR / "books.json")

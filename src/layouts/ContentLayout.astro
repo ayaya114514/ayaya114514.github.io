@@ -6,7 +6,7 @@ import PageLayout from '@/layouts/BaseLayout.astro'
 import { integ } from '@/site-config'
 
 interface Props {
-  meta: SiteMeta
+  meta: SiteMeta & { modifiedDate?: string }
   highlightColor?: string
   back?: string
 }
