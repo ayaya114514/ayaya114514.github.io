@@ -28,7 +28,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
           <a
             href={s.link}
             aria-current={active ? 'page' : undefined}
-            class={`px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-muted ${
+            class={`w-fit self-start px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-muted ${
               active ? 'bg-muted text-[var(--primary)]' : 'text-muted-foreground'
             }`}
           >
@@ -91,7 +91,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
               <a
                 href={s.link}
                 aria-current={active ? 'page' : undefined}
-                class={`px-3 py-2.5 rounded-md text-sm font-medium transition-colors hover:bg-muted ${
+                class={`w-fit self-start px-3 py-2.5 rounded-md text-sm font-medium transition-colors hover:bg-muted ${
                   active ? 'bg-muted text-[var(--primary)]' : 'text-muted-foreground'
                 }`}
               >
