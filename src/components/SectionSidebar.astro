@@ -1,14 +1,21 @@
 ---
+import { getCollection } from 'astro:content'
+
 import config from '@/site-config'
+import SectionSubmenu from '@/components/SectionSubmenu.astro'
 
 interface Props {
   showDesktop?: boolean
   hasSubNav?: boolean
 }
 
-const { showDesktop = true, hasSubNav = Astro.slots.has('nav-sub') } = Astro.props
+const { showDesktop = true } = Astro.props
 const sections = config.header.menu ?? []
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
+const posts = await getCollection('blog', ({ data }) => (import.meta.env.PROD ? !data.draft : true))
+const currentBlogId = currentPath.startsWith('/blog/')
+  ? decodeURIComponent(currentPath.slice('/blog/'.length))
+  : undefined
 ---
 
 <!-- ===== 桌面端侧边栏 ===== -->
@@ -53,18 +60,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
             class='mt-1 mb-2 ms-3 ps-3 border-l border-muted-foreground/20'
             hidden
           >
-            <a
-              href={s.link}
-              data-astro-prefetch
-              class='block rounded-md px-2 py-1 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground'
-            >
-              {s.title === '工具' ? '工具列表' : s.title}
-            </a>
-            {active && hasSubNav && (
-              <div class='mt-1'>
-                <slot name='nav-sub' />
-              </div>
-            )}
+            <SectionSubmenu section={s} {posts} {currentBlogId} />
           </div>
         </div>
       )
@@ -151,18 +147,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
                 class='mt-1 mb-2 ms-3 ps-3 border-l border-muted-foreground/20'
                 hidden
               >
-                <a
-                  href={s.link}
-                  data-astro-prefetch
-                  class='block rounded-md px-2 py-1 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground'
-                >
-                  {s.title === '工具' ? '工具列表' : s.title}
-                </a>
-                {active && hasSubNav && (
-                  <div class='mt-1'>
-                    <slot name='nav-sub' />
-                  </div>
-                )}
+                <SectionSubmenu section={s} {posts} {currentBlogId} />
               </div>
             </div>
           )
