@@ -1,67 +1,45 @@
 ---
-import { getCollection } from 'astro:content'
-
 import config from '@/site-config'
-import SectionSubmenu from '@/components/SectionSubmenu.astro'
 
 interface Props {
   showDesktop?: boolean
   hasSubNav?: boolean
 }
 
-const { showDesktop = true } = Astro.props
+const { showDesktop = true, hasSubNav = Astro.slots.has('nav-sub') } = Astro.props
 const sections = config.header.menu ?? []
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
-const posts = await getCollection('blog', ({ data }) => (import.meta.env.PROD ? !data.draft : true))
-const currentBlogId = currentPath.startsWith('/blog/')
-  ? decodeURIComponent(currentPath.slice('/blog/'.length))
-  : undefined
 ---
 
 <!-- ===== 桌面端侧边栏 ===== -->
 <aside
   class={`hidden ${showDesktop ? 'lg:flex' : ''} sticky top-20 self-start w-56 shrink-0 me-8 mt-20 flex-col gap-y-1 max-h-[calc(100vh-6rem)] overflow-y-auto bg-transparent`}
   aria-label='桌面侧栏导航'
-  data-section-menu
 >
   {
-    sections.map((s, index) => {
+    sections.map((s) => {
       const active =
         s.link === '/'
           ? currentPath === '/'
           : currentPath === s.link || currentPath.startsWith(s.link + '/')
-      const panelId = `desktop-section-${index}`
       return (
         <div class='flex flex-col'>
-          <button
-            type='button'
-            aria-expanded='false'
-            aria-controls={panelId}
-            data-section-toggle
-            class={`flex w-full items-center justify-between px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-muted ${
+          <a
+            href={s.link}
+            aria-current={active ? 'page' : undefined}
+            class={`px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-muted ${
               active ? 'bg-muted text-[var(--primary)]' : 'text-muted-foreground'
             }`}
           >
-            <span>{s.title}</span>
-            <svg
-              class='section-chevron h-3.5 w-3.5 shrink-0 transition-transform'
-              viewBox='0 0 20 20'
-              fill='currentColor'
-              aria-hidden='true'
-            >
-              <path d='M7.05 4.55a.75.75 0 0 1 1.06 0l4.9 4.9a.75.75 0 0 1 0 1.06l-4.9 4.9a.75.75 0 0 1-1.06-1.06L11.38 10 7.05 5.61a.75.75 0 0 1 0-1.06Z' />
-            </svg>
-          </button>
+            {s.title}
+          </a>
 
-          {/* 一级菜单只负责展开；子标题或目录项才负责实际跳转。 */}
-          <div
-            id={panelId}
-            data-section-panel
-            class='mt-1 mb-2 ms-3 ps-3 border-l border-muted-foreground/20'
-            hidden
-          >
-            <SectionSubmenu section={s} {posts} {currentBlogId} />
-          </div>
+          {/* 当前激活的板块下方展开「子板块」内容（笔记目录 / TOC 等） */}
+          {active && hasSubNav && (
+            <div class='mt-1 mb-2 ms-3 ps-3 border-l border-muted-foreground/20'>
+              <slot name='nav-sub' />
+            </div>
+          )}
         </div>
       )
     })
@@ -107,48 +85,30 @@ const currentBlogId = currentPath.startsWith('/blog/')
     </div>
 
     <!-- 抽屉内容：与桌面侧边栏相同的导航 + 子板块 -->
-    <nav
-      class='flex-1 overflow-y-auto px-3 py-4'
-      aria-label='移动侧栏导航'
-      data-section-menu
-    >
+    <nav class='flex-1 overflow-y-auto px-3 py-4' aria-label='移动侧栏导航'>
       {
-        sections.map((s, index) => {
+        sections.map((s) => {
           const active =
             s.link === '/'
               ? currentPath === '/'
               : currentPath === s.link || currentPath.startsWith(s.link + '/')
-          const panelId = `mobile-section-${index}`
           return (
             <div class='flex flex-col'>
-              <button
-                type='button'
-                aria-expanded='false'
-                aria-controls={panelId}
-                data-section-toggle
-                class={`flex w-full items-center justify-between px-3 py-2.5 rounded-md text-sm font-medium transition-colors hover:bg-muted ${
+              <a
+                href={s.link}
+                aria-current={active ? 'page' : undefined}
+                class={`px-3 py-2.5 rounded-md text-sm font-medium transition-colors hover:bg-muted ${
                   active ? 'bg-muted text-[var(--primary)]' : 'text-muted-foreground'
                 }`}
               >
-                <span>{s.title}</span>
-                <svg
-                  class='section-chevron h-3.5 w-3.5 shrink-0 transition-transform'
-                  viewBox='0 0 20 20'
-                  fill='currentColor'
-                  aria-hidden='true'
-                >
-                  <path d='M7.05 4.55a.75.75 0 0 1 1.06 0l4.9 4.9a.75.75 0 0 1 0 1.06l-4.9 4.9a.75.75 0 0 1-1.06-1.06L11.38 10 7.05 5.61a.75.75 0 0 1 0-1.06Z' />
-                </svg>
-              </button>
+                {s.title}
+              </a>
 
-              <div
-                id={panelId}
-                data-section-panel
-                class='mt-1 mb-2 ms-3 ps-3 border-l border-muted-foreground/20'
-                hidden
-              >
-                <SectionSubmenu section={s} {posts} {currentBlogId} />
-              </div>
+              {active && hasSubNav && (
+                <div class='mt-1 mb-2 ms-3 ps-3 border-l border-muted-foreground/20'>
+                  <slot name='nav-sub' />
+                </div>
+              )}
             </div>
           )
         })
@@ -158,36 +118,6 @@ const currentBlogId = currentPath.startsWith('/blog/')
 </div>
 
 <script>
-  function initSectionMenus() {
-    document.querySelectorAll<HTMLElement>('[data-section-menu]').forEach((menu) => {
-      const toggles = Array.from(menu.querySelectorAll<HTMLButtonElement>('[data-section-toggle]'))
-
-      toggles.forEach((toggle) => {
-        toggle.addEventListener('click', () => {
-          const wasExpanded = toggle.getAttribute('aria-expanded') === 'true'
-
-          toggles.forEach((item) => {
-            item.setAttribute('aria-expanded', 'false')
-            const panelId = item.getAttribute('aria-controls')
-            const panel = panelId ? document.getElementById(panelId) : null
-            if (panel) panel.hidden = true
-          })
-
-          if (!wasExpanded) {
-            toggle.setAttribute('aria-expanded', 'true')
-            const panelId = toggle.getAttribute('aria-controls')
-            const panel = panelId ? document.getElementById(panelId) : null
-            if (panel) {
-              panel.hidden = false
-              // SectionNav 在折叠状态下无法得到正确尺寸；展开后通知它重新定位高亮块。
-              requestAnimationFrame(() => window.dispatchEvent(new Event('resize')))
-            }
-          }
-        })
-      })
-    })
-  }
-
   function initMobileSidebar() {
     const close = document.getElementById('mobile-sidebar-close')
     const backdrop = document.getElementById('mobile-sidebar-backdrop')
@@ -289,12 +219,5 @@ const currentBlogId = currentPath.startsWith('/blog/')
     })
   }
 
-  initSectionMenus()
   initMobileSidebar()
 </script>
-
-<style>
-  [data-section-toggle][aria-expanded='true'] .section-chevron {
-    transform: rotate(90deg);
-  }
-</style>
