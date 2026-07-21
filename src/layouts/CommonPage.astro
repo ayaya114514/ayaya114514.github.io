@@ -14,7 +14,7 @@ const { title, description, headings, ...props } = Astro.props
 ---
 
 <PageLayout meta={{ description, title }} {...props}>
-  <SectionNav {title} {headings} slot='sidebar' />
+  {headings && headings.length > 0 && <SectionNav {title} {headings} slot='sidebar' />}
 
   <Fragment slot='header'>
     <h1 class='text-2xl font-medium sm:mb-2 sm:text-3xl'>{title}</h1>
