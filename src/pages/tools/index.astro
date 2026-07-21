@@ -32,17 +32,15 @@ const tools: Tool[] = [
   }
 ]
 
-const headings = [{ depth: 2, slug: 'tools', text: '🛠 工具' }]
+const abbreviationOf = (title: string) => title.match(/[A-Z]/g)?.join('') ?? ''
+
 ---
 
-<PageLayout title='工具' description='收集和分享我制作或常用的在线小工具。' {headings}>
+<PageLayout title='工具' description='收集和分享我制作或常用的在线小工具。'>
   <section>
-    <h2 id='tools'>
-      🛠 工具
-      <span class='ml-2 text-sm font-normal text-muted-foreground'>共 {tools.length} 个</span>
-    </h2>
+    <p class='text-sm text-muted-foreground'>共 {tools.length} 个</p>
 
-    <div class='not-prose grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3'>
+    <div class='not-prose mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3'>
       {
         tools.map((t) => (
           <a
@@ -51,8 +49,14 @@ const headings = [{ depth: 2, slug: 'tools', text: '🛠 工具' }]
             rel='noopener noreferrer'
             class='group flex flex-col gap-y-1.5 rounded-lg border bg-background/60 p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md'
           >
-            <h3 class='text-base font-medium leading-snug group-hover:text-[var(--primary)]'>
-              {t.title}
+            <h3 class='flex flex-wrap items-center gap-x-2 gap-y-1 text-base font-medium leading-snug group-hover:text-[var(--primary)]'>
+              <span>{t.title}</span>
+              <span
+                class='inline-flex rounded border border-muted-foreground/35 px-1.5 py-0.5 text-[10px] font-semibold leading-none tracking-wide text-muted-foreground transition-colors group-hover:border-[var(--primary)]/50 group-hover:text-[var(--primary)]'
+                aria-label={`${t.title} 缩写`}
+              >
+                {abbreviationOf(t.title)}
+              </span>
             </h3>
             {t.description && <p class='text-sm text-muted-foreground'>{t.description}</p>}
             <p class='mt-auto truncate pt-1 text-xs text-muted-foreground/70'>{t.href}</p>
