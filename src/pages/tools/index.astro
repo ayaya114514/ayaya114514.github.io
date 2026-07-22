@@ -21,6 +21,11 @@ const tools: Tool[] = [
     description: '日语练习'
   },
   {
+    title: 'AyayaVpsCalculator',
+    href: 'https://ayaya114514.github.io/AyayaVpsCalculator/',
+    description: 'VPS 剩余价值计算器'
+  },
+  {
     title: 'GitPulse',
     href: 'https://gitpulse-one.vercel.app/',
     description: '在线 GitHub 总结图'
@@ -33,7 +38,6 @@ const tools: Tool[] = [
 ]
 
 const abbreviationOf = (title: string) => title.match(/[A-Z]/g)?.join('') ?? ''
-
 ---
 
 <PageLayout title='工具' description='收集和分享我制作或常用的在线小工具。'>
