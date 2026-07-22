@@ -3,11 +3,10 @@ import config from '@/site-config'
 
 interface Props {
   showDesktop?: boolean
-  /** 历史兼容：BaseLayout 仍会传入，但左侧栏不再渲染任何子导航。 */
   hasSubNav?: boolean
 }
 
-const { showDesktop = true } = Astro.props
+const { showDesktop = true, hasSubNav = Astro.slots.has('nav-sub') } = Astro.props
 const sections = config.header.menu ?? []
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
 ---
@@ -28,12 +27,19 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
           <a
             href={s.link}
             aria-current={active ? 'page' : undefined}
-            class={`w-fit self-start px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-muted ${
+            class={`w-full px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-muted ${
               active ? 'bg-muted text-[var(--primary)]' : 'text-muted-foreground'
             }`}
           >
             {s.title}
           </a>
+
+          {/* 当前板块的子栏目保持可见，避免用户离开正文才能切换内容。 */}
+          {active && hasSubNav && (
+            <div class='mt-1 mb-2 ms-3 ps-3 border-l border-muted-foreground/20'>
+              <slot name='nav-sub' />
+            </div>
+          )}
         </div>
       )
     })
@@ -78,7 +84,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
       </button>
     </div>
 
-    <!-- 抽屉内容：与桌面侧边栏相同的五个直接链接 -->
+    <!-- 抽屉内容：与桌面侧边栏相同的导航 + 当前板块子栏目 -->
     <nav class='flex-1 overflow-y-auto px-3 py-4' aria-label='移动侧栏导航'>
       {
         sections.map((s) => {
@@ -91,12 +97,18 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
               <a
                 href={s.link}
                 aria-current={active ? 'page' : undefined}
-                class={`w-fit self-start px-3 py-2.5 rounded-md text-sm font-medium transition-colors hover:bg-muted ${
+                class={`w-full px-3 py-2.5 rounded-md text-sm font-medium transition-colors hover:bg-muted ${
                   active ? 'bg-muted text-[var(--primary)]' : 'text-muted-foreground'
                 }`}
               >
                 {s.title}
               </a>
+
+              {active && hasSubNav && (
+                <div class='mt-1 mb-2 ms-3 ps-3 border-l border-muted-foreground/20'>
+                  <slot name='nav-sub' />
+                </div>
+              )}
             </div>
           )
         })
