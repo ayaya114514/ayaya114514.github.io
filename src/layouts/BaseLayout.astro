@@ -1,5 +1,4 @@
 ---
-import { Footer } from 'astro-pure/components/basic'
 import type { SiteMeta } from 'astro-pure/types'
 import BaseHead from '@/components/BaseHead.astro'
 import Header from '@/components/Header.astro'
@@ -67,7 +66,6 @@ const hasSubNav = Astro.slots.has('nav-sub')
         <div class='flex-1 w-full'>
           <slot />
         </div>
-        <Footer />
       </div>
     </div>
 
