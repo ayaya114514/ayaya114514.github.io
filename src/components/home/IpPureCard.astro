@@ -6,7 +6,7 @@ const providerUrl = 'https://ippure.com'
 ---
 
 <Section title='访客网络'>
-  <ip-pure-card class='block min-w-0'>
+  <ip-pure-card class='block w-full min-w-0 max-w-[560px]'>
     <div class='overflow-hidden rounded-xl border bg-background/60 p-2 shadow-sm sm:p-3'>
       <a
         data-ip-card-link
@@ -14,7 +14,6 @@ const providerUrl = 'https://ippure.com'
         target='_blank'
         rel='noopener noreferrer'
         class='block overflow-hidden rounded-lg'
-        aria-describedby='ip-card-privacy-note'
       >
         <img
           data-ip-card-image
@@ -62,19 +61,6 @@ const providerUrl = 'https://ippure.com'
         </a>
       </div>
     </div>
-
-    <p id='ip-card-privacy-note' class='mt-2 text-xs leading-relaxed text-muted-foreground'>
-      卡片由
-      <a
-        href={providerUrl}
-        target='_blank'
-        rel='noopener noreferrer'
-        class='underline underline-offset-2'
-      >
-        IPPure
-      </a>
-      实时生成；加载时浏览器会直接请求其服务。
-    </p>
   </ip-pure-card>
 </Section>
 
