@@ -3,6 +3,7 @@ import { Image } from 'astro:assets'
 
 import { Icon, Label } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
+import IpPureCard from '@/components/home/IpPureCard.astro'
 import Section from '@/components/home/Section.astro'
 import config from '@/site-config'
 
@@ -146,6 +147,8 @@ if (!images[imagePath])
           全流程等，如有需要请务必联络我，我会耐心免费为您解答的！
         </p>
       </Section>
+
+      <IpPureCard />
 
       {/* Contact */}
       <Section title='联络先'>

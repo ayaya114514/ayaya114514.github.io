@@ -1,0 +1,102 @@
+---
+import Section from './Section.astro'
+
+const cardSrc = 'https://my.ippure.com/v1/card'
+const providerUrl = 'https://ippure.com'
+---
+
+<Section title='访客网络'>
+  <ip-pure-card class='block min-w-0'>
+    <div class='overflow-hidden rounded-xl border bg-background/60 p-2 shadow-sm sm:p-3'>
+      <a
+        data-ip-card-link
+        href={providerUrl}
+        target='_blank'
+        rel='noopener noreferrer'
+        class='block overflow-hidden rounded-lg'
+        aria-describedby='ip-card-privacy-note'
+      >
+        <img
+          data-ip-card-image
+          src={cardSrc}
+          alt='当前访客的 IP 信息卡片'
+          loading='lazy'
+          decoding='async'
+          referrerpolicy='no-referrer'
+          class='block h-auto w-full'
+        />
+      </a>
+
+      <div
+        data-ip-card-fallback
+        class='flex min-h-36 flex-col items-center justify-center gap-y-3 rounded-lg bg-muted/60 px-4 py-8 text-center'
+        aria-live='polite'
+        hidden
+      >
+        <svg
+          class='size-7 text-muted-foreground'
+          viewBox='0 0 24 24'
+          fill='none'
+          stroke='currentColor'
+          stroke-width='1.7'
+          stroke-linecap='round'
+          stroke-linejoin='round'
+          aria-hidden='true'
+        >
+          <path d='M5 12a7 7 0 0 1 12.9-3.8'></path>
+          <path d='M19 12a7 7 0 0 1-12.9 3.8'></path>
+          <path d='m15 5 3 .5.5 3'></path>
+          <path d='m9 19-3-.5-.5-3'></path>
+        </svg>
+        <div>
+          <p class='text-sm font-medium'>暂时无法加载网络信息卡片</p>
+          <p class='mt-1 text-xs text-muted-foreground'>可能被浏览器扩展或网络策略拦截</p>
+        </div>
+        <a
+          href={providerUrl}
+          target='_blank'
+          rel='noopener noreferrer'
+          class='rounded-md border px-3 py-1.5 text-xs font-medium hover:bg-muted'
+        >
+          前往 IPPure 检测
+        </a>
+      </div>
+    </div>
+
+    <p id='ip-card-privacy-note' class='mt-2 text-xs leading-relaxed text-muted-foreground'>
+      卡片由
+      <a
+        href={providerUrl}
+        target='_blank'
+        rel='noopener noreferrer'
+        class='underline underline-offset-2'
+      >
+        IPPure
+      </a>
+      实时生成；加载时浏览器会直接请求其服务。
+    </p>
+  </ip-pure-card>
+</Section>
+
+<script>
+  class IpPureCard extends HTMLElement {
+    connectedCallback() {
+      const image = this.querySelector<HTMLImageElement>('[data-ip-card-image]')
+      const imageLink = this.querySelector<HTMLElement>('[data-ip-card-link]')
+      const fallback = this.querySelector<HTMLElement>('[data-ip-card-fallback]')
+      if (!image || !imageLink || !fallback) return
+
+      const showFallback = () => {
+        imageLink.hidden = true
+        fallback.hidden = false
+      }
+
+      image.addEventListener('error', showFallback, { once: true })
+      if (image.complete && image.naturalWidth === 0) showFallback()
+    }
+  }
+
+  if (!customElements.get('ip-pure-card')) {
+    customElements.define('ip-pure-card', IpPureCard)
+  }
+</script>
