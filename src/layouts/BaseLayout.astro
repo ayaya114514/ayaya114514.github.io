@@ -28,6 +28,7 @@ const hasSubNav = Astro.slots.has('nav-sub')
 <html lang={config.locale.lang}>
   <head>
     <BaseHead {articleDate} {description} {modifiedDate} {ogImage} {title} />
+    <slot name='head' />
     {
       /*
       强制锁定为暗色主题：原 ThemeProvider 会读 localStorage / 系统偏好来决定明暗，

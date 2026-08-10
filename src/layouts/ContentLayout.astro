@@ -22,6 +22,8 @@ const hasToc = Astro.slots.has('toc')
 ---
 
 <PageLayout {meta} {highlightColor} {...props}>
+  <slot name='head' slot='head' />
+
   {/* 子板块导航：上抛到全局 SectionSidebar 的 nav-sub 槽 */}
   <slot name='sidebar' slot='nav-sub' />
 
