@@ -38,6 +38,12 @@
 不能写 `h*>a`**——后者会把 Markdown 标题里你自己写的 `<a>` 也一起藏掉
 （例如 `### 1. [论文标题](url)`，标题文字直接看不见）。
 
+## 公式文章必须显式声明 `math: true`
+
+`BlogPost.astro` 只会为 frontmatter 带 `math: true` 的文章加载 KaTeX CSS，
+避免所有普通文章都承担公式样式开销。新增或编辑含 `$...$` / `$$...$$` 公式的
+Markdown 时必须同步加上该字段；不含公式的文章保持默认 `false`。
+
 ## 全站强制暗色，by design
 
 `src/layouts/BaseLayout.astro` 顶部硬给 `<html>` 加了 `dark` class、
@@ -60,14 +66,17 @@
   默认只保存在 `~/Library/Application Support/ayaya-blog/douban-cookie.txt`，
   不得复制进 repo、打印或提交。抓取失败或第一页为空时必须保留旧数据。
 - YouTube：`npm run sync:youtube` 使用 YouTube Data API v3 的
-  `youtube.readonly` scope，更新 `src/data/youtube-subs.json` 并下载缺失头像到
-  `public/youtube-avatars/`。OAuth client 和 token 默认只保存在
+  `youtube.readonly` scope，更新 `src/data/youtube-subs.json`；头像原图保存到
+  不发布的 `assets/raw/youtube-avatars/`，页面只使用
+  `public/youtube-avatars/thumbs/` 下的 WebP。OAuth client 和 token 默认只保存在
   `~/Library/Application Support/ayaya-blog/`，不得复制进 repo、打印或提交；
   日常同步不需要重新下载 Takeout 文件。
 
 `scripts/import_youtube_subs.mjs` 只保留为 Google Takeout CSV 的 fallback。
 其它 `.mjs` 脚本（`gen_favicon` / `import_bands`）是一次性导入工具。
-需要同时更新娱乐板块的两类账号数据时运行 `npm run sync:entertainment`。
+需要同时更新娱乐板块的两类账号数据时运行 `npm run sync:entertainment`；该 wrapper
+会先创建三份同目录 durable backup，并在任一同步或最终数据校验失败时 atomic
+restore；恢复失败时保留 backup 供人工处理。
 
 ## 娱乐数据的自然语言触发约定
 
@@ -78,8 +87,9 @@ commit 和 `git push`，无需再复述方案或要求二次确认：
 - “同步豆瓣” / “更新电影和书籍”：运行 `npm run sync:douban`。
 - “同步油管和豆瓣” / “同步娱乐数据”：运行 `npm run sync:entertainment`。
 
-同步完成后必须核对 JSON 条目数、重复 URL、本地图片缺失和 credential
-isolation，再运行 `npm run lint`、`npm run check`、`npm run build`。只 stage
+同步完成后运行 `npm run verify`，统一检查 format、lint、Astro types、JSON
+条目数、重复 URL、本地图片和 production build；同时人工核对 credential
+isolation。只 stage
 本次同步产生的数据、图片和必要代码/文档，commit 后 push 当前分支。OAuth
 或 Cookie 失效时停止，不得覆盖旧数据；只有需要重新登录或授权时才询问用户。
 

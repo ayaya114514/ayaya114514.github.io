@@ -18,18 +18,130 @@ const CONFIG_DIR =
 const CLIENT_PATH = process.env.YOUTUBE_OAUTH_CLIENT || path.join(CONFIG_DIR, 'youtube-client.json')
 const TOKEN_PATH = process.env.YOUTUBE_OAUTH_TOKEN || path.join(CONFIG_DIR, 'youtube-token.json')
 const OUT_JSON = path.join(ROOT, 'src/data/youtube-subs.json')
-const AVATAR_DIR = path.join(ROOT, 'public/youtube-avatars')
-const AVATAR_PUBLIC_PREFIX = '/youtube-avatars'
-const AVATAR_THUMB_DIR = path.join(AVATAR_DIR, 'thumbs')
-const AVATAR_THUMB_PUBLIC_PREFIX = `${AVATAR_PUBLIC_PREFIX}/thumbs`
+const AVATAR_SOURCE_DIR = path.join(ROOT, 'assets/raw/youtube-avatars')
+const AVATAR_THUMB_DIR = path.join(ROOT, 'public/youtube-avatars/thumbs')
+const AVATAR_THUMB_PUBLIC_PREFIX = '/youtube-avatars/thumbs'
 const AVATAR_THUMB_SIZE = 160
 const AVATAR_THUMB_QUALITY = 80
 const OAUTH_SCOPE = 'https://www.googleapis.com/auth/youtube.readonly'
+const FETCH_TIMEOUT_MS = 15_000
+const FETCH_RETRIES = 2
+const MAX_IMAGE_BYTES = 8 * 1024 * 1024
+const RETRYABLE_STATUS = new Set([429, 500, 502, 503, 504])
 
 const args = new Set(process.argv.slice(2))
+const KNOWN_ARGS = new Set([
+  '--auth-only',
+  '--reauthorize',
+  '--refresh-avatars',
+  '--allow-large-drop',
+  '--help'
+])
 const AUTH_ONLY = args.has('--auth-only')
 const REAUTHORIZE = args.has('--reauthorize')
 const REFRESH_AVATARS = args.has('--refresh-avatars')
+const ALLOW_LARGE_DROP = args.has('--allow-large-drop')
+
+function sleep(milliseconds) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds))
+}
+
+function retryDelay(response, attempt) {
+  const retryAfter = response?.headers.get('retry-after')?.trim()
+  if (retryAfter && /^\d+(?:\.\d+)?$/.test(retryAfter)) {
+    return Math.min(Number(retryAfter) * 1000, 15_000)
+  }
+  return Math.min(750 * 2 ** attempt, 6_000) + Math.floor(Math.random() * 250)
+}
+
+async function fetchWithRetry(url, init = {}, options = {}) {
+  const timeoutMs = options.timeoutMs ?? FETCH_TIMEOUT_MS
+  const retries = options.retries ?? FETCH_RETRIES
+  let lastError
+
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    const signal = AbortSignal.timeout(timeoutMs)
+    let response
+    try {
+      response = await fetch(url, { ...init, signal })
+      if (!RETRYABLE_STATUS.has(response.status) || attempt === retries) return response
+      await response.body?.cancel().catch(() => {})
+    } catch (error) {
+      lastError = error
+      if (attempt === retries) {
+        const detail = ['AbortError', 'TimeoutError'].includes(error.name)
+          ? `timeout after ${timeoutMs}ms`
+          : error.message
+        throw new Error(`网络请求失败: ${detail}`, { cause: error })
+      }
+    }
+    await sleep(retryDelay(response, attempt))
+  }
+
+  throw lastError
+}
+
+async function readImageBuffer(response) {
+  const contentType = (response.headers.get('content-type') || '').split(';', 1)[0].toLowerCase()
+  if (!contentType.startsWith('image/')) {
+    throw new Error(`unexpected content-type: ${contentType || 'unknown'}`)
+  }
+
+  const declaredLength = Number(response.headers.get('content-length'))
+  if (Number.isFinite(declaredLength) && declaredLength > MAX_IMAGE_BYTES) {
+    throw new Error(`image exceeds ${MAX_IMAGE_BYTES / 1024 / 1024} MiB limit`)
+  }
+  if (!response.body) throw new Error('empty image response')
+
+  const reader = response.body.getReader()
+  const chunks = []
+  let total = 0
+  try {
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+      total += value.byteLength
+      if (total > MAX_IMAGE_BYTES) {
+        throw new Error(`image exceeds ${MAX_IMAGE_BYTES / 1024 / 1024} MiB limit`)
+      }
+      chunks.push(Buffer.from(value))
+    }
+  } catch (error) {
+    await reader.cancel(error).catch(() => {})
+    throw error
+  } finally {
+    reader.releaseLock()
+  }
+  if (total === 0) throw new Error('empty image response')
+  return Buffer.concat(chunks, total)
+}
+
+async function writeJsonAtomic(filePath, payload) {
+  const temporary = path.join(
+    path.dirname(filePath),
+    `.${path.basename(filePath)}.${process.pid}-${crypto.randomBytes(6).toString('hex')}.tmp`
+  )
+  await fs.mkdir(path.dirname(filePath), { recursive: true })
+  try {
+    await fs.writeFile(temporary, `${JSON.stringify(payload, null, 2)}\n`, {
+      encoding: 'utf8',
+      flag: 'wx'
+    })
+    await fs.rename(temporary, filePath)
+  } finally {
+    await fs.rm(temporary, { force: true })
+  }
+}
+
+function assertNoLargeDrop(previous, nextCount, label) {
+  const previousCount = Array.isArray(previous?.items) ? previous.items.length : 0
+  if (previousCount === 0 || nextCount * 4 >= previousCount * 3) return
+  const detail = `${label} 条目从 ${previousCount} 降到 ${nextCount}（超过 25%）`
+  if (!ALLOW_LARGE_DROP) {
+    throw new Error(`${detail}；为避免异常响应覆盖旧数据，本次停止。确认后可加 --allow-large-drop`)
+  }
+  console.warn(`[!] ${detail}；已按 --allow-large-drop 继续`)
+}
 
 function printHelp() {
   console.log(`Usage: npm run sync:youtube -- [options]
@@ -38,6 +150,7 @@ Options:
   --auth-only        Complete OAuth authorization without syncing data
   --reauthorize      Ignore the saved token and authorize again
   --refresh-avatars  Re-download existing channel avatars
+  --allow-large-drop Allow replacing data when the channel count drops by more than 25%
   --help             Show this help
 
 OAuth client: ${CLIENT_PATH}
@@ -107,11 +220,18 @@ function openBrowser(url) {
 }
 
 async function exchangeToken(params) {
-  const response = await fetch('https://oauth2.googleapis.com/token', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams(params)
-  })
+  const response = await fetchWithRetry(
+    'https://oauth2.googleapis.com/token',
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(params)
+    },
+    {
+      // Authorization codes are one-time credentials; never replay that exchange automatically.
+      retries: params.grant_type === 'authorization_code' ? 0 : FETCH_RETRIES
+    }
+  )
   const payload = await response.json()
   if (!response.ok) {
     const detail = payload.error_description || payload.error || `HTTP ${response.status}`
@@ -263,7 +383,7 @@ async function getToken(client) {
 async function youtubeGet(endpoint, params, accessToken) {
   const url = new URL(`https://www.googleapis.com/youtube/v3/${endpoint}`)
   url.search = new URLSearchParams(params)
-  const response = await fetch(url, {
+  const response = await fetchWithRetry(url, {
     headers: { Authorization: `Bearer ${accessToken}` }
   })
   const payload = await response.json()
@@ -316,6 +436,25 @@ async function fileExists(filePath) {
   }
 }
 
+async function isValidAvatarThumbnail(filePath) {
+  try {
+    const stats = await fs.lstat(filePath)
+    if (!stats.isFile() || stats.size === 0) return false
+    const metadata = await sharp(filePath, { failOn: 'error' }).metadata()
+    if (
+      metadata.format !== 'webp' ||
+      metadata.width !== AVATAR_THUMB_SIZE ||
+      metadata.height !== AVATAR_THUMB_SIZE
+    ) {
+      return false
+    }
+    await sharp(filePath, { failOn: 'error' }).raw().toBuffer()
+    return true
+  } catch {
+    return false
+  }
+}
+
 async function writeAvatarThumbnail(source, destination) {
   const temporary = `${destination}.${process.pid}-${Math.random().toString(16).slice(2)}.tmp`
   await fs.mkdir(path.dirname(destination), { recursive: true })
@@ -330,25 +469,35 @@ async function writeAvatarThumbnail(source, destination) {
       .webp({ quality: AVATAR_THUMB_QUALITY, effort: 4 })
       .toFile(temporary)
     await fs.rename(temporary, destination)
+    if (!(await isValidAvatarThumbnail(destination))) {
+      await fs.rm(destination, { force: true })
+      throw new Error(`generated thumbnail failed validation: ${destination}`)
+    }
   } finally {
     await fs.rm(temporary, { force: true })
   }
 }
 
 async function ensureAvatarThumbnail(source, destination, force = false) {
-  if (!force && (await fileExists(destination))) return
+  if (!force && (await isValidAvatarThumbnail(destination))) return
   await writeAvatarThumbnail(source, destination)
 }
 
 async function downloadAvatar(channelId, avatarUrl) {
-  const destination = path.join(AVATAR_DIR, `${channelId}.jpg`)
+  const destination = path.join(AVATAR_SOURCE_DIR, `${channelId}.jpg`)
   const thumbnail = path.join(AVATAR_THUMB_DIR, `${channelId}.webp`)
   const publicPath = `${AVATAR_THUMB_PUBLIC_PREFIX}/${channelId}.webp`
 
   async function useExistingAvatar() {
+    if (await isValidAvatarThumbnail(thumbnail)) return publicPath
     if (!(await fileExists(destination))) return null
-    await ensureAvatarThumbnail(destination, thumbnail)
-    return publicPath
+    try {
+      await ensureAvatarThumbnail(destination, thumbnail)
+      return (await isValidAvatarThumbnail(thumbnail)) ? publicPath : null
+    } catch (error) {
+      console.warn(`  ! 本地头像无法重建 ${channelId}: ${error.message}`)
+      return null
+    }
   }
 
   if (!REFRESH_AVATARS) {
@@ -359,13 +508,9 @@ async function downloadAvatar(channelId, avatarUrl) {
 
   const temporary = `${destination}.${process.pid}-${Math.random().toString(16).slice(2)}.tmp`
   try {
-    const response = await fetch(avatarUrl)
+    const response = await fetchWithRetry(avatarUrl)
     if (!response.ok) throw new Error(`HTTP ${response.status}`)
-    const contentType = response.headers.get('content-type') || ''
-    if (!contentType.startsWith('image/')) {
-      throw new Error(`unexpected content-type: ${contentType || 'unknown'}`)
-    }
-    await fs.writeFile(temporary, Buffer.from(await response.arrayBuffer()))
+    await fs.writeFile(temporary, await readImageBuffer(response), { flag: 'wx' })
     await writeAvatarThumbnail(temporary, thumbnail)
     await fs.rename(temporary, destination)
     return publicPath
@@ -395,7 +540,10 @@ async function mapLimit(values, limit, mapper) {
 async function syncSubscriptions(accessToken) {
   console.log('[*] 读取已授权账号的 YouTube 订阅…')
   const subscriptions = await getSubscriptions(accessToken)
-  await fs.mkdir(AVATAR_DIR, { recursive: true })
+  await Promise.all([
+    fs.mkdir(AVATAR_SOURCE_DIR, { recursive: true }),
+    fs.mkdir(AVATAR_THUMB_DIR, { recursive: true })
+  ])
 
   const items = await mapLimit(subscriptions, 4, async (subscription, index) => {
     const snippet = subscription.snippet || {}
@@ -411,17 +559,26 @@ async function syncSubscriptions(accessToken) {
   })
 
   const channelIds = new Set()
+  const channelUrls = new Set()
   for (const item of items) {
+    if (!/^UC[A-Za-z0-9_-]{22}$/.test(item.id) || !item.title.trim()) {
+      throw new Error(`YouTube API 返回无效频道资料：${item.id || '(missing id)'}`)
+    }
     if (channelIds.has(item.id)) {
       throw new Error(`YouTube API 返回重复 channelId：${item.id}；为避免覆盖旧数据，本次停止`)
     }
+    if (channelUrls.has(item.url)) {
+      throw new Error(`YouTube API 返回重复 channel URL：${item.url}；本次停止`)
+    }
     channelIds.add(item.id)
+    channelUrls.add(item.url)
   }
 
   const previous = await readJsonIfPresent(OUT_JSON)
   if (items.length === 0 && Array.isArray(previous?.items) && previous.items.length > 0) {
     throw new Error('YouTube API 意外返回空订阅列表；为避免覆盖旧数据，本次停止')
   }
+  assertNoLargeDrop(previous, items.length, 'YouTube subscriptions')
 
   items.sort((a, b) => a.title.localeCompare(b.title, 'zh-Hans-CN'))
   const now = new Date()
@@ -431,9 +588,7 @@ async function syncSubscriptions(accessToken) {
     updated_at: localTime.toISOString().replace('T', ' ').slice(0, 19),
     items
   }
-  const temporary = `${OUT_JSON}.tmp`
-  await fs.writeFile(temporary, `${JSON.stringify(payload, null, 2)}\n`, 'utf8')
-  await fs.rename(temporary, OUT_JSON)
+  await writeJsonAtomic(OUT_JSON, payload)
   console.log(`[*] 写入 ${OUT_JSON}（${items.length} 条）`)
 }
 
@@ -442,6 +597,8 @@ async function main() {
     printHelp()
     return
   }
+  const unknownArgs = [...args].filter((arg) => !KNOWN_ARGS.has(arg))
+  if (unknownArgs.length) throw new Error(`未知选项：${unknownArgs.join(', ')}`)
 
   const client = await loadClient()
   const token = await getToken(client)

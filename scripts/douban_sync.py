@@ -26,10 +26,12 @@ import json
 import os
 import random
 import re
+import shutil
 import sys
 import time
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -70,6 +72,11 @@ SLEEP_MAX = 4.5
 
 # 请求超时
 TIMEOUT = 20
+
+# 临时网络错误最多额外重试两次；图片严格限制大小，避免异常响应占满内存/磁盘。
+MAX_RETRIES = 2
+MAX_IMAGE_BYTES = 8 * 1024 * 1024
+RETRYABLE_STATUS = {429, 500, 502, 503, 504}
 
 HEADERS_BASE = {
     "User-Agent": (
@@ -113,6 +120,43 @@ def make_session(cookie: str) -> requests.Session:
 def polite_sleep() -> None:
     """随机睡眠，模拟人为浏览节奏。"""
     time.sleep(random.uniform(SLEEP_MIN, SLEEP_MAX))
+
+
+def _retry_delay(response: requests.Response | None, attempt: int) -> float:
+    """优先尊重 Retry-After（秒），同时把等待限制在合理范围内。"""
+    if response is not None:
+        raw = response.headers.get("Retry-After", "").strip()
+        try:
+            return min(max(float(raw), 0.0), 15.0)
+        except ValueError:
+            pass
+    return min(1.5 * (2**attempt), 8.0) + random.uniform(0.0, 0.5)
+
+
+def get_with_retry(client: Any, url: str, **kwargs: Any) -> requests.Response:
+    """带 timeout 和 bounded retry 的 GET；最终错误仍交给调用方判断。"""
+    kwargs.setdefault("timeout", TIMEOUT)
+    last_error: requests.RequestException | None = None
+
+    for attempt in range(MAX_RETRIES + 1):
+        response: requests.Response | None = None
+        try:
+            response = client.get(url, **kwargs)
+            if response.status_code not in RETRYABLE_STATUS or attempt == MAX_RETRIES:
+                return response
+        except requests.RequestException as error:
+            last_error = error
+            if attempt == MAX_RETRIES:
+                raise
+
+        delay = _retry_delay(response, attempt)
+        if response is not None:
+            response.close()
+        print(f"    [网络重试 {attempt + 1}/{MAX_RETRIES}] {delay:.1f}s  {url}")
+        time.sleep(delay)
+
+    assert last_error is not None
+    raise last_error
 
 
 def parse_rating(li_block) -> int | None:
@@ -159,7 +203,7 @@ def upgrade_cover(url: str) -> str:
     return url
 
 
-def download_cover(url: str, sess: requests.Session) -> str | None:
+def download_cover(url: str) -> str | None:
     """
     把豆瓣封面图下载到 public/images/douban/，返回站点内的相对路径。
 
@@ -194,11 +238,47 @@ def download_cover(url: str, sess: requests.Session) -> str | None:
     try:
         # 注意：用全新的 requests 调用，不用 session 上的 cookie
         # （豆瓣图床域名 doubanio.com 不需要 cookie，反而带上更可疑）
-        r = requests.get(url, headers=headers, timeout=15)
-        if r.status_code != 200 or not r.content:
+        r = get_with_retry(requests, url, headers=headers, stream=True)
+        if r.status_code != 200:
             print(f"    [封面下载失败] HTTP {r.status_code}  {url}")
+            r.close()
             return None
-        local_path.write_bytes(r.content)
+
+        content_type = r.headers.get("Content-Type", "").split(";", 1)[0].lower()
+        if not content_type.startswith("image/"):
+            print(f"    [封面下载失败] 非图片 Content-Type: {content_type or 'unknown'}  {url}")
+            r.close()
+            return None
+
+        content_length = r.headers.get("Content-Length")
+        if content_length and int(content_length) > MAX_IMAGE_BYTES:
+            print(f"    [封面下载失败] 图片超过 {MAX_IMAGE_BYTES // 1024 // 1024} MiB  {url}")
+            r.close()
+            return None
+
+        temporary = local_path.with_name(
+            f".{local_path.name}.{os.getpid()}-{time.time_ns()}.tmp"
+        )
+        total = 0
+        try:
+            with temporary.open("xb") as file:
+                for chunk in r.iter_content(chunk_size=64 * 1024):
+                    if not chunk:
+                        continue
+                    total += len(chunk)
+                    if total > MAX_IMAGE_BYTES:
+                        raise ValueError(
+                            f"图片超过 {MAX_IMAGE_BYTES // 1024 // 1024} MiB"
+                        )
+                    file.write(chunk)
+                if total == 0:
+                    raise ValueError("图片响应为空")
+                file.flush()
+                os.fsync(file.fileno())
+            os.replace(temporary, local_path)
+        finally:
+            r.close()
+            temporary.unlink(missing_ok=True)
         return f"{COVER_URL_PREFIX}/{filename}"
     except Exception as e:
         print(f"    [封面下载异常] {e}  {url}")
@@ -207,7 +287,7 @@ def download_cover(url: str, sess: requests.Session) -> str | None:
 
 def fetch_page(sess: requests.Session, url: str) -> tuple[BeautifulSoup, str]:
     """请求一页 HTML，做基础错误检查后返回解析好的 soup 和原始 HTML 文本。"""
-    resp = sess.get(url, timeout=TIMEOUT, allow_redirects=True)
+    resp = get_with_retry(sess, url, allow_redirects=True)
     # 被重定向到登录页 = Cookie 失效
     if "accounts.douban.com" in resp.url or resp.status_code in (302, 403):
         sys.exit(
@@ -216,7 +296,9 @@ def fetch_page(sess: requests.Session, url: str) -> tuple[BeautifulSoup, str]:
         )
     if resp.status_code != 200:
         sys.exit(f"[!] HTTP {resp.status_code}：{url}")
-    return BeautifulSoup(resp.text, "html.parser"), resp.text
+    html = resp.text
+    resp.close()
+    return BeautifulSoup(html, "html.parser"), html
 
 
 def dump_debug(html: str, tag: str) -> Path:
@@ -415,17 +497,30 @@ def fetch_books(sess: requests.Session) -> list[dict[str, Any]]:
 
 
 def dedupe_items(items: list[dict[str, Any]], label: str) -> list[dict[str, Any]]:
-    """按 URL 去重并拒绝缺少关键字段的结果，防止异常响应污染正式数据。"""
+    """拒绝重复 URL 和缺少关键字段的结果，防止异常响应污染正式数据。"""
     seen: set[str] = set()
     result: list[dict[str, Any]] = []
     for item in items:
         url = item.get("url")
         title = item.get("title")
-        if not isinstance(url, str) or not url or not isinstance(title, str) or not title:
+        if (
+            not isinstance(url, str)
+            or not url
+            or not isinstance(title, str)
+            or not title.strip()
+        ):
             sys.exit(f"[!] {label} 抓取结果缺少 title/url；为避免覆盖旧数据，本次停止")
+        parsed = urlparse(url)
+        hostname = (parsed.hostname or "").lower()
+        if (
+            parsed.scheme not in {"http", "https"}
+            or not (hostname == "douban.com" or hostname.endswith(".douban.com"))
+            or parsed.username
+            or parsed.password
+        ):
+            sys.exit(f"[!] {label} 抓取结果含无效 URL：{url}；本次停止")
         if url in seen:
-            print(f"    [{label}] 跳过重复条目：{title}  {url}")
-            continue
+            sys.exit(f"[!] {label} 抓取结果含重复 URL：{title}  {url}；本次停止")
         seen.add(url)
         result.append(item)
     if not result:
@@ -433,9 +528,7 @@ def dedupe_items(items: list[dict[str, Any]], label: str) -> list[dict[str, Any]
     return result
 
 
-def localize_covers(
-    items: list[dict[str, Any]], sess: requests.Session, label: str
-) -> None:
+def localize_covers(items: list[dict[str, Any]], label: str) -> None:
     """
     遍历抓到的条目，把 cover 字段从豆瓣 URL 替换为本地相对路径。
     下载失败就把 cover 置 None，前端会显示"无封面"占位。
@@ -447,7 +540,7 @@ def localize_covers(
         remote = it.get("cover")
         if not remote or remote.startswith(COVER_URL_PREFIX):
             continue
-        local = download_cover(remote, sess)
+        local = download_cover(remote)
         it["cover"] = local  # 失败就是 None
         # 简单进度提示，每 10 张打一次
         if i % 10 == 0 or i == total:
@@ -455,22 +548,119 @@ def localize_covers(
         time.sleep(random.uniform(0.3, 0.8))
 
 
-def dump_json(items: list[dict[str, Any]], path: Path) -> None:
-    """Atomic 写入 JSON，避免同步中断留下半个文件。"""
-    path.parent.mkdir(parents=True, exist_ok=True)
+def assert_no_large_drop(
+    items: list[dict[str, Any]], path: Path, label: str, allow_large_drop: bool
+) -> None:
+    """异常缩减超过 25% 时 fail closed；确认是正常删除后可显式 override。"""
+    if not path.exists():
+        return
+    try:
+        previous = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        sys.exit(f"[!] 无法读取旧 {label} JSON（{path}）：{error}；本次停止")
+    previous_items = previous.get("items")
+    if not isinstance(previous_items, list):
+        sys.exit(f"[!] 旧 {label} JSON 缺少 items array；本次停止")
+
+    previous_count = len(previous_items)
+    next_count = len(items)
+    if previous_count == 0 or next_count * 4 >= previous_count * 3:
+        return
+    detail = f"{label}条目从 {previous_count} 降到 {next_count}（超过 25%）"
+    if not allow_large_drop:
+        sys.exit(
+            f"[!] {detail}；为避免异常响应覆盖旧数据，本次停止。"
+            "确认后可加 --allow-large-drop"
+        )
+    print(f"[!] {detail}；已按 --allow-large-drop 继续")
+
+
+def _payload_bytes(items: list[dict[str, Any]], updated_at: str) -> bytes:
     payload = {
         "user_id": USER_ID,
         "count": len(items),
-        "updated_at": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "updated_at": updated_at,
         "items": items,
     }
-    temporary = path.with_suffix(f"{path.suffix}.tmp")
-    temporary.write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
-    os.replace(temporary, path)
-    print(f"  -> 已写入 {path}（{len(items)} 条）")
+    return (json.dumps(payload, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+
+
+def dump_json_batch(datasets: list[tuple[list[dict[str, Any]], Path]]) -> None:
+    """
+    先准备所有 JSON，再逐个替换；任一替换失败时用 byte-for-byte backup 回滚。
+
+    文件系统不支持跨文件的单一 atomic rename，因此这里用同目录临时文件和备份
+    把失败窗口收窄，并保证 Python 可捕获的异常不会留下新旧混合快照。
+    """
+    updated_at = time.strftime("%Y-%m-%d %H:%M:%S")
+    nonce = f"{os.getpid()}-{time.time_ns()}"
+    prepared: list[tuple[list[dict[str, Any]], Path, Path]] = []
+    backups: dict[Path, Path | None] = {}
+    cleanup_backups = True
+
+    try:
+        for items, target in datasets:
+            target.parent.mkdir(parents=True, exist_ok=True)
+            temporary = target.with_name(f".{target.name}.{nonce}.tmp")
+            with temporary.open("xb") as file:
+                file.write(_payload_bytes(items, updated_at))
+                file.flush()
+                os.fsync(file.fileno())
+            prepared.append((items, target, temporary))
+
+        for _, target, _ in prepared:
+            if target.exists():
+                backup = target.with_name(f".{target.name}.{nonce}.bak")
+                shutil.copy2(target, backup)
+                backups[target] = backup
+            else:
+                backups[target] = None
+
+        for _, target, temporary in prepared:
+            os.replace(temporary, target)
+    except BaseException as error:
+        rollback_errors: list[str] = []
+        # Roll back every target for which backup state was recorded. This also
+        # covers KeyboardInterrupt arriving after os.replace() returns but before
+        # the next Python statement can mark the target as installed.
+        for _, target, _ in reversed(prepared):
+            if target not in backups:
+                continue
+            backup = backups[target]
+            try:
+                if backup is not None and backup.exists():
+                    os.replace(backup, target)
+                elif target.exists():
+                    target.unlink()
+            except OSError as rollback_error:
+                backup_label = str(backup) if backup is not None else "(no backup)"
+                rollback_errors.append(
+                    f"{target} (backup={backup_label}): {rollback_error}"
+                )
+        if rollback_errors:
+            cleanup_backups = False
+            raise RuntimeError(
+                "JSON transaction 失败，且回滚不完整；已保留可用 backup："
+                + "; ".join(rollback_errors)
+            ) from error
+        raise
+    finally:
+        for _, _, temporary in prepared:
+            temporary.unlink(missing_ok=True)
+        # A signal between copy2() and recording `backups[target]` can leave an
+        # incomplete orphan. The original target was never replaced, so it is
+        # always safe to discard only these unrecorded backup paths.
+        for _, target, _ in prepared:
+            expected_backup = target.with_name(f".{target.name}.{nonce}.bak")
+            if target not in backups:
+                expected_backup.unlink(missing_ok=True)
+        if cleanup_backups:
+            for backup in backups.values():
+                if backup is not None:
+                    backup.unlink(missing_ok=True)
+
+    for items, target, _ in prepared:
+        print(f"  -> 已写入 {target}（{len(items)} 条）")
 
 
 # ---------- 主流程 ----------
@@ -480,25 +670,46 @@ def main() -> None:
     cookie = load_cookie()
     sess = make_session(cookie)
 
-    target = sys.argv[1] if len(sys.argv) > 1 else "all"
+    raw_args = sys.argv[1:]
+    allowed_options = {"--allow-large-drop"}
+    unknown_options = [
+        arg
+        for arg in raw_args
+        if arg.startswith("--") and arg not in allowed_options
+    ]
+    if unknown_options:
+        sys.exit(f"未知选项：{', '.join(unknown_options)}")
+    positional = [arg for arg in raw_args if not arg.startswith("--")]
+    if len(positional) > 1:
+        sys.exit("用法：douban_sync.py [all|movie|book] [--allow-large-drop]")
+    target = positional[0] if positional else "all"
+    allow_large_drop = "--allow-large-drop" in raw_args
     valid_targets = {"all", "movie", "movies", "book", "books"}
     if target not in valid_targets:
-        sys.exit("用法：douban_sync.py [all|movie|book]")
+        sys.exit("用法：douban_sync.py [all|movie|book] [--allow-large-drop]")
+
+    datasets: list[tuple[str, str, list[dict[str, Any]], Path]] = []
 
     if target in ("all", "movie", "movies"):
         print("=== 抓取电影 ===")
         movies = dedupe_items(fetch_movies(sess), "movie")
-        print(f"=== 下载电影封面（共 {len(movies)} 张） ===")
-        localize_covers(movies, sess, "movie")
-        dump_json(movies, OUTPUT_DIR / "movies.json")
-        polite_sleep()
+        datasets.append(("movie", "电影", movies, OUTPUT_DIR / "movies.json"))
+        if target == "all":
+            polite_sleep()
 
     if target in ("all", "book", "books"):
         print("=== 抓取图书 ===")
         books = dedupe_items(fetch_books(sess), "book")
-        print(f"=== 下载图书封面（共 {len(books)} 张） ===")
-        localize_covers(books, sess, "book")
-        dump_json(books, OUTPUT_DIR / "books.json")
+        datasets.append(("book", "图书", books, OUTPUT_DIR / "books.json"))
+
+    # all 模式下，只有两类数据都已完整抓取并通过校验后，才开始本地化封面；
+    # 两类封面也处理完后，才进入带 rollback 的 JSON batch commit。
+    for label, display_label, items, path in datasets:
+        assert_no_large_drop(items, path, display_label, allow_large_drop)
+        print(f"=== 下载{display_label}封面（共 {len(items)} 张） ===")
+        localize_covers(items, label)
+
+    dump_json_batch([(items, path) for _, _, items, path in datasets])
 
     print("\n完成。检查 src/data/douban/ 下的 JSON，确认无误后再 git commit。")
 

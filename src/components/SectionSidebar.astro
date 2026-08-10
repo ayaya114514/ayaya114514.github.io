@@ -131,6 +131,7 @@ const sections = (config.header.menu ?? []).map((section) => ({
     const drawerEl = drawer
     const rootEl = root
     const toggleButton = toggle
+    const desktopMedia = window.matchMedia('(min-width: 1024px)')
     const inertSiblings: HTMLElement[] = []
     let lastFocused: HTMLElement | null = null
     let hideTimer: number | undefined
@@ -154,7 +155,11 @@ const sections = (config.header.menu ?? []).map((section) => ({
     }
 
     function open() {
-      if (hideTimer) window.clearTimeout(hideTimer)
+      if (desktopMedia.matches) return
+      if (hideTimer) {
+        window.clearTimeout(hideTimer)
+        hideTimer = undefined
+      }
       lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null
       backdropEl.hidden = false
       drawerEl.hidden = false
@@ -170,7 +175,11 @@ const sections = (config.header.menu ?? []).map((section) => ({
       })
     }
 
-    function close_(restoreFocus = true) {
+    function close_(restoreFocus = true, hideImmediately = false) {
+      if (hideTimer) {
+        window.clearTimeout(hideTimer)
+        hideTimer = undefined
+      }
       drawerEl.setAttribute('inert', '')
       drawerEl.setAttribute('aria-hidden', 'true')
       drawerEl.classList.add('-translate-x-full')
@@ -179,12 +188,29 @@ const sections = (config.header.menu ?? []).map((section) => ({
       setBackgroundInert(false)
       document.body.style.overflow = ''
       if (restoreFocus) lastFocused?.focus()
+      else if (drawerEl.contains(document.activeElement)) {
+        ;(document.activeElement as HTMLElement).blur()
+      }
+      lastFocused = null
+
+      if (hideImmediately) {
+        drawerEl.hidden = true
+        backdropEl.hidden = true
+        return
+      }
       hideTimer = window.setTimeout(() => {
         if (drawerEl.getAttribute('aria-hidden') === 'true') {
           drawerEl.hidden = true
           backdropEl.hidden = true
         }
+        hideTimer = undefined
       }, 300)
+    }
+
+    function handleDesktopBreakpoint(event: MediaQueryListEvent) {
+      // The mobile root becomes display:none at lg. Release the modal state at
+      // the same breakpoint so inert siblings and the body scroll lock cannot linger.
+      if (event.matches && drawerEl.getAttribute('aria-hidden') === 'false') close_(false, true)
     }
 
     // 暴露给 Header 的汉堡按钮调用
@@ -195,6 +221,7 @@ const sections = (config.header.menu ?? []).map((section) => ({
     drawerEl.querySelectorAll('a[href]').forEach((link) => {
       link.addEventListener('click', () => close_(false))
     })
+    desktopMedia.addEventListener('change', handleDesktopBreakpoint)
 
     // 按 Escape 关闭；Tab / Shift+Tab 始终限制在 modal drawer 内。
     document.addEventListener('keydown', (e) => {

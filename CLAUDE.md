@@ -38,6 +38,12 @@
 不能写 `h*>a`**——后者会把 Markdown 标题里你自己写的 `<a>` 也一起藏掉
 （例如 `### 1. [论文标题](url)`，标题文字直接看不见）。
 
+## 公式文章必须显式声明 `math: true`
+
+`BlogPost.astro` 只会为 frontmatter 带 `math: true` 的文章加载 KaTeX CSS，
+避免所有普通文章都承担公式样式开销。新增或编辑含 `$...$` / `$$...$$` 公式的
+Markdown 时必须同步加上该字段；不含公式的文章保持默认 `false`。
+
 ## 全站强制暗色，by design
 
 `src/layouts/BaseLayout.astro` 顶部硬给 `<html>` 加了 `dark` class、
@@ -53,13 +59,23 @@
 
 ## scripts/ 用途
 
-只有一组脚本：把豆瓣"看过的电影 / 读过的书"抓下来，写入
-`src/data/douban/{movies,books}.json`，给娱乐板块用。
-入口 `scripts/douban_sync.py`，详细用法看 `scripts/README.md`。
-`scripts/cookie.txt` 是登录态、已经在 `.gitignore` 里，不要提交。
+娱乐板块有两条长期同步链路，详细用法统一看 `scripts/README.md`：
 
-其它 `.mjs` 脚本（`gen_favicon` / `import_bands` / `import_youtube_subs`）
-是一次性导入工具，跑过一次就不用动了。
+- 豆瓣：`npm run sync:douban` 把"看过的电影 / 读过的书"写入
+  `src/data/douban/{movies,books}.json`。Cookie 默认只保存在
+  `~/Library/Application Support/ayaya-blog/douban-cookie.txt`，不得复制进
+  repo、打印或提交；抓取失败或任一分类为空时必须保留旧数据。
+- YouTube：`npm run sync:youtube` 使用 YouTube Data API v3 的
+  `youtube.readonly` scope，更新 `src/data/youtube-subs.json` 并下载缺失头像。
+  OAuth client 和 token 默认只保存在
+  `~/Library/Application Support/ayaya-blog/`，不得复制进 repo、打印或提交。
+
+需要同时更新两类账号数据时运行带 rollback 的 `npm run sync:entertainment`。
+同步后运行 `npm run verify` 做完整验证，其中已包含条目数、重复标识和本地图片
+完整性检查。`scripts/import_youtube_subs.mjs` 只保留为 Google Takeout CSV 的
+fallback；`gen_favicon.mjs` 和 `import_bands.mjs` 是一次性导入工具。YouTube、
+乐队头像和桌搭设备的 source originals 统一放在不会发布到站点的
+`assets/raw/`，`public/` 只保留页面实际使用的缩略图。
 
 > paper-digest 目录下的论文速读 Markdown 目前是外部生成后手动放进来的，
 > repo 里没有抓取脚本——如果以后要做自动化，需要新增。
