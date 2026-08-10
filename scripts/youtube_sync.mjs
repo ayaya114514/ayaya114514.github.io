@@ -6,6 +6,7 @@ import http from 'node:http'
 import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import sharp from 'sharp'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -19,6 +20,10 @@ const TOKEN_PATH = process.env.YOUTUBE_OAUTH_TOKEN || path.join(CONFIG_DIR, 'you
 const OUT_JSON = path.join(ROOT, 'src/data/youtube-subs.json')
 const AVATAR_DIR = path.join(ROOT, 'public/youtube-avatars')
 const AVATAR_PUBLIC_PREFIX = '/youtube-avatars'
+const AVATAR_THUMB_DIR = path.join(AVATAR_DIR, 'thumbs')
+const AVATAR_THUMB_PUBLIC_PREFIX = `${AVATAR_PUBLIC_PREFIX}/thumbs`
+const AVATAR_THUMB_SIZE = 160
+const AVATAR_THUMB_QUALITY = 80
 const OAUTH_SCOPE = 'https://www.googleapis.com/auth/youtube.readonly'
 
 const args = new Set(process.argv.slice(2))
@@ -311,12 +316,48 @@ async function fileExists(filePath) {
   }
 }
 
+async function writeAvatarThumbnail(source, destination) {
+  const temporary = `${destination}.${process.pid}-${Math.random().toString(16).slice(2)}.tmp`
+  await fs.mkdir(path.dirname(destination), { recursive: true })
+
+  try {
+    await sharp(source)
+      .rotate()
+      .resize(AVATAR_THUMB_SIZE, AVATAR_THUMB_SIZE, {
+        fit: 'cover',
+        position: 'attention'
+      })
+      .webp({ quality: AVATAR_THUMB_QUALITY, effort: 4 })
+      .toFile(temporary)
+    await fs.rename(temporary, destination)
+  } finally {
+    await fs.rm(temporary, { force: true })
+  }
+}
+
+async function ensureAvatarThumbnail(source, destination, force = false) {
+  if (!force && (await fileExists(destination))) return
+  await writeAvatarThumbnail(source, destination)
+}
+
 async function downloadAvatar(channelId, avatarUrl) {
   const destination = path.join(AVATAR_DIR, `${channelId}.jpg`)
-  const publicPath = `${AVATAR_PUBLIC_PREFIX}/${channelId}.jpg`
-  if (!REFRESH_AVATARS && (await fileExists(destination))) return publicPath
-  if (!avatarUrl) return (await fileExists(destination)) ? publicPath : null
+  const thumbnail = path.join(AVATAR_THUMB_DIR, `${channelId}.webp`)
+  const publicPath = `${AVATAR_THUMB_PUBLIC_PREFIX}/${channelId}.webp`
 
+  async function useExistingAvatar() {
+    if (!(await fileExists(destination))) return null
+    await ensureAvatarThumbnail(destination, thumbnail)
+    return publicPath
+  }
+
+  if (!REFRESH_AVATARS) {
+    const existing = await useExistingAvatar()
+    if (existing) return existing
+  }
+  if (!avatarUrl) return await useExistingAvatar()
+
+  const temporary = `${destination}.${process.pid}-${Math.random().toString(16).slice(2)}.tmp`
   try {
     const response = await fetch(avatarUrl)
     if (!response.ok) throw new Error(`HTTP ${response.status}`)
@@ -324,13 +365,15 @@ async function downloadAvatar(channelId, avatarUrl) {
     if (!contentType.startsWith('image/')) {
       throw new Error(`unexpected content-type: ${contentType || 'unknown'}`)
     }
-    const temporary = `${destination}.tmp`
     await fs.writeFile(temporary, Buffer.from(await response.arrayBuffer()))
+    await writeAvatarThumbnail(temporary, thumbnail)
     await fs.rename(temporary, destination)
     return publicPath
   } catch (error) {
     console.warn(`  ! 头像下载失败 ${channelId}: ${error.message}`)
-    return (await fileExists(destination)) ? publicPath : null
+    return await useExistingAvatar()
+  } finally {
+    await fs.rm(temporary, { force: true })
   }
 }
 

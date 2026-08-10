@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 // 抓取乐队 / 歌手的头像，写到 src/data/bands.json，
-// 头像下载到 public/band-avatars/<slug>.jpg。
+// 原头像下载到 public/band-avatars/<slug>.jpg，页面使用
+// public/band-avatars/thumbs/<slug>.webp 下的 160px WebP 展示图。
 //
 // 数据来源：Wikipedia REST API summary（多语言回退）。
 // 用法：node scripts/import_bands.mjs
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import sharp from 'sharp'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -15,6 +17,10 @@ const ROOT = path.resolve(__dirname, '..')
 const OUT_JSON = path.join(ROOT, 'src/data/bands.json')
 const AVATAR_DIR = path.join(ROOT, 'public/band-avatars')
 const AVATAR_PUBLIC_PREFIX = '/band-avatars'
+const AVATAR_THUMB_DIR = path.join(AVATAR_DIR, 'thumbs')
+const AVATAR_THUMB_PUBLIC_PREFIX = `${AVATAR_PUBLIC_PREFIX}/thumbs`
+const AVATAR_THUMB_SIZE = 160
+const AVATAR_THUMB_QUALITY = 80
 
 const UA = 'ayaya-blog/1.0 (https://github.com/ayaya114514; anyangyang2022@gmail.com) Node-fetch'
 
@@ -96,6 +102,52 @@ async function downloadBinary(url, dest) {
   await fs.writeFile(dest, buf)
 }
 
+async function fileExists(filePath) {
+  try {
+    await fs.access(filePath)
+    return true
+  } catch {
+    return false
+  }
+}
+
+async function writeAvatarThumbnail(source, destination) {
+  const temporary = `${destination}.${process.pid}-${Math.random().toString(16).slice(2)}.tmp`
+  await fs.mkdir(path.dirname(destination), { recursive: true })
+
+  try {
+    await sharp(source)
+      .rotate()
+      .resize(AVATAR_THUMB_SIZE, AVATAR_THUMB_SIZE, {
+        fit: 'cover',
+        position: 'attention'
+      })
+      .webp({ quality: AVATAR_THUMB_QUALITY, effort: 4 })
+      .toFile(temporary)
+    await fs.rename(temporary, destination)
+  } finally {
+    await fs.rm(temporary, { force: true })
+  }
+}
+
+async function ensureAvatarThumbnail(source, destination) {
+  if (await fileExists(destination)) return
+  await writeAvatarThumbnail(source, destination)
+}
+
+async function downloadAvatar(sourceUrl, destination, thumbnail) {
+  const temporary = `${destination}.${process.pid}-${Math.random().toString(16).slice(2)}.tmp`
+
+  try {
+    await downloadBinary(sourceUrl, temporary)
+    // Sharp decodes the temporary download before either canonical path is used.
+    await writeAvatarThumbnail(temporary, thumbnail)
+    await fs.rename(temporary, destination)
+  } finally {
+    await fs.rm(temporary, { force: true })
+  }
+}
+
 // 找到一个能用的 Wikipedia summary（按提供的 lang/title 顺序尝试），
 // 返回 originalimage.source 或 thumbnail.source；都没图就返回 null。
 async function findArtistImage(titles) {
@@ -115,23 +167,19 @@ async function findArtistImage(titles) {
 
 async function processArtist(a) {
   const dest = path.join(AVATAR_DIR, `${a.slug}.jpg`)
-  let exists = false
-  try {
-    await fs.access(dest)
-    exists = true
-  } catch {
-    // 文件不存在时继续下载。
-  }
+  const thumbnail = path.join(AVATAR_THUMB_DIR, `${a.slug}.webp`)
+  const publicPath = `${AVATAR_THUMB_PUBLIC_PREFIX}/${a.slug}.webp`
 
   let avatar = null
-  if (exists) {
-    avatar = `${AVATAR_PUBLIC_PREFIX}/${a.slug}.jpg`
+  if (await fileExists(dest)) {
+    await ensureAvatarThumbnail(dest, thumbnail)
+    avatar = publicPath
   } else {
     const found = await findArtistImage(a.titles)
     if (found) {
       try {
-        await downloadBinary(found.img, dest)
-        avatar = `${AVATAR_PUBLIC_PREFIX}/${a.slug}.jpg`
+        await downloadAvatar(found.img, dest, thumbnail)
+        avatar = publicPath
         console.log(`    via ${found.lang}.wikipedia: ${found.title}`)
       } catch (e) {
         console.warn(`    ! 下载失败: ${e.message}`)
@@ -150,7 +198,10 @@ async function processArtist(a) {
 }
 
 async function main() {
-  await fs.mkdir(AVATAR_DIR, { recursive: true })
+  await Promise.all([
+    fs.mkdir(AVATAR_DIR, { recursive: true }),
+    fs.mkdir(AVATAR_THUMB_DIR, { recursive: true })
+  ])
   const items = []
   for (let i = 0; i < artists.length; i++) {
     const a = artists[i]

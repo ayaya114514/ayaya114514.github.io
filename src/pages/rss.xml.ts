@@ -10,7 +10,7 @@ const GET = async () => {
 
   return rss({
     // Basic configs
-    trailingSlash: false,
+    trailingSlash: true,
     xmlns: { h: 'http://www.w3.org/TR/html4/' },
     stylesheet: '/scripts/pretty-feed-v3.xsl',
 
@@ -22,7 +22,7 @@ const GET = async () => {
       title: post.data.title,
       description: post.data.description,
       pubDate: post.data.publishDate,
-      link: `/blog/${post.id}`
+      link: `/blog/${post.id}/`
     }))
   })
 }

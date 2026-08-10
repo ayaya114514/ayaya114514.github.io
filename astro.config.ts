@@ -25,9 +25,12 @@ import config from './src/site.config.ts'
 export default defineConfig({
   // [Basic]
   site: 'https://ayaya114514.github.io',
-  trailingSlash: 'never',
+  // GitHub Pages serves directory routes from `index.html`, so generate URLs that
+  // already match its canonical trailing-slash form and avoid an extra 301.
+  trailingSlash: 'always',
   prefetch: {
-    defaultStrategy: 'viewport'
+    // Avoid competing with the initial page load on high-latency connections.
+    defaultStrategy: 'hover'
   },
 
   // [Output] static for GitHub Pages

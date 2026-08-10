@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // 把 Google Takeout 导出的 YouTube 订阅 CSV 转成站点 JSON，
-// 顺便抓取每个频道的头像（og:image）下载到 public/youtube-avatars/。
+// 顺便抓取每个频道的头像（og:image）下载到 public/youtube-avatars/，
+// 并生成 160px WebP 展示图到 public/youtube-avatars/thumbs/。
 //
 // 用法：
 //   node scripts/import_youtube_subs.mjs [csv_path]
@@ -8,6 +9,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import sharp from 'sharp'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -17,6 +19,10 @@ const DEFAULT_CSV = '/Users/ayaya/Downloads/Takeout/YouTube 和 YouTube Music/�
 const OUT_JSON = path.join(ROOT, 'src/data/youtube-subs.json')
 const AVATAR_DIR = path.join(ROOT, 'public/youtube-avatars')
 const AVATAR_PUBLIC_PREFIX = '/youtube-avatars'
+const AVATAR_THUMB_DIR = path.join(AVATAR_DIR, 'thumbs')
+const AVATAR_THUMB_PUBLIC_PREFIX = `${AVATAR_PUBLIC_PREFIX}/thumbs`
+const AVATAR_THUMB_SIZE = 160
+const AVATAR_THUMB_QUALITY = 80
 
 const UA =
   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36'
@@ -90,20 +96,60 @@ async function downloadBinary(url, dest) {
   await fs.writeFile(dest, buf)
 }
 
+async function fileExists(filePath) {
+  try {
+    await fs.access(filePath)
+    return true
+  } catch {
+    return false
+  }
+}
+
+async function writeAvatarThumbnail(source, destination) {
+  const temporary = `${destination}.${process.pid}-${Math.random().toString(16).slice(2)}.tmp`
+  await fs.mkdir(path.dirname(destination), { recursive: true })
+
+  try {
+    await sharp(source)
+      .rotate()
+      .resize(AVATAR_THUMB_SIZE, AVATAR_THUMB_SIZE, {
+        fit: 'cover',
+        position: 'attention'
+      })
+      .webp({ quality: AVATAR_THUMB_QUALITY, effort: 4 })
+      .toFile(temporary)
+    await fs.rename(temporary, destination)
+  } finally {
+    await fs.rm(temporary, { force: true })
+  }
+}
+
+async function ensureAvatarThumbnail(source, destination) {
+  if (await fileExists(destination)) return
+  await writeAvatarThumbnail(source, destination)
+}
+
+async function downloadAvatar(sourceUrl, destination, thumbnail) {
+  const temporary = `${destination}.${process.pid}-${Math.random().toString(16).slice(2)}.tmp`
+
+  try {
+    await downloadBinary(sourceUrl, temporary)
+    // Sharp decodes the temporary download before either canonical path is used.
+    await writeAvatarThumbnail(temporary, thumbnail)
+    await fs.rename(temporary, destination)
+  } finally {
+    await fs.rm(temporary, { force: true })
+  }
+}
+
 async function processChannel({ id, url, title }) {
   const localPath = path.join(AVATAR_DIR, `${id}.jpg`)
-  const publicPath = `${AVATAR_PUBLIC_PREFIX}/${id}.jpg`
+  const thumbnailPath = path.join(AVATAR_THUMB_DIR, `${id}.webp`)
+  const publicPath = `${AVATAR_THUMB_PUBLIC_PREFIX}/${id}.webp`
 
   // 已有头像就不重新下载
-  let exists = false
-  try {
-    await fs.access(localPath)
-    exists = true
-  } catch {
-    // 文件不存在时继续下载。
-  }
-
-  if (exists) {
+  if (await fileExists(localPath)) {
+    await ensureAvatarThumbnail(localPath, thumbnailPath)
     return { id, url, title, avatar: publicPath }
   }
 
@@ -117,7 +163,7 @@ async function processChannel({ id, url, title }) {
 
   if (avatarUrl) {
     try {
-      await downloadBinary(avatarUrl, localPath)
+      await downloadAvatar(avatarUrl, localPath, thumbnailPath)
       return { id, url, title, avatar: publicPath }
     } catch (e) {
       console.warn(`  ! 下载头像失败 ${id}: ${e.message}`)
@@ -137,7 +183,10 @@ async function main() {
   console.log(`[*] 表头: ${header.join(' | ')}`)
   console.log(`[*] 共 ${data.length} 个频道`)
 
-  await fs.mkdir(AVATAR_DIR, { recursive: true })
+  await Promise.all([
+    fs.mkdir(AVATAR_DIR, { recursive: true }),
+    fs.mkdir(AVATAR_THUMB_DIR, { recursive: true })
+  ])
 
   const items = []
   for (let i = 0; i < data.length; i++) {
