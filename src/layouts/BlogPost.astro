@@ -7,11 +7,11 @@ import 'katex/dist/katex.min.css'
 
 import config from 'virtual:config'
 
-import { MediumZoom } from 'astro-pure/advanced'
 import { ArticleBottom, Hero } from 'astro-pure/components/pages'
 import PageLayout from '@/layouts/ContentLayout.astro'
 import BlogDirectory from '@/components/blog/Directory.astro'
 import BlogToc from '@/components/blog/Toc.astro'
+import MediumZoom from '@/components/MediumZoom.astro'
 
 interface Props {
   post: CollectionEntry<'blog'>
@@ -45,6 +45,12 @@ const orderedPosts = [...posts]
   .filter((p) => groupKey(p.id) === currentGroup)
   .sort((a, b) => a.id.localeCompare(b.id))
 
+// ArticleBottom builds hrefs from each collection id. Clone the navigation-only
+// entries with a trailing slash so its links match GitHub Pages' directory URLs
+// without patching the third-party component.
+const navigationPosts = orderedPosts.map((p) => ({ ...p, id: `${p.id}/` }))
+const navigationId = `${id}/`
+
 // 右侧「本页目录」只收录 h2 / h3：h1 在笔记正文里基本不出现；h4 在论文速读里是
 // 「核心贡献 / 技术栈 …」这类成组重复的小标题，收进来目录会长到上百条。
 // 标题不足 2 个的笔记（如 00-prelude、纯无标题的笔记）则不渲染目录。
@@ -73,9 +79,11 @@ const primaryColor = data.heroImage?.color ?? 'hsl(var(--primary) / var(--un-tex
 
   <slot />
 
+  {config.integ.mediumZoom.enable && <MediumZoom />}
+
   <Fragment slot='bottom'>
     {/* Article recommend */}
-    <ArticleBottom collections={orderedPosts} {id} class='mt-3 sm:mt-6' />
+    <ArticleBottom collections={navigationPosts} id={navigationId} class='mt-3 sm:mt-6' />
   </Fragment>
 
   <slot name='bottom-sidebar' slot='bottom-sidebar' />
@@ -92,5 +100,3 @@ const primaryColor = data.heroImage?.color ?? 'hsl(var(--primary) / var(--un-tex
     display: none;
   }
 </style>
-
-{config.integ.mediumZoom.enable && <MediumZoom />}
