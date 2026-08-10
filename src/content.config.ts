@@ -28,6 +28,7 @@ const blog = defineCollection({
         .optional(),
       language: z.string().optional(),
       tags: z.array(z.string()).optional(),
+      math: z.boolean().default(false),
       draft: z.boolean().default(false),
       // Special fields
       comment: z.boolean().default(true)

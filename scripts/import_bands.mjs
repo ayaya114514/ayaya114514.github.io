@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 // 抓取乐队 / 歌手的头像，写到 src/data/bands.json，
-// 原头像下载到 public/band-avatars/<slug>.jpg，页面使用
+// 原头像下载到 assets/raw/band-avatars/<slug>.jpg，仅用于生成 thumbnail；页面使用
 // public/band-avatars/thumbs/<slug>.webp 下的 160px WebP 展示图。
 //
 // 数据来源：Wikipedia REST API summary（多语言回退）。
 // 用法：node scripts/import_bands.mjs
+import crypto from 'node:crypto'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -15,14 +16,103 @@ const __dirname = path.dirname(__filename)
 const ROOT = path.resolve(__dirname, '..')
 
 const OUT_JSON = path.join(ROOT, 'src/data/bands.json')
-const AVATAR_DIR = path.join(ROOT, 'public/band-avatars')
-const AVATAR_PUBLIC_PREFIX = '/band-avatars'
-const AVATAR_THUMB_DIR = path.join(AVATAR_DIR, 'thumbs')
-const AVATAR_THUMB_PUBLIC_PREFIX = `${AVATAR_PUBLIC_PREFIX}/thumbs`
+const AVATAR_SOURCE_DIR = path.join(ROOT, 'assets/raw/band-avatars')
+const AVATAR_THUMB_DIR = path.join(ROOT, 'public/band-avatars/thumbs')
+const AVATAR_THUMB_PUBLIC_PREFIX = '/band-avatars/thumbs'
 const AVATAR_THUMB_SIZE = 160
 const AVATAR_THUMB_QUALITY = 80
+const FETCH_TIMEOUT_MS = 15_000
+const FETCH_RETRIES = 2
+const MAX_IMAGE_BYTES = 8 * 1024 * 1024
+const RETRYABLE_STATUS = new Set([429, 500, 502, 503, 504])
 
 const UA = 'ayaya-blog/1.0 (https://github.com/ayaya114514; anyangyang2022@gmail.com) Node-fetch'
+
+function sleep(milliseconds) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds))
+}
+
+function retryDelay(response, attempt) {
+  const retryAfter = response?.headers.get('retry-after')?.trim()
+  if (retryAfter && /^\d+(?:\.\d+)?$/.test(retryAfter)) {
+    return Math.min(Number(retryAfter) * 1000, 15_000)
+  }
+  return Math.min(750 * 2 ** attempt, 6_000) + Math.floor(Math.random() * 250)
+}
+
+async function fetchWithRetry(url, init = {}) {
+  for (let attempt = 0; attempt <= FETCH_RETRIES; attempt++) {
+    const signal = AbortSignal.timeout(FETCH_TIMEOUT_MS)
+    let response
+    try {
+      response = await fetch(url, { ...init, signal })
+      if (!RETRYABLE_STATUS.has(response.status) || attempt === FETCH_RETRIES) return response
+      await response.body?.cancel().catch(() => {})
+    } catch (error) {
+      if (attempt === FETCH_RETRIES) {
+        const detail = ['AbortError', 'TimeoutError'].includes(error.name)
+          ? `timeout after ${FETCH_TIMEOUT_MS}ms`
+          : error.message
+        throw new Error(`网络请求失败: ${detail}`, { cause: error })
+      }
+    }
+    await sleep(retryDelay(response, attempt))
+  }
+  throw new Error('网络请求失败')
+}
+
+async function readLimitedBuffer(response, maxBytes, label) {
+  const declaredLength = Number(response.headers.get('content-length'))
+  if (Number.isFinite(declaredLength) && declaredLength > maxBytes) {
+    throw new Error(`${label} exceeds ${maxBytes} byte limit`)
+  }
+  if (!response.body) throw new Error(`empty ${label} response`)
+
+  const reader = response.body.getReader()
+  const chunks = []
+  let total = 0
+  try {
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+      total += value.byteLength
+      if (total > maxBytes) throw new Error(`${label} exceeds ${maxBytes} byte limit`)
+      chunks.push(Buffer.from(value))
+    }
+  } catch (error) {
+    await reader.cancel(error).catch(() => {})
+    throw error
+  } finally {
+    reader.releaseLock()
+  }
+  if (total === 0) throw new Error(`empty ${label} response`)
+  return Buffer.concat(chunks, total)
+}
+
+async function readImageBuffer(response) {
+  const contentType = (response.headers.get('content-type') || '').split(';', 1)[0].toLowerCase()
+  if (!contentType.startsWith('image/')) {
+    throw new Error(`unexpected content-type: ${contentType || 'unknown'}`)
+  }
+  return await readLimitedBuffer(response, MAX_IMAGE_BYTES, 'image')
+}
+
+async function writeJsonAtomic(filePath, payload) {
+  const temporary = path.join(
+    path.dirname(filePath),
+    `.${path.basename(filePath)}.${process.pid}-${crypto.randomBytes(6).toString('hex')}.tmp`
+  )
+  await fs.mkdir(path.dirname(filePath), { recursive: true })
+  try {
+    await fs.writeFile(temporary, `${JSON.stringify(payload, null, 2)}\n`, {
+      encoding: 'utf8',
+      flag: 'wx'
+    })
+    await fs.rename(temporary, filePath)
+  } finally {
+    await fs.rm(temporary, { force: true })
+  }
+}
 
 // slug：本地文件名；display：卡片上显示的名字；links：可点击跳转的 URL；
 // titles：Wikipedia 标题候选（按 lang 匹配，依次尝试）。
@@ -90,21 +180,41 @@ const artists = [
 ]
 
 async function fetchJson(url) {
-  const res = await fetch(url, { headers: { 'User-Agent': UA, Accept: 'application/json' } })
+  const res = await fetchWithRetry(url, {
+    headers: { 'User-Agent': UA, Accept: 'application/json' }
+  })
   if (!res.ok) throw new Error(`HTTP ${res.status}`)
   return await res.json()
 }
 
 async function downloadBinary(url, dest) {
-  const res = await fetch(url, { headers: { 'User-Agent': UA } })
+  const res = await fetchWithRetry(url, { headers: { 'User-Agent': UA } })
   if (!res.ok) throw new Error(`HTTP ${res.status}`)
-  const buf = Buffer.from(await res.arrayBuffer())
-  await fs.writeFile(dest, buf)
+  await fs.writeFile(dest, await readImageBuffer(res), { flag: 'wx' })
 }
 
 async function fileExists(filePath) {
   try {
     await fs.access(filePath)
+    return true
+  } catch {
+    return false
+  }
+}
+
+async function isValidAvatarThumbnail(filePath) {
+  try {
+    const stats = await fs.lstat(filePath)
+    if (!stats.isFile() || stats.size === 0) return false
+    const metadata = await sharp(filePath, { failOn: 'error' }).metadata()
+    if (
+      metadata.format !== 'webp' ||
+      metadata.width !== AVATAR_THUMB_SIZE ||
+      metadata.height !== AVATAR_THUMB_SIZE
+    ) {
+      return false
+    }
+    await sharp(filePath, { failOn: 'error' }).raw().toBuffer()
     return true
   } catch {
     return false
@@ -125,13 +235,17 @@ async function writeAvatarThumbnail(source, destination) {
       .webp({ quality: AVATAR_THUMB_QUALITY, effort: 4 })
       .toFile(temporary)
     await fs.rename(temporary, destination)
+    if (!(await isValidAvatarThumbnail(destination))) {
+      await fs.rm(destination, { force: true })
+      throw new Error(`generated thumbnail failed validation: ${destination}`)
+    }
   } finally {
     await fs.rm(temporary, { force: true })
   }
 }
 
 async function ensureAvatarThumbnail(source, destination) {
-  if (await fileExists(destination)) return
+  if (await isValidAvatarThumbnail(destination)) return
   await writeAvatarThumbnail(source, destination)
 }
 
@@ -166,15 +280,23 @@ async function findArtistImage(titles) {
 }
 
 async function processArtist(a) {
-  const dest = path.join(AVATAR_DIR, `${a.slug}.jpg`)
+  const dest = path.join(AVATAR_SOURCE_DIR, `${a.slug}.jpg`)
   const thumbnail = path.join(AVATAR_THUMB_DIR, `${a.slug}.webp`)
   const publicPath = `${AVATAR_THUMB_PUBLIC_PREFIX}/${a.slug}.webp`
 
   let avatar = null
-  if (await fileExists(dest)) {
-    await ensureAvatarThumbnail(dest, thumbnail)
+  if (await isValidAvatarThumbnail(thumbnail)) {
     avatar = publicPath
-  } else {
+  } else if (await fileExists(dest)) {
+    try {
+      await ensureAvatarThumbnail(dest, thumbnail)
+      if (await isValidAvatarThumbnail(thumbnail)) avatar = publicPath
+    } catch (e) {
+      console.warn(`    ! 本地头像无法重建: ${e.message}`)
+    }
+  }
+
+  if (!avatar) {
     const found = await findArtistImage(a.titles)
     if (found) {
       try {
@@ -199,7 +321,7 @@ async function processArtist(a) {
 
 async function main() {
   await Promise.all([
-    fs.mkdir(AVATAR_DIR, { recursive: true }),
+    fs.mkdir(AVATAR_SOURCE_DIR, { recursive: true }),
     fs.mkdir(AVATAR_THUMB_DIR, { recursive: true })
   ])
   const items = []
@@ -208,7 +330,7 @@ async function main() {
     console.log(`[${i + 1}/${artists.length}] ${a.display}`)
     const item = await processArtist(a)
     items.push(item)
-    await new Promise((r) => setTimeout(r, 200))
+    await sleep(200)
   }
 
   const payload = {
@@ -216,13 +338,13 @@ async function main() {
     updated_at: new Date().toISOString().replace('T', ' ').slice(0, 19),
     items
   }
-  await fs.writeFile(OUT_JSON, JSON.stringify(payload, null, 2) + '\n', 'utf8')
+  await writeJsonAtomic(OUT_JSON, payload)
   console.log(`\n[*] 写入 ${OUT_JSON}`)
-  console.log(`[*] 头像目录: ${AVATAR_DIR}`)
+  console.log(`[*] 头像 source: ${AVATAR_SOURCE_DIR}`)
   const missing = items.filter((x) => !x.avatar).map((x) => x.display)
   if (missing.length) {
     console.log(`[!] 缺图片: ${missing.join(', ')}`)
-    console.log('    可手动放 public/band-avatars/<slug>.jpg 后重跑脚本，或保留无图占位。')
+    console.log('    可手动放 assets/raw/band-avatars/<slug>.jpg 后重跑脚本，或保留无图占位。')
   }
 }
 
