@@ -121,7 +121,10 @@ const sections: { id: string; title: string; payload: DoubanPayload; emptyHint: 
                   <img
                     src={c.avatar}
                     alt={c.title}
+                    width='160'
+                    height='160'
                     loading='lazy'
+                    decoding='async'
                     class='h-full w-full object-cover transition-transform duration-300 group-hover:scale-105'
                   />
                 ) : (
@@ -164,7 +167,10 @@ const sections: { id: string; title: string; payload: DoubanPayload; emptyHint: 
                 <img
                   src={b.avatar}
                   alt={b.display}
+                  width='160'
+                  height='160'
                   loading='lazy'
+                  decoding='async'
                   class='h-full w-full object-cover transition-transform duration-300 group-hover:scale-105'
                 />
               ) : (

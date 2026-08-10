@@ -33,10 +33,10 @@ export const theme: ThemeUserConfig = {
   header: {
     menu: [
       { title: '首页', link: '/' },
-      { title: '工具', link: '/tools' },
-      { title: '笔记', link: '/blog' },
-      { title: '娱乐', link: '/entertainment' },
-      { title: '桌搭', link: '/desksetup' }
+      { title: '工具', link: '/tools/' },
+      { title: '笔记', link: '/blog/' },
+      { title: '娱乐', link: '/entertainment/' },
+      { title: '桌搭', link: '/desksetup/' }
     ]
   },
 

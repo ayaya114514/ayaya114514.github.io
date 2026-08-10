@@ -5,6 +5,8 @@
 `youtube_sync.mjs` 通过 YouTube Data API v3 读取当前授权账号的订阅频道，
 并更新 `src/data/youtube-subs.json` 和缺失的频道头像。旧的
 `import_youtube_subs.mjs` 仍可用于导入 Google Takeout CSV。
+页面使用的头像会自动生成到 `public/youtube-avatars/thumbs/`，格式为
+160×160 WebP；原图保留在上级目录，仅用于后续重新生成缩略图。
 
 ### 第一次使用
 

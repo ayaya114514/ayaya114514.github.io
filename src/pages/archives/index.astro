@@ -3,12 +3,14 @@ import { PostPreview } from 'astro-pure/components/pages'
 import { getBlogCollection, groupCollectionsByYear, sortMDByDate } from 'astro-pure/server'
 import { Button } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
+import { getBlogLandingHref } from '@/utils/blog-navigation'
 
 export const prerender = true
 
 const allPosts = await getBlogCollection()
 const allPostsByDate = sortMDByDate(allPosts)
 const allPostsByYear = groupCollectionsByYear(allPostsByDate)
+const blogLandingHref = await getBlogLandingHref()
 
 const meta = {
   description: '按年份浏览全部博客笔记与论文速读。',
@@ -17,7 +19,7 @@ const meta = {
 ---
 
 <PageLayout {meta}>
-  <Button title='Back' href='/blog' variant='back' />
+  <Button title='Back' href={blogLandingHref} variant='back' />
 
   <main class='mt-6 lg:mt-10'>
     <div id='content-header' class='animate'>
@@ -39,7 +41,7 @@ const meta = {
             <p class='px-5 text-muted-foreground'>共 {posts.length} 篇</p>
             <ul class='flex flex-col text-start'>
               {posts.map((p) => (
-                <PostPreview post={p} class='border-0 bg-transparent py-2' />
+                <PostPreview post={{ ...p, id: `${p.id}/` }} class='border-0 bg-transparent py-2' />
               ))}
             </ul>
           </div>
