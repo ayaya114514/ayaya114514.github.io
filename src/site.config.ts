@@ -2,9 +2,9 @@ import type { Config, IntegrationUserConfig, ThemeUserConfig } from 'astro-pure/
 
 export const theme: ThemeUserConfig = {
   // [Basic]
-  title: 'Ayaya114514',
-  author: 'ayaya',
-  description: '有关 ayaya 的一切',
+  title: 'Hanyuu',
+  author: 'Hanyuu',
+  description: '有关 Hanyuu 的一切',
   favicon: '/favicon/favicon.ico',
   socialCard: '/images/social-card.png',
   locale: {
