@@ -2,7 +2,7 @@
 import PageLayout from '@/layouts/CommonPage.astro'
 import ArtistNav from '@/components/lyrics/ArtistNav.astro'
 
-import { getArtistSongs, lyricArtists, songSlug } from '../../../data/lyrics'
+import { getArtistSongs, lyricArtists, songSlug, type LyricLine } from '../../../data/lyrics'
 
 type Props = {
   artistSlug: string
@@ -39,11 +39,23 @@ function parseJapanese(value: string): JapaneseSegment[] {
   return segments
 }
 
+function groupStanzas(lyricLines: LyricLine[]): LyricLine[][] {
+  const stanzas: LyricLine[][] = []
+
+  for (const line of lyricLines) {
+    if (stanzas.length === 0 || line.breakBefore) stanzas.push([])
+    stanzas[stanzas.length - 1].push(line)
+  }
+
+  return stanzas
+}
+
 const { artistSlug, songTitle } = Astro.props as Props
 const artist = lyricArtists.find((candidate) => candidate.slug === artistSlug)
 if (!artist) throw new Error(`Unknown lyric artist: ${artistSlug}`)
 
 const lines = artist.details[songTitle]?.lines ?? []
+const stanzas = groupStanzas(lines)
 ---
 
 <PageLayout
@@ -54,64 +66,94 @@ const lines = artist.details[songTitle]?.lines ?? []
   <ArtistNav slot='sidebar' artists={lyricArtists} currentSlug={artist.slug} />
 
   {
-    lines.length > 0 && (
-      <ol class='lyric-sheet not-prose'>
-        {lines.map((line) => (
-          <li class:list={['lyric-block', line.breakBefore && 'stanza-break']}>
-            <p lang='ja' class='lyric-japanese'>
-              {parseJapanese(line.japanese).map((segment) =>
-                segment.reading ? (
-                  <ruby>
-                    {segment.text}
-                    <rt>{segment.reading}</rt>
-                  </ruby>
-                ) : (
-                  segment.text
-                )
-              )}
-            </p>
-            {line.chinese && (
-              <p lang='zh-CN' class='lyric-chinese'>
-                {line.chinese}
-              </p>
-            )}
-          </li>
+    stanzas.length > 0 && (
+      <div class='lyric-sheet not-prose'>
+        {stanzas.map((stanza) => (
+          <section class='lyric-stanza'>
+            <ol class='lyric-lines'>
+              {stanza.map((line) => (
+                <li class='lyric-row'>
+                  <p lang='ja' class='lyric-japanese'>
+                    {parseJapanese(line.japanese).map((segment) =>
+                      segment.reading ? (
+                        <ruby>
+                          {segment.text}
+                          <rt>{segment.reading}</rt>
+                        </ruby>
+                      ) : (
+                        segment.text
+                      )
+                    )}
+                  </p>
+                  <p lang='zh-CN' class='lyric-chinese'>
+                    {line.chinese ?? ''}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </section>
         ))}
-      </ol>
+      </div>
     )
   }
 </PageLayout>
 
 <style>
   .lyric-sheet {
-    max-width: 52rem;
+    width: 100%;
+    max-width: 72rem;
+    margin: 0;
+  }
+
+  .lyric-stanza {
+    position: relative;
+  }
+
+  .lyric-stanza::after {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 50%;
+    width: 1px;
+    background: hsl(var(--border) / 0.6);
+    content: '';
+    pointer-events: none;
+  }
+
+  .lyric-stanza + .lyric-stanza {
+    margin-top: clamp(0.9rem, 2vw, 1.25rem);
+    padding-top: clamp(0.9rem, 2vw, 1.25rem);
+    border-top: 1px solid hsl(var(--border) / 0.6);
+  }
+
+  .lyric-lines {
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  .lyric-block {
+  .lyric-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
     margin: 0;
   }
 
-  .lyric-block + .lyric-block {
-    margin-top: clamp(1.45rem, 3vw, 1.9rem);
+  .lyric-row + .lyric-row {
+    margin-top: clamp(0.55rem, 1.4vw, 0.9rem);
   }
 
-  .lyric-block.stanza-break {
-    margin-top: clamp(3rem, 7vw, 4.5rem);
-  }
-
-  .lyric-block p {
+  .lyric-row p {
+    min-width: 0;
     margin: 0;
     overflow-wrap: anywhere;
   }
 
   .lyric-japanese {
+    padding-inline-end: clamp(1.25rem, 3.5vw, 3rem);
     color: hsl(var(--foreground));
-    font-size: clamp(1.35rem, 2.7vw, 1.75rem);
+    font-size: clamp(1.15rem, 2.2vw, 1.45rem);
     font-weight: 480;
-    line-height: 2;
+    line-height: 2.1;
     letter-spacing: 0.012em;
   }
 
@@ -128,20 +170,35 @@ const lines = artist.details[songTitle]?.lines ?? []
   }
 
   .lyric-chinese {
-    margin-top: 0.3rem !important;
+    padding-block-start: 0.2em;
+    padding-inline-start: clamp(1.25rem, 3.5vw, 3rem);
     color: hsl(var(--foreground) / 0.78);
-    font-size: clamp(1.08rem, 2.2vw, 1.3rem);
-    line-height: 1.75;
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    line-height: 1.9;
     letter-spacing: 0.008em;
   }
 
   @media (max-width: 639px) {
-    .lyric-block + .lyric-block {
-      margin-top: 1.35rem;
+    .lyric-stanza + .lyric-stanza {
+      margin-top: 0.9rem;
+      padding-top: 0.9rem;
     }
 
-    .lyric-block.stanza-break {
-      margin-top: 2.8rem;
+    .lyric-row + .lyric-row {
+      margin-top: 0.65rem;
+    }
+
+    .lyric-japanese {
+      padding-inline-end: 0.8rem;
+      font-size: 1rem;
+      line-height: 2.15;
+    }
+
+    .lyric-chinese {
+      padding-block-start: 0.28em;
+      padding-inline-start: 0.8rem;
+      font-size: 0.92rem;
+      line-height: 1.85;
     }
   }
 </style>
