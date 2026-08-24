@@ -1,6 +1,7 @@
 import yorushikaLyrics from './yorushika-lyrics.json'
 import nbunaLyrics from './nbuna-lyrics.json'
 import zutomayoLyrics from './zutomayo-lyrics.json'
+import orangestarLyrics from './orangestar-lyrics.json'
 import lyricTitleTranslations from './lyric-title-translations.json'
 
 export type LyricLine = {
@@ -377,6 +378,82 @@ export const lyricArtists: LyricArtist[] = [
     singles: ['イチジク煙'],
     details: zutomayoLyrics as Record<string, LyricSongDetails>,
     titleTranslations: lyricTitleTranslations.zutomayo
+  },
+  {
+    slug: 'orangestar',
+    name: 'Orangestar',
+    albums: [
+      {
+        title: '未完成エイトビーツ',
+        songs: [
+          '或るひと夏の追憶',
+          '空奏列車',
+          'シンクロナイザー',
+          '真夏と少年の天ノ川戦争',
+          '残灯花火',
+          'イヤホンと蝉時雨',
+          '超次元愛歌',
+          'Ifの世界設定',
+          'からっぽの街月夜の下',
+          '夏色アンサー',
+          '白昼都市サブマージ計画',
+          'アスノヨゾラ哨戒班',
+          '花と記憶',
+          '雨き声残響',
+          '未完成タイムリミッター'
+        ]
+      },
+      {
+        title: '未収録OSC',
+        songs: ['CITRUS', '心象蜃気楼', 'キミノヨゾラ哨戒班', 'Lingering Fireworks', '時ノ雨、最終戦争', '新世界LIVE']
+      },
+      {
+        title: 'SEASIDE SOLILOQUIES',
+        songs: [
+          'Alice in 冷凍庫',
+          '水星',
+          'Trash Day',
+          'DAYBREAK FRONTLINE',
+          'Uz',
+          'Still-GATE',
+          'White Landscape',
+          'RIP',
+          '濫觴生命',
+          'サンダルリープ',
+          '回る空うさぎ',
+          '八十八鍵の宇宙',
+          'DAYBREAK FRONTLINE (Acoustic Remix)'
+        ]
+      },
+      {
+        title: 'Light in the Distance',
+        songs: ['灯台', 'MOON-VINE', '夜蝉 (feat. 夏背)', 'ノクティルーカ (Cover)', 'Sunflower (feat. 夏背)']
+      },
+      {
+        title: 'And So Henceforth,',
+        songs: [
+          'Henceforth',
+          'Surges',
+          '滑走',
+          '霽れを待つ',
+          '白南風',
+          'Pier',
+          'Skywards',
+          'Artificial Light',
+          'MOON-VINE (ASH ver.)',
+          'Aloud (ASH ver.)',
+          'ノクティルーカ (ASH ver.)',
+          '快晴'
+        ]
+      },
+      {
+        title: 'Postscript',
+        songs: ['Postscript', 'Aloud (P.S. ver.)', '白南風 (P.S. ver.)', 'ノクティルーカ (feat. 夏背 & 遼遼)']
+      }
+    ],
+    singles: ['Nadir', 'Encounter', 'Petals', '花筏'],
+    details: orangestarLyrics as Record<string, LyricSongDetails>,
+    titleTranslations: lyricTitleTranslations.orangestar
   }
 ]
 

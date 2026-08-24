@@ -1,0 +1,1075 @@
+{
+  "アスノヨゾラ哨戒班": {
+    "lines": [
+      {
+        "japanese": "気分次第です僕は",
+        "chinese": "依心情而定的我"
+      },
+      {
+        "japanese": "敵を選んで戦う少年",
+        "chinese": "是个择敌而战的少年"
+      },
+      {
+        "japanese": "叶えたい未来も無くて",
+        "chinese": "连想实现的未来都没有"
+      },
+      {
+        "japanese": "夢に描かれるのを待ってた",
+        "chinese": "只是等待着梦中描绘下的空想"
+      },
+      {
+        "japanese": "そのくせ未来が怖くて",
+        "chinese": "因此惧怕着未来",
+        "breakBefore": true
+      },
+      {
+        "japanese": "明日を嫌って過去に願って",
+        "chinese": "讨厌明天  向着过去祈愿"
+      },
+      {
+        "japanese": "もう如何（どう）しようも無くなって叫ぶんだ",
+        "chinese": "「已经走投无路了啊」这样叫喊着"
+      },
+      {
+        "japanese": "明日よ明日よもう来ないでよって",
+        "chinese": "「明天啊  明天啊  求求你不要来了」"
+      },
+      {
+        "japanese": "そんな僕を置いて",
+        "chinese": "将那样的我置之不理",
+        "breakBefore": true
+      },
+      {
+        "japanese": "月は沈み陽は昇る",
+        "chinese": "明月西沉  旭日东升"
+      },
+      {
+        "japanese": "けどその夜（よ）は違ったんだ",
+        "chinese": "但那个夜晚已经不同了"
+      },
+      {
+        "japanese": "君は",
+        "chinese": "是你"
+      },
+      {
+        "japanese": "僕の",
+        "chinese": "将我的手"
+      },
+      {
+        "japanese": "手を",
+        "chinese": "牵起"
+      },
+      {
+        "japanese": "空へ舞う 世界の彼方",
+        "chinese": "向着天空飞舞  直到世界的彼方",
+        "breakBefore": true
+      },
+      {
+        "japanese": "闇を照らす魁星（かいせい）",
+        "chinese": "照亮黑暗的魁星"
+      },
+      {
+        "japanese": "「君と僕もさ、また明日へ向かっていこう」",
+        "chinese": "「你和我一起，再次向着明日前进吧」"
+      },
+      {
+        "japanese": "夢で終わってしまうのならば",
+        "chinese": "如果只能以梦终结的话"
+      },
+      {
+        "japanese": "昨日を変えさせて",
+        "chinese": "那就让我去改变昨天吧"
+      },
+      {
+        "japanese": "なんて言わないから",
+        "chinese": "这样的话才不会说呢"
+      },
+      {
+        "japanese": "また明日も君とこうやって",
+        "chinese": "在明天也要和你一起这样"
+      },
+      {
+        "japanese": "笑わせて",
+        "chinese": "欢笑"
+      },
+      {
+        "japanese": "あれから世界は変わったって",
+        "chinese": "从那时起世界就已改变",
+        "breakBefore": true
+      },
+      {
+        "japanese": "本気で思ったって",
+        "chinese": "就算我真心这么觉得"
+      },
+      {
+        "japanese": "期待したって変えようとしたって",
+        "chinese": "哪怕期待着  即使想去改变"
+      },
+      {
+        "japanese": "未来は残酷で",
+        "chinese": "未来却依旧残酷"
+      },
+      {
+        "japanese": "それでもいつだって君と見ていた",
+        "chinese": "即便如此总是与你一起看着的",
+        "breakBefore": true
+      },
+      {
+        "japanese": "世界は本当に綺麗だった",
+        "chinese": "这世界真的美丽无比"
+      },
+      {
+        "japanese": "忘れてないさ",
+        "chinese": "不要忘记了哦"
+      },
+      {
+        "japanese": "思い出せるように仕舞ってるの",
+        "chinese": "为了能回想起来就铭记在心中吧"
+      },
+      {
+        "japanese": "君がいてもいなくても翔べるなんて妄想",
+        "chinese": "无论你在不在  飞翔亦只是空想",
+        "breakBefore": true
+      },
+      {
+        "japanese": "独りじゃ歩くことさえ僕はしないまま藍色の風に吐いた幻想",
+        "chinese": "我就连孤身一人迈出脚步都做不到  在苍蓝的风中吐出了幻想"
+      },
+      {
+        "japanese": "壊してくれって願って踠（もが）いたって",
+        "chinese": "即使祈愿了毁坏  这样挣扎着"
+      },
+      {
+        "japanese": "願ったんなら叶えてしまえやって",
+        "chinese": "「若是许下了愿望就去实现吧」"
+      },
+      {
+        "japanese": "君は",
+        "chinese": "你"
+      },
+      {
+        "japanese": "言って",
+        "chinese": "如此说道"
+      },
+      {
+        "japanese": "また明日の夜に",
+        "chinese": "想着在明日的夜晚",
+        "breakBefore": true
+      },
+      {
+        "japanese": "逢いに行こうと思うが",
+        "chinese": "去与你重逢"
+      },
+      {
+        "japanese": "どうかな君はいないかな",
+        "chinese": "但会怎么样呢  你也许不在呢"
+      },
+      {
+        "japanese": "それでもいつまでも僕ら一つだから",
+        "chinese": "但无论何时我们都连在一起"
+      },
+      {
+        "japanese": "またね",
+        "chinese": "所以再见了"
+      },
+      {
+        "japanese": "Sky Arrow 笑っていよう",
+        "chinese": "笑起来吧"
+      },
+      {
+        "japanese": "未来を少しでも君といたいから叫ぼう",
+        "chinese": "因为未来也有点想和你在一起呢  所以呐喊吧"
+      },
+      {
+        "japanese": "今日の日をいつか思い出せ",
+        "chinese": "总有一天要想起今天哦"
+      },
+      {
+        "japanese": "未来の僕ら",
+        "chinese": "未来的我们啊"
+      }
+    ]
+  },
+  "DAYBREAK FRONTLINE": {
+    "lines": [
+      {
+        "japanese": "「眠れないんだ」",
+        "chinese": "睡不着啊"
+      },
+      {
+        "japanese": "風もなく茹だりそうな夜に",
+        "chinese": "在无风闷热的夜晚"
+      },
+      {
+        "japanese": "君の声が耳元で揺らいだ",
+        "chinese": "你的声音在耳边回旋"
+      },
+      {
+        "japanese": "感傷に浸ってばっか",
+        "chinese": "只顾沉浸在感伤之情中"
+      },
+      {
+        "japanese": "何も変わらない",
+        "chinese": "没有任何改变"
+      },
+      {
+        "japanese": "笑えない日々を",
+        "chinese": "从这些没有乐趣的日子里"
+      },
+      {
+        "japanese": "抜け出そうぜ",
+        "chinese": "逃走吧"
+      },
+      {
+        "japanese": "君を連れ飛び出した",
+        "chinese": "带着你跑了出去"
+      },
+      {
+        "japanese": "風が通り過ぎた",
+        "chinese": "风轻轻拂过",
+        "breakBefore": true
+      },
+      {
+        "japanese": "闇と混ざり合った",
+        "chinese": "与黑夜混杂"
+      },
+      {
+        "japanese": "君の笑い声が",
+        "chinese": "你的笑声"
+      },
+      {
+        "japanese": "小さく藍の空に響いて",
+        "chinese": "轻轻地在藏蓝色天空中回荡"
+      },
+      {
+        "japanese": "そんなんで生きていけんのか",
+        "chinese": "这样真的能活下去吗",
+        "breakBefore": true
+      },
+      {
+        "japanese": "もう戻れないぜ",
+        "chinese": "已经回不去了"
+      },
+      {
+        "japanese": "なんて揺らぎそうな想いは",
+        "chinese": "之类动摇的思绪都加在"
+      },
+      {
+        "japanese": "アクセルへ",
+        "chinese": "油门上"
+      },
+      {
+        "japanese": "このまま地平線を",
+        "chinese": "就这样直接"
+      },
+      {
+        "japanese": "追い越してやるんだ",
+        "chinese": "超越地平线吧"
+      },
+      {
+        "japanese": "最前線飛ばせ僕たちは",
+        "chinese": "在最前线飞驰的我们",
+        "breakBefore": true
+      },
+      {
+        "japanese": "星もない夜",
+        "chinese": "在星光黯淡的夜晚"
+      },
+      {
+        "japanese": "ただ東を目指して行く",
+        "chinese": "只是一味的奔向东方"
+      },
+      {
+        "japanese": "13秒先もわかんなくたって",
+        "chinese": "13秒后的未来都无法预测"
+      },
+      {
+        "japanese": "精一杯僕を生きていく",
+        "chinese": "尽全力活出自己"
+      },
+      {
+        "japanese": "何も後悔なんてないさ",
+        "chinese": "没有任何后悔"
+      },
+      {
+        "japanese": "前を向け",
+        "chinese": "朝向前方"
+      },
+      {
+        "japanese": "止まらないさ",
+        "chinese": "不会停下"
+      },
+      {
+        "japanese": "きっと光の待つ方へ",
+        "chinese": "一定会到达光亮等待的地方"
+      },
+      {
+        "japanese": "暗闇に落ちた",
+        "chinese": "被暗夜吞没的",
+        "breakBefore": true
+      },
+      {
+        "japanese": "先の見えないような道も",
+        "chinese": "看似没有前途的道路"
+      },
+      {
+        "japanese": "辿り着いたら",
+        "chinese": "到达了之后"
+      },
+      {
+        "japanese": "闇なんてなかった",
+        "chinese": "其实并没有黑暗"
+      },
+      {
+        "japanese": "きっと僕は僕を",
+        "chinese": "肯定是我对我自己"
+      },
+      {
+        "japanese": "信じ切っちゃいないから",
+        "chinese": "没能抱有完全的信心"
+      },
+      {
+        "japanese": "いっそあの向こうへ",
+        "chinese": "干脆向着那远方"
+      },
+      {
+        "japanese": "未だ見ぬ夜明けを",
+        "chinese": "还未看见的黎明"
+      },
+      {
+        "japanese": "信じ歩いた",
+        "chinese": "去相信着"
+      },
+      {
+        "japanese": "追い抜いた 走った",
+        "chinese": "超越 飞奔",
+        "breakBefore": true
+      },
+      {
+        "japanese": "期待した 転んだ",
+        "chinese": "期待 跌倒"
+      },
+      {
+        "japanese": "迷った わかんなくなって",
+        "chinese": "迷茫 无措"
+      },
+      {
+        "japanese": "でもjust feel alive",
+        "chinese": "但只觉活着"
+      },
+      {
+        "japanese": "fear or light",
+        "chinese": "恐惧还是光明"
+      },
+      {
+        "japanese": "まだ僕らは歩いていく",
+        "chinese": "我们还会走下去"
+      },
+      {
+        "japanese": "こんなんじゃいつまで経っても",
+        "chinese": "这样下去无论再过多久",
+        "breakBefore": true
+      },
+      {
+        "japanese": "何処にも行けやしないさ",
+        "chinese": "都去不了任何地方"
+      },
+      {
+        "japanese": "なんて拭えない想いもアクセルへ",
+        "chinese": "之类挥之不去的想法都加在油门"
+      },
+      {
+        "japanese": "どうせ止まれるはずないさ",
+        "chinese": "反正已经停不下来了"
+      },
+      {
+        "japanese": "夜に腐っていたって僕たちは",
+        "chinese": "曾在夜晚腐朽的我们"
+      },
+      {
+        "japanese": "間違いなく明日に向かっていく",
+        "chinese": "毫无疑问正冲向明天"
+      },
+      {
+        "japanese": "最前線飛ばせ僕たちは",
+        "chinese": "在最前线飞驰的我们",
+        "breakBefore": true
+      },
+      {
+        "japanese": "白みだした星空",
+        "chinese": "开始泛白的星空下"
+      },
+      {
+        "japanese": "胸を鳴らしている",
+        "chinese": "心中激动难抑"
+      },
+      {
+        "japanese": "眠らないよう",
+        "chinese": "为了驱散困意"
+      },
+      {
+        "japanese": "上がるミュージックと",
+        "chinese": "带上了动感的音乐"
+      },
+      {
+        "japanese": "ぬるくなった水だけ持っていく",
+        "chinese": "还有已经温热的水"
+      },
+      {
+        "japanese": "無駄なものは何もないさ",
+        "chinese": "没有任何多余的杂物"
+      },
+      {
+        "japanese": "前を向け",
+        "chinese": "朝向前方"
+      },
+      {
+        "japanese": "その方がきっと笑えるさって",
+        "chinese": "你说这样肯定能展露笑容"
+      },
+      {
+        "japanese": "最前線飛ばせ僕たちは",
+        "chinese": "在最前线飞驰的我们",
+        "breakBefore": true
+      },
+      {
+        "japanese": "昇る太陽",
+        "chinese": "逐渐升起的太阳"
+      },
+      {
+        "japanese": "その光を目指していく",
+        "chinese": "目标是那道曙光"
+      },
+      {
+        "japanese": "幸せって今はわかんなくたって",
+        "chinese": "虽然还不知道幸福的含义"
+      },
+      {
+        "japanese": "精一杯僕を生きていく",
+        "chinese": "尽全力活出自己"
+      },
+      {
+        "japanese": "何も後悔なんてないさ",
+        "chinese": "没有任何后悔"
+      },
+      {
+        "japanese": "前を向け",
+        "chinese": "朝向前方"
+      },
+      {
+        "japanese": "終わらないさ",
+        "chinese": "不会结束"
+      },
+      {
+        "japanese": "一生僕らは生きて征け",
+        "chinese": "我们的一生皆是征途"
+      }
+    ]
+  },
+  "Alice in 冷凍庫": {
+    "lines": [
+      {
+        "japanese": "それは時の果てる 劇場世界のプロローグ",
+        "chinese": "那是时光尽头的 剧场世界的序章"
+      },
+      {
+        "japanese": "アライ A lie? 君は誰？ どことなく物憂げに",
+        "chinese": "Ally A lie? 你是谁？总觉得有些没精打采"
+      },
+      {
+        "japanese": "裸足のままで 張りつく夜に遊ぶように",
+        "chinese": "赤着脚 就像是在这拼凑出的夜里游玩似的"
+      },
+      {
+        "japanese": "彷徨う僕は何故か 君を探しているのだ",
+        "chinese": "正在迷惘中的我是为何 寻找着你的身影呢"
+      },
+      {
+        "japanese": "だぁ だぁ",
+        "chinese": "哒 哒"
+      },
+      {
+        "japanese": "あの日のいつかまでの 星座のソラは闇のように",
+        "chinese": "如同那天在不知不觉中 繁星遍布的天空化为漆黑",
+        "breakBefore": true
+      },
+      {
+        "japanese": "閉ざされた小景に 意味もなく吐き捨てる",
+        "chinese": "封闭的这片小景 连半点意义都吐露不出"
+      },
+      {
+        "japanese": "あぁ 僕は何故 僕をどこまで連れてくの",
+        "chinese": "啊啊 我是为何 将自己带到远方去呢"
+      },
+      {
+        "japanese": "開けたその先に いつか見た扉",
+        "chinese": "于展开的前方 曾经见过的门扉"
+      },
+      {
+        "japanese": "合図で るらったったった",
+        "chinese": "信号打响 噜啦 哒 哒 哒",
+        "breakBefore": true
+      },
+      {
+        "japanese": "繰り返して 回ったったった",
+        "chinese": "翻来覆去 旋转不停"
+      },
+      {
+        "japanese": "君が居そうな氷漬けの夢",
+        "chinese": "于你所存在的冰封梦境"
+      },
+      {
+        "japanese": "迷走 昏いステップ るらったったった",
+        "chinese": "迷失路途 步伐昏沉 噜啦 哒 哒 哒",
+        "breakBefore": true
+      },
+      {
+        "japanese": "寂しくて 笑ったったった",
+        "chinese": "感到寂寞 笑了起来"
+      },
+      {
+        "japanese": "踏み出すままに汚せ",
+        "chinese": "就这样沾染上脏污而向前"
+      },
+      {
+        "japanese": "今は凍えぬように",
+        "chinese": "仿佛仍未冻僵一般"
+      },
+      {
+        "japanese": "言葉よ意味を成せ 冷やかな世界 病みの曜日",
+        "chinese": "让言语构成意义吧 这冰冷的世界 忧伤的每天",
+        "breakBefore": true
+      },
+      {
+        "japanese": "消え行くあてもなく 独り舞台に泣き崩れる",
+        "chinese": "消逝而去无影无踪 独自一人于舞台放声痛哭"
+      },
+      {
+        "japanese": "あぁ もう嫌だ 全て0からやり直して",
+        "chinese": "啊啊 已经受够了 让一切由零重新开始吧"
+      },
+      {
+        "japanese": "回り切ったその先に いつか見た扉",
+        "chinese": "在踌躇不决的前方 那曾经看到的门扉"
+      },
+      {
+        "japanese": "荒んだ夜 眠れないレイニー",
+        "chinese": "于那暴风吹起的 无眠雨夜",
+        "breakBefore": true
+      },
+      {
+        "japanese": "自称冷静な世界とside alley – C 0 0",
+        "chinese": "自称冷静的世界和 side alley – C 0 0"
+      },
+      {
+        "japanese": "見据えたナンセンス 必然の解離",
+        "chinese": "意料之中的荒谬 必然发生的分离"
+      },
+      {
+        "japanese": "僕ら また出逢えるように",
+        "chinese": "仿佛我们能再次相遇"
+      },
+      {
+        "japanese": "あぁ",
+        "chinese": "啊啊"
+      },
+      {
+        "japanese": "朝靄を空に裂いた 君のその柔い手が",
+        "chinese": "朝霭划破天空 你用柔软的双手",
+        "breakBefore": true
+      },
+      {
+        "japanese": "白銀製の帳を たやすく浚ってゆく",
+        "chinese": "将那白雪的帐幕 轻易地揭开"
+      },
+      {
+        "japanese": "知らぬまま 大人になるほど 懐かしさは残るけど",
+        "chinese": "像是在不知不觉间 就长大成人了那般 虽然留下了眷恋"
+      },
+      {
+        "japanese": "それも全部かき混ぜて 廻り出す今日は綺麗だ",
+        "chinese": "但就让那亦与一切混合起来 开始运转的今天无比美妙"
+      },
+      {
+        "japanese": "時間が音をたてながら 崩れてゆく最後を",
+        "chinese": "时间滴答走过 逐渐崩坏于最终之时"
+      },
+      {
+        "japanese": "君は何故か悲しそうに 笑いながら踊るWonderland",
+        "chinese": "为何你好像满怀悲伤 却依然展颜起舞 Wonderland"
+      },
+      {
+        "japanese": "またあの日と 同じようなさ 星空に呑まれては",
+        "chinese": "仿佛那天的情景重叠 被星空吞噬掉一般"
+      },
+      {
+        "japanese": "紡ぎ出した言葉通りの 想い熱を放て",
+        "chinese": "就如那交织而成的言语那样 让这感情热度散发开吧"
+      }
+    ]
+  },
+  "回る空うさぎ": {
+    "lines": [
+      {
+        "japanese": "また月が昇る 今日が終わりだす",
+        "chinese": "月亮再次升起 今天就要结束了"
+      },
+      {
+        "japanese": "願い奏でる 言葉をのみこむ",
+        "chinese": "奏响了愿望 却欲言又止"
+      },
+      {
+        "japanese": "Friday Night 泣きだす 君はまだ大丈夫",
+        "chinese": "Friday Night 不禁哭泣  你却还是一如平常"
+      },
+      {
+        "japanese": "駆け出せ足音 明日を変えたい",
+        "chinese": "奔跑的脚步声响起 如果想要改变明天的话"
+      },
+      {
+        "japanese": "なら なら",
+        "chinese": "那么 那么",
+        "breakBefore": true
+      },
+      {
+        "japanese": "まだ まだ まだ",
+        "chinese": "还未 还未 还未"
+      },
+      {
+        "japanese": "また夜空一周に 満たして欠いて流れる",
+        "chinese": "又在夜空中绕行了一周 月亮的盈亏也流转了一回",
+        "breakBefore": true
+      },
+      {
+        "japanese": "時を眺める だけじゃ笑えない",
+        "chinese": "眺望着时光 仅仅这样可笑不出来"
+      },
+      {
+        "japanese": "回る空うさぎ 君と明日はイコール",
+        "chinese": "月兔回旋于空中 你与明天相等同"
+      },
+      {
+        "japanese": "まけるな明日に 背を向けたくない",
+        "chinese": "不要输给明天呐 因为不想逃避啦"
+      },
+      {
+        "japanese": "から から",
+        "chinese": "所以 所以",
+        "breakBefore": true
+      },
+      {
+        "japanese": "いま から から",
+        "chinese": "从现在 开始 开始"
+      },
+      {
+        "japanese": "遥か月を目指した今日の空は",
+        "chinese": "把遥远的月亮作为目标  而今天的天空",
+        "breakBefore": true
+      },
+      {
+        "japanese": "彼方 西に流れた もう届かないや",
+        "chinese": "朝着那边 向着西面流去了 已经触及不到了呀"
+      },
+      {
+        "japanese": "届かないや",
+        "chinese": "也传达不到了呀"
+      },
+      {
+        "japanese": "涙 星を濡らした今日の空は",
+        "chinese": "眼泪把繁星沾湿了 而今天的天空",
+        "breakBefore": true
+      },
+      {
+        "japanese": "彼方 夜に流れた 「もう泣くなよ」",
+        "chinese": "朝着那边 向着夜晚流去了  “别再哭啦”"
+      },
+      {
+        "japanese": "遥か月を目指した今日の空は",
+        "chinese": "把遥远的月亮作为目标 而今天的天空",
+        "breakBefore": true
+      },
+      {
+        "japanese": "数多 星を降らした 夢じゃないや！",
+        "chinese": "有许多的星星从空中落下 这并不是梦呀！"
+      },
+      {
+        "japanese": "夢じゃないや",
+        "chinese": "这不是梦"
+      }
+    ]
+  },
+  "雨き声残響": {
+    "lines": [
+      {
+        "japanese": "自分より下手くそな人",
+        "chinese": "寻找比自己更没用的人"
+      },
+      {
+        "japanese": "探して浸るの優越感",
+        "chinese": "沉浸于这般的优越感之中"
+      },
+      {
+        "japanese": "でもその度ちょっと自分を嫌って",
+        "chinese": "但每当这样做就会有点变得讨厌自己"
+      },
+      {
+        "japanese": "次元遡って現実逃避",
+        "chinese": "回遡次元逃避现实"
+      },
+      {
+        "japanese": "でも良いんじゃない？",
+        "chinese": "但这样也不错吧？",
+        "breakBefore": true
+      },
+      {
+        "japanese": "別に良いんじゃない？",
+        "chinese": "就这样不就好了吗？"
+      },
+      {
+        "japanese": "無理に強がらなくても良いんじゃない？",
+        "chinese": "即使不勉强去逞强也可以吧？"
+      },
+      {
+        "japanese": "下を見て強くなれるのも",
+        "chinese": "向下望就能变得坚强"
+      },
+      {
+        "japanese": "また人だからさ。",
+        "chinese": "因为我也不过是人啊"
+      },
+      {
+        "japanese": "五月蠅い もううざい くらいにCryを掻き消す様な",
+        "chinese": "吵死了 真的麻烦死了   如此 将哭泣声 消抹掉似的",
+        "breakBefore": true
+      },
+      {
+        "japanese": "世界なら 抗ってたいのに",
+        "chinese": "这般的世界 我明明就想要去与之抵抗"
+      },
+      {
+        "japanese": "降り出した空の泣き声は透明で",
+        "chinese": "降雨的天空的 哭泣声却是透明的",
+        "breakBefore": true
+      },
+      {
+        "japanese": "『わかんない、もうわかんないよ！』を何遍も。",
+        "chinese": "『我不懂啊,我不管了啊!』无数次这样说到。"
+      },
+      {
+        "japanese": "僕達は存在証明に 毎日一生懸命で",
+        "chinese": "我们为了存在的证明   每天都拼命过活",
+        "breakBefore": true
+      },
+      {
+        "japanese": "こんな素晴らしい世界で まだ生きる意味を探してる",
+        "chinese": "在如此美妙的世界   继续去探求活着的意义"
+      },
+      {
+        "japanese": "そりゃそうだろだって人間は 希望無しでは生きられないからさ",
+        "chinese": "因为说着「那是理所当然的吧」的人们    没有了希望就活不下去了啊",
+        "breakBefore": true
+      },
+      {
+        "japanese": "みんな 心のどっかで 来世を",
+        "chinese": "大家在心裹某处 都是"
+      },
+      {
+        "japanese": "信じてる。",
+        "chinese": "深信着来世的"
+      },
+      {
+        "japanese": "昨日の僕守る為に 笑うくらいなら",
+        "chinese": "若然欢笑  只是为了守护昨天的我",
+        "breakBefore": true
+      },
+      {
+        "japanese": "泣いたっていいだろ？ ねぇ",
+        "chinese": "那即使我哭了也没关系吧？  呐"
+      },
+      {
+        "japanese": "止まないの雨が 夏空を鮮明に描いたって",
+        "chinese": "不止的雨   即使鲜明地描绘出夏日的天空",
+        "breakBefore": true
+      },
+      {
+        "japanese": "僕達は不完全で",
+        "chinese": "我们亦是不完美而"
+      },
+      {
+        "japanese": "未完成な",
+        "chinese": "不成熟的呢"
+      }
+    ]
+  },
+  "MOON-VINE": {
+    "lines": [
+      {
+        "japanese": "降り出した雨の音",
+        "chinese": "来访大地的雨水之声"
+      },
+      {
+        "japanese": "誰もいない夜の底",
+        "chinese": "空无一人的深夜底层"
+      },
+      {
+        "japanese": "今日が来てしまう前に",
+        "chinese": "趁着在今日到来之前"
+      },
+      {
+        "japanese": "絵に描いて泣いている",
+        "chinese": "我描画着 也哭泣着"
+      },
+      {
+        "japanese": "漕ぎ出した舟の音",
+        "chinese": "启程漂泊的舟船之声",
+        "breakBefore": true
+      },
+      {
+        "japanese": "何もない夜の底",
+        "chinese": "空无一物的黑夜底层"
+      },
+      {
+        "japanese": "今日だって知らぬままに",
+        "chinese": "连今日都还尚未知晓"
+      },
+      {
+        "japanese": "思い出してしまっている",
+        "chinese": "我就这样开始了回想"
+      },
+      {
+        "japanese": "繰り返した迷走と",
+        "chinese": "不断重演的迷途 还有",
+        "breakBefore": true
+      },
+      {
+        "japanese": "何もない僕の心",
+        "chinese": "我那一无所有的内心"
+      },
+      {
+        "japanese": "どうかしてしまう前に",
+        "chinese": "在还没有意识到异常之前"
+      },
+      {
+        "japanese": "光ばっか探している",
+        "chinese": "我只是在寻找着光明"
+      },
+      {
+        "japanese": "先へ行くほどに何か違って",
+        "chinese": "要向更前方去有什么不对",
+        "breakBefore": true
+      },
+      {
+        "japanese": "諦める方が何なんだ",
+        "chinese": "要选择放弃又是为何"
+      },
+      {
+        "japanese": "止まれないままに迷子になって",
+        "chinese": "无法停留的我们成为迷路的孩子"
+      },
+      {
+        "japanese": "笑えないままに前を向く",
+        "chinese": "就这样失去了笑容 一味向前"
+      },
+      {
+        "japanese": "願ったいつかは",
+        "chinese": "曾几何时也",
+        "breakBefore": true
+      },
+      {
+        "japanese": "夜の果てに",
+        "chinese": "在夜晚的尽头许下过愿望"
+      },
+      {
+        "japanese": "「こんな夢みたいなさ",
+        "chinese": "“这简直像梦一样的"
+      },
+      {
+        "japanese": "朝は来ない」",
+        "chinese": "“清晨是不会来临的”"
+      },
+      {
+        "japanese": "って笑う君だって",
+        "chinese": "即便是这般调笑的你"
+      },
+      {
+        "japanese": "知らぬままに",
+        "chinese": "也在不知不觉间"
+      },
+      {
+        "japanese": "こんな嘘みたいなさ",
+        "chinese": "做起了这"
+      },
+      {
+        "japanese": "夢を見てる",
+        "chinese": "谎言一般美好的梦"
+      },
+      {
+        "japanese": "鳴り出す風の音",
+        "chinese": "呼啸而起的清风之声",
+        "breakBefore": true
+      },
+      {
+        "japanese": "君がいない夜の底",
+        "chinese": "你所缺席的幽夜底层"
+      },
+      {
+        "japanese": "今日だって道の果てに",
+        "chinese": "时至今日我依然在路的尽头"
+      },
+      {
+        "japanese": "また願ってしまっている",
+        "chinese": "默诵着我的愿望"
+      },
+      {
+        "japanese": "繰り返した迷走と",
+        "chinese": "不断重演的迷途 还有",
+        "breakBefore": true
+      },
+      {
+        "japanese": "何もない僕の心",
+        "chinese": "我那一无所有的内心"
+      },
+      {
+        "japanese": "夜が明けてしまう前に",
+        "chinese": "在黎明造访之前"
+      },
+      {
+        "japanese": "何も変われないでいる",
+        "chinese": "都尚还没有些许变化"
+      },
+      {
+        "japanese": "また「夢なんだ、",
+        "chinese": "又要“这是梦，",
+        "breakBefore": true
+      },
+      {
+        "japanese": "これは夢なんだ！」って",
+        "chinese": "“这只是梦而已！”地念着"
+      },
+      {
+        "japanese": "忘れたいそれが何だって",
+        "chinese": "想要去忘记那是何物"
+      },
+      {
+        "japanese": "「忘れられそうにないな」って",
+        "chinese": "“看来想忘掉没那么容易”"
+      },
+      {
+        "japanese": "君は笑って前を向く",
+        "chinese": "你这般笑着继续向前"
+      },
+      {
+        "japanese": "明日だって",
+        "chinese": "就算是明天"
+      },
+      {
+        "japanese": "明日になって",
+        "chinese": "一切都前往了明天"
+      },
+      {
+        "japanese": "変わらないそれが何だって",
+        "chinese": "那不曾变幻的究竟为何"
+      },
+      {
+        "japanese": "変わらないなりに何かって",
+        "chinese": "那不会变幻的将要为何"
+      },
+      {
+        "japanese": "理由を探して迷子になってゆく",
+        "chinese": "我们还会继续前行 做寻找那些理由的 迷途的孩子"
+      },
+      {
+        "japanese": "また「夢なんだ、",
+        "chinese": "又要“这是梦，",
+        "breakBefore": true
+      },
+      {
+        "japanese": "これは夢なんだ！」って",
+        "chinese": "“这只是梦而已！”地念着"
+      },
+      {
+        "japanese": "忘れたいそれが何だって",
+        "chinese": "想要去忘记那是何物"
+      },
+      {
+        "japanese": "「忘れられそうにないな」って",
+        "chinese": "“看来想忘掉没那么容易”"
+      },
+      {
+        "japanese": "君は笑って前を向く",
+        "chinese": "你这般笑着继续向前"
+      },
+      {
+        "japanese": "「もう嫌なんだ、",
+        "chinese": "“已经受够了，",
+        "breakBefore": true
+      },
+      {
+        "japanese": "もう嫌なんだ！」って",
+        "chinese": "“我已经受够了啊！”"
+      },
+      {
+        "japanese": "終わらないそれが何だって",
+        "chinese": "那不曾终结的究竟为何"
+      },
+      {
+        "japanese": "終わらないなりに何かって",
+        "chinese": "那不会终结的将要为何"
+      },
+      {
+        "japanese": "希望を探して迷子になっても",
+        "chinese": "即便成为那探寻希望的迷途之子 也不曾知晓"
+      },
+      {
+        "japanese": "願ったいつかは",
+        "chinese": "曾几何时也",
+        "breakBefore": true
+      },
+      {
+        "japanese": "夜の果てに",
+        "chinese": "在夜晚的尽头许下过愿望"
+      },
+      {
+        "japanese": "「こんな夢みたいなさ",
+        "chinese": "“这简直像梦一样的"
+      },
+      {
+        "japanese": "朝は来ない」",
+        "chinese": "“清晨是不会来临的”"
+      },
+      {
+        "japanese": "って笑う君だって",
+        "chinese": "即便是这般调笑的你"
+      },
+      {
+        "japanese": "知らぬままに",
+        "chinese": "也在不知不觉间"
+      },
+      {
+        "japanese": "こんな嘘みたいなさ",
+        "chinese": "做起了这"
+      },
+      {
+        "japanese": "夢を見てる",
+        "chinese": "谎言一般美好的梦啊"
+      },
+      {
+        "japanese": "止み出した雨の音",
+        "chinese": "告别天空的雨水之声",
+        "breakBefore": true
+      },
+      {
+        "japanese": "君が描いた夜の底",
+        "chinese": "你所描绘的黑夜底层"
+      },
+      {
+        "japanese": "今日が来てしまう前に",
+        "chinese": "趁着今日到来之前"
+      },
+      {
+        "japanese": "また見返して泣いている",
+        "chinese": "我哭泣着 回头张望"
+      }
+    ]
+  }
+}
