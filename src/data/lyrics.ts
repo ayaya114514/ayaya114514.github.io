@@ -1,4 +1,5 @@
 import yorushikaLyrics from './yorushika-lyrics.json'
+import nbunaLyrics from './nbuna-lyrics.json'
 
 export type LyricLine = {
   japanese: string
@@ -171,6 +172,74 @@ export const lyricArtists: LyricArtist[] = [
     ],
     singles: ['あぶく', '茜', '斜陽', 'テレパス'],
     details: yorushikaLyrics as Record<string, LyricSongDetails>
+  },
+  {
+    slug: 'n-buna',
+    name: 'n-buna',
+    albums: [
+      {
+        title: 'カーテンコールが止む前に',
+        songs: [
+          '一人きりロックショー',
+          'スロイド',
+          '透明エレジー',
+          'アイラ',
+          'また雨が降ったら',
+          '七月、影法師、藍色、ロッカー',
+          '夕立ち(inst)',
+          '背景、夏に溺れる',
+          'カーテンコールが止む前に',
+          'ウミユリ海底譚',
+          'ハイカラ色の',
+          '夜に染まるまで',
+          '劇場愛歌',
+          'さよならワンダーノイズ'
+        ]
+      },
+      {
+        title: '花と水飴、最終電車',
+        songs: [
+          'もうじき夏が終わるから',
+          '無人駅',
+          '始発とカフカ',
+          'ウミユリ海底譚',
+          '昼青',
+          '拝啓、夏に溺れる',
+          'ヒグレギ',
+          '透明エレジー',
+          '夜祭前に',
+          'メリュー',
+          '着火、カウントダウン',
+          '敬具',
+          'ずっと空を見ていた',
+          '夜明けと蛍',
+          '花と水飴、最終電車'
+        ]
+      },
+      {
+        title: '月を歩いている',
+        songs: [
+          'モノローグ',
+          'ルラ',
+          '三月と狼少年',
+          '歌う睡蓮',
+          '花降らし',
+          '落花',
+          '泣いた振りをした',
+          '白ゆき',
+          'ラプンツェル',
+          '落陽',
+          '白ゆきの独白',
+          'セロ弾き群青',
+          'それでもいいよ。',
+          'かぐや',
+          'エピローグ',
+          'カエルのはなし'
+        ]
+      }
+    ],
+    singles: ['初恋'],
+    details: nbunaLyrics as Record<string, LyricSongDetails>
   }
 ]
 
