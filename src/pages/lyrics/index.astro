@@ -1,10 +1,13 @@
 ---
 import PageLayout from '@/layouts/CommonPage.astro'
+import ArtistNav from '@/components/lyrics/ArtistNav.astro'
 
 import { getArtistSongs, lyricArtists } from '../../data/lyrics'
 ---
 
 <PageLayout title='歌词' description='按艺人和专辑整理的歌词索引。'>
+  <ArtistNav slot='sidebar' artists={lyricArtists} />
+
   <section class='not-prose'>
     <p class='mb-5 text-sm leading-6 text-muted-foreground'>选择艺人，再按专辑或单曲查找歌曲。</p>
 

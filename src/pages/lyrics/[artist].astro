@@ -1,7 +1,6 @@
 ---
-import type { MarkdownHeading } from 'astro'
-
 import PageLayout from '@/layouts/CommonPage.astro'
+import ArtistNav from '@/components/lyrics/ArtistNav.astro'
 
 import { getArtist, getSongHref, lyricArtists } from '../../data/lyrics'
 
@@ -11,183 +10,202 @@ export function getStaticPaths() {
 
 const artist = getArtist(Astro.params.artist ?? '')
 if (!artist) throw new Error(`Unknown lyric artist: ${Astro.params.artist}`)
-
-const headings: MarkdownHeading[] = [
-  ...artist.albums.map((album, index) => ({
-    depth: 2,
-    slug: `album-${index + 1}`,
-    text: album.title
-  })),
-  { depth: 2, slug: 'singles', text: '单曲' }
-]
 ---
 
 <PageLayout
   title={artist.name}
   description={`按专辑和单曲浏览 ${artist.name} 的歌曲。`}
-  {headings}
   back='/lyrics/'
 >
+  <ArtistNav slot='sidebar' artists={lyricArtists} currentSlug={artist.slug} />
+
   <div class='not-prose'>
-    <div class='mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between'>
-      <div>
-        {artist.alias && <p class='text-sm text-muted-foreground'>{artist.alias}</p>}
-        <p class='mt-1 text-sm text-muted-foreground'>按专辑排列，单曲集中在末尾。</p>
-      </div>
+    {artist.alias && <p class='mb-6 text-sm text-muted-foreground'>{artist.alias}</p>}
 
-      <label class='block w-full sm:max-w-xs'>
-        <span class='sr-only'>搜索歌曲</span>
-        <input
-          id='song-search'
-          type='search'
-          inputmode='search'
-          autocomplete='off'
-          placeholder='搜索歌曲名…'
-          class='w-full rounded-lg border bg-background/70 px-3.5 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground/70 focus:border-[var(--primary)]'
-        />
-      </label>
-    </div>
-
-    <p id='search-status' class='mb-4 hidden text-sm text-muted-foreground' aria-live='polite'></p>
-
-    <div id='album-grid' class='grid grid-cols-1 items-start gap-4 xl:grid-cols-2'>
-      {
-        artist.albums.map((album, albumIndex) => (
-          <section
-            id={`album-${albumIndex + 1}`}
-            class='song-section scroll-mt-24 overflow-hidden rounded-xl border bg-background/55'
-            data-section-name={album.title}
-          >
-            <div class='flex items-baseline justify-between gap-4 border-b px-4 py-3.5'>
-              <h2 class='m-0 text-base font-medium text-foreground'>{album.title}</h2>
-              <span class='shrink-0 text-xs tabular-nums text-muted-foreground'>
-                {album.songs.length} 首
-              </span>
-            </div>
-
-            <ol class='m-0 list-none p-0'>
-              {album.songs.map((song, songIndex) => (
-                <li class='song-row m-0 border-b last:border-b-0' data-song-name={song}>
-                  <a
-                    href={getSongHref(artist, song)}
-                    class='group flex min-h-11 items-center gap-3 px-4 py-2.5 hover:bg-muted/55'
-                    data-astro-prefetch
-                  >
-                    <span class='w-6 shrink-0 text-right text-xs tabular-nums text-muted-foreground/60'>
-                      {String(songIndex + 1).padStart(2, '0')}
-                    </span>
-                    <span class='min-w-0 grow text-sm leading-6 text-foreground group-hover:text-[var(--primary)]'>
-                      {song}
-                    </span>
-                    {artist.details[song]?.sources?.length && (
-                      <span
-                        class='shrink-0 rounded border border-[var(--primary)]/35 px-1.5 py-0.5 text-[10px] leading-none text-[var(--primary)]'
-                        title='已筛选中文翻译来源'
-                      >
-                        译
-                      </span>
-                    )}
-                  </a>
-                </li>
-              ))}
-            </ol>
-          </section>
-        ))
-      }
-
-      <section
-        id='singles'
-        class='song-section scroll-mt-24 overflow-hidden rounded-xl border bg-background/55 xl:col-span-2'
-        data-section-name='单曲'
-      >
-        <div class='flex items-baseline justify-between gap-4 border-b px-4 py-3.5'>
-          <h2 class='m-0 text-base font-medium text-foreground'>单曲</h2>
-          <span class='shrink-0 text-xs tabular-nums text-muted-foreground'>
-            {artist.singles.length} 首
-          </span>
+    <div class='catalog'>
+      <section class='catalog-section' aria-labelledby='albums-heading'>
+        <div class='catalog-kind'>
+          <h2 id='albums-heading'>专辑</h2>
         </div>
 
-        <ol class='m-0 grid list-none grid-cols-1 p-0 sm:grid-cols-2 xl:grid-cols-3'>
+        <div class='catalog-list'>
           {
-            artist.singles.map((song, songIndex) => (
-              <li
-                class='song-row m-0 border-b sm:[&:nth-last-child(-n+2)]:border-b-0 xl:[&:nth-last-child(-n+3)]:border-b-0'
-                data-song-name={song}
-              >
-                <a
-                  href={getSongHref(artist, song)}
-                  class='group flex min-h-11 items-center gap-3 px-4 py-2.5 hover:bg-muted/55'
-                  data-astro-prefetch
-                >
-                  <span class='w-6 shrink-0 text-right text-xs tabular-nums text-muted-foreground/60'>
-                    {String(songIndex + 1).padStart(2, '0')}
-                  </span>
-                  <span class='min-w-0 grow text-sm leading-6 text-foreground group-hover:text-[var(--primary)]'>
-                    {song}
-                  </span>
-                  {artist.details[song]?.sources?.length && (
-                    <span
-                      class='shrink-0 rounded border border-[var(--primary)]/35 px-1.5 py-0.5 text-[10px] leading-none text-[var(--primary)]'
-                      title='已筛选中文翻译来源'
-                    >
-                      译
-                    </span>
-                  )}
-                </a>
-              </li>
+            artist.albums.map((album) => (
+              <section class='catalog-row'>
+                <h3>{album.title}</h3>
+                <p class='song-links'>
+                  {album.songs.map((song, songIndex) => (
+                    <>
+                      {songIndex > 0 && (
+                        <span class='song-separator' aria-hidden='true'>
+                          ・
+                        </span>
+                      )}
+                      <a
+                        href={getSongHref(artist, song)}
+                        class:list={[
+                          'song-link',
+                          artist.details[song]?.lines.length && 'has-lyrics'
+                        ]}
+                        data-astro-prefetch
+                      >
+                        {song}
+                      </a>
+                    </>
+                  ))}
+                </p>
+              </section>
             ))
           }
-        </ol>
+        </div>
+      </section>
+
+      <section class='catalog-section' aria-labelledby='singles-heading'>
+        <div class='catalog-kind'>
+          <h2 id='singles-heading'>单曲</h2>
+        </div>
+
+        <div class='catalog-list'>
+          <section class='catalog-row'>
+            <h3>单曲</h3>
+            <p class='song-links'>
+              {
+                artist.singles.map((song, songIndex) => (
+                  <>
+                    {songIndex > 0 && (
+                      <span class='song-separator' aria-hidden='true'>
+                        ・
+                      </span>
+                    )}
+                    <a
+                      href={getSongHref(artist, song)}
+                      class:list={['song-link', artist.details[song]?.lines.length && 'has-lyrics']}
+                      data-astro-prefetch
+                    >
+                      {song}
+                    </a>
+                  </>
+                ))
+              }
+            </p>
+          </section>
+        </div>
       </section>
     </div>
 
-    <div id='no-results' class='hidden rounded-xl border border-dashed px-5 py-10 text-center'>
-      <p class='text-sm text-muted-foreground'>没有找到这首歌。</p>
-    </div>
+    <p class='mt-4 text-xs leading-5 text-muted-foreground'>高亮歌曲已收录歌词。</p>
   </div>
 </PageLayout>
 
-<script>
-  const input = document.querySelector<HTMLInputElement>('#song-search')
-  const rows = Array.from(document.querySelectorAll<HTMLElement>('.song-row'))
-  const sections = Array.from(document.querySelectorAll<HTMLElement>('.song-section'))
-  const status = document.querySelector<HTMLElement>('#search-status')
-  const noResults = document.querySelector<HTMLElement>('#no-results')
+<style>
+  .catalog {
+    overflow: hidden;
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.65rem;
+    background: hsl(var(--background) / 0.46);
+  }
 
-  const normalize = (value: string) =>
-    value.normalize('NFKC').toLocaleLowerCase().replace(/\s+/g, '')
+  .catalog-section {
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1fr);
+  }
 
-  input?.addEventListener('input', () => {
-    const query = normalize(input.value)
-    let matches = 0
+  .catalog-section + .catalog-section {
+    border-top: 1px solid hsl(var(--border));
+  }
 
-    for (const row of rows) {
-      const matched = !query || normalize(row.dataset.songName ?? '').includes(query)
-      row.hidden = !matched
-      if (matched) matches += 1
+  .catalog-kind {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-inline-end: 1px solid hsl(var(--border));
+    background: hsl(var(--muted) / 0.5);
+  }
+
+  .catalog-kind h2,
+  .catalog-row h3,
+  .song-links {
+    margin: 0;
+  }
+
+  .catalog-kind h2 {
+    font-size: 0.95rem;
+    font-weight: 650;
+    color: hsl(var(--foreground));
+  }
+
+  .catalog-row {
+    display: grid;
+    grid-template-columns: minmax(11.5rem, 25%) minmax(0, 1fr);
+    align-items: stretch;
+  }
+
+  .catalog-row + .catalog-row {
+    border-top: 1px solid hsl(var(--border));
+  }
+
+  .catalog-row h3 {
+    display: flex;
+    align-items: center;
+    padding: 0.85rem 1rem;
+    border-inline-end: 1px solid hsl(var(--border));
+    font-size: 0.94rem;
+    font-weight: 600;
+    line-height: 1.55;
+    color: hsl(var(--foreground));
+  }
+
+  .song-links {
+    padding: 0.68rem 1rem;
+    font-size: 0.94rem;
+    line-height: 2;
+    overflow-wrap: anywhere;
+  }
+
+  .song-link {
+    color: hsl(var(--foreground) / 0.82);
+    text-decoration: none;
+    text-underline-offset: 0.2em;
+    transition: color 150ms ease;
+  }
+
+  .song-link.has-lyrics {
+    color: hsl(var(--primary));
+  }
+
+  .song-link:hover {
+    color: hsl(var(--primary));
+    text-decoration: underline;
+  }
+
+  .song-separator {
+    color: hsl(var(--muted-foreground) / 0.62);
+  }
+
+  @media (max-width: 767px) {
+    .catalog-section {
+      display: block;
     }
 
-    for (const section of sections) {
-      const sectionMatched = !query || normalize(section.dataset.sectionName ?? '').includes(query)
-      const visibleRows = Array.from(section.querySelectorAll<HTMLElement>('.song-row')).filter(
-        (row) => !row.hidden
-      )
-
-      if (sectionMatched && query) {
-        section.querySelectorAll<HTMLElement>('.song-row').forEach((row) => {
-          if (row.hidden) {
-            row.hidden = false
-            matches += 1
-          }
-        })
-      }
-      section.hidden = !sectionMatched && visibleRows.length === 0
+    .catalog-kind {
+      padding: 0.7rem 0.9rem;
+      border-inline-end: 0;
+      border-bottom: 1px solid hsl(var(--border));
     }
 
-    if (status) {
-      status.hidden = !query
-      status.textContent = query ? `找到 ${matches} 个匹配项` : ''
+    .catalog-row {
+      display: block;
     }
-    if (noResults) noResults.hidden = matches !== 0 || !query
-  })
-</script>
+
+    .catalog-row h3 {
+      padding: 0.75rem 0.9rem 0.35rem;
+      border-inline-end: 0;
+    }
+
+    .song-links {
+      padding: 0.25rem 0.9rem 0.8rem;
+      font-size: 0.91rem;
+      line-height: 1.9;
+    }
+  }
+</style>
