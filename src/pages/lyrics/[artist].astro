@@ -10,6 +10,8 @@ export function getStaticPaths() {
 
 const artist = getArtist(Astro.params.artist ?? '')
 if (!artist) throw new Error(`Unknown lyric artist: ${Astro.params.artist}`)
+
+const hasLyrics = (song: string) => Boolean(artist.details[song]?.lines.length)
 ---
 
 <PageLayout
@@ -20,8 +22,6 @@ if (!artist) throw new Error(`Unknown lyric artist: ${Astro.params.artist}`)
   <ArtistNav slot='sidebar' artists={lyricArtists} currentSlug={artist.slug} />
 
   <div class='not-prose'>
-    {artist.alias && <p class='mb-6 text-sm text-muted-foreground'>{artist.alias}</p>}
-
     <div class='catalog'>
       <section class='catalog-section' aria-labelledby='albums-heading'>
         <div class='catalog-kind'>
@@ -41,16 +41,17 @@ if (!artist) throw new Error(`Unknown lyric artist: ${Astro.params.artist}`)
                           ・
                         </span>
                       )}
-                      <a
-                        href={getSongHref(artist, song)}
-                        class:list={[
-                          'song-link',
-                          artist.details[song]?.lines.length && 'has-lyrics'
-                        ]}
-                        data-astro-prefetch
-                      >
-                        {song}
-                      </a>
+                      {hasLyrics(song) ? (
+                        <a
+                          href={getSongHref(artist, song)}
+                          class='song-link has-lyrics'
+                          data-astro-prefetch
+                        >
+                          {song}
+                        </a>
+                      ) : (
+                        <span class='song-name'>{song}</span>
+                      )}
                     </>
                   ))}
                 </p>
@@ -77,13 +78,17 @@ if (!artist) throw new Error(`Unknown lyric artist: ${Astro.params.artist}`)
                         ・
                       </span>
                     )}
-                    <a
-                      href={getSongHref(artist, song)}
-                      class:list={['song-link', artist.details[song]?.lines.length && 'has-lyrics']}
-                      data-astro-prefetch
-                    >
-                      {song}
-                    </a>
+                    {hasLyrics(song) ? (
+                      <a
+                        href={getSongHref(artist, song)}
+                        class='song-link has-lyrics'
+                        data-astro-prefetch
+                      >
+                        {song}
+                      </a>
+                    ) : (
+                      <span class='song-name'>{song}</span>
+                    )}
                   </>
                 ))
               }
@@ -92,8 +97,6 @@ if (!artist) throw new Error(`Unknown lyric artist: ${Astro.params.artist}`)
         </div>
       </section>
     </div>
-
-    <p class='mt-4 text-xs leading-5 text-muted-foreground'>高亮歌曲已收录歌词。</p>
   </div>
 </PageLayout>
 
@@ -162,8 +165,11 @@ if (!artist) throw new Error(`Unknown lyric artist: ${Astro.params.artist}`)
     overflow-wrap: anywhere;
   }
 
-  .song-link {
+  .song-name {
     color: hsl(var(--foreground) / 0.82);
+  }
+
+  .song-link {
     text-decoration: none;
     text-underline-offset: 0.2em;
     transition: color 150ms ease;

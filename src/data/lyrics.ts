@@ -1,5 +1,6 @@
 import yorushikaLyrics from './yorushika-lyrics.json'
 import nbunaLyrics from './nbuna-lyrics.json'
+import zutomayoLyrics from './zutomayo-lyrics.json'
 
 export type LyricLine = {
   japanese: string
@@ -19,7 +20,6 @@ export type LyricAlbum = {
 export type LyricArtist = {
   slug: string
   name: string
-  alias?: string
   albums: LyricAlbum[]
   singles: string[]
   details: Record<string, LyricSongDetails>
@@ -54,7 +54,6 @@ export const lyricArtists: LyricArtist[] = [
   {
     slug: 'yorushika',
     name: 'ヨルシカ',
-    alias: '夜鹿',
     albums: [
       {
         title: '夏草が邪魔をする',
@@ -240,6 +239,139 @@ export const lyricArtists: LyricArtist[] = [
     ],
     singles: ['初恋'],
     details: nbunaLyrics as Record<string, LyricSongDetails>
+  },
+  {
+    slug: 'zutomayo',
+    name: 'ずっと真夜中でいいのに。',
+    albums: [
+      {
+        title: '正しい偽りからの起床',
+        songs: [
+          '秒針を噛む',
+          'ヒューマノイド',
+          'サターン',
+          '雲丹と栗',
+          '脳裏上のクラッカー',
+          '君がいて水になる'
+        ]
+      },
+      {
+        title: '今は今で誓いは笑みで',
+        songs: [
+          '勘冴えて悔しいわ',
+          '正義',
+          'またね幻',
+          'マイノリティ脈絡',
+          '彷徨い酔い温度',
+          '眩しいDNAだけ'
+        ]
+      },
+      {
+        title: '潜潜話',
+        songs: [
+          '脳裏上のクラッカー',
+          '勘冴えて悔しいわ',
+          '居眠り遠征隊',
+          'ハゼ馳せる果てるまで',
+          '蹴っ飛ばした毛布',
+          'Dear. Mr「F」',
+          'こんなこと騒動',
+          '眩しいDNAだけ',
+          'ヒューマノイド',
+          'グラスとラムレーズン',
+          '正義',
+          '優しくLAST SMILE',
+          '秒針を噛む'
+        ]
+      },
+      {
+        title: '朗らかな皮膚とて不服',
+        songs: [
+          '低血ボルト',
+          'お勉強しといてよ',
+          'Ham',
+          'JK BOMBER',
+          'マリンブルーの庭園',
+          'MILABO'
+        ]
+      },
+      {
+        title: 'ぐされ',
+        songs: [
+          '胸の煙',
+          '正しくなれない',
+          'お勉強しといてよ',
+          '勘ぐれい',
+          'はゔぁ',
+          '機械油',
+          '暗く黒く',
+          'MILABO',
+          'ろんりねす',
+          '繰り返す収穫',
+          '過眠',
+          '低血ボルト',
+          '奥底に眠るルーツ'
+        ]
+      },
+      {
+        title: '伸び仕草懲りて暇乞い',
+        songs: [
+          '違う曲にしようよ',
+          '袖のキルト',
+          'あいつら全員同窓会',
+          '猫リセット',
+          '夜中のキスミ',
+          'ばかじゃないのに'
+        ]
+      },
+      {
+        title: '沈香学',
+        songs: [
+          '花一匁',
+          '残機',
+          '猫リセット',
+          '綺羅キラー (feat. Mori Calliope)',
+          '馴れ合いサーブ',
+          'あいつら全員同窓会',
+          '夏枯れ',
+          '袖のキルト',
+          '不法侵入',
+          'ばかじゃないのに',
+          '消えてしまいそうです',
+          'ミラーチューン',
+          '上辺の私自身なんだよ'
+        ]
+      },
+      {
+        title: '虚仮の一念海馬に託す',
+        songs: ['虚仮にしてくれ', 'TAIDADA', 'クズリ念', '海馬成長痛', '嘘じゃない', 'Blues in the Closet']
+      },
+      {
+        title: '形藻土',
+        songs: [
+          '地球存在しない説',
+          '間人間',
+          'メディアノーチェ',
+          'TAIDADA',
+          '蟹しゃぶふぁんく',
+          '微熱魔',
+          'クリームで会いにいけますか (Disco Re-Edit)',
+          'またね幻 (Live in Studio_80光年先の君へ)',
+          'シェードの埃は延長',
+          '形',
+          'ultra魂',
+          '不死身の訓練',
+          '海馬成長痛',
+          'アンチモン',
+          'よもすがら',
+          'クズリ念 (Live in Studio_温蔵庫)',
+          '嘘じゃない',
+          'lowmotion algae'
+        ]
+      }
+    ],
+    singles: ['イチジク煙'],
+    details: zutomayoLyrics as Record<string, LyricSongDetails>
   }
 ]
 
@@ -255,6 +387,10 @@ export function songSlug(title: string): string {
 
 export function getArtistSongs(artist: LyricArtist): string[] {
   return [...new Set([...artist.albums.flatMap((album) => album.songs), ...artist.singles])]
+}
+
+export function getArtistLyricSongs(artist: LyricArtist): string[] {
+  return getArtistSongs(artist).filter((title) => artist.details[title]?.lines.length)
 }
 
 export function getSongHref(artist: LyricArtist, title: string): string {

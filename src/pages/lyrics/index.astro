@@ -9,8 +9,6 @@ import { getArtistSongs, lyricArtists } from '../../data/lyrics'
   <ArtistNav slot='sidebar' artists={lyricArtists} />
 
   <section class='not-prose'>
-    <p class='mb-5 text-sm leading-6 text-muted-foreground'>选择艺人，再按专辑或单曲查找歌曲。</p>
-
     <div class='grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3'>
       {
         lyricArtists.map((artist) => (
@@ -19,11 +17,9 @@ import { getArtistSongs, lyricArtists } from '../../data/lyrics'
             class='group rounded-xl border bg-background/60 p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md'
             data-astro-prefetch
           >
-            <p class='mb-2 text-xs font-medium tracking-[0.18em] text-muted-foreground'>艺人</p>
             <h2 class='m-0 text-xl font-medium leading-snug group-hover:text-[var(--primary)]'>
               {artist.name}
             </h2>
-            {artist.alias && <p class='mt-1 text-sm text-muted-foreground'>{artist.alias}</p>}
             <p class='mt-5 text-xs text-muted-foreground/80'>
               {artist.albums.length} 张专辑 · {getArtistSongs(artist).length} 首歌曲
             </p>
