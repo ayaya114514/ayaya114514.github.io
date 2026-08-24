@@ -2,7 +2,7 @@
 import PageLayout from '@/layouts/CommonPage.astro'
 import ArtistNav from '@/components/lyrics/ArtistNav.astro'
 
-import { getArtistSongs, lyricArtists, songSlug, type LyricLine } from '../../../data/lyrics'
+import { getArtistLyricSongs, lyricArtists, songSlug, type LyricLine } from '../../../data/lyrics'
 
 type Props = {
   artistSlug: string
@@ -16,7 +16,7 @@ type JapaneseSegment = {
 
 export function getStaticPaths() {
   return lyricArtists.flatMap((artist) =>
-    getArtistSongs(artist).map((songTitle) => ({
+    getArtistLyricSongs(artist).map((songTitle) => ({
       params: { artist: artist.slug, song: songSlug(songTitle) },
       props: { artistSlug: artist.slug, songTitle }
     }))
@@ -25,7 +25,8 @@ export function getStaticPaths() {
 
 function parseJapanese(value: string): JapaneseSegment[] {
   const segments: JapaneseSegment[] = []
-  const annotation = /([\p{Script=Han}々〆ヵヶ￥]+)（([^（）]+)）/gu
+  const annotation =
+    /([\p{Script=Han}々〆ヵヶァ-ヿーA-Za-z]+)[（(]([ぁ-んァ-ヿー々〆ヵヶ]{1,12})[）)]/gu
   let cursor = 0
 
   for (const match of value.matchAll(annotation)) {
