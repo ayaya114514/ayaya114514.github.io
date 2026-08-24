@@ -1,11 +1,17 @@
 ---
 import PageLayout from '@/layouts/CommonPage.astro'
+import ArtistNav from '@/components/lyrics/ArtistNav.astro'
 
-import { getArtistSongs, getSongReleases, lyricArtists, songSlug } from '../../../data/lyrics'
+import { getArtistSongs, lyricArtists, songSlug } from '../../../data/lyrics'
 
 type Props = {
   artistSlug: string
   songTitle: string
+}
+
+type JapaneseSegment = {
+  text: string
+  reading?: string
 }
 
 export function getStaticPaths() {
@@ -17,112 +23,83 @@ export function getStaticPaths() {
   )
 }
 
+function parseJapanese(value: string): JapaneseSegment[] {
+  const segments: JapaneseSegment[] = []
+  const annotation = /([\p{Script=Han}々〆ヵヶ￥]+)（([^（）]+)）/gu
+  let cursor = 0
+
+  for (const match of value.matchAll(annotation)) {
+    const index = match.index ?? 0
+    if (index > cursor) segments.push({ text: value.slice(cursor, index) })
+    segments.push({ text: match[1], reading: match[2] })
+    cursor = index + match[0].length
+  }
+
+  if (cursor < value.length) segments.push({ text: value.slice(cursor) })
+  return segments
+}
+
 const { artistSlug, songTitle } = Astro.props as Props
 const artist = lyricArtists.find((candidate) => candidate.slug === artistSlug)
 if (!artist) throw new Error(`Unknown lyric artist: ${artistSlug}`)
 
-const details = artist.details[songTitle] ?? {}
-const releases = getSongReleases(artist, songTitle)
+const lines = artist.details[songTitle]?.lines ?? []
 ---
 
 <PageLayout
   title={songTitle}
-  description={`${artist.name}《${songTitle}》的日语、罗马音与中文歌词页面。`}
+  description={`${artist.name}《${songTitle}》的日语与中文歌词。`}
   back={`/lyrics/${artist.slug}/`}
 >
-  <div class='not-prose'>
-    <nav
-      class='mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground'
-      aria-label='面包屑'
-    >
-      <a href='/lyrics/'>歌词</a>
-      <span aria-hidden='true'>/</span>
-      <a href={`/lyrics/${artist.slug}/`}>{artist.name}</a>
-      <span aria-hidden='true'>/</span>
-      <span class='text-foreground'>{songTitle}</span>
-    </nav>
+  <ArtistNav slot='sidebar' artists={lyricArtists} currentSlug={artist.slug} />
 
-    <div class='mb-10 border-y py-4'>
-      <p class='text-sm text-muted-foreground'>艺人</p>
-      <p class='mt-1 text-base text-foreground'>{artist.name}</p>
-      <p class='mt-4 text-sm text-muted-foreground'>分类</p>
-      <p class='mt-1 text-sm leading-6 text-foreground'>{releases.join(' · ')}</p>
-    </div>
-
-    {
-      details.lines?.length ? (
-        <section aria-labelledby='lyrics-heading'>
-          <div class='mb-8'>
-            <h2 id='lyrics-heading' class='m-0 text-lg font-medium text-foreground'>
-              歌词
-            </h2>
-            {details.note && (
-              <p class='mt-2 text-sm leading-6 text-muted-foreground'>{details.note}</p>
+  {
+    lines.length > 0 && (
+      <ol class='lyric-sheet not-prose'>
+        {lines.map((line) => (
+          <li class:list={['lyric-block', line.breakBefore && 'stanza-break']}>
+            <p lang='ja' class='lyric-japanese'>
+              {parseJapanese(line.japanese).map((segment) =>
+                segment.reading ? (
+                  <ruby>
+                    {segment.text}
+                    <rt>{segment.reading}</rt>
+                  </ruby>
+                ) : (
+                  segment.text
+                )
+              )}
+            </p>
+            {line.chinese && (
+              <p lang='zh-CN' class='lyric-chinese'>
+                {line.chinese}
+              </p>
             )}
-          </div>
-
-          <ol class='lyric-sheet m-0 list-none p-0'>
-            {details.lines.map((line) => (
-              <li class='lyric-block m-0'>
-                <p lang='ja' class='lyric-japanese'>
-                  {line.japanese}
-                </p>
-                <p lang='ja-Latn' class='lyric-romaji'>
-                  {line.romaji}
-                </p>
-                <p lang='zh-CN' class='lyric-chinese'>
-                  {line.chinese}
-                </p>
-              </li>
-            ))}
-          </ol>
-        </section>
-      ) : (
-        <section class='rounded-xl border border-dashed bg-background/35 px-5 py-8 sm:px-7'>
-          <h2 class='m-0 text-base font-medium text-foreground'>歌词正文尚未收录</h2>
-          <p class='mt-2 max-w-2xl text-sm leading-7 text-muted-foreground'>
-            这首歌的独立页面已经建立。只有经过人工筛选、并且可以合法使用的日语、罗马音和中文文本才会加入站内。
-          </p>
-        </section>
-      )
-    }
-
-    {
-      details.sources?.length ? (
-        <section class='mt-12 border-t pt-8' aria-labelledby='sources-heading'>
-          <h2 id='sources-heading' class='m-0 text-lg font-medium text-foreground'>
-            已筛选来源
-          </h2>
-          <div class='mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2'>
-            {details.sources.map((source) => (
-              <a
-                href={source.url}
-                target='_blank'
-                rel='noopener noreferrer'
-                class='group rounded-xl border bg-background/55 p-4 hover:border-[var(--primary)]/55'
-              >
-                <h3 class='m-0 text-sm font-medium text-foreground group-hover:text-[var(--primary)]'>
-                  {source.label}
-                </h3>
-                <p class='mt-2 text-xs leading-5 text-muted-foreground'>{source.note}</p>
-              </a>
-            ))}
-          </div>
-        </section>
-      ) : (
-        <p class='mt-8 text-sm leading-6 text-muted-foreground'>中文翻译来源仍在筛选中。</p>
-      )
-    }
-  </div>
+          </li>
+        ))}
+      </ol>
+    )
+  }
 </PageLayout>
 
 <style>
   .lyric-sheet {
     max-width: 52rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .lyric-block {
+    margin: 0;
   }
 
   .lyric-block + .lyric-block {
-    margin-top: clamp(2.75rem, 7vw, 5rem);
+    margin-top: clamp(1.45rem, 3vw, 1.9rem);
+  }
+
+  .lyric-block.stanza-break {
+    margin-top: clamp(3rem, 7vw, 4.5rem);
   }
 
   .lyric-block p {
@@ -130,25 +107,41 @@ const releases = getSongReleases(artist, songTitle)
     overflow-wrap: anywhere;
   }
 
-  .lyric-japanese,
-  .lyric-chinese {
+  .lyric-japanese {
     color: hsl(var(--foreground));
-    font-size: clamp(1.25rem, 2.5vw, 1.65rem);
-    line-height: 1.65;
-    letter-spacing: 0.01em;
+    font-size: clamp(1.35rem, 2.7vw, 1.75rem);
+    font-weight: 480;
+    line-height: 2;
+    letter-spacing: 0.012em;
   }
 
-  .lyric-romaji {
-    margin-block: 0.55rem !important;
-    color: hsl(var(--muted-foreground));
-    font-size: clamp(1.05rem, 2.1vw, 1.35rem);
-    line-height: 1.65;
-    letter-spacing: 0.015em;
+  .lyric-japanese ruby {
+    ruby-align: center;
+    ruby-position: over;
+  }
+
+  .lyric-japanese rt {
+    color: hsl(var(--foreground) / 0.82);
+    font-size: 0.48em;
+    font-weight: 450;
+    letter-spacing: 0.03em;
+  }
+
+  .lyric-chinese {
+    margin-top: 0.3rem !important;
+    color: hsl(var(--foreground) / 0.78);
+    font-size: clamp(1.08rem, 2.2vw, 1.3rem);
+    line-height: 1.75;
+    letter-spacing: 0.008em;
   }
 
   @media (max-width: 639px) {
     .lyric-block + .lyric-block {
-      margin-top: 2.75rem;
+      margin-top: 1.35rem;
+    }
+
+    .lyric-block.stanza-break {
+      margin-top: 2.8rem;
     }
   }
 </style>
