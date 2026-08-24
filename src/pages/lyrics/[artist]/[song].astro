@@ -25,8 +25,7 @@ export function getStaticPaths() {
 
 function parseJapanese(value: string): JapaneseSegment[] {
   const segments: JapaneseSegment[] = []
-  const annotation =
-    /([\p{Script=Han}々〆ヵヶァ-ヿーA-Za-z]+)[（(]([ぁ-んァ-ヿー々〆ヵヶ]{1,12})[）)]/gu
+  const annotation = /([\p{Script=Han}々〆ヵヶ]+)[（(]([ぁ-んァ-ヿー々〆ヵヶ]{1,12})[）)]/gu
   let cursor = 0
 
   for (const match of value.matchAll(annotation)) {
