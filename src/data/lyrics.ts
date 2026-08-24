@@ -1,6 +1,7 @@
 import yorushikaLyrics from './yorushika-lyrics.json'
 import nbunaLyrics from './nbuna-lyrics.json'
 import zutomayoLyrics from './zutomayo-lyrics.json'
+import lyricTitleTranslations from './lyric-title-translations.json'
 
 export type LyricLine = {
   japanese: string
@@ -23,6 +24,7 @@ export type LyricArtist = {
   albums: LyricAlbum[]
   singles: string[]
   details: Record<string, LyricSongDetails>
+  titleTranslations: Record<string, string>
 }
 
 const secondPersonSongs = [
@@ -170,7 +172,8 @@ export const lyricArtists: LyricArtist[] = [
       }
     ],
     singles: ['あぶく', '茜', '斜陽', 'テレパス'],
-    details: yorushikaLyrics as Record<string, LyricSongDetails>
+    details: yorushikaLyrics as Record<string, LyricSongDetails>,
+    titleTranslations: lyricTitleTranslations.yorushika
   },
   {
     slug: 'n-buna',
@@ -238,7 +241,8 @@ export const lyricArtists: LyricArtist[] = [
       }
     ],
     singles: ['初恋'],
-    details: nbunaLyrics as Record<string, LyricSongDetails>
+    details: nbunaLyrics as Record<string, LyricSongDetails>,
+    titleTranslations: lyricTitleTranslations['n-buna']
   },
   {
     slug: 'zutomayo',
@@ -371,7 +375,8 @@ export const lyricArtists: LyricArtist[] = [
       }
     ],
     singles: ['イチジク煙'],
-    details: zutomayoLyrics as Record<string, LyricSongDetails>
+    details: zutomayoLyrics as Record<string, LyricSongDetails>,
+    titleTranslations: lyricTitleTranslations.zutomayo
   }
 ]
 
