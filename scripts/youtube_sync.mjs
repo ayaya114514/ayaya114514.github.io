@@ -28,6 +28,7 @@ const FETCH_TIMEOUT_MS = 15_000
 const FETCH_RETRIES = 2
 const MAX_IMAGE_BYTES = 8 * 1024 * 1024
 const RETRYABLE_STATUS = new Set([429, 500, 502, 503, 504])
+const EXCLUDED_NORMALIZED_SUBSCRIPTION_TITLES = new Set(['ylz'])
 
 const args = new Set(process.argv.slice(2))
 const KNOWN_ARGS = new Set([
@@ -539,7 +540,14 @@ async function mapLimit(values, limit, mapper) {
 
 async function syncSubscriptions(accessToken) {
   console.log('[*] 读取已授权账号的 YouTube 订阅…')
-  const subscriptions = await getSubscriptions(accessToken)
+  const fetchedSubscriptions = await getSubscriptions(accessToken)
+  const subscriptions = fetchedSubscriptions.filter((subscription) => {
+    const title = subscription.snippet?.title?.trim() || ''
+    const normalizedTitle = title.normalize('NFKC').toLowerCase().replace(/\s+/g, '')
+    if (!EXCLUDED_NORMALIZED_SUBSCRIPTION_TITLES.has(normalizedTitle)) return true
+    console.log(`  [-] 按排除规则跳过 ${title}`)
+    return false
+  })
   await Promise.all([
     fs.mkdir(AVATAR_SOURCE_DIR, { recursive: true }),
     fs.mkdir(AVATAR_THUMB_DIR, { recursive: true })
