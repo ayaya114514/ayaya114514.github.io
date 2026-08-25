@@ -22,7 +22,6 @@ export const theme: ThemeUserConfig = {
     alt: 'Avatar'
   },
 
-  titleDelimiter: '•',
   prerender: true,
   npmCDN: 'https://cdn.jsdelivr.net/npm',
 
