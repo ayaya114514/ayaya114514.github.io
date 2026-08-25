@@ -1,13 +1,7 @@
 {
-  "count": 39,
-  "updated_at": "2026-07-20 00:15:56",
+  "count": 35,
+  "updated_at": "2026-08-25 23:52:17",
   "items": [
-    {
-      "id": "UCD_cg9Tak9SvlPHRsWxUIpA",
-      "url": "https://www.youtube.com/channel/UCD_cg9Tak9SvlPHRsWxUIpA",
-      "title": "大耳朵TV",
-      "avatar": "/youtube-avatars/thumbs/UCD_cg9Tak9SvlPHRsWxUIpA.webp"
-    },
     {
       "id": "UCX6fKN_3fpg5aq_G9WinaBg",
       "url": "https://www.youtube.com/channel/UCX6fKN_3fpg5aq_G9WinaBg",
@@ -19,18 +13,6 @@
       "url": "https://www.youtube.com/channel/UC6ShY5V93ep-XzcB6mTDW1Q",
       "title": "黑貓的野望 BlackCat's Studio",
       "avatar": "/youtube-avatars/thumbs/UC6ShY5V93ep-XzcB6mTDW1Q.webp"
-    },
-    {
-      "id": "UC6VKHP606ee6ffKwKmBHSig",
-      "url": "https://www.youtube.com/channel/UC6VKHP606ee6ffKwKmBHSig",
-      "title": "人生肥宅x尊",
-      "avatar": "/youtube-avatars/thumbs/UC6VKHP606ee6ffKwKmBHSig.webp"
-    },
-    {
-      "id": "UC-ujeda5rDgCe-910J5keTg",
-      "url": "https://www.youtube.com/channel/UC-ujeda5rDgCe-910J5keTg",
-      "title": "人生魯宅x尊-第2頻道",
-      "avatar": "/youtube-avatars/thumbs/UC-ujeda5rDgCe-910J5keTg.webp"
     },
     {
       "id": "UCVjmBo22Mimyc4NR4Nz89MA",
@@ -87,6 +69,12 @@
       "avatar": "/youtube-avatars/thumbs/UCvjNdLLy5sinqD92Axk8w-g.webp"
     },
     {
+      "id": "UCNIy6zQyP7SuLEIaiwymfUA",
+      "url": "https://www.youtube.com/channel/UCNIy6zQyP7SuLEIaiwymfUA",
+      "title": "Fujii Kaze",
+      "avatar": "/youtube-avatars/thumbs/UCNIy6zQyP7SuLEIaiwymfUA.webp"
+    },
+    {
       "id": "UCoSrY_IQQVpmIRZ9Xf-y93g",
       "url": "https://www.youtube.com/channel/UCoSrY_IQQVpmIRZ9Xf-y93g",
       "title": "Gawr Gura Ch. hololive-EN",
@@ -103,12 +91,6 @@
       "url": "https://www.youtube.com/channel/UCWQtYtq9EOB4-I5P-3fh8lA",
       "title": "Kanade Ch. 音乃瀬奏 ‐ ReGLOSS",
       "avatar": "/youtube-avatars/thumbs/UCWQtYtq9EOB4-I5P-3fh8lA.webp"
-    },
-    {
-      "id": "UCjLEmnpCNeisMxy134KPwWw",
-      "url": "https://www.youtube.com/channel/UCjLEmnpCNeisMxy134KPwWw",
-      "title": "Kobo Kanaeru Ch. hololive-ID",
-      "avatar": "/youtube-avatars/thumbs/UCjLEmnpCNeisMxy134KPwWw.webp"
     },
     {
       "id": "UChAnqc_AY5_I3Px5dig3X1Q",
@@ -187,12 +169,6 @@
       "url": "https://www.youtube.com/channel/UC5CwaMl1eIgY8h02uZw7u8A",
       "title": "Suisei Channel",
       "avatar": "/youtube-avatars/thumbs/UC5CwaMl1eIgY8h02uZw7u8A.webp"
-    },
-    {
-      "id": "UCTvHWSfBZgtxE4sILOaurIQ",
-      "url": "https://www.youtube.com/channel/UCTvHWSfBZgtxE4sILOaurIQ",
-      "title": "Vestia Zeta Ch. hololive-ID",
-      "avatar": "/youtube-avatars/thumbs/UCTvHWSfBZgtxE4sILOaurIQ.webp"
     },
     {
       "id": "UCqm3BQLlJfvkTsX_hvm0UmA",
