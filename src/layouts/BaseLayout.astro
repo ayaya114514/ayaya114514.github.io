@@ -57,15 +57,17 @@ const hasSubNav = Astro.slots.has('nav-sub')
         />
       )
     }
-    <div id='main-container' class='w-full max-w-[96rem] min-h-[100dvh] flex'>
-      {/* 移动抽屉始终存在；showSidebar 只控制桌面侧栏。 */}
-      <SectionSidebar showDesktop={showSidebar} {hasSubNav}>
-        {hasSubNav && <slot name='nav-sub' slot='nav-sub' />}
-      </SectionSidebar>
-      <div class='flex-1 min-w-0 flex flex-col justify-between'>
-        <Header />
-        <div class='flex-1 w-full'>
-          <slot />
+    <div id='main-container' class='w-full max-w-[96rem] min-h-[100dvh] flex flex-col'>
+      <Header />
+      <div class='flex flex-1 min-h-0'>
+        {/* 移动抽屉始终存在；showSidebar 只控制桌面侧栏。 */}
+        <SectionSidebar showDesktop={showSidebar} {hasSubNav}>
+          {hasSubNav && <slot name='nav-sub' slot='nav-sub' />}
+        </SectionSidebar>
+        <div class='flex-1 min-w-0 flex flex-col justify-between'>
+          <div class='flex-1 w-full'>
+            <slot />
+          </div>
         </div>
       </div>
     </div>
