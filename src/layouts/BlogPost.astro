@@ -11,7 +11,7 @@ import PageLayout from '@/layouts/ContentLayout.astro'
 import BlogDirectory from '@/components/blog/Directory.astro'
 import BlogToc from '@/components/blog/Toc.astro'
 import MediumZoom from '@/components/MediumZoom.astro'
-import { BLOG_ROOT_GROUP, getBlogGroupKey } from '@/utils/blog-navigation'
+import { getBlogGroupKey } from '@/utils/blog-navigation'
 
 interface Props {
   post: CollectionEntry<'blog'>
@@ -27,7 +27,7 @@ const {
   remarkPluginFrontmatter
 } = Astro.props
 
-const { description, heroImage, publishDate, title, updatedDate } = data
+const { heroImage, publishDate, title, updatedDate } = data
 
 // ArticleBottom 取 collections[index-1] 当作 prev、index+1 当作 next。
 // 1) 传入的 posts 由 sortMDByDate 按日期倒序排，对带序号的章节笔记（00-、01-）会让"序号大的"
@@ -60,13 +60,11 @@ const socialImage = heroImage
 const articleDate = publishDate.toISOString()
 const modifiedDate = updatedDate?.toISOString()
 const primaryColor = data.heroImage?.color ?? 'hsl(var(--primary) / var(--un-text-opacity))'
-const backHref = currentGroup === BLOG_ROOT_GROUP ? '/blog/' : `/blog/${currentGroup}/`
 ---
 
 <PageLayout
-  meta={{ articleDate, description, modifiedDate, ogImage: socialImage, title }}
+  meta={{ articleDate, modifiedDate, ogImage: socialImage, title }}
   highlightColor={primaryColor}
-  back={backHref}
 >
   <Fragment slot='head'>
     {data.math && <link rel='stylesheet' href={katexStylesheet} />}
@@ -89,15 +87,3 @@ const backHref = currentGroup === BLOG_ROOT_GROUP ? '/blog/' : `/blog/${currentG
 
   <slot name='bottom-sidebar' slot='bottom-sidebar' />
 </PageLayout>
-
-{
-  /*
-  description 保留给 SEO / RSS，但文章标题下不重复展示摘要。is:global 是因为 Hero
-  来自 node_modules，无法直接修改其作用域样式。
-*/
-}
-<style is:global>
-  .article-info > .italic.mt-3 {
-    display: none;
-  }
-</style>

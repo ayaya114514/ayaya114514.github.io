@@ -63,11 +63,7 @@ const stanzas = groupStanzas(lines)
 const pageTitle = `${songTitle}（${titleTranslation}）`
 ---
 
-<PageLayout
-  title={pageTitle}
-  description={`${artist.name}《${pageTitle}》的日语与中文歌词。`}
-  back={`/lyrics/${artist.slug}/`}
->
+<PageLayout title={pageTitle} description={`${artist.name}《${pageTitle}》的日语与中文歌词。`}>
   <ArtistNav slot='sidebar' artists={lyricArtists} currentSlug={artist.slug} />
 
   {
