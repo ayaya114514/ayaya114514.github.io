@@ -1,36 +1,37 @@
 ---
 import type { CollectionEntry } from 'astro:content'
 
+import { BLOG_ROOT_GROUP, blogGroups, getBlogGroupKey } from '@/utils/blog-navigation'
+
 interface Props {
   posts: CollectionEntry<'blog'>[]
   currentId?: string
+  group?: string
   class?: string
 }
 
-const { posts, currentId, class: className } = Astro.props
+const { posts, currentId, group, class: className } = Astro.props
 
 // 按 id 升序排，确保形如 "00-prelude" 这类带序号的笔记排在前面
-const sortedPosts = [...posts].sort((a, b) => a.id.localeCompare(b.id))
+const sortedPosts = posts
+  .filter((post) => !group || getBlogGroupKey(post.id) === group)
+  .sort((a, b) => a.id.localeCompare(b.id))
 
-// 子项目展示名映射：原始目录 slug -> 中文名。若未配置则回退到原 slug
-const groupNameMap: Record<string, string> = {
-  'machine-learning': '机器学习',
-  'paper-digest': '论文抓取',
-  miscellaneous: '杂项'
-}
+// 子项目展示名与顺序和笔记总览共用一份配置，避免两个入口逐渐不一致。
+const groupNameMap: Record<string, string> = Object.fromEntries(
+  blogGroups.map((item) => [item.slug, item.title])
+)
 // 分组手动显示顺序。未列出的分组按字典序排到末尾。
 // 这里手动指定是为了让"论文抓取"能夹在"机器学习"和"杂项"之间
 // （单凭字典序 paper-digest > miscellaneous，会排到最后）。
-const groupOrder = ['machine-learning', 'paper-digest', 'miscellaneous']
-const ROOT_GROUP = '__root__'
+const groupOrder: string[] = blogGroups.map((item) => item.slug)
 
 // 按一级目录分组：machine-learning/00-prelude -> 组 "machine-learning"；
 // 顶层文件（无子目录）放入特殊根分组，渲染时单独处理
 type Group = { key: string; items: CollectionEntry<'blog'>[] }
 const groups: Group[] = []
 for (const p of sortedPosts) {
-  const segments = p.id.split('/')
-  const key = segments.length > 1 ? segments[0] : ROOT_GROUP
+  const key = getBlogGroupKey(p.id)
   let g = groups.find((x) => x.key === key)
   if (!g) {
     g = { key, items: [] }
@@ -41,8 +42,8 @@ for (const p of sortedPosts) {
 
 // 把分组按 groupOrder 重排；根分组（顶层散文件）始终放最前
 groups.sort((a, b) => {
-  if (a.key === ROOT_GROUP) return -1
-  if (b.key === ROOT_GROUP) return 1
+  if (a.key === BLOG_ROOT_GROUP) return -1
+  if (b.key === BLOG_ROOT_GROUP) return 1
   const ai = groupOrder.indexOf(a.key)
   const bi = groupOrder.indexOf(b.key)
   if (ai === -1 && bi === -1) return a.key.localeCompare(b.key)
@@ -63,7 +64,7 @@ const displayName = (key: string) => groupNameMap[key] ?? key
           <ul
             class:list={[
               'flex flex-col gap-y-1',
-              g.key !== ROOT_GROUP && 'border-l border-muted-foreground/20 ps-3'
+              g.key !== BLOG_ROOT_GROUP && 'border-l border-muted-foreground/20 ps-3'
             ]}
           >
             {g.items.map((p) => {
@@ -88,11 +89,11 @@ const displayName = (key: string) => groupNameMap[key] ?? key
           </ul>
         )
         // 根分组（顶层散文件）没有可折叠的容器，直接铺开
-        if (g.key === ROOT_GROUP) {
+        if (g.key === BLOG_ROOT_GROUP) {
           return <li>{linkList}</li>
         }
         // 仅当当前所在文章属于此分组时默认展开（保留位置感），其他分组保持收起
-        const isCurrentGroup = g.items.some((p) => p.id === currentId)
+        const isCurrentGroup = groups.length === 1 || g.items.some((p) => p.id === currentId)
         return (
           <li>
             <details open={isCurrentGroup} class='note-group'>

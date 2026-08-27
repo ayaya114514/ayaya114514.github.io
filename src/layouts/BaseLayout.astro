@@ -14,15 +14,18 @@ interface Props {
   meta: SiteMeta & { modifiedDate?: string }
   highlightColor?: string
   showSidebar?: boolean
+  hasSubNav?: boolean
 }
 
 const {
   meta: { articleDate, description = config.description, modifiedDate, ogImage, title },
   highlightColor,
   showSidebar = true,
+  hasSubNav: hasSubNavProp,
   ...props
 } = Astro.props
-const hasSubNav = Astro.slots.has('nav-sub')
+const hasSubNav = hasSubNavProp ?? Astro.slots.has('nav-sub')
+const showDesktopSidebar = showSidebar && hasSubNav
 ---
 
 <html lang={config.locale.lang}>
@@ -60,8 +63,8 @@ const hasSubNav = Astro.slots.has('nav-sub')
     <div id='main-container' class='w-full max-w-[96rem] min-h-[100dvh] flex flex-col'>
       <Header />
       <div class='flex flex-1 min-h-0'>
-        {/* 移动抽屉始终存在；showSidebar 只控制桌面侧栏。 */}
-        <SectionSidebar showDesktop={showSidebar} {hasSubNav}>
+        {/* 移动抽屉始终保留全站导航；桌面侧栏只在当前页面提供板块目录时显示。 */}
+        <SectionSidebar showDesktop={showDesktopSidebar} {hasSubNav}>
           {hasSubNav && <slot name='nav-sub' slot='nav-sub' />}
         </SectionSidebar>
         <div class='flex-1 min-w-0 flex flex-col justify-between'>
