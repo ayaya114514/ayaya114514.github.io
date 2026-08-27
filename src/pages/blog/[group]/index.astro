@@ -10,7 +10,7 @@ type BlogGroup = (typeof blogGroups)[number]
 
 interface Props {
   group: BlogGroup
-  posts: CollectionEntry<'blog'>[]
+  allPosts: CollectionEntry<'blog'>[]
 }
 
 export async function getStaticPaths() {
@@ -20,18 +20,19 @@ export async function getStaticPaths() {
     params: { group: group.slug },
     props: {
       group,
-      posts: posts
-        .filter((post) => getBlogGroupKey(post.id) === group.slug)
-        .sort((a, b) => a.id.localeCompare(b.id))
+      allPosts: posts
     }
   }))
 }
 
-const { group, posts } = Astro.props
+const { group, allPosts } = Astro.props
+const posts = allPosts
+  .filter((post) => getBlogGroupKey(post.id) === group.slug)
+  .sort((a, b) => a.id.localeCompare(b.id))
 ---
 
 <PageLayout title={group.title} description={group.description}>
-  <BlogDirectory posts={posts} group={group.slug} slot='sidebar' />
+  <BlogDirectory posts={allPosts} currentGroup={group.slug} slot='sidebar' />
 
   <section class='note-catalog not-prose' aria-label={`${group.title}笔记目录`}>
     {

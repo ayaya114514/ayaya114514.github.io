@@ -70,7 +70,7 @@ const primaryColor = data.heroImage?.color ?? 'hsl(var(--primary) / var(--un-tex
     {data.math && <link rel='stylesheet' href={katexStylesheet} />}
   </Fragment>
 
-  <BlogDirectory {posts} currentId={id} group={currentGroup} slot='sidebar' />
+  <BlogDirectory {posts} currentId={id} {currentGroup} slot='sidebar' />
 
   {tocHeadings.length > 1 && <BlogToc headings={tocHeadings} title='本页目录' slot='toc' />}
 

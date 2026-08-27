@@ -6,16 +6,14 @@ import { BLOG_ROOT_GROUP, blogGroups, getBlogGroupKey } from '@/utils/blog-navig
 interface Props {
   posts: CollectionEntry<'blog'>[]
   currentId?: string
-  group?: string
+  currentGroup?: string
   class?: string
 }
 
-const { posts, currentId, group, class: className } = Astro.props
+const { posts, currentId, currentGroup, class: className } = Astro.props
 
 // 按 id 升序排，确保形如 "00-prelude" 这类带序号的笔记排在前面
-const sortedPosts = posts
-  .filter((post) => !group || getBlogGroupKey(post.id) === group)
-  .sort((a, b) => a.id.localeCompare(b.id))
+const sortedPosts = [...posts].sort((a, b) => a.id.localeCompare(b.id))
 
 // 子项目展示名与顺序和笔记总览共用一份配置，避免两个入口逐渐不一致。
 const groupNameMap: Record<string, string> = Object.fromEntries(
@@ -92,8 +90,8 @@ const displayName = (key: string) => groupNameMap[key] ?? key
         if (g.key === BLOG_ROOT_GROUP) {
           return <li>{linkList}</li>
         }
-        // 仅当当前所在文章属于此分组时默认展开（保留位置感），其他分组保持收起
-        const isCurrentGroup = groups.length === 1 || g.items.some((p) => p.id === currentId)
+        // 当前板块默认展开；其他板块保持收起，但仍可在同一侧栏中手动展开浏览。
+        const isCurrentGroup = g.key === currentGroup || g.items.some((p) => p.id === currentId)
         return (
           <li>
             <details open={isCurrentGroup} class='note-group'>
