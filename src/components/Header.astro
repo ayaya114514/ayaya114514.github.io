@@ -1,14 +1,12 @@
 ---
 import { Icon } from 'astro-pure/user'
-import { getBlogLandingHref, isSectionActive, normalizeRoutePath } from '@/utils/blog-navigation'
+import { isSectionActive, normalizeRoutePath } from '@/utils/blog-navigation'
 import config from '@/site-config'
 
-const blogLandingHref = await getBlogLandingHref()
 const currentPath = normalizeRoutePath(Astro.url.pathname)
 const sections = (config.header.menu ?? []).map((section) => ({
   ...section,
-  active: isSectionActive(currentPath, section.link),
-  href: normalizeRoutePath(section.link) === '/blog' ? blogLandingHref : section.link
+  active: isSectionActive(currentPath, section.link)
 }))
 ---
 
@@ -41,7 +39,7 @@ const sections = (config.header.menu ?? []).map((section) => ({
         {
           sections.map((item) => (
             <a
-              href={item.href}
+              href={item.link}
               class='w-full flex-none grow py-2 max-lg:text-center lg:text-right font-medium transition-none hover:text-primary lg:w-fit lg:px-3'
               aria-current={item.active ? 'page' : undefined}
               data-astro-prefetch

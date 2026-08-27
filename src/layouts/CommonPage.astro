@@ -13,9 +13,10 @@ interface Props {
 
 const { title, description, headings, ...props } = Astro.props
 const hasCustomSidebar = Astro.slots.has('sidebar')
+const hasSidebar = hasCustomSidebar || Boolean(headings?.length)
 ---
 
-<PageLayout meta={{ description, title }} {...props}>
+<PageLayout meta={{ description, title }} {hasSidebar} {...props}>
   {hasCustomSidebar && <slot name='sidebar' slot='sidebar' />}
   {
     !hasCustomSidebar && headings && headings.length > 0 && (

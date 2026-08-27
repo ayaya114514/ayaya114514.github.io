@@ -1,0 +1,114 @@
+---
+import type { CollectionEntry } from 'astro:content'
+
+import { getBlogCollection } from 'astro-pure/server'
+import PageLayout from '@/layouts/CommonPage.astro'
+import BlogDirectory from '@/components/blog/Directory.astro'
+import { blogGroups, getBlogGroupKey } from '@/utils/blog-navigation'
+
+type BlogGroup = (typeof blogGroups)[number]
+
+interface Props {
+  group: BlogGroup
+  posts: CollectionEntry<'blog'>[]
+}
+
+export async function getStaticPaths() {
+  const posts = await getBlogCollection()
+
+  return blogGroups.map((group) => ({
+    params: { group: group.slug },
+    props: {
+      group,
+      posts: posts
+        .filter((post) => getBlogGroupKey(post.id) === group.slug)
+        .sort((a, b) => a.id.localeCompare(b.id))
+    }
+  }))
+}
+
+const { group, posts } = Astro.props
+---
+
+<PageLayout title={group.title} description={group.description} back='/blog/'>
+  <BlogDirectory posts={posts} group={group.slug} slot='sidebar' />
+
+  <section class='note-catalog not-prose' aria-label={`${group.title}笔记目录`}>
+    {
+      posts.map((post) => (
+        <a class='note-row' href={`/blog/${post.id}/`} data-astro-prefetch>
+          <h2>{post.data.title}</h2>
+          <p>{post.data.description}</p>
+        </a>
+      ))
+    }
+  </section>
+</PageLayout>
+
+<style>
+  .note-catalog {
+    overflow: hidden;
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.65rem;
+    background: hsl(var(--background) / 0.46);
+  }
+
+  .note-row {
+    display: grid;
+    grid-template-columns: minmax(13rem, 31%) minmax(0, 1fr);
+    color: inherit;
+    text-decoration: none;
+    transition: background-color 150ms ease;
+  }
+
+  .note-row + .note-row {
+    border-top: 1px solid hsl(var(--border));
+  }
+
+  .note-row:hover {
+    background: hsl(var(--muted) / 0.35);
+  }
+
+  .note-row h2,
+  .note-row p {
+    margin: 0;
+    padding: 0.85rem 1rem;
+    overflow-wrap: anywhere;
+  }
+
+  .note-row h2 {
+    display: flex;
+    align-items: center;
+    border-inline-end: 1px solid hsl(var(--border));
+    color: hsl(var(--foreground));
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.55;
+    transition: color 150ms ease;
+  }
+
+  .note-row:hover h2 {
+    color: hsl(var(--primary));
+  }
+
+  .note-row p {
+    color: hsl(var(--muted-foreground));
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 767px) {
+    .note-row {
+      display: block;
+    }
+
+    .note-row h2 {
+      padding: 0.8rem 0.9rem 0.3rem;
+      border-inline-end: 0;
+    }
+
+    .note-row p {
+      padding: 0.2rem 0.9rem 0.8rem;
+    }
+  }
+</style>

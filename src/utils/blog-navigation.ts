@@ -1,15 +1,26 @@
-import { getBlogCollection } from 'astro-pure/server'
+export const BLOG_ROOT_GROUP = '__root__'
 
-let landingHref: Promise<string> | undefined
+export const blogGroups = [
+  {
+    slug: 'machine-learning',
+    title: '机器学习',
+    description: '课程学习、基础概念与模型实现笔记。'
+  },
+  {
+    slug: 'paper-digest',
+    title: '论文抓取',
+    description: '生命科学与机器学习论文的周期性速读记录。'
+  },
+  {
+    slug: 'miscellaneous',
+    title: '杂项',
+    description: '暂未归入固定系列的技术记录与说明。'
+  }
+] as const
 
-/** Resolve the first note using the same stable id ordering as the blog directory. */
-export function getBlogLandingHref() {
-  landingHref ??= getBlogCollection().then((posts) => {
-    const first = [...posts].sort((a, b) => a.id.localeCompare(b.id))[0]
-    return first ? `/blog/${first.id}/` : '/'
-  })
-
-  return landingHref
+export function getBlogGroupKey(postId: string) {
+  const segments = postId.split('/')
+  return segments.length > 1 ? segments[0] : BLOG_ROOT_GROUP
 }
 
 export function normalizeRoutePath(path: string) {
