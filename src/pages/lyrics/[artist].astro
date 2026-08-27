@@ -14,11 +14,7 @@ if (!artist) throw new Error(`Unknown lyric artist: ${Astro.params.artist}`)
 const hasLyrics = (song: string) => Boolean(artist.details[song]?.lines.length)
 ---
 
-<PageLayout
-  title={artist.name}
-  description={`按专辑和单曲浏览 ${artist.name} 的歌曲。`}
-  back='/lyrics/'
->
+<PageLayout title={artist.name} description={`按专辑和单曲浏览 ${artist.name} 的歌曲。`}>
   <ArtistNav slot='sidebar' artists={lyricArtists} currentSlug={artist.slug} />
 
   <div class='not-prose'>
