@@ -1,0 +1,35 @@
+---
+import { blogGroups } from '@/utils/blog-navigation'
+
+interface Props {
+  currentSlug?: string
+}
+
+const { currentSlug } = Astro.props
+---
+
+<nav aria-label='笔记板块' class='text-sm'>
+  <ul class='m-0 flex list-none flex-col gap-y-1 p-0'>
+    {
+      blogGroups.map((group) => {
+        const active = group.slug === currentSlug
+
+        return (
+          <li class='m-0'>
+            <a
+              href={`/blog/${group.slug}/`}
+              aria-current={active ? 'page' : undefined}
+              class:list={[
+                'block rounded-md px-2 py-1.5 transition-colors hover:bg-muted hover:text-foreground',
+                active ? 'bg-muted text-[var(--primary)]' : 'text-muted-foreground'
+              ]}
+              data-astro-prefetch
+            >
+              {group.title}
+            </a>
+          </li>
+        )
+      })
+    }
+  </ul>
+</nav>

@@ -1,6 +1,7 @@
 ---
 import { getBlogCollection } from 'astro-pure/server'
 import PageLayout from '@/layouts/CommonPage.astro'
+import BlogGroupNav from '@/components/blog/GroupNav.astro'
 import { blogGroups, getBlogGroupKey } from '@/utils/blog-navigation'
 
 export const prerender = true
@@ -9,6 +10,8 @@ const posts = await getBlogCollection()
 ---
 
 <PageLayout title='笔记' description='按主题浏览学习笔记、论文速读与其他技术记录。'>
+  <BlogGroupNav slot='sidebar' />
+
   <section class='not-prose'>
     <div class='grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3'>
       {
@@ -24,8 +27,7 @@ const posts = await getBlogCollection()
               <h2 class='m-0 text-xl font-medium leading-snug group-hover:text-[var(--primary)]'>
                 {group.title}
               </h2>
-              <p class='mt-3 text-sm leading-relaxed text-muted-foreground'>{group.description}</p>
-              <p class='mt-5 text-xs text-muted-foreground/80'>{postCount} 篇笔记</p>
+              <p class='mt-6 text-xs text-muted-foreground/80'>{postCount} 篇笔记</p>
             </a>
           )
         })

@@ -20,7 +20,7 @@ const GET = async () => {
     site: import.meta.env.SITE,
     items: feedPosts.map((post) => ({
       title: post.data.title,
-      description: post.data.description,
+      description: config.description,
       pubDate: post.data.publishDate,
       link: `/blog/${post.id}/`
     }))
