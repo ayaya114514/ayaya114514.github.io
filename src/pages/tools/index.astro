@@ -53,7 +53,7 @@ const tools: Tool[] = [
   {
     title: 'AyayaMiner',
     href: 'https://ayaya114514.github.io/AyayaMiner/',
-    description: '专家扫雷'
+    description: '扫雷游戏'
   }
 ]
 
@@ -61,6 +61,25 @@ const abbreviationOf = (title: string) => title.match(/[A-Z]/g)?.join('') ?? ''
 ---
 
 <PageLayout title='工具' description='收集和分享我制作或常用的在线小工具。'>
+  <nav slot='sidebar' aria-label='工具目录' class='text-sm'>
+    <ul class='m-0 flex list-none flex-col gap-y-1 p-0'>
+      {
+        tools.map((tool) => (
+          <li class='m-0'>
+            <a
+              href={tool.href}
+              target='_blank'
+              rel='noopener noreferrer'
+              class='block rounded-md px-2 py-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground'
+            >
+              {tool.title}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
   <section>
     <p class='text-sm text-muted-foreground'>共 {tools.length} 个</p>
 
