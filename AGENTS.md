@@ -64,7 +64,7 @@ Markdown 时必须同步加上该字段；不含公式的文章保持默认 `fal
 - 豆瓣：`scripts/douban_sync.py` 把"看过的电影 / 读过的书"写入
   `src/data/douban/{movies,books}.json`。日常运行 `npm run sync:douban`；Cookie
   默认只保存在 `~/Library/Application Support/ayaya-blog/douban-cookie.txt`，
-  不得复制进 repo、打印或提交。抓取失败或第一页为空时必须保留旧数据。
+  不得复制进 repo、打印或提交。抓取失败或任一分类为空时必须保留旧数据。
 - YouTube：`npm run sync:youtube` 使用 YouTube Data API v3 的
   `youtube.readonly` scope，更新 `src/data/youtube-subs.json`；头像原图保存到
   不发布的 `assets/raw/youtube-avatars/`，页面只使用
@@ -76,7 +76,9 @@ Markdown 时必须同步加上该字段；不含公式的文章保持默认 `fal
 其它 `.mjs` 脚本（`gen_favicon` / `import_bands`）是一次性导入工具。
 需要同时更新娱乐板块的两类账号数据时运行 `npm run sync:entertainment`；该 wrapper
 会先创建三份同目录 durable backup，并在任一同步或最终数据校验失败时 atomic
-restore；恢复失败时保留 backup 供人工处理。
+restore；恢复失败时保留 backup 供人工处理。YouTube、乐队头像和桌搭设备的
+source originals 统一放在不会发布到站点的 `assets/raw/`，`public/` 只保留页面
+实际使用的缩略图。
 
 ## 娱乐数据的自然语言触发约定
 
