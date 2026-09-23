@@ -1,81 +1,32 @@
-# 项目速记（给未来的 Claude / 也方便我自己回顾）
+@AGENTS.md
 
-> 只记"读代码看不出来的约定"。技术栈、目录结构、依赖版本请直接看
-> `package.json` / `astro.config.ts` / 各组件源文件。
+> `AGENTS.md` 是本项目约定的唯一来源（Codex 与 Claude Code 共用），改约定只改 `AGENTS.md`；
+> 文中 “Codex” 即当前 agent。下面是从 Codex 记忆迁移的补充经验。
 
-## 子板块（sub-section）是 load-bearing 概念
+## 验证与发布
 
-博客文章按 `src/content/blog/<group>/<slug>.md` 组织，**`id` 的第一段**
-（`machine-learning` / `paper-digest` / `miscellaneous` …）被当作"子板块"，
-有两处依赖它，改一处要同时想另一处：
+- 验证：`source ~/.nvm/nvm.sh && nvm use 22 && npm run verify`（format check、ESLint、
+  Astro check、data validation、production build）。Node 20 会失败。
+- 发布收尾：`npm run verify` → 只 stage 目标文件 → `git push origin main` →
+  `gh run watch <run-id> --exit-status`（push 后 run 可能延迟注册，按分支查）→
+  线上 HTTP / 内容 smoke check → 确认工作区干净。
+- 依赖链 `npm audit` advisory（Astro / astro-pure）不要强行 major 升级，除非先做兼容性评估。
 
-- 左侧目录：`src/components/blog/Directory.astro` 按它分组，组名映射在
-  `groupNameMap`、显示顺序在 `groupOrder`，新增分组要同步加。
-- 底部上一篇/下一篇：`src/layouts/BlogPost.astro` 把 `posts` 过滤到当前
-  子板块再传给 `ArticleBottom`，**翻页不跨板块**（边界处那侧直接不渲染按钮）。
+## 页面约定
 
-## 章节笔记按 `id` 升序，而不是 publishDate 倒序
+- 工具页 `src/pages/tools/index.astro`：`tools` 数组同时驱动卡片和
+  `<nav slot='sidebar' aria-label='工具目录'>` 侧边栏；公开路由 `/tools/`。
+  新增外部工具只追加到数组中用户指定的位置，不改 header/nav。
+- 笔记侧边栏显示全部分组，只默认展开当前分组，其余保留 `<details>` 手动展开。
+- 首页：名字 / 头像在 `src/site.config.ts`，简介与联系方式在 `src/pages/index.astro`；
+  邮箱故意以 `anyangyang2022_at_gmail.com` 纯文本显示，不做 `mailto:`。
+- 歌词：目录 `src/data/lyrics.ts`，正文 `src/data/*-lyrics.json`，歌名翻译
+  `src/data/lyric-title-translations.json`。层级是 艺人 → 专辑/单曲 → 歌曲，
+  不要封面和年份；只有存在已审核正文的歌曲才生成链接，其余保持纯文本；
+  不要用未审核的机翻（“不要垃圾的翻译”）。
 
-`astro-pure` 默认给的 `posts` 是按日期倒序的。对带数字前缀的笔记
-（`00-prelude` / `01-linear-regression`）会让"序号大的"排在前面，
-底部 prev/next 就反了。`BlogPost.astro` 已经统一改成 `id` 升序，
-与左侧目录一致。新增章节请用 `NN-xxx` 的命名习惯保持可排序。
+## 坑
 
-## `ArticleBottom` 来自 `node_modules/astro-pure`，不要去改 lib
-
-底部翻页组件是第三方的，已经踩过两次：
-1. 排序方向反了（见上）
-2. 跨子板块跳转
-
-调整行为只能通过传入的 `collections` 这一个接口（先 filter、再 sort），
-不要 patch node_modules。
-
-## 自动锚点 class 是 `anchor`，CSS 选择器必须带它
-
-`astro.config.ts` 里 `rehypeAutolinkHeadings.properties.className = ['anchor']`
-给每个 `<h*>` 追加了一个 `<a class="anchor">#</a>`。
-**`uno.config.ts` 里写"默认隐藏标题锚点"的规则必须是 `h*>a.anchor`，
-不能写 `h*>a`**——后者会把 Markdown 标题里你自己写的 `<a>` 也一起藏掉
-（例如 `### 1. [论文标题](url)`，标题文字直接看不见）。
-
-## 公式文章必须显式声明 `math: true`
-
-`BlogPost.astro` 只会为 frontmatter 带 `math: true` 的文章加载 KaTeX CSS，
-避免所有普通文章都承担公式样式开销。新增或编辑含 `$...$` / `$$...$$` 公式的
-Markdown 时必须同步加上该字段；不含公式的文章保持默认 `false`。
-
-## 全站强制暗色，by design
-
-`src/layouts/BaseLayout.astro` 顶部硬给 `<html>` 加了 `dark` class、
-覆盖 `localStorage` 的 `theme`、改 `theme-color` meta。这是用户主动
-要求的"只用暗色"，不要当作主题切换 bug 去"修复"。
-
-## 站点元配置
-
-- `src/site.config.ts`：站点名 / 菜单 / typography 配置，新增菜单板块
-  要顺便在 `src/pages/<板块>/` 下建页面。
-- `output: 'static'` + `site: 'https://ayaya114514.github.io'`
-  （`astro.config.ts`），部署目标是 GitHub Pages。
-
-## scripts/ 用途
-
-娱乐板块有两条长期同步链路，详细用法统一看 `scripts/README.md`：
-
-- 豆瓣：`npm run sync:douban` 把"看过的电影 / 读过的书"写入
-  `src/data/douban/{movies,books}.json`。Cookie 默认只保存在
-  `~/Library/Application Support/ayaya-blog/douban-cookie.txt`，不得复制进
-  repo、打印或提交；抓取失败或任一分类为空时必须保留旧数据。
-- YouTube：`npm run sync:youtube` 使用 YouTube Data API v3 的
-  `youtube.readonly` scope，更新 `src/data/youtube-subs.json` 并下载缺失头像。
-  OAuth client 和 token 默认只保存在
-  `~/Library/Application Support/ayaya-blog/`，不得复制进 repo、打印或提交。
-
-需要同时更新两类账号数据时运行带 rollback 的 `npm run sync:entertainment`。
-同步后运行 `npm run verify` 做完整验证，其中已包含条目数、重复标识和本地图片
-完整性检查。`scripts/import_youtube_subs.mjs` 只保留为 Google Takeout CSV 的
-fallback；`gen_favicon.mjs` 和 `import_bands.mjs` 是一次性导入工具。YouTube、
-乐队头像和桌搭设备的 source originals 统一放在不会发布到站点的
-`assets/raw/`，`public/` 只保留页面实际使用的缩略图。
-
-> paper-digest 目录下的论文速读 Markdown 目前是外部生成后手动放进来的，
-> repo 里没有抓取脚本——如果以后要做自动化，需要新增。
+- 线上断言数 sidebar 展开组时，`<summary>` 里嵌套 SVG 会让简单 regex 误判；用 parser。
+- Pages smoke test 偶发 `SSLEOFError`：带 User-Agent 的 `requests.Session` 逐页重试（≤4 次）。
+- 没装 `tsx` 时，审计 TS 数据可用已安装 TypeScript 的 `transpileModule`。
