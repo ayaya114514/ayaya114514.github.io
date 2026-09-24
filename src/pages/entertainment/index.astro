@@ -72,18 +72,16 @@ const headings = [
   { depth: 2, slug: 'books', text: '📚 书籍' }
 ]
 
-const sections: { id: string; title: string; payload: DoubanPayload; emptyHint: string }[] = [
+const sections: { id: string; title: string; payload: DoubanPayload }[] = [
   {
     id: 'movies',
     title: '🎬 电影',
-    payload: movies,
-    emptyHint: '还没有数据。运行 `python scripts/douban_sync.py movie` 同步。'
+    payload: movies
   },
   {
     id: 'books',
     title: '📚 书籍',
-    payload: books,
-    emptyHint: '还没有数据。运行 `python scripts/douban_sync.py book` 同步。'
+    payload: books
   }
 ]
 ---
@@ -104,9 +102,7 @@ const sections: { id: string; title: string; payload: DoubanPayload; emptyHint: 
 
     {
       ytSubs.items.length === 0 ? (
-        <p class='text-sm text-muted-foreground'>
-          还没有数据。运行 <code>npm run sync:youtube</code> 同步。
-        </p>
+        <p class='text-sm text-muted-foreground'>还没有数据。</p>
       ) : (
         <div class='not-prose grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
           {ytSubs.items.map((c) => (
@@ -134,7 +130,7 @@ const sections: { id: string; title: string; payload: DoubanPayload; emptyHint: 
                 )}
               </div>
               <h3
-                class='line-clamp-2 text-center text-sm font-medium leading-snug group-hover:text-[var(--primary)]'
+                class='line-clamp-2 text-center text-sm font-medium leading-snug group-hover:text-primary'
                 title={c.title}
               >
                 {c.title}
@@ -180,7 +176,7 @@ const sections: { id: string; title: string; payload: DoubanPayload; emptyHint: 
               )}
             </div>
             <h3
-              class='line-clamp-2 text-center text-sm font-medium leading-snug group-hover:text-[var(--primary)]'
+              class='line-clamp-2 text-center text-sm font-medium leading-snug group-hover:text-primary'
               title={b.display}
             >
               {b.display}
@@ -192,7 +188,7 @@ const sections: { id: string; title: string; payload: DoubanPayload; emptyHint: 
   </section>
 
   {
-    sections.map(({ id, title, payload, emptyHint }) => (
+    sections.map(({ id, title, payload }) => (
       <section>
         <h2 id={id}>
           {title}
@@ -200,7 +196,7 @@ const sections: { id: string; title: string; payload: DoubanPayload; emptyHint: 
         </h2>
 
         {payload.items.length === 0 ? (
-          <p class='text-sm text-muted-foreground'>{emptyHint}</p>
+          <p class='text-sm text-muted-foreground'>还没有数据。</p>
         ) : (
           <div class='not-prose grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
             {payload.items.map((it) => (
@@ -215,7 +211,10 @@ const sections: { id: string; title: string; payload: DoubanPayload; emptyHint: 
                     <img
                       src={resolveCover(it.cover)!}
                       alt={it.title}
+                      width='270'
+                      height='405'
                       loading='lazy'
+                      decoding='async'
                       class='h-full w-full object-cover transition-transform duration-300 group-hover:scale-105'
                     />
                   ) : (
@@ -226,7 +225,7 @@ const sections: { id: string; title: string; payload: DoubanPayload; emptyHint: 
                 </div>
                 <div class='flex flex-1 flex-col gap-y-1 p-2.5'>
                   <h3
-                    class='line-clamp-2 text-sm font-medium leading-snug group-hover:text-[var(--primary)]'
+                    class='line-clamp-2 text-sm font-medium leading-snug group-hover:text-primary'
                     title={it.title}
                   >
                     {it.title}

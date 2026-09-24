@@ -97,10 +97,10 @@ const abbreviationOf = (title: string) => title.match(/[A-Z]/g)?.join('') ?? ''
             rel='noopener noreferrer'
             class='group flex flex-col gap-y-1.5 rounded-lg border bg-background/60 p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md'
           >
-            <h3 class='flex flex-wrap items-center gap-x-2 gap-y-1 text-base font-medium leading-snug group-hover:text-[var(--primary)]'>
+            <h3 class='flex flex-wrap items-center gap-x-2 gap-y-1 text-base font-medium leading-snug group-hover:text-primary'>
               <span>{t.title}</span>
               <span
-                class='inline-flex rounded border border-muted-foreground/35 px-1.5 py-0.5 text-[10px] font-semibold leading-none tracking-wide text-muted-foreground transition-colors group-hover:border-[var(--primary)]/50 group-hover:text-[var(--primary)]'
+                class='inline-flex rounded border border-muted-foreground/35 px-1.5 py-0.5 text-xs font-semibold leading-none tracking-wide text-muted-foreground transition-colors group-hover:border-primary/50 group-hover:text-primary'
                 aria-label={`${t.title} 缩写`}
               >
                 {abbreviationOf(t.title)}
