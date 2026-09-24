@@ -1183,10 +1183,32 @@ export function getArtist(slug: string): LyricArtist | undefined {
   return lyricArtists.find((artist) => artist.slug === slug)
 }
 
+// 可读 slug：保留日文 / 英文字母与数字，其余符号折成连字符，例如
+// 「綺羅キラー (feat. Mori Calliope)」→「綺羅キラー-feat-mori-calliope」。
 export function songSlug(title: string): string {
+  return title
+    .normalize('NFKC')
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+// 旧版按码点 base36 拼出来的 slug，只用于给已发布的旧链接生成跳转页。
+export function legacySongSlug(title: string): string {
   return Array.from(title)
     .map((character) => character.codePointAt(0)?.toString(36))
     .join('-')
+}
+
+export function getLegacySongRedirects(): Record<string, string> {
+  return Object.fromEntries(
+    lyricArtists.flatMap((artist) =>
+      getArtistLyricSongs(artist).map((title) => [
+        `/lyrics/${artist.slug}/${legacySongSlug(title)}/`,
+        getSongHref(artist, title)
+      ])
+    )
+  )
 }
 
 export function getArtistSongs(artist: LyricArtist): string[] {
