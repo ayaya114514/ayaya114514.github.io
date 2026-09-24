@@ -15,12 +15,22 @@ type JapaneseSegment = {
 }
 
 export function getStaticPaths() {
-  return lyricArtists.flatMap((artist) =>
-    getArtistLyricSongs(artist).map((songTitle) => ({
-      params: { artist: artist.slug, song: songSlug(songTitle) },
-      props: { artistSlug: artist.slug, songTitle }
-    }))
-  )
+  return lyricArtists.flatMap((artist) => {
+    const seen = new Map<string, string>()
+    return getArtistLyricSongs(artist).map((songTitle) => {
+      const song = songSlug(songTitle)
+      if (!song) throw new Error(`Empty lyric slug: ${artist.slug}/${songTitle}`)
+      const previous = seen.get(song)
+      if (previous) {
+        throw new Error(`Duplicate lyric slug ${artist.slug}/${song}: ${previous} / ${songTitle}`)
+      }
+      seen.set(song, songTitle)
+      return {
+        params: { artist: artist.slug, song },
+        props: { artistSlug: artist.slug, songTitle }
+      }
+    })
+  })
 }
 
 function parseJapanese(value: string): JapaneseSegment[] {

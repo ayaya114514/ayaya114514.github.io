@@ -4,6 +4,7 @@ import { defineConfig, fontProviders } from 'astro/config'
 import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
 
+import { getLegacySongRedirects } from './src/data/lyrics.ts'
 // Local integrations
 import rehypeAutolinkHeadings from './src/plugins/rehype-auto-link-headings.ts'
 // Shiki
@@ -35,6 +36,8 @@ export default defineConfig({
 
   // [Output] static for GitHub Pages
   output: 'static',
+  // 歌曲页改成可读 slug 后，旧的 base36 链接生成静态跳转页，避免已分享的地址失效。
+  redirects: getLegacySongRedirects(),
 
   // [Fonts]
   fonts: [
