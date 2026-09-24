@@ -21,7 +21,7 @@ const { currentSlug } = Astro.props
               aria-current={active ? 'page' : undefined}
               class:list={[
                 'block rounded-md px-2 py-1.5 transition-colors hover:bg-muted hover:text-foreground',
-                active ? 'bg-muted text-[var(--primary)]' : 'text-muted-foreground'
+                active ? 'bg-muted text-primary' : 'text-muted-foreground'
               ]}
               data-astro-prefetch
             >
@@ -31,5 +31,14 @@ const { currentSlug } = Astro.props
         )
       })
     }
+    <li class='m-0 mt-2 border-t border-muted-foreground/20 pt-2'>
+      <a
+        href='/archives/'
+        class='block rounded-md px-2 py-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground'
+        data-astro-prefetch
+      >
+        按年份归档
+      </a>
+    </li>
   </ul>
 </nav>

@@ -74,9 +74,7 @@ const displayName = (key: string) => groupNameMap[key] ?? key
                     aria-current={isCurrent ? 'page' : undefined}
                     class:list={[
                       'block rounded-md px-2 py-1 transition-colors hover:bg-muted hover:text-foreground',
-                      isCurrent
-                        ? 'bg-muted font-medium text-[var(--primary)]'
-                        : 'text-muted-foreground'
+                      isCurrent ? 'bg-muted font-medium text-primary' : 'text-muted-foreground'
                     ]}
                   >
                     {p.data.title}

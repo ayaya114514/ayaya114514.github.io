@@ -6,21 +6,20 @@ import { getBlogCollection, sortMDByDate } from 'astro-pure/server'
 
 const GET = async () => {
   const allPostsByDate = sortMDByDate(await getBlogCollection()) as CollectionEntry<'blog'>[]
-  const feedPosts = allPostsByDate.slice(0, config.content.blogPageSize ?? 10)
 
   return rss({
     // Basic configs
     trailingSlash: true,
-    xmlns: { h: 'http://www.w3.org/TR/html4/' },
     stylesheet: '/scripts/pretty-feed-v3.xsl',
 
     // Contents
     title: config.title,
     description: config.description,
     site: import.meta.env.SITE,
-    items: feedPosts.map((post) => ({
+    // 只在文章自己写了 description 时输出；论文速读等没有摘要的文章不再重复站点简介。
+    items: allPostsByDate.map((post) => ({
       title: post.data.title,
-      description: config.description,
+      description: post.data.description,
       pubDate: post.data.publishDate,
       link: `/blog/${post.id}/`
     }))
