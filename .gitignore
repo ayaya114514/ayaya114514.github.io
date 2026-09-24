@@ -48,3 +48,6 @@ scripts/youtube-token*.json
 scripts/.venv/
 scripts/__pycache__/
 scripts/debug/
+
+### Claude Code ###
+.claude/settings.local.json

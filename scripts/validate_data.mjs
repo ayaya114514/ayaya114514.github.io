@@ -1,10 +1,13 @@
-import { readFile, stat } from 'node:fs/promises'
+import { readdir, readFile, stat } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const PUBLIC_DIR = path.join(ROOT, 'public')
 const failures = []
+const warnings = []
+// 每个 public 目录里被 JSON 引用到的文件，用来找出不再被引用但仍会发布的图片。
+const referencedAssets = new Map()
 
 const datasets = [
   {
@@ -13,7 +16,8 @@ const datasets = [
     required: ['slug', 'display', 'link'],
     unique: ['slug', 'link'],
     urls: ['link'],
-    asset: 'avatar'
+    asset: 'avatar',
+    assetDir: 'band-avatars/thumbs'
   },
   {
     label: 'YouTube subscriptions',
@@ -21,7 +25,8 @@ const datasets = [
     required: ['id', 'title', 'url'],
     unique: ['id', 'url'],
     urls: ['url'],
-    asset: 'avatar'
+    asset: 'avatar',
+    assetDir: 'youtube-avatars/thumbs'
   },
   {
     label: 'Douban movies',
@@ -29,7 +34,8 @@ const datasets = [
     required: ['title', 'url'],
     unique: ['url'],
     urls: ['url'],
-    asset: 'cover'
+    asset: 'cover',
+    assetDir: 'images/douban'
   },
   {
     label: 'Douban books',
@@ -37,7 +43,8 @@ const datasets = [
     required: ['title', 'url'],
     unique: ['url'],
     urls: ['url'],
-    asset: 'cover'
+    asset: 'cover',
+    assetDir: 'images/douban'
   }
 ]
 
@@ -74,6 +81,23 @@ async function validateAsset(label, index, field, value) {
     else if (file.size === 0) report(`${label} item ${index + 1}: ${value} is empty`)
   } catch {
     report(`${label} item ${index + 1}: missing public asset ${value}`)
+  }
+}
+
+function referenced(assetDir) {
+  if (!referencedAssets.has(assetDir)) referencedAssets.set(assetDir, new Set())
+  return referencedAssets.get(assetDir)
+}
+
+// 孤儿图只记 warning：退订频道等正常同步也会留下旧图，不应让 sync:entertainment 因此回滚。
+async function findOrphanAssets() {
+  for (const [assetDir, used] of referencedAssets) {
+    const directory = path.join(PUBLIC_DIR, assetDir)
+    for (const entry of await readdir(directory, { withFileTypes: true })) {
+      if (!entry.isFile() || entry.name.startsWith('.')) continue
+      const absolute = path.join(directory, entry.name)
+      if (!used.has(absolute)) warnings.push(`unreferenced public asset /${assetDir}/${entry.name}`)
+    }
   }
 }
 
@@ -125,6 +149,9 @@ async function validateDataset(spec) {
     }
 
     await validateAsset(spec.label, index, spec.asset, item[spec.asset])
+    if (typeof item[spec.asset] === 'string') {
+      referenced(spec.assetDir).add(path.resolve(PUBLIC_DIR, item[spec.asset].slice(1)))
+    }
   }
 
   return payload.items.length
@@ -133,6 +160,12 @@ async function validateDataset(spec) {
 const counts = []
 for (const dataset of datasets) {
   counts.push(`${dataset.label}: ${await validateDataset(dataset)}`)
+}
+
+await findOrphanAssets()
+if (warnings.length > 0) {
+  console.warn(`Data validation found ${warnings.length} warning(s):`)
+  for (const warning of warnings) console.warn(`- ${warning}`)
 }
 
 if (failures.length > 0) {
