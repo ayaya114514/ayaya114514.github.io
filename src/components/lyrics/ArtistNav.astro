@@ -22,7 +22,7 @@ const { artists, currentSlug } = Astro.props
               aria-current={active ? 'page' : undefined}
               class:list={[
                 'block rounded-md px-2 py-1.5 transition-colors hover:bg-muted hover:text-foreground',
-                active ? 'bg-muted text-[var(--primary)]' : 'text-muted-foreground'
+                active ? 'bg-muted text-primary' : 'text-muted-foreground'
               ]}
               data-astro-prefetch
             >
