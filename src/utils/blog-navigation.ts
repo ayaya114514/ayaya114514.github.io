@@ -12,6 +12,11 @@ export const blogGroups = [
     description: '生命科学与机器学习论文的周期性速读记录。'
   },
   {
+    slug: 'minidb',
+    title: 'MiniDB',
+    description: '用 Python 从零写一个以 SQLite 为标准答案的数据库。'
+  },
+  {
     slug: 'miscellaneous',
     title: '杂项',
     description: '暂未归入固定系列的技术记录与说明。'
