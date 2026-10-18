@@ -14,9 +14,10 @@
 
 ## 页面约定
 
-- 工具页 `src/pages/tools/index.astro`：`tools` 数组同时驱动卡片和
-  `<nav slot='sidebar' aria-label='工具目录'>` 侧边栏；公开路由 `/tools/`。
-  新增外部工具只追加到数组中用户指定的位置，不改 header/nav。
+- 网站页（原“工具”页）`src/pages/tools/index.astro`：`groups` 数组（分类 工具 / 游戏 /
+  日语，每组一个 `tools` 数组）同时驱动分组卡片和
+  `<nav slot='sidebar' aria-label='网站目录'>` 侧边栏；header 菜单名是“网站”，公开路由仍是 `/tools/`。
+  新增外部网站只追加到对应分类 `tools` 中用户指定的位置，不改 header/nav。
 - 笔记侧边栏显示全部分组，只默认展开当前分组，其余保留 `<details>` 手动展开。
 - 首页：名字 / 头像在 `src/site.config.ts`，简介与联系方式在 `src/pages/index.astro`；
   邮箱故意以 `anyangyang2022_at_gmail.com` 纯文本显示，不做 `mailto:`。
