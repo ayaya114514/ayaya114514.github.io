@@ -32,7 +32,7 @@ export const theme: ThemeUserConfig = {
   header: {
     menu: [
       { title: '首页', link: '/' },
-      { title: '工具', link: '/tools/' },
+      { title: '网站', link: '/tools/' },
       { title: '笔记', link: '/blog/' },
       { title: '歌词', link: '/lyrics/' },
       { title: '娱乐', link: '/entertainment/' },
