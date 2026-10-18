@@ -16,6 +16,21 @@ type ToolGroup = {
 
 const groups: ToolGroup[] = [
   {
+    title: '日语',
+    tools: [
+      {
+        title: 'AyayaJp',
+        href: 'https://ayaya114514.github.io/AyayaJp/',
+        description: '日语练习'
+      },
+      {
+        title: 'AyayaJpInput',
+        href: 'https://ayaya114514.github.io/AyayaJpInput/',
+        description: '浏览器里的日语输入法'
+      }
+    ]
+  },
+  {
     title: '工具',
     tools: [
       {
@@ -74,25 +89,8 @@ const groups: ToolGroup[] = [
         description: '设计路线与怪物编队，突破自适应 AI 防线的反向塔防游戏'
       }
     ]
-  },
-  {
-    title: '日语',
-    tools: [
-      {
-        title: 'AyayaJp',
-        href: 'https://ayaya114514.github.io/AyayaJp/',
-        description: '日语练习'
-      },
-      {
-        title: 'AyayaJpInput',
-        href: 'https://ayaya114514.github.io/AyayaJpInput/',
-        description: '浏览器里的日语输入法'
-      }
-    ]
   }
 ]
-
-const total = groups.reduce((sum, group) => sum + group.tools.length, 0)
 
 const abbreviationOf = (title: string) => title.match(/[A-Z]/g)?.join('') ?? ''
 ---
@@ -130,14 +128,11 @@ const abbreviationOf = (title: string) => title.match(/[A-Z]/g)?.join('') ?? ''
   </nav>
 
   <section>
-    <p class='text-sm text-muted-foreground'>共 {total} 个</p>
-
     {
       groups.map((group) => (
-        <div class='mt-6'>
+        <div class='mb-6'>
           <h2 id={group.title} class='mb-0 mt-0 text-lg font-medium'>
             {group.title}
-            <span class='ml-2 text-sm font-normal text-muted-foreground'>{group.tools.length}</span>
           </h2>
           <div class='not-prose mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3'>
             {group.tools.map((t) => (

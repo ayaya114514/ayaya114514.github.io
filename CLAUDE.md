@@ -14,8 +14,8 @@
 
 ## 页面约定
 
-- 网站页（原“工具”页）`src/pages/tools/index.astro`：`groups` 数组（分类 工具 / 游戏 /
-  日语，每组一个 `tools` 数组）同时驱动分组卡片和
+- 网站页（原“工具”页）`src/pages/tools/index.astro`：`groups` 数组（分类依次为 日语 / 工具 /
+  游戏，每组一个 `tools` 数组，不显示计数）同时驱动分组卡片和
   `<nav slot='sidebar' aria-label='网站目录'>` 侧边栏；header 菜单名是“网站”，公开路由仍是 `/tools/`。
   新增外部网站只追加到对应分类 `tools` 中用户指定的位置，不改 header/nav。
 - 笔记侧边栏显示全部分组，只默认展开当前分组，其余保留 `<details>` 手动展开。
