@@ -11957,5 +11957,176 @@
         "chinese": "全都捧到怀间"
       }
     ]
+  },
+  "いさな": {
+    "lines": [
+      {
+        "japanese": "あなたの胸（むな）びれ",
+        "chinese": "你的胸鳍"
+      },
+      {
+        "japanese": "窓辺（まどべ）を泳（およ）いで",
+        "chinese": "在窗边游动"
+      },
+      {
+        "japanese": "柔（やわ）らかに溶（と）けた",
+        "chinese": "仿佛柔柔地化开了的"
+      },
+      {
+        "japanese": "琥珀（こはく）のよう",
+        "chinese": "琥珀一般"
+      },
+      {
+        "japanese": "あなたの鼻先（はなさき）",
+        "chinese": "你的鼻尖",
+        "breakBefore": true
+      },
+      {
+        "japanese": "背（せ）びれと口髭（くちひげ）",
+        "chinese": "背鳍与胡须"
+      },
+      {
+        "japanese": "静（しず）かなまなこは",
+        "chinese": "那双安静的眼眸"
+      },
+      {
+        "japanese": "まるで夜（よる）の",
+        "chinese": "宛如在夜幕之中"
+      },
+      {
+        "japanese": "話（はな）して　鳴（な）いて",
+        "chinese": "对谈 鸣叫",
+        "breakBefore": true
+      },
+      {
+        "japanese": "僕（ぼく）ら波（なみ）を掻（か）いてた",
+        "chinese": "我们拨开层层水波"
+      },
+      {
+        "japanese": "陸（りく）に想（おも）い馳（は）せるように",
+        "chinese": "仿佛畅想着陆地一般"
+      },
+      {
+        "japanese": "瞼（まぶた）を落（お）として　蓋（ふた）して",
+        "chinese": "合上眼睑 轻轻盖住",
+        "breakBefore": true
+      },
+      {
+        "japanese": "すぐは覚（さ）めないほど眠（ねむ）って",
+        "chinese": "深深沉入不会即刻醒来的睡梦"
+      },
+      {
+        "japanese": "呼吸（こきゅう）を吹（ふ）かして",
+        "chinese": "吹入一口气息"
+      },
+      {
+        "japanese": "さぁ深（ふか）く泳（およ）いで　泳（およ）いで",
+        "chinese": "来吧 向深处游去 游去",
+        "breakBefore": true
+      },
+      {
+        "japanese": "眠（ねむ）りの浅（あさ）いその波間（なみま）を",
+        "chinese": "在那片浅眠的浪花之间"
+      },
+      {
+        "japanese": "白（しろ）く微睡（まどろ）みながら",
+        "chinese": "泛着白色 朦胧小憩"
+      },
+      {
+        "japanese": "あなたのさえずり",
+        "chinese": "你的啼啭鸣啭",
+        "breakBefore": true
+      },
+      {
+        "japanese": "ソファの木漏（こも）れ日（び）",
+        "chinese": "沙发上洒落的斑驳树影"
+      },
+      {
+        "japanese": "柔（やわ）らかに揺（ゆ）れた",
+        "chinese": "柔柔地摇曳着"
+      },
+      {
+        "japanese": "海辺（うみべ）のよう",
+        "chinese": "仿佛海边一般"
+      },
+      {
+        "japanese": "笑（わら）って　泣（な）いて",
+        "chinese": "有笑有泪",
+        "breakBefore": true
+      },
+      {
+        "japanese": "僕（ぼく）ら波（なみ）を待（ま）ってる",
+        "chinese": "我们静待浪涛翻滚"
+      },
+      {
+        "japanese": "じきに思（おも）い出（だ）せるように",
+        "chinese": "只为让回忆快快涌上心头"
+      },
+      {
+        "japanese": "波間（なみま）を旅（たび）して　潜（もぐ）って",
+        "chinese": "穿行浪间 潜入水底",
+        "breakBefore": true
+      },
+      {
+        "japanese": "息（いき）も出来（でき）ないほど深（ふか）くへ",
+        "chinese": "潜至几乎要窒息般的深处"
+      },
+      {
+        "japanese": "呼吸（こきゅう）を吹（ふ）かして",
+        "chinese": "吹入一口气息"
+      },
+      {
+        "japanese": "さぁ深（ふか）く泳（およ）いで　泳（およ）いで",
+        "chinese": "来吧 游曳在深处 在深处",
+        "breakBefore": true
+      },
+      {
+        "japanese": "あなたの長（なが）いその尾（お）びれを",
+        "chinese": "将你那长长的尾鳍"
+      },
+      {
+        "japanese": "波（なみ）に横（よこ）たえながら",
+        "chinese": "静静横置于波涛之上"
+      },
+      {
+        "japanese": "話（はな）して　鳴（な）いて",
+        "chinese": "对谈 鸣叫",
+        "breakBefore": true
+      },
+      {
+        "japanese": "僕（ぼく）ら波（なみ）を掻（か）いてた",
+        "chinese": "我们拨开层层水波"
+      },
+      {
+        "japanese": "いつかまた会（あ）えるように",
+        "chinese": "仿佛终有一日 还能再次相见"
+      },
+      {
+        "japanese": "瞼（まぶた）を落（お）として　蓋（ふた）して",
+        "chinese": "合上眼睑 轻轻盖住",
+        "breakBefore": true
+      },
+      {
+        "japanese": "夢（ゆめ）も覚（さ）めないほど眠（ねむ）って",
+        "chinese": "深深沉入再也不会醒来的漫长梦境中"
+      },
+      {
+        "japanese": "もう自分（じぶん）を許（ゆる）して",
+        "chinese": "与自己和解吧"
+      },
+      {
+        "japanese": "さぁ深（ふか）く泳（およ）いで　泳（およ）いで",
+        "chinese": "来吧 游曳在深处 在深处",
+        "breakBefore": true
+      },
+      {
+        "japanese": "眠（ねむ）りの浅（あさ）いその波間（なみま）を",
+        "chinese": "在那片浅眠的浪花之间"
+      },
+      {
+        "japanese": "白（しろ）く微睡（まどろ）みながら",
+        "chinese": "泛着白色 朦胧小憩"
+      }
+    ]
   }
 }
