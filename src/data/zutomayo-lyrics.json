@@ -19,8 +19,7 @@
       },
       {
         "japanese": "「私（わたし）もそうだよ。」って偽（いつわ）りの気持（きも）ち合算（がっさん）して",
-        "chinese": "「我也是唷。」这种话 总合着虚伪的情绪",
-        "breakBefore": true
+        "chinese": "「我也是唷。」这种话 总合着虚伪的情绪"
       },
       {
         "japanese": "吐（は）いて黙（だま）ってずっと溜（た）まってく",
@@ -87,8 +86,7 @@
       },
       {
         "japanese": "目（め）も口（くち）も意味（いみ）がないほどに",
-        "chinese": "视线与诽言 如此的毫无意义",
-        "breakBefore": true
+        "chinese": "视线与诽言 如此的毫无意义"
       },
       {
         "japanese": "塞（ふさ）ぎ込（こ）んで動（うご）けない僕（ぼく）を",
@@ -176,8 +174,7 @@
       },
       {
         "japanese": "このまま奪（うば）って隠（かく）して話（はな）したい",
-        "chinese": "就这样被剥夺 隐藏起来 想和你对话",
-        "breakBefore": true
+        "chinese": "就这样被剥夺 隐藏起来 想和你对话"
       },
       {
         "japanese": "分（わ）かり合（あ）う○1つもなくても",
@@ -197,8 +194,7 @@
       },
       {
         "japanese": "ハレタレイラ",
-        "chinese": "Hareta Leila",
-        "breakBefore": true
+        "chinese": "Hareta Leila"
       }
     ]
   },
@@ -222,7 +218,8 @@
       },
       {
         "japanese": "立（た）ちはだかるボスをまだ",
-        "chinese": "横倒在路中央的Boss"
+        "chinese": "横倒在路中央的Boss",
+        "breakBefore": true
       },
       {
         "japanese": "起（お）こさずに",
@@ -283,7 +280,8 @@
       },
       {
         "japanese": "きっと水（みず）でさえ",
-        "chinese": "一定连水"
+        "chinese": "一定连水",
+        "breakBefore": true
       },
       {
         "japanese": "この熱（ねつ）でさえ",
@@ -331,7 +329,8 @@
       },
       {
         "japanese": "浮（う）かんでいるだけの",
-        "chinese": "向只是漂浮在那儿的"
+        "chinese": "向只是漂浮在那儿的",
+        "breakBefore": true
       },
       {
         "japanese": "あの泡（あわ）に名前（なまえ）がある",
@@ -371,7 +370,8 @@
       },
       {
         "japanese": "桃味（ももあじ）の",
-        "chinese": "蜜桃味的汽水中"
+        "chinese": "蜜桃味的汽水中",
+        "breakBefore": true
       },
       {
         "japanese": "炭酸水（たんさんすい）に2人（ふたり）潜（もぐ）り込（こ）んで",
@@ -391,7 +391,8 @@
       },
       {
         "japanese": "きっと震（ふる）えさえ",
-        "chinese": "一定连这份心的颤抖"
+        "chinese": "一定连这份心的颤抖",
+        "breakBefore": true
       },
       {
         "japanese": "この重（おも）ささえ",
@@ -439,7 +440,8 @@
       },
       {
         "japanese": "言（い）えるかな",
-        "chinese": "能说出口吗？"
+        "chinese": "能说出口吗？",
+        "breakBefore": true
       },
       {
         "japanese": "言（い）い切（き）れること",
@@ -483,7 +485,8 @@
       },
       {
         "japanese": "きっと水（みず）でさえ",
-        "chinese": "一定连水"
+        "chinese": "一定连水",
+        "breakBefore": true
       },
       {
         "japanese": "この熱（ねつ）でさえ",
@@ -531,7 +534,8 @@
       },
       {
         "japanese": "レイラサイダサブアッタッシャル",
-        "chinese": "Good Night 17"
+        "chinese": "Good Night 17",
+        "breakBefore": true
       },
       {
         "japanese": "マラハバマッサラーママダ",
@@ -624,7 +628,8 @@
       },
       {
         "japanese": "終（お）わりを告（つ）げてくデータと",
-        "chinese": "宣告结束的程序"
+        "chinese": "宣告结束的程序",
+        "breakBefore": true
       },
       {
         "japanese": "コードと酸素（さんそ）を飲（の）み込（こ）んでく",
@@ -640,8 +645,7 @@
       },
       {
         "japanese": "言（い）わなきゃ",
-        "chinese": "必须说出来啊",
-        "breakBefore": true
+        "chinese": "必须说出来啊"
       },
       {
         "japanese": "でもやっぱやだ",
@@ -923,8 +927,7 @@
       },
       {
         "japanese": "傷（きず）つけっぱなし",
-        "chinese": "保持着适当的距离",
-        "breakBefore": true
+        "chinese": "保持着适当的距离"
       },
       {
         "japanese": "気（き）づけない時（とき）もある",
@@ -976,8 +979,7 @@
         "chinese": "笨拙的说话方式也没关系啊"
       },
       {
-        "japanese": "うにぐり",
-        "breakBefore": true
+        "japanese": "うにぐり"
       },
       {
         "japanese": "おにぎり"
@@ -987,7 +989,8 @@
       },
       {
         "japanese": "いくらバッテンにされても",
-        "chinese": "不管多少次的被你指正"
+        "chinese": "不管多少次的被你指正",
+        "breakBefore": true
       },
       {
         "japanese": "そもそも目（め）に止（と）まらなくても",
@@ -1019,7 +1022,8 @@
       },
       {
         "japanese": "正（ただ）しいほど",
-        "chinese": "在你寻求正确的同时"
+        "chinese": "在你寻求正确的同时",
+        "breakBefore": true
       },
       {
         "japanese": "魔（ま）の攻撃（こうげき）が押（お）し寄（よ）せたら",
@@ -1051,7 +1055,8 @@
       },
       {
         "japanese": "雲丹（うに）と栗（くり）",
-        "chinese": "海胆与栗子"
+        "chinese": "海胆与栗子",
+        "breakBefore": true
       },
       {
         "japanese": "柿（かき）と梨（なし）",
@@ -1083,7 +1088,8 @@
       },
       {
         "japanese": "ひとりぼっちと１匹（ぴき）",
-        "chinese": "仅靠形单影只的我们"
+        "chinese": "仅靠形单影只的我们",
+        "breakBefore": true
       },
       {
         "japanese": "何（なに）かが変（か）えられるかな",
@@ -1111,7 +1117,8 @@
       },
       {
         "japanese": "雲丹（うに）と栗（くり）",
-        "chinese": "海胆与栗子"
+        "chinese": "海胆与栗子",
+        "breakBefore": true
       },
       {
         "japanese": "柿（かき）と梨（なし）",
@@ -1142,8 +1149,7 @@
         "chinese": "还有那笨拙的温柔 我都一样喜欢"
       },
       {
-        "japanese": "うにぐり",
-        "breakBefore": true
+        "japanese": "うにぐり"
       },
       {
         "japanese": "おにぎり"
@@ -1181,8 +1187,7 @@
       },
       {
         "japanese": "新（あたら）しい通知（つうち）だけさばいて",
-        "chinese": "仅通过新的通知来裁决",
-        "breakBefore": true
+        "chinese": "仅通过新的通知来裁决"
       },
       {
         "japanese": "優先順位（ゆうせんじゅんい）がカポ1ばっかで",
@@ -1272,8 +1277,7 @@
       },
       {
         "japanese": "ぼんやりと月（つき）を透（す）かしてみたり",
-        "chinese": "呆呆地透过月光看清",
-        "breakBefore": true
+        "chinese": "呆呆地透过月光看清"
       },
       {
         "japanese": "タイミングをずらしてみたり",
@@ -1285,7 +1289,8 @@
       },
       {
         "japanese": "嫌（きら）う体力（たいりょく）があるようで",
-        "chinese": "尚有厌烦的力气一般"
+        "chinese": "尚有厌烦的力气一般",
+        "breakBefore": true
       },
       {
         "japanese": "大抵（たいてい）が水（みず）だらけ",
@@ -1383,8 +1388,7 @@
       },
       {
         "japanese": "ぼんやりと月（つき）を透（す）かしてみたり",
-        "chinese": "呆呆地透过月光看清",
-        "breakBefore": true
+        "chinese": "呆呆地透过月光看清"
       },
       {
         "japanese": "タイミングをずらしてみたり",
@@ -1396,7 +1400,8 @@
       },
       {
         "japanese": "「おめでとう」って言（い）って返（かえ）ってはこないなら",
-        "chinese": "若是说了「恭喜」却得不到任何回应"
+        "chinese": "若是说了「恭喜」却得不到任何回应",
+        "breakBefore": true
       },
       {
         "japanese": "言（い）わないでよ",
@@ -1425,7 +1430,8 @@
       },
       {
         "japanese": "台詞（せりふ）なのにばかみたい",
-        "chinese": "明明只是台词却像傻子一般"
+        "chinese": "明明只是台词却像傻子一般",
+        "breakBefore": true
       },
       {
         "japanese": "ただ走（はし）って",
@@ -1534,8 +1540,7 @@
       },
       {
         "japanese": "借（か）りパクしてた",
-        "chinese": "未曾还你的回忆",
-        "breakBefore": true
+        "chinese": "未曾还你的回忆"
       },
       {
         "japanese": "夜弦（よげん）の月（つき）も",
@@ -1543,7 +1548,8 @@
       },
       {
         "japanese": "気配（けはい）だけで超（こ）えられるから",
-        "chinese": "以为仅凭气势就能战胜"
+        "chinese": "以为仅凭气势就能战胜",
+        "breakBefore": true
       },
       {
         "japanese": "柵（しがらみ）や秩序（ちつじょ）の甘（あま）えは",
@@ -1575,12 +1581,12 @@
       },
       {
         "japanese": "鮮（あざ）やかなフルーツに毒（どく）を吐（は）いて",
-        "chinese": "通过向艳丽果实吐露恶言"
+        "chinese": "通过向艳丽果实吐露恶言",
+        "breakBefore": true
       },
       {
         "japanese": "習（なら）ったばかりの嘘（うそ）を挟（はさ）んで",
-        "chinese": "掺杂学会不久的谎言",
-        "breakBefore": true
+        "chinese": "掺杂学会不久的谎言"
       },
       {
         "japanese": "食（た）べ尽（つ）くすことで",
@@ -1592,7 +1598,8 @@
       },
       {
         "japanese": "変（へん）な言葉使（ことばつか）う僕（ぼく）でいなきゃ",
-        "chinese": "置身在谎言的世界"
+        "chinese": "置身在谎言的世界",
+        "breakBefore": true
       },
       {
         "japanese": "交（まじ）わることない",
@@ -1694,7 +1701,8 @@
       },
       {
         "japanese": "お洒落（しゃれ）な言葉（ことば）でいいから",
-        "chinese": "虚有其表的话语也好"
+        "chinese": "虚有其表的话语也好",
+        "breakBefore": true
       },
       {
         "japanese": "少（すこ）しでも触（ふ）れられた瞬間（しゅんかん）",
@@ -1706,8 +1714,7 @@
       },
       {
         "japanese": "色（いろ）のない輝（かがや）きを追（お）うばかり",
-        "chinese": "无谓追寻暗淡光辉",
-        "breakBefore": true
+        "chinese": "无谓追寻暗淡光辉"
       },
       {
         "japanese": "探（さぐ）ってしまう歌（うた）が",
@@ -2156,8 +2163,7 @@
       },
       {
         "japanese": "チカヅイテトーノイテサングリアッテミタンダ",
-        "chinese": "时远时近 试过探寻彼此",
-        "breakBefore": true
+        "chinese": "时远时近 试过探寻彼此"
       },
       {
         "japanese": "チカヅイテトーノイテワカリアッテミタンダ",
@@ -2604,8 +2610,7 @@
       },
       {
         "japanese": "紛（まぎ）らわして紛（まぎ）らわして距離（きょり）を取（と）るほど",
-        "chinese": "纷扰困惑 扑朔迷离 越是拉开距离",
-        "breakBefore": true
+        "chinese": "纷扰困惑 扑朔迷离 越是拉开距离"
       },
       {
         "japanese": "一方的（いっぽうてき）を貫（つらぬ）くなら",
@@ -2657,8 +2662,7 @@
       },
       {
         "japanese": "誰（だれ）かは滝（たき）のように笑（わら）えば",
-        "chinese": "谁能像瀑布那样（不停地大）笑的话",
-        "breakBefore": true
+        "chinese": "谁能像瀑布那样（不停地大）笑的话"
       },
       {
         "japanese": "頼（たよ）りに堅（かた）い志（こころざし）は距離（きょり）も煮詰（につ）める",
@@ -2923,8 +2927,7 @@
       },
       {
         "japanese": "今（いま）は傷（きず）つくことも願（ねが）ってる",
-        "chinese": "现在就连受伤也求之不得",
-        "breakBefore": true
+        "chinese": "现在就连受伤也求之不得"
       },
       {
         "japanese": "見（み）たことない光（ひかり）を望（のぞ）むなら",
@@ -3089,8 +3092,7 @@
       },
       {
         "japanese": "犠牲（ぎせい）にしたって本心（ほんしん）だけ",
-        "chinese": "牺牲的也就只有内心",
-        "breakBefore": true
+        "chinese": "牺牲的也就只有内心"
       }
     ]
   },
@@ -4176,8 +4178,7 @@
       },
       {
         "japanese": "その場（ば）限（かぎ）りシェア次第（しだい）",
-        "chinese": "只能根据当时的状况",
-        "breakBefore": true
+        "chinese": "只能根据当时的状况"
       },
       {
         "japanese": "グラスとラムレ-ズン",
@@ -4377,8 +4378,7 @@
       },
       {
         "japanese": "どーしよっCAね",
-        "chinese": "啊  怎么办才好呢",
-        "breakBefore": true
+        "chinese": "啊  怎么办才好呢"
       }
     ]
   },
@@ -4537,8 +4537,7 @@
       },
       {
         "japanese": "でも引（ひ）き止（と）めらんない",
-        "chinese": "但是无法挽留",
-        "breakBefore": true
+        "chinese": "但是无法挽留"
       }
     ]
   },
@@ -4637,8 +4636,7 @@
       },
       {
         "japanese": "たとえ否定（ひてい）しかしない誰（だれ）かを",
-        "chinese": "不论是以偏概全的否定他人",
-        "breakBefore": true
+        "chinese": "不论是以偏概全的否定他人"
       },
       {
         "japanese": "正義（せいぎ）まで押（お）し付（つ）ける客観（きゃっかん）を",
@@ -4732,8 +4730,7 @@
       },
       {
         "japanese": "助（たす）かれ..",
-        "chinese": "得救了",
-        "breakBefore": true
+        "chinese": "得救了"
       },
       {
         "japanese": "怖（こわ）がることを金輪際（こんりんざい）",
@@ -5102,8 +5099,7 @@
       },
       {
         "japanese": "問（と）い説（と）いてよ？",
-        "chinese": "回答我啊？",
-        "breakBefore": true
+        "chinese": "回答我啊？"
       }
     ]
   },
@@ -5127,8 +5123,7 @@
       },
       {
         "japanese": "一言（ひとこと）目（め）はきっと久（ひさ）しぶり",
-        "chinese": "第一句话一定是 好久不见",
-        "breakBefore": true
+        "chinese": "第一句话一定是 好久不见"
       },
       {
         "japanese": "それしか言（い）えないそれすら出（で）てこない",
@@ -5161,8 +5156,7 @@
       },
       {
         "japanese": "僕（ぼく）の立場（たちば）とちっちゃな嘘（うそ）で食（た）べられた",
-        "chinese": "我的立场被微不足道的谎言吞噬殆尽",
-        "breakBefore": true
+        "chinese": "我的立场被微不足道的谎言吞噬殆尽"
       },
       {
         "japanese": "いっぱい諦（あきら）めさせた",
@@ -5571,8 +5565,7 @@
       },
       {
         "japanese": "簡単（かんたん）には言（い）わないでね",
-        "chinese": "不要轻易诉说",
-        "breakBefore": true
+        "chinese": "不要轻易诉说"
       },
       {
         "japanese": "否定（ひてい）しないから",
@@ -5613,8 +5606,7 @@
       },
       {
         "japanese": "想（おも）ってないとかじゃないの",
-        "chinese": "却不意味着我并没这么想",
-        "breakBefore": true
+        "chinese": "却不意味着我并没这么想"
       },
       {
         "japanese": "いつも御（お）別（わか）ればかり考（かんが）える人生（じんせい）も",
@@ -5626,8 +5618,7 @@
       },
       {
         "japanese": "会（あ）えばきっと足（た）りなくて",
-        "chinese": "短暂的相见一定并不足够",
-        "breakBefore": true
+        "chinese": "短暂的相见一定并不足够"
       },
       {
         "japanese": "会話（かいわ）の切（き）れ端（はし）まで歌詞（かし）で覚（おぼ）えるの",
@@ -5647,8 +5638,7 @@
       },
       {
         "japanese": "あなたに幾度（いくど）も触（ふ）れたって",
-        "chinese": "无论与你有过多少次接触",
-        "breakBefore": true
+        "chinese": "无论与你有过多少次接触"
       },
       {
         "japanese": "大体（だいたい）ちょっとだけ頓知（とんち）",
@@ -5978,8 +5968,7 @@
       },
       {
         "japanese": "煙（けむり）撒（ま）いてくる待（ま）って",
-        "chinese": "我去抽根烟    等一下",
-        "breakBefore": true
+        "chinese": "我去抽根烟    等一下"
       },
       {
         "japanese": "唯一（ゆいいつ）話（はな）せるデリバリー",
@@ -6193,8 +6182,7 @@
       },
       {
         "japanese": "知（し）らない方（ほう）が幸（しあわ）せだって",
-        "chinese": "有候无知也是种幸福",
-        "breakBefore": true
+        "chinese": "有候无知也是种幸福"
       },
       {
         "japanese": "知（し）れば知（し）り得（え）るほど",
@@ -6244,8 +6232,7 @@
       },
       {
         "japanese": "ねぇ、知（し）り得（え）る方（ほう）が幸（しあわ）せだって",
-        "chinese": "呐、知晓真相后的幸福",
-        "breakBefore": true
+        "chinese": "呐、知晓真相后的幸福"
       },
       {
         "japanese": "辿（たど）り着（つ）いてもいい?",
@@ -6333,8 +6320,7 @@
       },
       {
         "japanese": "全（すべ）て嫌（きら）われても",
-        "chinese": "全部被讨厌",
-        "breakBefore": true
+        "chinese": "全部被讨厌"
       },
       {
         "japanese": "奪（うば）われてないから",
@@ -6521,8 +6507,7 @@
       },
       {
         "japanese": "錆（さ）び付（つ）いた勘（かん）ぐれい",
-        "chinese": "用那早已锈迹斑斑的直觉",
-        "breakBefore": true
+        "chinese": "用那早已锈迹斑斑的直觉"
       },
       {
         "japanese": "緊張（きんちょう）を解（ほど）いて",
@@ -6563,8 +6548,7 @@
       },
       {
         "japanese": "駆（か）け引（ひ）きを続（つづ）けて",
-        "chinese": "只好这样继续伺机而动了",
-        "breakBefore": true
+        "chinese": "只好这样继续伺机而动了"
       }
     ]
   },
@@ -7130,8 +7114,7 @@
       },
       {
         "japanese": "未読（みどく）にした美学（びがく）でよかった",
-        "chinese": "消息放置未读 当一种美学",
-        "breakBefore": true
+        "chinese": "消息放置未读 当一种美学"
       },
       {
         "japanese": "だいじょばないって言（い）えた程（ほど）",
@@ -8409,8 +8392,7 @@
       },
       {
         "japanese": "試（ため）したいわあたたかくて",
-        "chinese": "真想尝试下 那份温暖啊",
-        "breakBefore": true
+        "chinese": "真想尝试下 那份温暖啊"
       },
       {
         "japanese": "絶体絶命（ぜったいぜつめい）な夜（よる）は気持（きも）ちい",
@@ -8477,8 +8459,7 @@
       },
       {
         "japanese": "試（ため）したいわあたたかくて",
-        "chinese": "真想尝试下 那份温暖啊",
-        "breakBefore": true
+        "chinese": "真想尝试下 那份温暖啊"
       },
       {
         "japanese": "絶体絶命（ぜったいぜつめい）な夜（よる）は気持（きも）ちい",
@@ -8528,8 +8509,7 @@
       },
       {
         "japanese": "言（い）いたいことジャンケンご愛顧（あいこ）じゃ",
-        "chinese": "想说的话语与猜拳 都要感谢眷顾",
-        "breakBefore": true
+        "chinese": "想说的话语与猜拳 都要感谢眷顾"
       },
       {
         "japanese": "まずは実感（じっかん）湧（わ）くまで拵（こしら）え",
@@ -8909,7 +8889,8 @@
       },
       {
         "japanese": "ぐずぐずおセンチなマイナス思考（しこう）だ",
-        "chinese": "磨磨蹭蹭的消极思考"
+        "chinese": "磨磨蹭蹭的消极思考",
+        "breakBefore": true
       },
       {
         "japanese": "Nobody's coming and still I'm crying \"Red Rover\"",
@@ -9002,8 +8983,7 @@
       },
       {
         "japanese": "ぶらーーんぶらーーん",
-        "chinese": "Buraーーnburaーーn",
-        "breakBefore": true
+        "chinese": "Buraーーnburaーーn"
       },
       {
         "japanese": "出（で）だしの荒削（あらけず）り衝動（しょうどう）ここにある",
@@ -9077,8 +9057,7 @@
       },
       {
         "japanese": "ぶらーーんぶらーーん",
-        "chinese": "Buraーーnburaーーn",
-        "breakBefore": true
+        "chinese": "Buraーーnburaーーn"
       }
     ]
   },
@@ -9152,8 +9131,7 @@
       },
       {
         "japanese": "dodownnnnn",
-        "chinese": "do downnnnn",
-        "breakBefore": true
+        "chinese": "do downnnnn"
       },
       {
         "japanese": "共感（きょうかん）したいですが相槌（あいづち）の安全策（あんぜんさく）は",
@@ -9211,8 +9189,7 @@
       },
       {
         "japanese": "dodownnnnn",
-        "chinese": "do downnnnn",
-        "breakBefore": true
+        "chinese": "do downnnnn"
       },
       {
         "japanese": "誰（だれ）からも邪魔（じゃま）されない",
@@ -9262,8 +9239,7 @@
       },
       {
         "japanese": "謝（あやま）らないでしょ?",
-        "chinese": "也无法道歉吧？",
-        "breakBefore": true
+        "chinese": "也无法道歉吧？"
       }
     ]
   },
@@ -9538,8 +9514,7 @@
       },
       {
         "japanese": "どうでもいいから置（お）いてった",
-        "chinese": "怎样都好了 丢在一边了",
-        "breakBefore": true
+        "chinese": "怎样都好了 丢在一边了"
       },
       {
         "japanese": "あいつら全員（ぜんいん）同窓会（どうそうかい）",
@@ -10025,8 +10000,7 @@
       },
       {
         "japanese": "見（み）つめ合（あ）える度（たび）に疑問（ぎもん）を込（こ）めて",
-        "chinese": "每当与你四目相视 我总会怀揣疑问",
-        "breakBefore": true
+        "chinese": "每当与你四目相视 我总会怀揣疑问"
       },
       {
         "japanese": "ただ違（ちが）うならわかりやすく教（おし）えて?",
@@ -10088,8 +10062,7 @@
       },
       {
         "japanese": "dandan…",
-        "chinese": "dan dan...",
-        "breakBefore": true
+        "chinese": "dan dan..."
       },
       {
         "japanese": "できるだけ長（なが）く過（す）ごせるように",
@@ -10636,8 +10609,7 @@
       },
       {
         "japanese": "ねぇどうしたいんだ",
-        "chinese": "呐 怎么了呢",
-        "breakBefore": true
+        "chinese": "呐 怎么了呢"
       },
       {
         "japanese": "今日（きょう）が何度目（なんどめ）の季節（きせつ）だった",
@@ -11035,8 +11007,7 @@
       },
       {
         "japanese": "希望（きぼう）だと捉（とら）えてもぐさり",
-        "chinese": "即便将其当作希望",
-        "breakBefore": true
+        "chinese": "即便将其当作希望"
       },
       {
         "japanese": "生（なま）ぬるい風（かぜ）=傷口（きずぐち）によい風（かぜ）",
@@ -11163,8 +11134,7 @@
       },
       {
         "japanese": "過去（かこ）にないの数式（レシピ）にないのさ",
-        "chinese": "从未有过 也不在任何公式（配方）里",
-        "breakBefore": true
+        "chinese": "从未有过 也不在任何公式（配方）里"
       },
       {
         "japanese": "6種（しゅ）のスパイスが新（しん）発売（はつばい）なんです",
@@ -11247,8 +11217,7 @@
       },
       {
         "japanese": "君（きみ）の魂（たましい）深（ふか）く濃（こ）いのさ",
-        "chinese": "你的灵魂 深邃而浓郁",
-        "breakBefore": true
+        "chinese": "你的灵魂 深邃而浓郁"
       },
       {
         "japanese": "6種（しゅ）の表情（ひょうじょう）パーツ新（しん）発売（はつばい）なんです",
@@ -11322,8 +11291,7 @@
       },
       {
         "japanese": "怖（こわ）くなってやがて散（ち）るのに",
-        "chinese": "心生畏惧 明知终将凋零",
-        "breakBefore": true
+        "chinese": "心生畏惧 明知终将凋零"
       },
       {
         "japanese": "想（おも）い通（どお）りの成功（せいこう）経験（けいけん）を",
@@ -11648,7 +11616,8 @@
       },
       {
         "japanese": "とっくに心（こころ）弓矢（ゆみや）は焦（こ）げる",
-        "chinese": "内心早已如弓矢焦灼"
+        "chinese": "内心早已如弓矢焦灼",
+        "breakBefore": true
       },
       {
         "japanese": "永遠（えいえん）燃（も）えると思（おも）えてたのに",
@@ -11788,8 +11757,7 @@
       },
       {
         "japanese": "萎（な）えるぜ全方位（ぜんほうい）急（きゅう）にだるいよ",
-        "chinese": "全方位都让人提不起劲 忽然就倦怠起来",
-        "breakBefore": true
+        "chinese": "全方位都让人提不起劲 忽然就倦怠起来"
       },
       {
         "japanese": "君（きみ）専用（せんよう）の心構（こころがま）えしかないけれど",
@@ -11967,8 +11935,7 @@
       },
       {
         "japanese": "〈萎（な）えるぜ全方位（ぜんほうい）急（きゅう）にだるいよ〉",
-        "chinese": "全方位都让人提不起劲 忽然就倦怠起来",
-        "breakBefore": true
+        "chinese": "全方位都让人提不起劲 忽然就倦怠起来"
       },
       {
         "japanese": "何（なに）もやってない癖（くせ）に",
@@ -12067,8 +12034,7 @@
       },
       {
         "japanese": "蟹（かに）しゃぶふぁんく",
-        "chinese": "蟹肉涮锅 不安刻",
-        "breakBefore": true
+        "chinese": "蟹肉涮锅 不安刻"
       },
       {
         "japanese": "蟹（かに）しゃぶふぁんく",
@@ -12319,8 +12285,7 @@
       },
       {
         "japanese": "ハテナ以前（いぜん）の否定（ひてい）ってなんか不自然（ふしぜん）",
-        "chinese": "惹得我期待雀跃",
-        "breakBefore": true
+        "chinese": "惹得我期待雀跃"
       },
       {
         "japanese": "ナンセンスなお返事（へんじ）が衝撃（しょうげき）でも",
@@ -12399,7 +12364,8 @@
       },
       {
         "japanese": "逃（のが）れることも時（とき）には賢（かしこ）く",
-        "chinese": "偶尔的逃避 亦是智慧"
+        "chinese": "偶尔的逃避 亦是智慧",
+        "breakBefore": true
       },
       {
         "japanese": "自分（じぶん）を救（すく）うように君（きみ）を救（すく）いたい",
@@ -12511,7 +12477,8 @@
       },
       {
         "japanese": "ララ(C-R-E-A-M,I'mCreamy)",
-        "chinese": "啦啦(C-R-E-A-M, I'm Creamy)"
+        "chinese": "啦啦(C-R-E-A-M, I'm Creamy)",
+        "breakBefore": true
       },
       {
         "japanese": "ラララララシュビドゥバシュビドゥバ",
@@ -12689,12 +12656,12 @@
       },
       {
         "japanese": "君（きみ）のせいだよ",
-        "chinese": "都怪你啊",
-        "breakBefore": true
+        "chinese": "都怪你啊"
       },
       {
         "japanese": "シェードの誇（ほこ）りは戦場（せんじょう）",
-        "chinese": "灯罩的骄傲 是战场"
+        "chinese": "灯罩的骄傲 是战场",
+        "breakBefore": true
       },
       {
         "japanese": "まだ見（み）てしまう",
@@ -12743,12 +12710,12 @@
       },
       {
         "japanese": "君（きみ）のせいだよ",
-        "chinese": "都怪你啊",
-        "breakBefore": true
+        "chinese": "都怪你啊"
       },
       {
         "japanese": "吐（は）き出（だ）せないまま消（き）えてった",
-        "chinese": "未能吐露心声 便已消逝不见"
+        "chinese": "未能吐露心声 便已消逝不见",
+        "breakBefore": true
       },
       {
         "japanese": "溶（と）けてったそれでよかった",
@@ -12842,8 +12809,7 @@
       },
       {
         "japanese": "答（こた）え合（あ）わせしなくても",
-        "chinese": "即使不去核对答案",
-        "breakBefore": true
+        "chinese": "即使不去核对答案"
       },
       {
         "japanese": "大丈夫（だいじょうぶ）君（きみ）と私（わたし）だけ",
@@ -12972,8 +12938,7 @@
       },
       {
         "japanese": "答（こた）え合（あ）わせしなくても",
-        "chinese": "即使不去核对答案",
-        "breakBefore": true
+        "chinese": "即使不去核对答案"
       },
       {
         "japanese": "大丈夫（だいじょうぶ）君（きみ）と私（わたし）だけ",
@@ -13104,8 +13069,7 @@
       },
       {
         "japanese": "カラオケ映像（えいぞう）に酔（よ）う",
-        "chinese": "醉倒在卡拉OK的影像画面里",
-        "breakBefore": true
+        "chinese": "醉倒在卡拉OK的影像画面里"
       },
       {
         "japanese": "赤（あか）いバラ急（きゅう）に燃（も）える",
@@ -13283,8 +13247,7 @@
       },
       {
         "japanese": "いっときの思（おも）い出（で）何点（なんてん）?",
-        "chinese": "一时的回忆能打几分",
-        "breakBefore": true
+        "chinese": "一时的回忆能打几分"
       },
       {
         "japanese": "こっちからばいばい案件（あんけん）",
@@ -13328,8 +13291,7 @@
       },
       {
         "japanese": "Shineylikeagingerエール込（こ）みで酩酊（めいてい）",
-        "chinese": "Shiney like a ginger 连同加油干杯 酩酊",
-        "breakBefore": true
+        "chinese": "Shiney like a ginger 连同加油干杯 酩酊"
       },
       {
         "japanese": "踊（ダンス）っちまう絶頂（ぜっちょう）返事（へんじ）オンザホリック",
@@ -13471,8 +13433,7 @@
       },
       {
         "japanese": "皆（みな）が寝静（ねしず）まれば僕（ぼく）の出番（でばん）来（く）る...",
-        "chinese": "待到众人皆沉睡 便是我出场之时",
-        "breakBefore": true
+        "chinese": "待到众人皆沉睡 便是我出场之时"
       },
       {
         "japanese": "\"葬（そう）皆（みな）が寝静（ねしず）まれば僕（ぼく）の出番（でばん）来（く）る\"",
@@ -13521,8 +13482,7 @@
       },
       {
         "japanese": "hmmmm…hmmhmmhmmmm…hmmhmm",
-        "chinese": "hmmmm…hmm hmm hmmmm…hmm hmm",
-        "breakBefore": true
+        "chinese": "hmmmm…hmm hmm hmmmm…hmm hmm"
       },
       {
         "japanese": "hmmmm…hmmhmmhmmmm…hmmhmm",
@@ -13645,8 +13605,7 @@
       },
       {
         "japanese": "まるで◯です",
-        "chinese": "简直就像◯对号",
-        "breakBefore": true
+        "chinese": "简直就像◯对号"
       },
       {
         "japanese": "固体（こたい）がペースト同様（どうよう）に",
@@ -13842,8 +13801,7 @@
       },
       {
         "japanese": "世（よ）の中（なか）の意図（いと）・書（しょ）が全部（ぜんぶ）",
-        "chinese": "世间的意图与书卷",
-        "breakBefore": true
+        "chinese": "世间的意图与书卷"
       },
       {
         "japanese": "響（ひび）くとは限（かぎ）らないことわかるよもう",
@@ -14368,7 +14326,8 @@
       },
       {
         "japanese": "嫌（いや）なこと全部（ぜんぶ）げすいで歌（うた）ったら",
-        "chinese": "若将厌恶之事悉数抹去放声歌唱"
+        "chinese": "若将厌恶之事悉数抹去放声歌唱",
+        "breakBefore": true
       },
       {
         "japanese": "水（みず）も小鳥（ことり）もうわずって聞（き）こえる",
@@ -14471,8 +14430,7 @@
       },
       {
         "japanese": "心静（こころしず）かに研（と）ぎ澄（す）ませば聴（き）こえる",
-        "chinese": "若让心灵沉静下来 凝神倾听 便能听见",
-        "breakBefore": true
+        "chinese": "若让心灵沉静下来 凝神倾听 便能听见"
       },
       {
         "japanese": "無邪気（むじゃき）にはしゃいでた横顔（よこがお）灯火（ともしび）",
@@ -14484,8 +14442,7 @@
       },
       {
         "japanese": "大人（おとな）になれたなら",
-        "chinese": "若能成为大人",
-        "breakBefore": true
+        "chinese": "若能成为大人"
       },
       {
         "japanese": "またいつかどこかで思（おも）い出（だ）そう",
@@ -14548,8 +14505,7 @@
       },
       {
         "japanese": "ららら..",
-        "chinese": "啦啦啦",
-        "breakBefore": true
+        "chinese": "啦啦啦"
       }
     ]
   },
@@ -14586,8 +14542,7 @@
       },
       {
         "japanese": "ハテナ以前（いぜん）の否定（ひてい）ってなんか不自然（ふしぜん）",
-        "chinese": "惹得我期待雀跃",
-        "breakBefore": true
+        "chinese": "惹得我期待雀跃"
       },
       {
         "japanese": "ナンセンスなお返事（へんじ）が衝撃（しょうげき）でも",
@@ -14666,7 +14621,8 @@
       },
       {
         "japanese": "逃（のが）れることも時（とき）には賢（かしこ）く",
-        "chinese": "偶尔的逃避 亦是智慧"
+        "chinese": "偶尔的逃避 亦是智慧",
+        "breakBefore": true
       },
       {
         "japanese": "自分（じぶん）を救（すく）うように君（きみ）を救（すく）いたい",
@@ -14778,7 +14734,8 @@
       },
       {
         "japanese": "ララ(C-R-E-A-M,I'mCreamy)",
-        "chinese": "啦啦(C-R-E-A-M, I'm Creamy)"
+        "chinese": "啦啦(C-R-E-A-M, I'm Creamy)",
+        "breakBefore": true
       },
       {
         "japanese": "ラララララシュビドゥバシュビドゥバ",
@@ -15016,8 +14973,7 @@
       },
       {
         "japanese": "世（よ）の中（なか）の意図（いと）・書（しょ）が全部（ぜんぶ）",
-        "chinese": "世间的意图与书卷",
-        "breakBefore": true
+        "chinese": "世间的意图与书卷"
       },
       {
         "japanese": "響（ひび）くとは限（かぎ）らないことわかるよもう",
