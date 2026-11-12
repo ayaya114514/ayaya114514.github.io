@@ -2,6 +2,12 @@ import yorushikaLyrics from './yorushika-lyrics.json'
 import nbunaLyrics from './nbuna-lyrics.json'
 import zutomayoLyrics from './zutomayo-lyrics.json'
 import orangestarLyrics from './orangestar-lyrics.json'
+import fujiiKazeLyrics from './fujii-kaze-lyrics.json'
+import radwimpsLyrics from './radwimps-lyrics.json'
+import sakanactionLyrics from './sakanaction-lyrics.json'
+import backNumberLyrics from './back-number-lyrics.json'
+import mrsGreenAppleLyrics from './mrs-green-apple-lyrics.json'
+import aimyonLyrics from './aimyon-lyrics.json'
 import lyricTitleTranslations from './lyric-title-translations.json'
 
 export type LyricLine = {
@@ -462,7 +468,7 @@ export const lyricArtists: LyricArtist[] = [
       {
         title: 'HELP EVER HURT NEVER',
         songs: [
-          '何なw',
+          '何なんw',
           'もうええわ',
           '優しさ',
           'キリがないから',
@@ -547,8 +553,8 @@ export const lyricArtists: LyricArtist[] = [
       }
     ],
     singles: ['Comets＋Gold'],
-    details: {},
-    titleTranslations: {}
+    details: fujiiKazeLyrics,
+    titleTranslations: lyricTitleTranslations['fujii-kaze']
   },
   {
     slug: 'radwimps',
@@ -941,8 +947,8 @@ export const lyricArtists: LyricArtist[] = [
       '人間ごっこ',
       'KANASHIBARI (feat. ao)'
     ],
-    details: {},
-    titleTranslations: {}
+    details: radwimpsLyrics,
+    titleTranslations: lyricTitleTranslations.radwimps
   },
   {
     slug: 'sakanaction',
@@ -1030,8 +1036,8 @@ export const lyricArtists: LyricArtist[] = [
       }
     ],
     singles: ['moon', '怪獣', 'いらない'],
-    details: {},
-    titleTranslations: {}
+    details: sakanactionLyrics,
+    titleTranslations: lyricTitleTranslations.sakanaction
   },
   {
     slug: 'back-number',
@@ -1080,8 +1086,8 @@ export const lyricArtists: LyricArtist[] = [
     singles: [
       'だいじなこと', 'はじまりはじまり', '信者よ盲目であれ', 'one room', 'アイアムノットイナフ', '君の代わり', '反省線急行自宅行き', 'バースデー', '優柔不断宣言', '遠吠え', 'アーバンライフ', '君はいらないだろうな', 'Hey!Brother!', 'パレード', 'ひとくいにんげん', '君の恋人になったら', '魔女と僕', 'reunion', 'ゆめなのであれば', '強化書', 'Jaguar', 'ジャスティスインザボックス', '勝手にオリンピック', '怪獣のサイズ', '冬と春', '新しい恋人達に', '楽園の地図', 'ブルーアンバー', 'ある未来より愛を込めて', '幕が上がる', 'どうしてもどうしても'
     ],
-    details: {},
-    titleTranslations: {}
+    details: backNumberLyrics,
+    titleTranslations: lyricTitleTranslations['back-number']
   },
   {
     slug: 'mrs-green-apple',
@@ -1137,8 +1143,8 @@ export const lyricArtists: LyricArtist[] = [
       }
     ],
     singles: ['恋と吟', 'えほん', 'ノニサクウタ', 'SwitCh', '光のうた', 'Log (feat. 坂口有望)', '点描の唄 (feat. 井上苑子)', 'ア・プリオリ', '灯火', '月とアネモネ', 'あなたに', 'Carrying Happiness', '夏の影', 'GOOD DAY', 'lulu.', '風と町', 'Brand New'],
-    details: {},
-    titleTranslations: {}
+    details: mrsGreenAppleLyrics,
+    titleTranslations: lyricTitleTranslations['mrs-green-apple']
   },
   {
     slug: 'aimyon',
@@ -1174,8 +1180,8 @@ export const lyricArtists: LyricArtist[] = [
       }
     ],
     singles: ['いいことしましょ', '今日の芸術', '君がいない夜を越えられやしない', 'ハッピー', 'MIO', '青春と青春と青春', 'わかってない', 'あなたのために', '鯉', 'テレパしい', '葵', 'ユラユラ', 'ミニスカートとハイライト', '森のくまさん', '皐月', '彼氏有無', 'die die die', 'ねむい', 'スケッチ', '君の夢を聞きながら、僕は笑えるアイデアを！', 'おばけがでるぞ', 'いちについて'],
-    details: {},
-    titleTranslations: {}
+    details: aimyonLyrics,
+    titleTranslations: lyricTitleTranslations.aimyon
   }
 ]
 
