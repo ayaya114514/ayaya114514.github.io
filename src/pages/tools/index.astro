@@ -225,10 +225,10 @@ const abbreviationOf = (title: string) => title.match(/[A-Z]/g)?.join('') ?? ''
     width: 2.25rem;
     height: 2.25rem;
     place-items: center;
-    border: 1px solid hsl(0 0% 25%);
+    border: 1px solid hsl(var(--primary) / 0.32);
     border-radius: 0.625rem;
-    background: hsl(0 0% 13%);
-    color: hsl(var(--foreground));
+    background: hsl(var(--primary) / 0.1);
+    color: hsl(var(--primary));
     font-size: 0.6875rem;
     font-weight: 600;
     line-height: 1;
