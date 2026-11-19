@@ -105,14 +105,14 @@ const abbreviationOf = (title: string) => title.match(/[A-Z]/g)?.join('') ?? ''
     <ul class='m-0 flex list-none flex-col gap-y-3 p-0'>
       {
         groups.map((group) => (
-          <li class='tool-nav-group m-0' data-category={group.title}>
+          <li class='m-0'>
             <a
               href={`#${group.title}`}
-              class='tool-nav-title block px-2 py-1 font-medium no-underline'
+              class='block px-2 py-1 font-medium text-foreground no-underline hover:text-foreground'
             >
               {group.title}
             </a>
-            <ul class='m-0 ml-2 flex list-none flex-col gap-y-0.5 border-l border-border/70 p-0'>
+            <ul class='m-0 ml-2 flex list-none flex-col gap-y-0.5 p-0'>
               {group.tools.map((tool) => (
                 <li class='m-0'>
                   <a
@@ -135,11 +135,10 @@ const abbreviationOf = (title: string) => title.match(/[A-Z]/g)?.join('') ?? ''
   <div class='tool-directory not-prose'>
     {
       groups.map((group) => (
-        <section class='tool-section' data-category={group.title} aria-labelledby={group.title}>
-          <div class='tool-section-heading'>
-            <h2 id={group.title}>{group.title}</h2>
-            <span class='tool-section-rule' aria-hidden='true' />
-          </div>
+        <section aria-labelledby={group.title}>
+          <h2 id={group.title} class='tool-section-heading'>
+            {group.title}
+          </h2>
           <div class='tool-grid'>
             {group.tools.map((t) => (
               <a href={t.href} target='_blank' rel='noopener noreferrer' class='tool-card'>
@@ -179,53 +178,19 @@ const abbreviationOf = (title: string) => title.match(/[A-Z]/g)?.join('') ?? ''
     gap: 2rem;
   }
 
-  .tool-section,
-  .tool-nav-group {
-    --tool-accent: 199 85% 78%;
-  }
-
-  [data-category='工具'] {
-    --tool-accent: 158 55% 74%;
-  }
-
-  [data-category='归档'] {
-    --tool-accent: 263 70% 82%;
-  }
-
-  .tool-nav-title {
-    color: hsl(var(--tool-accent));
-  }
-
   .tool-section-heading {
-    display: flex;
-    align-items: center;
-    gap: 0.625rem;
-    margin-bottom: 0.875rem;
-  }
-
-  .tool-section-heading h2 {
-    margin: 0;
-    color: hsl(var(--tool-accent));
+    margin: 0 0 0.875rem;
+    color: hsl(var(--foreground));
     font-size: 1.125rem;
     font-weight: 600;
     line-height: 1.5;
     scroll-margin-top: 6rem;
   }
 
-  .tool-section-rule {
-    height: 1px;
-    flex: 1;
-    margin-left: 0.375rem;
-    background: linear-gradient(
-      to right,
-      hsl(var(--tool-accent) / 0.35),
-      hsl(var(--tool-accent) / 0.05)
-    );
-  }
-
   .tool-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17.5rem), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17.5rem), 1fr));
+    grid-auto-rows: minmax(7.25rem, 1fr);
     gap: 0.75rem;
   }
 
@@ -233,12 +198,11 @@ const abbreviationOf = (title: string) => title.match(/[A-Z]/g)?.join('') ?? ''
     display: grid;
     grid-template-columns: 2.25rem minmax(0, 1fr) 0.875rem;
     align-items: start;
-    gap: 0.75rem;
-    min-height: 6.5rem;
-    padding: 1.125rem;
-    border: 1px solid hsl(var(--tool-accent) / 0.22);
+    gap: 0.625rem;
+    padding: 0.875rem;
+    border: 1px solid hsl(0 0% 25%);
     border-radius: 0.75rem;
-    background: hsl(var(--background) / 0.55);
+    background: hsl(0 0% 8%);
     text-align: left;
     text-decoration: none;
     transition:
@@ -247,12 +211,12 @@ const abbreviationOf = (title: string) => title.match(/[A-Z]/g)?.join('') ?? ''
   }
 
   .tool-card:hover {
-    border-color: hsl(var(--tool-accent) / 0.6);
-    background: hsl(var(--muted) / 0.8);
+    border-color: hsl(0 0% 45%);
+    background: hsl(0 0% 12%);
   }
 
   .tool-card:focus-visible {
-    outline: 2px solid hsl(var(--tool-accent));
+    outline: 2px solid hsl(var(--foreground));
     outline-offset: 3px;
   }
 
@@ -261,10 +225,10 @@ const abbreviationOf = (title: string) => title.match(/[A-Z]/g)?.join('') ?? ''
     width: 2.25rem;
     height: 2.25rem;
     place-items: center;
-    border: 1px solid hsl(var(--tool-accent) / 0.22);
+    border: 1px solid hsl(0 0% 25%);
     border-radius: 0.625rem;
-    background: hsl(var(--tool-accent) / 0.08);
-    color: hsl(var(--tool-accent));
+    background: hsl(0 0% 13%);
+    color: hsl(var(--foreground));
     font-size: 0.6875rem;
     font-weight: 600;
     line-height: 1;
@@ -272,6 +236,7 @@ const abbreviationOf = (title: string) => title.match(/[A-Z]/g)?.join('') ?? ''
 
   .tool-copy {
     min-width: 0;
+    overflow-wrap: anywhere;
   }
 
   .tool-copy h3 {
@@ -280,22 +245,27 @@ const abbreviationOf = (title: string) => title.match(/[A-Z]/g)?.join('') ?? ''
     font-size: 0.9375rem;
     font-weight: 600;
     line-height: 1.5;
-    overflow-wrap: anywhere;
   }
 
   .tool-copy p {
     margin: 0.375rem 0 0;
-    color: hsl(var(--muted-foreground) / 0.85);
+    color: hsl(0 0% 75%);
     font-size: 0.875rem;
     line-height: 1.65;
   }
 
   .tool-arrow {
     margin-top: 0.25rem;
-    color: hsl(var(--muted-foreground) / 0.45);
+    color: hsl(0 0% 53%);
   }
 
   .tool-card:hover .tool-arrow {
-    color: hsl(var(--tool-accent));
+    color: hsl(var(--foreground));
+  }
+
+  @media (max-width: 20rem) {
+    .tool-grid {
+      grid-auto-rows: minmax(8.25rem, 1fr);
+    }
   }
 </style>
