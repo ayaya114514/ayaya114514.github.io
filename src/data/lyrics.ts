@@ -11,6 +11,7 @@ import aimyonLyrics from './aimyon-lyrics.json'
 import lyricTitleTranslations from './lyric-title-translations.json'
 
 export type LyricLine = {
+  // 混合表记（如 2人、君＋僕）的整组注音用「｜表记《读音》」。
   japanese: string
   chinese?: string
   breakBefore?: boolean
@@ -18,6 +19,11 @@ export type LyricLine = {
 
 export type LyricSongDetails = {
   lines: LyricLine[]
+  sourceNote?: {
+    text: string
+    href: string
+    linkText: string
+  }
 }
 
 export type LyricAlbum = {
@@ -381,7 +387,7 @@ export const lyricArtists: LyricArtist[] = [
         ]
       }
     ],
-    singles: ['イチジク煙'],
+    singles: ['イチジク煙', 'クリームで会いにいけますか'],
     details: zutomayoLyrics as Record<string, LyricSongDetails>,
     titleTranslations: lyricTitleTranslations.zutomayo
   },
@@ -531,7 +537,7 @@ export const lyricArtists: LyricArtist[] = [
       },
       {
         title: 'Best of Fujii Kaze 2020-2024',
-        songs: ['まつり', 'Workin’ Hard', '何なw', 'きらり', '花', 'ガーデン', 'damn', '死ぬのがいいわ', '旅路', '満ちてゆく']
+        songs: ['まつり', 'Workin’ Hard', '何なんw', 'きらり', '花', 'ガーデン', 'damn', '死ぬのがいいわ', '旅路', '満ちてゆく']
       },
       {
         title: 'Prema',
@@ -869,7 +875,7 @@ export const lyricArtists: LyricArtist[] = [
         title: 'すずめの戸締まり',
         songs: [
           '二人の出逢い',
-          '廃壟の温泉街',
+          '廃墟の温泉街',
           '手当て',
           'キャットチェース',
           '夜のフェリー',
@@ -1155,7 +1161,7 @@ export const lyricArtists: LyricArtist[] = [
         songs: ['貴方解剖純愛歌 ～死ね～', '分かってくれよ', 'お互い様やん', '○○ちゃん', '夜行バス', '幸せになりたい', '強がりました', 'ナウなヤングにバカウケするのは当たり前だのクラッ歌']
       },
       {
-        title: '憎まれっ子世に懚る',
+        title: '憎まれっ子世に憚る',
         songs: ['どうせ死ぬなら', '19歳になりたくない', '好きって言ってよ', '泥だんごの天才いたよね', 'おっぱい', '私に彼氏ができない理由', 'ほろ酔い']
       },
       {

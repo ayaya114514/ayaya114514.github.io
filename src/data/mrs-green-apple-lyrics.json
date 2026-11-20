@@ -10,7 +10,8 @@
         "chinese": "我会表扬我自己吧"
       },
       {
-        "japanese": "「大丈夫（だいじょうぶ）。ちゃんと見（み）てるから。」って"
+        "japanese": "「大丈夫（だいじょうぶ）。ちゃんと見（み）てるから。」って",
+        "chinese": "说声“没事的，我一直都看在眼里。”"
       },
       {
         "japanese": "口（くち）にしなきゃ　わからない",
@@ -60,7 +61,8 @@
         "chinese": "我会创造属于我的归宿吧"
       },
       {
-        "japanese": "「大丈夫（だいじょうぶ）。ここに居（い）ていいよ。」って"
+        "japanese": "「大丈夫（だいじょうぶ）。ここに居（い）ていいよ。」って",
+        "chinese": "说声“没事的，你可以待在这里。”"
       },
       {
         "japanese": "言（い）ってもらえる事（こと）でしょう",
@@ -624,7 +626,8 @@
         "breakBefore": true
       },
       {
-        "japanese": "踊（おど）り疲（つか）れたんだ 眠（ねむ）りはしないよ"
+        "japanese": "踊（おど）り疲（つか）れたんだ 眠（ねむ）りはしないよ",
+        "chinese": "已经跳累了，却不肯睡去"
       },
       {
         "japanese": "アイデアに勝（か）ちそうなのね",
@@ -687,7 +690,8 @@
         "chinese": "那结果是什么"
       },
       {
-        "japanese": "歩（ある）いた足（あし）跡数（かぞ）えればいいだろう"
+        "japanese": "歩（ある）いた足（あし）跡数（かぞ）えればいいだろう",
+        "chinese": "数数自己走过的脚印就好了吧"
       }
     ]
   },
@@ -1856,7 +1860,7 @@
         "chinese": "没错 武装与创造的登场！"
       },
       {
-        "japanese": "ここは遊（あそ）び心（こころ）で満（み）ちよう",
+        "japanese": "ここは遊（あそ）び心（ごころ）で満（み）ちよう",
         "chinese": "在这里满足玩乐之心吧",
         "breakBefore": true
       },
@@ -1976,7 +1980,7 @@
         "chinese": "为了斜肩而落泪的话"
       },
       {
-        "japanese": "なで肩（かた）ブームで",
+        "japanese": "なで肩（がた）ブームで",
         "chinese": "让斜肩成为流行"
       },
       {
@@ -2123,7 +2127,7 @@
         "chinese": "在理解一切如常的情况下"
       },
       {
-        "japanese": "吊（つ）り橋（はし）は既（すで）に壊（こわ）れ始（はじ）めて",
+        "japanese": "吊（つ）り橋（ばし）は既（すで）に壊（こわ）れ始（はじ）めて",
         "chinese": "那座吊桥已经开始崩溃"
       },
       {
@@ -2476,7 +2480,8 @@
       },
       {
         "japanese": "グラグラ 抜（ぬ）け落（お）ちそう",
-        "chinese": "摇摇晃晃 好像要脱落的样子"
+        "chinese": "摇摇晃晃 好像要脱落的样子",
+        "breakBefore": true
       },
       {
         "japanese": "乳歯（にゅうし）は抜（ぬ）けないように耐（た）える様（さま）が嫌（きら）い",
@@ -2656,7 +2661,7 @@
         "chinese": "但很美丽哦你的世界"
       },
       {
-        "japanese": "報（むく）われない気持（きも）が続（つづ）いていく毎日（まいにち）で",
+        "japanese": "報（むく）われない気持（きもち）が続（つづ）いていく毎日（まいにち）で",
         "chinese": "心意得不到回报的每天",
         "breakBefore": true
       },
@@ -4753,12 +4758,12 @@
       },
       {
         "japanese": "Good morning good night",
-        "chinese": "Good morning good night",
+        "chinese": "早安，晚安",
         "breakBefore": true
       },
       {
         "japanese": "I love youでgood bye",
-        "chinese": "I love you good bye"
+        "chinese": "说着“我爱你”道别"
       },
       {
         "japanese": "But離（はな）れられない",
@@ -4828,12 +4833,12 @@
       },
       {
         "japanese": "Good morning good night",
-        "chinese": "Good morning good night",
+        "chinese": "早安，晚安",
         "breakBefore": true
       },
       {
         "japanese": "I love youでglad",
-        "chinese": "I love you glad"
+        "chinese": "说一句“我爱你”，就觉得开心"
       },
       {
         "japanese": "「I don't know what to say」",
@@ -4853,12 +4858,12 @@
       },
       {
         "japanese": "Good morning good night",
-        "chinese": "Good morning good night",
+        "chinese": "早安，晚安",
         "breakBefore": true
       },
       {
         "japanese": "I love youとgood bye",
-        "chinese": "I love you good bye"
+        "chinese": "“我爱你”，还有“再见”"
       },
       {
         "japanese": "そのぐらいがいいや",
@@ -4874,11 +4879,12 @@
       },
       {
         "japanese": "Good morning good night",
-        "chinese": "Good morning good night"
+        "chinese": "早安，晚安",
+        "breakBefore": true
       },
       {
         "japanese": "I love youでgood bye",
-        "chinese": "I love you good bye"
+        "chinese": "说着“我爱你”道别"
       },
       {
         "japanese": "傷（きず）は絶（た）え間（ま）ない",
@@ -5877,13 +5883,16 @@
   "Oz (Album Version)": {
     "lines": [
       {
-        "japanese": "A A A Are you ready？ Yes, we have a reason."
+        "japanese": "A A A Are you ready？ Yes, we have a reason.",
+        "chinese": "准、准、准备好了吗？我们当然有理由出发。"
       },
       {
-        "japanese": "A A A Respectively, We have a dream. Come on！"
+        "japanese": "A A A Respectively, We have a dream. Come on！",
+        "chinese": "我、我、我们各有梦想。来吧！"
       },
       {
-        "japanese": "“Let's GO”"
+        "japanese": "“Let's GO”",
+        "chinese": "“出发！”"
       },
       {
         "japanese": "あの城（しろ）を目指（めざ）そうか",
@@ -5915,7 +5924,8 @@
         "chinese": "令人兴奋到心怦怦跳的故事"
       },
       {
-        "japanese": "Monday, Tuesday, Wednesday, Thursday, Friday"
+        "japanese": "Monday, Tuesday, Wednesday, Thursday, Friday",
+        "chinese": "星期一、星期二、星期三、星期四、星期五"
       },
       {
         "japanese": "Saturday, Sundayはholidayのモーション",
@@ -5952,10 +5962,12 @@
         "chinese": "城堡是什么颜色呢"
       },
       {
-        "japanese": "A A A Always don't forget, Coz we have a reason."
+        "japanese": "A A A Always don't forget, Coz we have a reason.",
+        "chinese": "永、永、永远别忘了，我们有自己的理由。"
       },
       {
-        "japanese": "A A A Respectively, We have a dream. The story"
+        "japanese": "A A A Respectively, We have a dream. The story",
+        "chinese": "我、我、我们各有梦想。故事就这样开始……"
       },
       {
         "japanese": "goes on.",
@@ -6033,13 +6045,16 @@
         "chinese": "马上就不得不说再见啦"
       },
       {
-        "japanese": "Well, We will Try."
+        "japanese": "Well, We will Try.",
+        "chinese": "好吧，我们会去试一试。"
       },
       {
-        "japanese": "Focus on Love. Clap！ Clap！ Clap！ Clap！"
+        "japanese": "Focus on Love. Clap！ Clap！ Clap！ Clap！",
+        "chinese": "专注于爱。拍手！拍手！拍手！拍手！"
       },
       {
-        "japanese": "To the other side of these days."
+        "japanese": "To the other side of these days.",
+        "chinese": "去往这些日子的另一端。"
       },
       {
         "japanese": "行（い）こうか",
@@ -6334,7 +6349,7 @@
         "chinese": "Lala...umbrella"
       },
       {
-        "japanese": "苦（くる）しいけど歌唱（うたうた）うわ　唄（うた）えど",
+        "japanese": "苦（くる）しいけど歌唱（うた）うわ　唄（うた）えど",
         "chinese": "即使很痛苦，但还是唱完这一曲，这首歌",
         "breakBefore": true
       },
@@ -6347,7 +6362,7 @@
         "chinese": "为了拥抱我的神"
       },
       {
-        "japanese": "２人（ふたり）で１つを決（き）めた",
+        "japanese": "｜２人《ふたり》で１つを決（き）めた",
         "chinese": "两人一起决定了一点"
       },
       {
@@ -7135,14 +7150,16 @@
       },
       {
         "japanese": "Woah wanted wanted",
-        "breakBefore": true
+        "breakBefore": true,
+        "chinese": "喔，被通缉了，被通缉了"
       },
       {
         "japanese": "僕（ぼく）らは逃（に）げている",
         "chinese": "我们在逃避"
       },
       {
-        "japanese": "Woah wanted wanted"
+        "japanese": "Woah wanted wanted",
+        "chinese": "喔，被通缉了，被通缉了"
       },
       {
         "japanese": "自分（じぶん）の弱（よわ）さから",
@@ -7200,24 +7217,29 @@
         "chinese": "与混乱的夜晚纠缠"
       },
       {
-        "japanese": "I don't wanna do"
+        "japanese": "I don't wanna do",
+        "chinese": "我不想这么做"
       },
       {
-        "japanese": "I don't wanna you're my ..."
+        "japanese": "I don't wanna you're my ...",
+        "chinese": "我不愿……你是我的……"
       },
       {
-        "japanese": "I don't care woo woo woo uh"
+        "japanese": "I don't care woo woo woo uh",
+        "chinese": "我不在乎，喔喔喔"
       },
       {
         "japanese": "Woah wanted wanted",
-        "breakBefore": true
+        "breakBefore": true,
+        "chinese": "喔，被通缉了，被通缉了"
       },
       {
         "japanese": "僕（ぼく）らは逃（に）げている",
         "chinese": "我们逃避着"
       },
       {
-        "japanese": "Woah wanted wanted"
+        "japanese": "Woah wanted wanted",
+        "chinese": "喔，被通缉了，被通缉了"
       },
       {
         "japanese": "妬（ねた）む心（こころ）から",
@@ -7292,14 +7314,16 @@
       },
       {
         "japanese": "Woah wanted wanted",
-        "breakBefore": true
+        "breakBefore": true,
+        "chinese": "喔，被通缉了，被通缉了"
       },
       {
         "japanese": "僕（ぼく）らは生（い）きている",
         "chinese": "我们努力活着"
       },
       {
-        "japanese": "Woah wanted wanted"
+        "japanese": "Woah wanted wanted",
+        "chinese": "喔，被通缉了，被通缉了"
       },
       {
         "japanese": "間違（まちが）いながらも",
@@ -7335,10 +7359,12 @@
         "japanese": "Woah oh oh oh oh oh oh"
       },
       {
-        "japanese": "Woah wanted wanted"
+        "japanese": "Woah wanted wanted",
+        "chinese": "喔，被通缉了，被通缉了"
       },
       {
-        "japanese": "Woah wanted wanted"
+        "japanese": "Woah wanted wanted",
+        "chinese": "喔，被通缉了，被通缉了"
       },
       {
         "japanese": "Woah oh oh oh oh oh oh"
@@ -7636,7 +7662,7 @@
         "chinese": "不要随波逐流呀"
       },
       {
-        "japanese": "止（とど）とどまらないように",
+        "japanese": "止（とど）まらないように",
         "chinese": "也不要停滞不前了呀"
       },
       {
@@ -8858,7 +8884,8 @@
       },
       {
         "japanese": "嗚呼（ああ）嫌（いや）",
-        "chinese": "啊 真讨厌啊"
+        "chinese": "啊 真讨厌啊",
+        "breakBefore": true
       },
       {
         "japanese": "鈍感（どんかん）が増（ふ）えてゆく",
@@ -11683,7 +11710,7 @@
         "chinese": "他们也是这样的人类"
       },
       {
-        "japanese": "&#65378;僕（ぼく）って人（ひと）はこんな人（ひと）&#65379;",
+        "japanese": "｢僕（ぼく）って人（ひと）はこんな人（ひと）｣",
         "chinese": "「我是这样的人」",
         "breakBefore": true
       },
@@ -11759,12 +11786,12 @@
         "chinese": "POPS如此新鲜 HeyLALALA…"
       },
       {
-        "japanese": "&#65378;運命（うんめい）&#65379;と思（おも）える君（きみ）に",
-        "chinese": "我认为与你相遇"
+        "japanese": "｢運命（うんめい）｣と思（おも）える君（きみ）に",
+        "chinese": "与你相遇，我想，"
       },
       {
         "japanese": "巡（めぐ）り会（あ）えたの",
-        "chinese": "是命中注定"
+        "chinese": "这或许就是命运。"
       },
       {
         "japanese": "若気（わかげ）の至（いた）りなんかじゃ",
@@ -13438,7 +13465,7 @@
         "chinese": "忽视的才是美好的"
       },
       {
-        "japanese": "2人（ふたり）居（い）れる今日（きょう）こそが素敵（すてき）なプレゼント",
+        "japanese": "｜2人《ふたり》居（い）れる今日（きょう）こそが素敵（すてき）なプレゼント",
         "chinese": "有你陪伴的今天才是最棒的礼物"
       },
       {
@@ -15490,7 +15517,8 @@
         "breakBefore": true
       },
       {
-        "japanese": "「アナタと最強（さいきょう）」"
+        "japanese": "「アナタと最強（さいきょう）」",
+        "chinese": "“和你一起，最强”"
       }
     ]
   },
@@ -16681,7 +16709,7 @@
         "chinese": "在生锈的心上添油"
       },
       {
-        "japanese": "ベッドにね 2人（ふたり）の香（かお）りを残（のこ）して",
+        "japanese": "ベッドにね ｜2人《ふたり》の香（かお）りを残（のこ）して",
         "chinese": "床上留下两个人的香气"
       },
       {
@@ -21442,7 +21470,8 @@
         "chinese": "将身心托付欢呼声"
       },
       {
-        "japanese": "期待（きたい）×不安定（ふあんてい）"
+        "japanese": "期待（きたい）×不安定（ふあんてい）",
+        "chinese": "期待与不安交织"
       },
       {
         "japanese": "望（のぞ）んで 突（つ）き抜（ぬ）けろ",
@@ -24094,7 +24123,7 @@
         "chinese": "青涩零星的幻想吧"
       },
       {
-        "japanese": "特（とく）にEvery oneに言（こと）われりゃ",
+        "japanese": "特（とく）にEvery oneに言（い）われりゃ",
         "chinese": "特别是被大家说的话"
       },
       {
@@ -25044,12 +25073,12 @@
       },
       {
         "japanese": "Ride",
-        "chinese": "启程"
+        "chinese": "启程",
+        "breakBefore": true
       },
       {
         "japanese": "大（おお）きな空（そら）へ",
-        "chinese": "向着辽阔长空",
-        "breakBefore": true
+        "chinese": "向着辽阔长空"
       },
       {
         "japanese": "僕（ぼく）だってそう",

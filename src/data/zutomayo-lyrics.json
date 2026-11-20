@@ -271,7 +271,7 @@
         "chinese": "嚼碎咽下去"
       },
       {
-        "japanese": "夕暮（ゆうく）れまで永遠（えいえん）などないと",
+        "japanese": "夕暮（ゆうぐ）れまで永遠（えいえん）などないと",
         "chinese": "在夕阳下沉之前 知道了"
       },
       {
@@ -374,7 +374,7 @@
         "breakBefore": true
       },
       {
-        "japanese": "炭酸水（たんさんすい）に2人（ふたり）潜（もぐ）り込（こ）んで",
+        "japanese": "炭酸水（たんさんすい）に｜2人《ふたり》潜（もぐ）り込（こ）んで",
         "chinese": "两人一起潜入"
       },
       {
@@ -979,13 +979,16 @@
         "chinese": "笨拙的说话方式也没关系啊"
       },
       {
-        "japanese": "うにぐり"
+        "japanese": "うにぐり",
+        "chinese": "海胆、栗子"
       },
       {
-        "japanese": "おにぎり"
+        "japanese": "おにぎり",
+        "chinese": "饭团"
       },
       {
-        "japanese": "うにぐり"
+        "japanese": "うにぐり",
+        "chinese": "海胆、栗子"
       },
       {
         "japanese": "いくらバッテンにされても",
@@ -1149,13 +1152,16 @@
         "chinese": "还有那笨拙的温柔 我都一样喜欢"
       },
       {
-        "japanese": "うにぐり"
+        "japanese": "うにぐり",
+        "chinese": "海胆、栗子"
       },
       {
-        "japanese": "おにぎり"
+        "japanese": "おにぎり",
+        "chinese": "饭团"
       },
       {
-        "japanese": "うにぐり"
+        "japanese": "うにぐり",
+        "chinese": "海胆、栗子"
       }
     ]
   },
@@ -1761,7 +1767,7 @@
         "chinese": "那憧憬的目光 现在还请不要移开"
       },
       {
-        "japanese": "あたしを嫌（きら）う鳥（とり）の笑（わら）い声（こえ）を消（け）そうよ",
+        "japanese": "あたしを嫌（きら）う鳥（とり）の笑（わら）い声（ごえ）を消（け）そうよ",
         "chinese": "那刺耳的恶评 请赶快消失吧"
       },
       {
@@ -6232,7 +6238,8 @@
       },
       {
         "japanese": "ねぇ、知（し）り得（え）る方（ほう）が幸（しあわ）せだって",
-        "chinese": "呐、知晓真相后的幸福"
+        "chinese": "呐、知晓真相后的幸福",
+        "breakBefore": true
       },
       {
         "japanese": "辿（たど）り着（つ）いてもいい?",
@@ -6663,7 +6670,7 @@
       },
       {
         "japanese": "TellmeTellme",
-        "chinese": ""
+        "chinese": "告诉我，告诉我"
       },
       {
         "japanese": "食（く）わんし食（く）わんし",
@@ -7114,7 +7121,8 @@
       },
       {
         "japanese": "未読（みどく）にした美学（びがく）でよかった",
-        "chinese": "消息放置未读 当一种美学"
+        "chinese": "消息放置未读 当一种美学",
+        "breakBefore": true
       },
       {
         "japanese": "だいじょばないって言（い）えた程（ほど）",
@@ -9325,7 +9333,8 @@
       },
       {
         "japanese": "どうでもいいから置（お）いてった",
-        "chinese": "怎样都好了 丢在一边了"
+        "chinese": "怎样都好了 丢在一边了",
+        "breakBefore": true
       },
       {
         "japanese": "あいつら全員（ぜんいん）同窓会（どうそうかい）",
@@ -9440,7 +9449,8 @@
       },
       {
         "japanese": "どうでもいいから置（お）いてった",
-        "chinese": "怎样都好了 丢在一边了"
+        "chinese": "怎样都好了 丢在一边了",
+        "breakBefore": true
       },
       {
         "japanese": "あいつら全員（ぜんいん）同窓会（どうそうかい）",
@@ -9514,7 +9524,8 @@
       },
       {
         "japanese": "どうでもいいから置（お）いてった",
-        "chinese": "怎样都好了 丢在一边了"
+        "chinese": "怎样都好了 丢在一边了",
+        "breakBefore": true
       },
       {
         "japanese": "あいつら全員（ぜんいん）同窓会（どうそうかい）",
@@ -9546,7 +9557,8 @@
       },
       {
         "japanese": "どうでもいいから置（お）いてった",
-        "chinese": "怎样都好了 丢在一边了"
+        "chinese": "怎样都好了 丢在一边了",
+        "breakBefore": true
       },
       {
         "japanese": "あいつら全員（ぜんいん）同窓会（どうそうかい）",
@@ -10641,7 +10653,7 @@
   "ミラーチューン": {
     "lines": [
       {
-        "japanese": "3,2,1mirrortune～",
+        "japanese": "3,2,1 mirror tune～",
         "chinese": "3,2,1 mirror tune～"
       },
       {
@@ -11340,31 +11352,31 @@
     "lines": [
       {
         "japanese": "medianoche",
-        "chinese": "Medianoche"
+        "chinese": "午夜"
       },
       {
         "japanese": "medianoche",
-        "chinese": "Medianoche"
+        "chinese": "午夜"
       },
       {
         "japanese": "medianoche",
-        "chinese": "Medianoche"
+        "chinese": "午夜"
       },
       {
         "japanese": "bajomedianoche",
-        "chinese": "bajo medianoche"
+        "chinese": "在午夜之下"
       },
       {
         "japanese": "medianoche",
-        "chinese": "Medianoche"
+        "chinese": "午夜"
       },
       {
         "japanese": "medianoche",
-        "chinese": "Medianoche"
+        "chinese": "午夜"
       },
       {
         "japanese": "medianoche",
-        "chinese": "Medianoche"
+        "chinese": "午夜"
       },
       {
         "japanese": "bajomedianoche",
@@ -11439,68 +11451,68 @@
       },
       {
         "japanese": "medianoche",
-        "chinese": "Medianoche",
+        "chinese": "午夜",
         "breakBefore": true
       },
       {
         "japanese": "medianoche",
-        "chinese": "Medianoche"
+        "chinese": "午夜"
       },
       {
         "japanese": "medianoche",
-        "chinese": "Medianoche"
+        "chinese": "午夜"
       },
       {
         "japanese": "bajomedianoche",
-        "chinese": "bajo medianoche"
+        "chinese": "在午夜之下"
       },
       {
         "japanese": "medianoche",
-        "chinese": "Medianoche"
+        "chinese": "午夜"
       },
       {
         "japanese": "medianoche",
-        "chinese": "Medianoche"
+        "chinese": "午夜"
       },
       {
         "japanese": "medianoche",
-        "chinese": "Medianoche"
+        "chinese": "午夜"
       },
       {
         "japanese": "bajomedianoche",
-        "chinese": "bajo medianoche"
+        "chinese": "在午夜之下"
       },
       {
         "japanese": "medianoche",
-        "chinese": "Medianoche"
+        "chinese": "午夜"
       },
       {
         "japanese": "medianoche",
-        "chinese": "Medianoche"
+        "chinese": "午夜"
       },
       {
         "japanese": "medianoche",
-        "chinese": "Medianoche"
+        "chinese": "午夜"
       },
       {
         "japanese": "bajomedianoche",
-        "chinese": "bajo medianoche"
+        "chinese": "在午夜之下"
       },
       {
         "japanese": "medianoche",
-        "chinese": "Medianoche"
+        "chinese": "午夜"
       },
       {
         "japanese": "medianoche",
-        "chinese": "Medianoche"
+        "chinese": "午夜"
       },
       {
         "japanese": "medianoche",
-        "chinese": "Medianoche"
+        "chinese": "午夜"
       },
       {
         "japanese": "bajomedianoche",
-        "chinese": "bajo medianoche"
+        "chinese": "在午夜之下"
       },
       {
         "japanese": "穢（けが）れ自分（じぶん）で取（と）れるわけもなく",
@@ -11638,7 +11650,7 @@
       },
       {
         "japanese": "哀（あい）哀（あい）哀（あい）",
-        "chinese": "哀哀哀"
+        "chinese": "哀伤，哀伤，哀伤"
       },
       {
         "japanese": "最後（さいご）何処（どこ）を目指（めざ）し歩（ある）いてゆくの",
@@ -12259,11 +12271,11 @@
         "chinese": "能以奶油之身相见吗"
       },
       {
-        "japanese": "C.R.E.A.MI'mCreamy",
+        "japanese": "C.R.E.A.M I'm Creamy",
         "chinese": "(C-R-E-A-M, I'm Creamy)"
       },
       {
-        "japanese": "C.R.E.A.MI'mCreamy",
+        "japanese": "C.R.E.A.M I'm Creamy",
         "chinese": "(C-R-E-A-M, I'm Creamy)"
       },
       {
@@ -12476,7 +12488,7 @@
         "chinese": "此刻可否能与啦啦"
       },
       {
-        "japanese": "ララ(C-R-E-A-M,I'mCreamy)",
+        "japanese": "ララ(C-R-E-A-M, I'm Creamy)",
         "chinese": "啦啦(C-R-E-A-M, I'm Creamy)",
         "breakBefore": true
       },
@@ -12485,7 +12497,7 @@
         "chinese": "啦啦啦啦啦 修比嘟哇 修比嘟哇"
       },
       {
-        "japanese": "ララ（ハンドクリームカスタードクリームI'mCreamy）",
+        "japanese": "ララ（ハンドクリーム カスタードクリーム I'm Creamy）",
         "chinese": "啦啦（护手霜 卡仕达酱 I'm Creamy）"
       },
       {
@@ -12493,7 +12505,7 @@
         "chinese": "啦啦啦啦啦 修比嘟哇 修比嘟哇"
       },
       {
-        "japanese": "(C-R-E-A-M,I'mCreamy)",
+        "japanese": "(C-R-E-A-M, I'm Creamy)",
         "chinese": "(C-R-E-A-M, I'm Creamy)"
       }
     ]
@@ -13458,7 +13470,8 @@
       },
       {
         "japanese": "冴（さ）えないイズムで踊（おど）り負（ま）かすからね",
-        "chinese": "就用这黯淡的主义 将舞蹈击败吧"
+        "chinese": "就用这黯淡的主义 将舞蹈击败吧",
+        "breakBefore": true
       },
       {
         "japanese": "海馬（かいば）まで嗅（か）いだだけ",
@@ -13481,24 +13494,24 @@
         "chinese": "seeeeeeeed"
       },
       {
-        "japanese": "hmmmm…hmmhmmhmmmm…hmmhmm",
+        "japanese": "hmmmm…hmm hmm hmmmm…hmm hmm",
         "chinese": "hmmmm…hmm hmm hmmmm…hmm hmm"
       },
       {
-        "japanese": "hmmmm…hmmhmmhmmmm…hmmhmm",
+        "japanese": "hmmmm…hmm hmm hmmmm…hmm hmm",
         "chinese": "hmmmm…hmm hmm hmmmm…hmm hmm"
       },
       {
-        "japanese": "starregulus",
+        "japanese": "star regulus",
         "chinese": "star regulus",
         "breakBefore": true
       },
       {
-        "japanese": "starregulusstarregulus",
+        "japanese": "star regulus star regulus",
         "chinese": "star regulus star regulus"
       },
       {
-        "japanese": "starregulus",
+        "japanese": "star regulus",
         "chinese": "star regulus"
       },
       {
@@ -13507,31 +13520,31 @@
         "breakBefore": true
       },
       {
-        "japanese": "starlessstarless",
+        "japanese": "starless starless",
         "chinese": "starless starless"
       },
       {
-        "japanese": "starlessstarlessstarless",
+        "japanese": "starless starless starless",
         "chinese": "starless starless starless"
       },
       {
-        "japanese": "starlessstarlessstarlessstarless",
+        "japanese": "starless starless starless starless",
         "chinese": "starless starless starless starless"
       },
       {
-        "japanese": "starlessstarlessstarlessstarlessstarless",
+        "japanese": "starless starless starless starless starless",
         "chinese": "starless starless starless starless starless"
       },
       {
-        "japanese": "starlessstarlessstarlessstarless",
+        "japanese": "starless starless starless starless",
         "chinese": "starless starless starless starless"
       },
       {
-        "japanese": "starlessstarlessstarless",
+        "japanese": "starless starless starless",
         "chinese": "starless starless starless"
       },
       {
-        "japanese": "starlessstarless",
+        "japanese": "starless starless",
         "chinese": "starless starless"
       },
       {
@@ -13547,11 +13560,11 @@
         "chinese": "starless"
       },
       {
-        "japanese": "starlessstarless",
+        "japanese": "starless starless",
         "chinese": "starless starless"
       },
       {
-        "japanese": "starlessstarlessstarless",
+        "japanese": "starless starless starless",
         "chinese": "starless starless starless..."
       },
       {
@@ -13605,7 +13618,8 @@
       },
       {
         "japanese": "まるで◯です",
-        "chinese": "简直就像◯对号"
+        "chinese": "简直就像◯对号",
+        "breakBefore": true
       },
       {
         "japanese": "固体（こたい）がペースト同様（どうよう）に",
@@ -14255,20 +14269,20 @@
         "chinese": "监狱晚餐"
       },
       {
-        "japanese": "ihihihimemememe",
+        "japanese": "i hi hi hi me me me me",
         "chinese": "i hi hi hi me me me me",
         "breakBefore": true
       },
       {
-        "japanese": "ihihihimemememe",
+        "japanese": "i hi hi hi me me me me",
         "chinese": "i hi hi hi me me me me"
       },
       {
-        "japanese": "boomboomboomboomboomboom",
+        "japanese": "boom boom boom boom boom boom",
         "chinese": "boom boom boom boom boom boom"
       },
       {
-        "japanese": "boobooboobooboo",
+        "japanese": "boo boo boo boo boo",
         "chinese": "boo boo boo boo boo"
       },
       {
@@ -14313,15 +14327,15 @@
         "chinese": "监狱晚餐"
       },
       {
-        "japanese": "ihihihimemememe",
+        "japanese": "i hi hi hi me me me me",
         "chinese": "i hi hi hi me me me me"
       },
       {
-        "japanese": "ihihihimemememe",
+        "japanese": "i hi hi hi me me me me",
         "chinese": "i hi hi hi me me me me"
       },
       {
-        "japanese": "boomboomboomboomboomboom",
+        "japanese": "boom boom boom boom boom boom",
         "chinese": "boom boom boom boom boom boom"
       },
       {
@@ -14343,44 +14357,44 @@
       },
       {
         "japanese": "fósilfósilfósilfósil",
-        "chinese": "fósil fósil fósil fósil",
+        "chinese": "化石，化石，化石，化石",
         "breakBefore": true
       },
       {
         "japanese": "fósilfósilfósil",
-        "chinese": "fósil fósil fósil"
+        "chinese": "化石，化石，化石"
       },
       {
         "japanese": "fósilfósilfósil",
-        "chinese": "fósil fósil fósil"
+        "chinese": "化石，化石，化石"
       },
       {
         "japanese": "fósilesseacumulan",
-        "chinese": "fósiles se acumulan"
+        "chinese": "化石不断堆积"
       },
       {
         "japanese": "fósilfósilfósilfósil",
-        "chinese": "fósil fósil fósil fósil"
+        "chinese": "化石，化石，化石，化石"
       },
       {
         "japanese": "fósilfósilfósil",
-        "chinese": "fósil fósil fósil"
+        "chinese": "化石，化石，化石"
       },
       {
         "japanese": "fósilfósilfósil",
-        "chinese": "fósil fósil fósil"
+        "chinese": "化石，化石，化石"
       },
       {
         "japanese": "fósilesseacumulan",
-        "chinese": "fósiles se acumulan"
+        "chinese": "化石不断堆积"
       },
       {
         "japanese": "fósilfósilfósil",
-        "chinese": "fósil fósil fósil"
+        "chinese": "化石，化石，化石"
       },
       {
         "japanese": "fósilesseacumulan",
-        "chinese": "fósiles se acumulan"
+        "chinese": "化石不断堆积"
       },
       {
         "japanese": "夕陽（ゆうひ）が落（お）ちてゆく海（うみ）に隠（かく）れる",
@@ -14516,11 +14530,11 @@
         "chinese": "能以奶油之身相见吗"
       },
       {
-        "japanese": "(C-R-E-A-M,I'mCreamy)",
+        "japanese": "(C-R-E-A-M, I'm Creamy)",
         "chinese": "(C-R-E-A-M, I'm Creamy)"
       },
       {
-        "japanese": "(C-R-E-A-M,I'mCreamy)",
+        "japanese": "(C-R-E-A-M, I'm Creamy)",
         "chinese": "(C-R-E-A-M, I'm Creamy)"
       },
       {
@@ -14733,7 +14747,7 @@
         "chinese": "此刻可否能与啦啦"
       },
       {
-        "japanese": "ララ(C-R-E-A-M,I'mCreamy)",
+        "japanese": "ララ(C-R-E-A-M, I'm Creamy)",
         "chinese": "啦啦(C-R-E-A-M, I'm Creamy)",
         "breakBefore": true
       },
@@ -14742,7 +14756,7 @@
         "chinese": "啦啦啦啦啦 修比嘟哇 修比嘟哇"
       },
       {
-        "japanese": "ララ（ハンドクリームカスタードクリームI'mCreamy）",
+        "japanese": "ララ（ハンドクリーム カスタードクリーム I'm Creamy）",
         "chinese": "啦啦（护手霜 卡仕达酱 I'm Creamy）"
       },
       {
@@ -14750,7 +14764,7 @@
         "chinese": "啦啦啦啦啦 修比嘟哇 修比嘟哇"
       },
       {
-        "japanese": "(C-R-E-A-M,I'mCreamy)",
+        "japanese": "(C-R-E-A-M, I'm Creamy)",
         "chinese": "(C-R-E-A-M, I'm Creamy)"
       }
     ]

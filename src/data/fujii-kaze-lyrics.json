@@ -2,12 +2,12 @@
   "何なんw": {
     "lines": [
       {
-        "japanese": "あんたのその歯（は）には下（さ）がった青（あお）さ粉（こ）に",
-        "chinese": "我看着你牙上的海苔渣子"
+        "japanese": "あんたのその歯（は）にはさがった青（あお）さ粉（こ）に",
+        "chinese": "你牙上卡着一点海苔碎屑"
       },
       {
         "japanese": "触（ふ）れるべきか否（いな）かで少（すこ）し悩（なや）んでる",
-        "chinese": "犹豫着该不该说"
+        "chinese": "我有点犹豫要不要告诉你"
       },
       {
         "japanese": "口（くち）にしない方（ほう）がいい真実（しんじつ）もあるから",
@@ -15,37 +15,36 @@
       },
       {
         "japanese": "…知（し）らない方（ほう）が良（よ）かったなんて言（い）わないでいて",
-        "chinese": "但你也别说\"还不如别告诉我\"这种话",
-        "breakBefore": true
+        "chinese": "可别说什么“还不如不知道”啊"
       },
       {
         "japanese": "何（なに）があってもずっと大好（だいす）きなのに",
-        "chinese": "不管未来怎样 我都会一直爱你"
+        "chinese": "明明无论发生什么，我都一直喜欢你"
       },
       {
         "japanese": "どんな時（とき）も ここにいるのに",
-        "chinese": "无论何时 都在这里"
+        "chinese": "明明无论何时，我都在这里"
       },
       {
         "japanese": "近（ちか）すぎて 見（み）えなくて 無視（むし）されて",
-        "chinese": "但离的太近就看不到 继而被熟视无睹"
+        "chinese": "可我离你太近，你看不见我，就把我忽略了"
       },
       {
         "japanese": "雨（あめ）の中（なか）一人（ひとり）行（ゆ）くあんた",
-        "chinese": "雨中的你 孤身离去",
+        "chinese": "你独自走在雨里",
         "breakBefore": true
       },
       {
         "japanese": "心（こころ）の中（なか）で囁（ささや）くのよ そっちに行（い）ってはダメと",
-        "chinese": "心中的我 嗫嚅细语 \"千万别过去\""
+        "chinese": "我在你心里低声说，别往那边去"
       },
       {
         "japanese": "聞（き）かないフリ続（つづ）けるあんた",
-        "chinese": "但继续装聋的你"
+        "chinese": "可你还是装作没听见"
       },
       {
         "japanese": "勢（いきお）いにまかせて 肥溜（こえだ）めへとダイブ",
-        "chinese": "顺势跳入粪坑"
+        "chinese": "一头栽进了粪坑"
       },
       {
         "japanese": "それは何（なん）なん",
@@ -61,7 +60,7 @@
         "chinese": "你这是干什么呀？"
       },
       {
-        "japanese": "何（なん）で何（なん）も聞（き）いてくれんかったん",
+        "japanese": "何（なん）で何（なに）も聞（き）いてくれんかったん",
         "chinese": "为什么不听人劝啊"
       },
       {
@@ -69,8 +68,8 @@
         "chinese": "你那什么态度啊？"
       },
       {
-        "japanese": "花（ばな）咲（さ）く町（まち）の角（かど）誓（ちか）った",
-        "chinese": "在花开的街角 许下的承诺"
+        "japanese": "花（はな）咲（さ）く町（まち）の角（かど）誓（ちか）った",
+        "chinese": "我们在花开的街角许下誓言"
       },
       {
         "japanese": "あの時（とき）の笑顔（えがお）は何（なん）なん",
@@ -82,37 +81,37 @@
       },
       {
         "japanese": "たまには大胆（だいたん）に攻（せ）めたら良（い）い",
-        "chinese": "偶尔大胆攻进",
+        "chinese": "偶尔也可以放胆一搏",
         "breakBefore": true
       },
       {
         "japanese": "時（とき）には慎重（しんちょう）に歩（あゆ）めば良（い）い",
-        "chinese": "时而谨慎前移"
+        "chinese": "有时也可以小心前行"
       },
       {
         "japanese": "真実（しんじつ）なんてもんはとっくのとうに",
-        "chinese": "你所不知的事实"
+        "chinese": "所谓真相，你其实早就知道了"
       },
       {
         "japanese": "知（し）っていることを知（し）らないだけでしょう",
-        "chinese": "就是真相早在你心里"
+        "chinese": "只是不知道自己早已知道罢了"
       },
       {
         "japanese": "あれほど刻（きざ）んだ後悔（こうかい）も",
-        "chinese": "当时后悔得痛心疾首",
+        "chinese": "那份曾刻骨铭心的悔意",
         "breakBefore": true
       },
       {
         "japanese": "くり返（かえ）す毎日（まいにち）の中（なか）で かき消（け）されていくのね",
-        "chinese": "还是被日复一日所抹去"
+        "chinese": "也被日复一日的生活渐渐冲淡"
       },
       {
         "japanese": "真（ま）っさらになった決意（けつい）を胸（むね）に",
-        "chinese": "你决定翻篇 关机重启"
+        "chinese": "揣着一份重新立下的决心"
       },
       {
         "japanese": "あんたは堂々（どうどう）と また肥溜（こえだ）めへとダイブ",
-        "chinese": "居然又自豪地对着粪坑 自由落体"
+        "chinese": "你却堂堂正正地又一头扎进了粪坑"
       },
       {
         "japanese": "それは何（なん）なん",
@@ -128,7 +127,7 @@
         "chinese": "那你为什么这样啊？"
       },
       {
-        "japanese": "何（なん）で何（なん）も聞（き）いてくれんかったん",
+        "japanese": "何（なん）で何（なに）も聞（き）いてくれんかったん",
         "chinese": "为什么不听人劝呢？"
       },
       {
@@ -136,8 +135,8 @@
         "chinese": "你那什么态度啊？"
       },
       {
-        "japanese": "花（ばな）咲（さ）く町（まち）の角（かど）誓（ちか）った",
-        "chinese": "在花开的街角 许下的承诺"
+        "japanese": "花（はな）咲（さ）く町（まち）の角（かど）誓（ちか）った",
+        "chinese": "我们在花开的街角许下誓言"
       },
       {
         "japanese": "あの時（とき）の笑顔（えがお）は何（なん）なん",
@@ -183,11 +182,11 @@
       },
       {
         "japanese": "もう歌（うた）わせないで 裏切（うらぎ）りのブルース",
-        "chinese": "别再让我唱起 背叛的怨曲"
+        "chinese": "别再让我唱那首背叛的布鲁斯"
       },
       {
         "japanese": "それは「何（なん）なんw」…ワシは言（い）うたが",
-        "chinese": "这首歌就是《WTF lol》我不早说了么",
+        "chinese": "这到底算什么？……我不是跟你说过了吗？",
         "breakBefore": true
       },
       {
@@ -392,8 +391,7 @@
       },
       {
         "japanese": "今（いま）何（なに）を見（み）ていた あなたの影（かげ）を見（み）た",
-        "chinese": "你刚刚在看什么 我看见了你的影子",
-        "breakBefore": true
+        "chinese": "你刚刚在看什么 我看见了你的影子"
       },
       {
         "japanese": "優（やさ）しさに震（ふる）えた あの腕（うで）の中（なか）で",
@@ -466,7 +464,7 @@
         "chinese": "冰冻的心 融化为爱"
       },
       {
-        "japanese": "花（ばな）の咲（さ）く季節（きせつ）が戻（もど）ってくる",
+        "japanese": "花（はな）の咲（さ）く季節（きせつ）が戻（もど）ってくる",
         "chinese": "花开的季节 冬尽春来"
       },
       {
@@ -627,7 +625,7 @@
   "罪の香り": {
     "lines": [
       {
-        "japanese": "声（こえ）も聞（きき）かさないで 出（で）て行（い）って",
+        "japanese": "声（こえ）も聞（き）かさないで 出（で）て行（い）って",
         "chinese": "快出去 别让我听到声音"
       },
       {
@@ -809,10 +807,6 @@
         "breakBefore": true
       },
       {
-        "japanese": "セルフライナーノーツ：プログレ、ジャズ、ラテンなどいろんな香（かお）りが漂（ただよ）うサウンドが圧倒（あっとう）的（てき）。罪（つみ）への恐（おそ）れを歌（うた）った楽曲（がっきょく）。",
-        "chinese": "Self Liner Notes：压倒性的嗓音中弥漫着前卫摇滚、爵士、拉丁音乐等各式各样的香气。是歌唱了对罪恶的恐惧的乐曲。"
-      },
-      {
         "japanese": "アルバムで唯一（ゆいいつ）ホーンセクションが入（はい）った楽曲（がっきょく）、熱気（ねっき）・生（なま）感（かん）があふれた熱（あつ）い仕上（しあ）がり。",
         "chinese": "是本专辑中唯一一首加入本部分的乐曲。最终完成版洋溢着热情与现场感。"
       }
@@ -962,13 +956,9 @@
         "chinese": "得意忘形"
       },
       {
-        "japanese": "セルフライナーノーツ：じりじりと徐々（じょじょ）に盛（も）り上（あ）がっていく。嚙（か）めば嚙（か）むほど味（あじ）が出（で）てくるスルメ曲（きょく）。",
-        "chinese": "藤井风个人自序：循序渐进逐渐达到高潮，越听越有味道的慢热洗脑歌。",
-        "breakBefore": true
-      },
-      {
         "japanese": "吉田（よしだ）有里（ゆり） (ゆりやんレトリィバァ)よりインスパイヤなタイトルからは想像（そうぞう）できない、とにかくアダルトなムードの曲（きょく）にしたかった。",
-        "chinese": "曲名的灵感来自于搞笑艺人Yurian的招牌动作，歌曲本身却是充满成熟氛围。无论如何也想营造出这样的反差。"
+        "chinese": "曲名的灵感来自于搞笑艺人Yurian的招牌动作，歌曲本身却是充满成熟氛围。无论如何也想营造出这样的反差。",
+        "breakBefore": true
       },
       {
         "japanese": "自分（じぶん）への戒（いまし）めへの曲（きょく）を書（か）いてからは、たぶんあまり調子（ちょうし）にのってないと思（おも）いたい。",
@@ -1386,13 +1376,9 @@
         "chinese": "让我昂首挺胸 飞翔天际"
       },
       {
-        "japanese": "セルフライナーノーツ：自分（じぶん）のルーツの1つである昭和（しょうわ）歌謡（かよう）を全面（ぜんめん）に押（お）し出（だ）した1曲（きょく）。Yaffle氏（し）(小島（こじま）裕（ひろし）規（き）)の現代（げんだい）解釈（かいしゃく）による、極力（きょくりょく）シンプルにそぎ落（お）としたアレンジがこの曲（きょく）の哀愁（あいしゅう）より引（ひ）き立（た）ててくれた。",
-        "chinese": "藤井风本人自序：该曲全面展现了自身音乐根源之一的昭和歌谣曲风格。Yaffle（小岛裕规）在其现代诠释下，尽可能简洁地进行了减法编曲，令这首歌曲的哀愁得到了加强。",
-        "breakBefore": true
-      },
-      {
         "japanese": "神（かみ）様（さま）を吹（ふ）く風（かぜ）に重（かさ）ね合（あ）わせて、導（みちび）いてほしいと願（ねが）う、祈（いの）りの歌（うた）。",
-        "chinese": "将神明比喻为吹起的风儿，愿其为自己指明方向的一首请愿、祈祷之歌。"
+        "chinese": "将神明比喻为吹起的风儿，愿其为自己指明方向的一首请愿、祈祷之歌。",
+        "breakBefore": true
       }
     ]
   },
@@ -3618,7 +3604,8 @@
       },
       {
         "japanese": "何（なに）も知（し）ったこっちゃない",
-        "chinese": "我什么都不在乎"
+        "chinese": "我什么都不在乎",
+        "breakBefore": true
       },
       {
         "japanese": "好（す）きにしてください",
@@ -3908,7 +3895,7 @@
         "chinese": "似乎只要跟随自己的内心"
       },
       {
-        "japanese": "作（づく）り変（か）えられるみたい",
+        "japanese": "作（つく）り変（か）えられるみたい",
         "chinese": "便可创造一个全新的世界"
       },
       {
@@ -4212,7 +4199,8 @@
       },
       {
         "japanese": "燃（も）えよ",
-        "breakBefore": true
+        "breakBefore": true,
+        "chinese": "燃烧吧"
       },
       {
         "japanese": "あの空（そら）に燃（も）えよ",
@@ -4220,26 +4208,27 @@
       },
       {
         "japanese": "明日（あした）なんか来（く）ると",
-        "chinese": "不在乎明天般地"
+        "chinese": "别去想明天来不来，"
       },
       {
         "japanese": "思（おも）わずに燃（も）えよ",
-        "chinese": "燃烧吧"
+        "chinese": "尽情燃烧吧"
       },
       {
         "japanese": "クールなフリ もうええよ",
-        "chinese": "不必装酷"
+        "chinese": "不用再装酷了"
       },
       {
-        "japanese": "強（つよ）がりも もうええよ"
+        "japanese": "強（つよ）がりも もうええよ",
+        "chinese": "也不用再逞强"
       },
       {
         "japanese": "汗（あせ）かいてもええよ",
-        "chinese": "尽情地流汗吧"
+        "chinese": "尽管流汗也无妨"
       },
       {
         "japanese": "恥（はじ）かいてもええよ",
-        "chinese": "丢脸也没关系"
+        "chinese": "就算出丑也没关系"
       },
       {
         "japanese": "簡単（かんたん）じゃないかもね",
@@ -4269,26 +4258,27 @@
       },
       {
         "japanese": "明日（あした）なんか来（く）ると",
-        "chinese": "不在乎明天般地"
+        "chinese": "别去想明天来不来，"
       },
       {
-        "japanese": "思（おも）わずに燃（も）えよ"
+        "japanese": "思（おも）わずに燃（も）えよ",
+        "chinese": "尽情燃烧吧"
       },
       {
         "japanese": "クールなフリ もうええよ",
-        "chinese": "不必装酷"
+        "chinese": "不用再装酷了"
       },
       {
         "japanese": "強（つよ）がりも もうええよ",
-        "chinese": "也不必逞强"
+        "chinese": "也不用再逞强"
       },
       {
         "japanese": "汗（あせ）かいてもええよ",
-        "chinese": "尽情地流汗吧"
+        "chinese": "尽管流汗也无妨"
       },
       {
         "japanese": "恥（はじ）かいてもええよ",
-        "chinese": "丢脸也没关系"
+        "chinese": "就算出丑也没关系"
       },
       {
         "japanese": "確（たし）かなものにはKeep hold on",
@@ -4326,25 +4316,27 @@
       },
       {
         "japanese": "明日（あした）なんか来（く）ると",
-        "chinese": "不在乎明天般地燃烧吧"
+        "chinese": "别去想明天来不来，"
       },
       {
-        "japanese": "思（おも）わずに燃（も）えよ"
+        "japanese": "思（おも）わずに燃（も）えよ",
+        "chinese": "尽情燃烧吧"
       },
       {
         "japanese": "クールなフリ もうええよ",
-        "chinese": "不必装酷"
+        "chinese": "不用再装酷了"
       },
       {
         "japanese": "強（つよ）がりも もうええよ",
-        "chinese": "也不必逞强"
+        "chinese": "也不用再逞强"
       },
       {
         "japanese": "汗（あせ）かいてもええよ",
-        "chinese": "尽情地流汗吧"
+        "chinese": "尽管流汗也无妨"
       },
       {
-        "japanese": "恥（はじ）かいてもええよ"
+        "japanese": "恥（はじ）かいてもええよ",
+        "chinese": "就算出丑也没关系"
       },
       {
         "japanese": "あの空（そら）に燃（も）えよ",
@@ -4353,23 +4345,27 @@
       },
       {
         "japanese": "燃（も）えよ",
-        "chinese": "燃烧吧　燃烧吧　燃烧吧"
-      },
-      {
-        "japanese": "燃（も）えよ"
-      },
-      {
-        "japanese": "燃（も）えよ"
+        "chinese": "燃烧吧"
       },
       {
         "japanese": "燃（も）えよ",
-        "chinese": "燃烧吧　燃烧吧　燃烧吧"
+        "chinese": "燃烧吧"
       },
       {
-        "japanese": "燃（も）えよ"
+        "japanese": "燃（も）えよ",
+        "chinese": "燃烧吧"
       },
       {
-        "japanese": "燃（も）えよ"
+        "japanese": "燃（も）えよ",
+        "chinese": "燃烧吧"
+      },
+      {
+        "japanese": "燃（も）えよ",
+        "chinese": "燃烧吧"
+      },
+      {
+        "japanese": "燃（も）えよ",
+        "chinese": "燃烧吧"
       },
       {
         "japanese": "燃（も）えよ",
@@ -4794,7 +4790,8 @@
         "chinese": "最安全 最美好 最幸福的归宿 我的宝贝"
       },
       {
-        "japanese": "damn"
+        "japanese": "damn",
+        "chinese": "真是的"
       }
     ]
   },
@@ -5932,10 +5929,11 @@
       },
       {
         "japanese": "(I need some hot stuff, baby, tonight) Won't spend another night on my own",
-        "chinese": "不将在自己孤独一人"
+        "chinese": "（今晚我渴望炽热的爱，宝贝）我不想再独自过一夜"
       },
       {
-        "japanese": "I dialed about a hundred numbers lately"
+        "japanese": "I dialed about a hundred numbers lately",
+        "chinese": "最近打了差不多一百通电话"
       },
       {
         "japanese": "I need some lovin', baby, gonna need your love tonight",
@@ -7030,7 +7028,8 @@
         "chinese": "就让我完整你的年少梦想"
       },
       {
-        "japanese": "(Tonight, tonight, tonight, tonight, tonight, tonight)"
+        "japanese": "(Tonight, tonight, tonight, tonight, tonight, tonight)",
+        "chinese": "（今夜，今夜，今夜，今夜，今夜，今夜）"
       },
       {
         "japanese": "(You) You make me (Make me)",
@@ -7083,7 +7082,8 @@
         "chinese": "就让我完整你年少的梦想"
       },
       {
-        "japanese": "(Tonight, tonight, tonight, tonight, tonight, tonight)"
+        "japanese": "(Tonight, tonight, tonight, tonight, tonight, tonight)",
+        "chinese": "（今夜，今夜，今夜，今夜，今夜，今夜）"
       }
     ]
   },
@@ -7138,7 +7138,7 @@
         "chinese": "真希望他别那样看着我"
       },
       {
-        "japanese": "Eh-еh, eh-eh"
+        "japanese": "Eh-eh, eh-eh"
       },
       {
         "japanese": "There's nothing else I can say",
@@ -8199,8 +8199,7 @@
       },
       {
         "japanese": "手（て）を放（はな）す、軽（かる）くなる、満（み）ちてゆく",
-        "chinese": "放开双手 变得轻盈 逐渐盈满",
-        "breakBefore": true
+        "chinese": "放开双手 变得轻盈 逐渐盈满"
       }
     ]
   },
@@ -9431,15 +9430,16 @@
       },
       {
         "japanese": "Oh",
-        "chinese": "噢 你所需的一切 尽在你的",
+        "chinese": "哦",
         "breakBefore": true
       },
       {
-        "japanese": "All you need, all you need, it's right there in your soul"
+        "japanese": "All you need, all you need, it's right there in your soul",
+        "chinese": "你所需的一切，全都在自己的灵魂深处"
       },
       {
         "japanese": "And nobody can break you anymore",
-        "chinese": "再也无人"
+        "chinese": "再没有人能伤害你"
       },
       {
         "japanese": "No matter how they try",
@@ -9594,17 +9594,20 @@
         "chinese": "除你之外 无人可比"
       },
       {
-        "japanese": "Inside, inside you"
+        "japanese": "Inside, inside you",
+        "chinese": "在你的内心深处"
       },
       {
-        "japanese": "Inside, inside you"
+        "japanese": "Inside, inside you",
+        "chinese": "在你的内心深处"
       },
       {
         "japanese": "Inside, inside you",
         "chinese": "在你的内心中"
       },
       {
-        "japanese": "You, you, you"
+        "japanese": "You, you, you",
+        "chinese": "你，就是你"
       },
       {
         "japanese": "You are the infinite sun and the moon",
@@ -10598,7 +10601,8 @@
       },
       {
         "japanese": "闇（やみ）を抜（ぬ）けて",
-        "chinese": "穿过黑暗"
+        "chinese": "穿过黑暗",
+        "breakBefore": true
       },
       {
         "japanese": "山（やま）を越（こ）えて",

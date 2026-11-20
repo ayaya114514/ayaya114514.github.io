@@ -1465,7 +1465,7 @@
         "breakBefore": true
       },
       {
-        "japanese": "悲（かな）しくなるのは仕方（しかた）がないんだ 歩（ある）き出（だ）せ煙（けむり）りの中（なか）を",
+        "japanese": "悲（かな）しくなるのは仕方（しかた）がないんだ 歩（ある）き出（だ）せ煙（けむ）りの中（なか）を",
         "chinese": "感到悲伤也没什么办法 只有在尘埃中继续行走"
       },
       {
@@ -1514,7 +1514,7 @@
         "breakBefore": true
       },
       {
-        "japanese": "悲（かな）しくなるのは仕方（しかた）がないんだ 歩（ある）き出（だ）せ煙（けむり）りの中（なか）を",
+        "japanese": "悲（かな）しくなるのは仕方（しかた）がないんだ 歩（ある）き出（だ）せ煙（けむ）りの中（なか）を",
         "chinese": "感到悲伤也没什么办法 只有在尘埃中继续行走"
       },
       {
@@ -1575,7 +1575,7 @@
         "breakBefore": true
       },
       {
-        "japanese": "煙（けむり）りのようだ 淋（さみ）しい僕（ぼく）らの煙（けむり）りのようだ",
+        "japanese": "煙（けむ）りのようだ 淋（さみ）しい僕（ぼく）らの煙（けむ）りのようだ",
         "chinese": "烟尘一样 像寂寞的我们的烟尘一样"
       },
       {
@@ -1597,13 +1597,8 @@
   "Ame(B)": {
     "lines": [
       {
-        "japanese": "Ame (B) - sakanaction",
-        "chinese": "Ame(B) - 鱼韵"
-      },
-      {
         "japanese": "アメ フルヨル",
-        "chinese": "雨水 敲打夜晚",
-        "breakBefore": true
+        "chinese": "雨水 敲打夜晚"
       },
       {
         "japanese": "キミガ クレタカサ",
@@ -1618,11 +1613,11 @@
         "chinese": "吹拂"
       },
       {
-        "japanese": "ツヨクフル",
+        "japanese": "ツヨクフク",
         "chinese": "强烈地吹动"
       },
       {
-        "japanese": "ヒダリカタニシタタアメ",
+        "japanese": "ヒダリカタニシタタルアメ",
         "chinese": "雨滴不断打在左肩上"
       },
       {
@@ -1642,11 +1637,11 @@
         "chinese": "吹拂"
       },
       {
-        "japanese": "ツヨクフル",
+        "japanese": "ツヨクフク",
         "chinese": "强烈地吹动"
       },
       {
-        "japanese": "ヒダリカタニシタタアメ",
+        "japanese": "ヒダリカタニシタタルアメ",
         "chinese": "雨滴不断打在左肩上"
       },
       {
@@ -1666,11 +1661,11 @@
         "chinese": "吹拂"
       },
       {
-        "japanese": "ツヨクフル",
+        "japanese": "ツヨクフク",
         "chinese": "强烈地吹动"
       },
       {
-        "japanese": "ヒダリカタニシタタアメ",
+        "japanese": "ヒダリカタニシタタルアメ",
         "chinese": "雨滴不断打在左肩上"
       },
       {
@@ -1776,7 +1771,7 @@
         "chinese": "单手挠了挠后背 轻轻的叹息 准备要走吧"
       },
       {
-        "japanese": "午前（ごぜん）0時（ごぜんれいじ）の狭間（はざま）で",
+        "japanese": "午前（ごぜん）｜0時《れいじ》の狭間（はざま）で",
         "chinese": "在午夜零点的缝隙",
         "breakBefore": true
       },
@@ -2747,7 +2742,8 @@
       },
       {
         "japanese": "悩（なや）んで 僕（ぼく）らは",
-        "chinese": "烦恼的我们"
+        "chinese": "烦恼的我们",
+        "breakBefore": true
       },
       {
         "japanese": "また知（し）らない場所（ばしょ）を知（し）るようになる",
@@ -2875,12 +2871,6 @@
   },
   "アンダー": {
     "lines": [
-      {
-        "japanese": "作詞（さくし）∶Ichiro Yamaguchi"
-      },
-      {
-        "japanese": "歌（うた）∶サカナクション"
-      },
       {
         "japanese": "髪（かみ）が伸（の）びるたび",
         "chinese": "察觉到头发变长了"
@@ -3235,7 +3225,7 @@
         "chinese": "握紧的手中都是汗"
       },
       {
-        "japanese": "表参道（おもてさんどう）の26時（にじゅうろくじ）が過（す）ぎてく",
+        "japanese": "表参道（おもてさんどう）の｜26時《にじゅうろくじ》が過（す）ぎてく",
         "chinese": "表参道26时渐渐过去了"
       },
       {
@@ -3299,7 +3289,7 @@
         "chinese": "握紧的手中都是汗"
       },
       {
-        "japanese": "表参道（おもてさんどう）の26時（にじゅうろくじ）が過（す）ぎてく",
+        "japanese": "表参道（おもてさんどう）の｜26時《にじゅうろくじ》が過（す）ぎてく",
         "chinese": "表参道26时渐渐过去了"
       },
       {
@@ -3328,7 +3318,7 @@
         "chinese": "握紧的手中都是汗"
       },
       {
-        "japanese": "表（ひょう）参道（さんどう）の26時（じ）が過（す）ぎてく",
+        "japanese": "表参道（おもてさんどう）の26時（じ）が過（す）ぎてく",
         "chinese": "表参道26时渐渐过去了"
       }
     ]
@@ -3410,7 +3400,8 @@
         "breakBefore": true
       },
       {
-        "japanese": "僕（ぼく）が覚悟（かくご）を決（き）めたのは    庭（にわ）の花（はな）が咲（さ）く頃（ころ）"
+        "japanese": "僕（ぼく）が覚悟（かくご）を決（き）めたのは    庭（にわ）の花（はな）が咲（さ）く頃（ころ）",
+        "chinese": "我下定决心时，院子里的花正开。"
       }
     ]
   },
@@ -4791,14 +4782,16 @@
       },
       {
         "japanese": "years years",
-        "breakBefore": true
+        "breakBefore": true,
+        "chinese": "岁月，岁月"
       },
       {
         "japanese": "この先（さき）に待（ま）ち受（う）けてる時代（じだい）の泥（どろ）が",
         "chinese": "在前方等待着 时代的洪流"
       },
       {
-        "japanese": "years years"
+        "japanese": "years years",
+        "chinese": "岁月，岁月"
       },
       {
         "japanese": "僕（ぼく）らを染（そ）めてしまうかはわからないけど",
@@ -4827,28 +4820,32 @@
       },
       {
         "japanese": "years years",
-        "breakBefore": true
+        "breakBefore": true,
+        "chinese": "岁月，岁月"
       },
       {
         "japanese": "この先（さき）に待（ま）ち受（う）けてる時代（じだい）のハサミは",
         "chinese": "在前方等待着 时代的利剪"
       },
       {
-        "japanese": "years years"
+        "japanese": "years years",
+        "chinese": "岁月，岁月"
       },
       {
         "japanese": "多分（たぶん）この帆（ほ）を切（き）り刻（きざ）みバラバラにするけど",
         "chinese": "虽然 或许会刻薄地将风帆切碎"
       },
       {
-        "japanese": "years years"
+        "japanese": "years years",
+        "chinese": "岁月，岁月"
       },
       {
         "japanese": "また繋（つな）ぎ合（あ）わせるから その時（とき）には",
         "chinese": "到了那时 我们能否再次拼接？"
       },
       {
-        "japanese": "years years"
+        "japanese": "years years",
+        "chinese": "岁月，岁月"
       },
       {
         "japanese": "君（きみ）のことを思（おも）い出（だ）しても許（ゆる）してくれるかい？",
@@ -4867,7 +4864,8 @@
         "chinese": "或许这就是 不变的其中之一"
       },
       {
-        "japanese": "years"
+        "japanese": "years",
+        "chinese": "岁月"
       }
     ]
   },
@@ -5219,7 +5217,8 @@
       },
       {
         "japanese": "離（はな）ればなれ",
-        "chinese": "离去了离去了"
+        "chinese": "离去了离去了",
+        "breakBefore": true
       },
       {
         "japanese": "鳥（とり）は群（む）れの仲間（なかま）が",
@@ -7381,7 +7380,7 @@
     "lines": [
       {
         "japanese": "探（さが）してる音（おと）　多（おお）すぎて　多（おお）すぎて",
-        "chinese": "寻找的身影 太多了啊 太多了啊"
+        "chinese": "想找的声音太多了，太多了"
       },
       {
         "japanese": "どこかに　何（なん）を忘（わす）れたか　忘（わす）れたさ",
@@ -8564,7 +8563,8 @@
         "chinese": "我们还能歌颂什么"
       },
       {
-        "japanese": "グッドバイ 世界（せかい）から"
+        "japanese": "グッドバイ 世界（せかい）から",
+        "chinese": "再见了，从这个世界，"
       },
       {
         "japanese": "何（なん）を歌（うた）うんだろう",
@@ -8784,7 +8784,8 @@
         "chinese": "雨 雨"
       },
       {
-        "japanese": "雨（あめ）"
+        "japanese": "雨（あめ）",
+        "chinese": "雨"
       },
       {
         "japanese": "ラララ",
@@ -11458,7 +11459,7 @@
         "chinese": "单手挠了挠后背 轻轻的叹息 准备要走吧"
       },
       {
-        "japanese": "午前（ごぜん）0時（ごぜんれいじ）の狭間（はざま）で",
+        "japanese": "午前（ごぜん）｜0時《れいじ》の狭間（はざま）で",
         "chinese": "在午夜零点的缝隙",
         "breakBefore": true
       },
@@ -11705,19 +11706,19 @@
       },
       {
         "japanese": "ずっと",
-        "chinese": "ずっと"
+        "chinese": "一直"
       },
       {
         "japanese": "隠（かく）してたけど",
-        "chinese": "一直 隐藏着"
+        "chinese": "都藏在心底"
       },
       {
         "japanese": "ずっと昔（むかし）の",
-        "chinese": "往昔 一直如此"
+        "chinese": "把从前"
       },
       {
         "japanese": "僕（ぼく）の答（こた）えをまた用意（ようい）して",
-        "chinese": "我的答复 又为你重新准备"
+        "chinese": "我给出的答案再准备一次"
       },
       {
         "japanese": "夢（ゆめ）みたいなこの日（ひ）を",
@@ -11738,20 +11739,20 @@
       },
       {
         "japanese": "ずっと",
-        "chinese": "一直、一直",
+        "chinese": "一直",
         "breakBefore": true
       },
       {
         "japanese": "この言葉（ことば）を",
-        "chinese": "这句话语"
+        "chinese": "记着这句话"
       },
       {
         "japanese": "ずっと昔（むかし）の",
-        "chinese": "往昔 一直如此"
+        "chinese": "把从前"
       },
       {
         "japanese": "僕（ぼく）の答（こた）えを今（いま）用意（ようい）して",
-        "chinese": "此刻 我的答复 正悄然萌生"
+        "chinese": "我给出的答案现在准备好"
       },
       {
         "japanese": "夢（ゆめ）みたいなこの日（ひ）を",
@@ -12758,7 +12759,7 @@
         "chinese": "寻寻觅觅终而前进"
       },
       {
-        "japanese": "また口（ぐち）つぐむだろう",
+        "japanese": "また口（くち）つぐむだろう",
         "chinese": "又转而缄口不言"
       },
       {
@@ -13051,7 +13052,7 @@
         "chinese": "那只小蜘蛛"
       },
       {
-        "japanese": "君（ぎみ）みたいだった",
+        "japanese": "君（きみ）みたいだった",
         "chinese": "就如同你一样"
       },
       {
@@ -13067,7 +13068,7 @@
         "chinese": "花尖摇曳拽弯了莲花"
       },
       {
-        "japanese": "苦（くる）しむ僕（ぼく）を引（ひ）っ張（ば）り上（あ）げてよ",
+        "japanese": "苦（くる）しむ僕（ぼく）を引（ひ）っ張（ぱ）り上（あ）げてよ",
         "chinese": "将煎熬的我牵出欲海啊"
       },
       {
@@ -13888,7 +13889,7 @@
         "chinese": "寻寻觅觅终而前进"
       },
       {
-        "japanese": "また口（ぐち）つぐむだろう",
+        "japanese": "また口（くち）つぐむだろう",
         "chinese": "又转而缄口不言"
       },
       {
@@ -16100,7 +16101,8 @@
       },
       {
         "japanese": "息（いき）をして 息（いき）をしていた",
-        "chinese": "呼吸着 在呼吸着"
+        "chinese": "呼吸着 在呼吸着",
+        "breakBefore": true
       },
       {
         "japanese": "息（いき）をして 息（いき）をしていた",
@@ -16138,8 +16140,7 @@
       },
       {
         "japanese": "息（いき）をして 息（いき）をしていた",
-        "chinese": "呼吸着 在呼吸着",
-        "breakBefore": true
+        "chinese": "呼吸着 在呼吸着"
       }
     ]
   },
@@ -17416,32 +17417,37 @@
         "chinese": "就算吹乱了头发 也还是依然前行"
       },
       {
-        "japanese": "years"
+        "japanese": "years",
+        "chinese": "岁月"
       },
       {
         "japanese": "years years",
-        "breakBefore": true
+        "breakBefore": true,
+        "chinese": "岁月，岁月"
       },
       {
         "japanese": "この先（さき）に待（ま）ち受（う）けてる時代（じだい）のハサミは",
         "chinese": "在前方等待着的 时代之剪"
       },
       {
-        "japanese": "years years"
+        "japanese": "years years",
+        "chinese": "岁月，岁月"
       },
       {
         "japanese": "多分（たぶん）この帆（ほ）を切（き）り刻（きざ）みバラバラにするけど",
         "chinese": "大概会刻薄地将风帆切碎"
       },
       {
-        "japanese": "years years"
+        "japanese": "years years",
+        "chinese": "岁月，岁月"
       },
       {
         "japanese": "また繋（つな）ぎ合（あ）わせるから　その時（とき）には",
         "chinese": "到了那时 我们能再次将其拼接"
       },
       {
-        "japanese": "years years"
+        "japanese": "years years",
+        "chinese": "岁月，岁月"
       },
       {
         "japanese": "君（きみ）のことを思（おも）い出（だ）しても許（ゆる）してくれるかい？",
@@ -17461,32 +17467,37 @@
         "chinese": "也许这就是始终不变的事情之一"
       },
       {
-        "japanese": "years"
+        "japanese": "years",
+        "chinese": "岁月"
       },
       {
         "japanese": "years years",
-        "breakBefore": true
+        "breakBefore": true,
+        "chinese": "岁月，岁月"
       },
       {
         "japanese": "この先（さき）に待（ま）ち受（う）けてる時代（じだい）のハサミは",
         "chinese": "在前方等待着的 时代之剪"
       },
       {
-        "japanese": "years years"
+        "japanese": "years years",
+        "chinese": "岁月，岁月"
       },
       {
         "japanese": "多分（たぶん）この帆（ほ）を切（き）り刻（きざ）みバラバラにするけど",
         "chinese": "大概会刻薄地将风帆切碎"
       },
       {
-        "japanese": "years years"
+        "japanese": "years years",
+        "chinese": "岁月，岁月"
       },
       {
         "japanese": "また繋（つな）ぎ合（あ）わせるから　その時（とき）には",
         "chinese": "到了那时 我们能再次将其拼接"
       },
       {
-        "japanese": "years years"
+        "japanese": "years years",
+        "chinese": "岁月，岁月"
       },
       {
         "japanese": "君（きみ）のことを思（おも）い出（だ）しても許（ゆる）してくれるかい？",
@@ -17506,7 +17517,8 @@
         "chinese": "也许这就是始终不变的事情之一"
       },
       {
-        "japanese": "years"
+        "japanese": "years",
+        "chinese": "岁月"
       }
     ]
   },

@@ -35,13 +35,14 @@ export function getStaticPaths() {
 
 function parseJapanese(value: string): JapaneseSegment[] {
   const segments: JapaneseSegment[] = []
-  const annotation = /([\p{Script=Han}々〆ヵヶ]+)[（(]([ぁ-んァ-ヿー々〆ヵヶ]+)[）)]/gu
+  const annotation =
+    /(?:｜([^｜《》\r\n]+)《([ぁ-ゖァ-ヺー]+)》|([\p{Script=Han}々〆ヵヶ]+)[（(]([ぁ-ゖァ-ヺー々〆ヵヶ]+)[）)])/gu
   let cursor = 0
 
   for (const match of value.matchAll(annotation)) {
     const index = match.index ?? 0
     if (index > cursor) segments.push({ text: value.slice(cursor, index) })
-    segments.push({ text: match[1], reading: match[2] })
+    segments.push({ text: match[1] ?? match[3], reading: match[2] ?? match[4] })
     cursor = index + match[0].length
   }
 
@@ -64,7 +65,9 @@ const { artistSlug, songTitle } = Astro.props as Props
 const artist = lyricArtists.find((candidate) => candidate.slug === artistSlug)
 if (!artist) throw new Error(`Unknown lyric artist: ${artistSlug}`)
 
-const lines = artist.details[songTitle]?.lines ?? []
+const song = artist.details[songTitle]
+const lines = song?.lines ?? []
+const sourceNote = song?.sourceNote
 const titleTranslation = artist.titleTranslations[songTitle]
 if (!titleTranslation)
   throw new Error(`Missing lyric title translation: ${artistSlug}/${songTitle}`)
@@ -77,6 +80,14 @@ const pageTitle = `${songTitle}（${titleTranslation}）`
   <ArtistNav slot='sidebar' artists={lyricArtists} currentSlug={artist.slug} />
 
   {
+    sourceNote && (
+      <p class='lyric-source-note'>
+        {sourceNote.text} <a href={sourceNote.href}>{sourceNote.linkText}</a>
+      </p>
+    )
+  }
+
+  {
     stanzas.length > 0 && (
       <div class='lyric-sheet not-prose'>
         {stanzas.map((stanza) => (
@@ -87,10 +98,7 @@ const pageTitle = `${songTitle}（${titleTranslation}）`
                   <p lang='ja' class='lyric-japanese'>
                     {parseJapanese(line.japanese).map((segment) =>
                       segment.reading ? (
-                        <ruby>
-                          {segment.text}
-                          <rt>{segment.reading}</rt>
-                        </ruby>
+                        <ruby>{[segment.text, <rt>{segment.reading}</rt>]}</ruby>
                       ) : (
                         segment.text
                       )
@@ -110,6 +118,12 @@ const pageTitle = `${songTitle}（${titleTranslation}）`
 </PageLayout>
 
 <style>
+  .lyric-source-note {
+    margin: 0 0 1.25rem;
+    color: hsl(var(--muted-foreground));
+    font-size: 0.95rem;
+  }
+
   .lyric-sheet {
     width: 100%;
     max-width: 72rem;

@@ -800,11 +800,11 @@
     "lines": [
       {
         "japanese": "降（ふ）り出（だ）した雨（あめ）の音（おと）",
-        "chinese": "来访大地的雨水之声"
+        "chinese": "雨刚落下的声音"
       },
       {
         "japanese": "誰（だれ）もいない夜（よる）の底（そこ）",
-        "chinese": "空无一人的深夜底层"
+        "chinese": "空无一人的深夜里"
       },
       {
         "japanese": "今日（きょう）が来（き）てしまう前（まえ）に",
@@ -1066,45 +1066,58 @@
   "或るひと夏の追憶": {
     "lines": [
       {
-        "japanese": "あぁやっと目（め）が覚（さ）めたかい君（くん）"
+        "japanese": "あぁやっと目（め）が覚（さ）めたかい君（くん）",
+        "chinese": "啊，你终于醒了啊"
       },
       {
-        "japanese": "あぁ違（ちが）うなむしろどっちが夢（ゆめ）だか"
+        "japanese": "あぁ違（ちが）うなむしろどっちが夢（ゆめ）だか",
+        "chinese": "啊，不对，到底哪边才是梦呢"
       },
       {
-        "japanese": "そんなこっちゃいいんだ"
+        "japanese": "そんなこっちゃいいんだ",
+        "chinese": "那种事也无所谓了"
       },
       {
-        "japanese": "さぁ行（い）こっかれつごー"
+        "japanese": "さぁ行（い）こっかれつごー",
+        "chinese": "走吧，出发"
       },
       {
-        "japanese": "あの向（む）こうに咲（さ）く向日葵（ひまわり）の方（ほう）へ"
+        "japanese": "あの向（む）こうに咲（さ）く向日葵（ひまわり）の方（ほう）へ",
+        "chinese": "去往前方葵花盛开的地方"
       },
       {
         "japanese": "あぁ君（きみ）はまだ覚（おぼ）えているかな",
-        "breakBefore": true
+        "breakBefore": true,
+        "chinese": "啊，你还记得吗"
       },
       {
-        "japanese": "あぁ忘（わす）れちゃって いいんだけれどさ"
+        "japanese": "あぁ忘（わす）れちゃって いいんだけれどさ",
+        "chinese": "啊，其实忘了也没关系"
       },
       {
-        "japanese": "あの夏（なつ）君（くん）に逢（あ）えたことが"
+        "japanese": "あの夏（なつ）君（くん）に逢（あ）えたことが",
+        "chinese": "那个夏天能遇见你"
       },
       {
-        "japanese": "僕（ぼく）にとってはただ嬉（うれ）しいんだ"
+        "japanese": "僕（ぼく）にとってはただ嬉（うれ）しいんだ",
+        "chinese": "我就只是觉得高兴"
       },
       {
-        "japanese": "そんなこっちゃいいんだ"
+        "japanese": "そんなこっちゃいいんだ",
+        "chinese": "那种事也无所谓了"
       },
       {
-        "japanese": "さぁ行（い）こっかれつごー"
+        "japanese": "さぁ行（い）こっかれつごー",
+        "chinese": "走吧，出发"
       },
       {
-        "japanese": "あの向（む）こうに咲（さ）く向日葵（ひまわり）の方（ほう）へ"
+        "japanese": "あの向（む）こうに咲（さ）く向日葵（ひまわり）の方（ほう）へ",
+        "chinese": "去往前方葵花盛开的地方"
       },
       {
         "japanese": "La la la...",
-        "breakBefore": true
+        "breakBefore": true,
+        "chinese": "啦啦啦……"
       }
     ]
   },
@@ -1264,9 +1277,6 @@
       {
         "japanese": "歌（うた）えぬなら",
         "chinese": "无法歌唱的话"
-      },
-      {
-        "japanese": "..music.."
       },
       {
         "japanese": "わかってるんだって",
@@ -1513,7 +1523,7 @@
         "chinese": "我发现了少女，如此这般与我邂逅"
       },
       {
-        "japanese": "七（しち）月（がつ）五日（いつか）高（こう）一生（いちせい）の夏（なつ）",
+        "japanese": "七（しち）月（がつ）五日（いつか）高一生（こういちせい）の夏（なつ）",
         "chinese": "夏天的七月五日我成为了高一新生",
         "breakBefore": true
       },
@@ -2151,7 +2161,7 @@
         "breakBefore": true
       },
       {
-        "japanese": "お愿（すなお）いどうか覚（さ）めないでよ",
+        "japanese": "お願（ねが）いどうか覚（さ）めないでよ",
         "chinese": "拜托了请不要让我醒过来"
       },
       {
@@ -2172,7 +2182,7 @@
         "chinese": "这道声音是什么?"
       },
       {
-        "japanese": "鳴（な）き声（こえ）に溺（おぼ）れた",
+        "japanese": "鳴（な）き声（ごえ）に溺（おぼ）れた",
         "chinese": "沉溺于那呜声"
       },
       {
@@ -2196,7 +2206,7 @@
         "chinese": "就会有何失去的话"
       },
       {
-        "japanese": "なんて愿（すなお）ってしまう僕（ぼく）はもういないから",
+        "japanese": "なんて願（ねが）ってしまう僕（ぼく）はもういないから",
         "chinese": "在祈求着些什么的我已不复存在了",
         "breakBefore": true
       },
@@ -2721,9 +2731,6 @@
   "夏色アンサー": {
     "lines": [
       {
-        "japanese": "Vocal: IA"
-      },
-      {
         "japanese": "夏（なつ）のさ 香（かお）りが",
         "chinese": "夏天的气味"
       },
@@ -3092,7 +3099,7 @@
         "chinese": "但也确实是已经枯萎了啊"
       },
       {
-        "japanese": "晴（は）れる微笑（びしょう）を与（あた）う災（さい）な物語（ものがたり）りに",
+        "japanese": "晴（は）れる微笑（びしょう）を与（あた）う災（さい）な物語（ものがた）りに",
         "chinese": "在晴天的微笑与灾难的故事之中",
         "breakBefore": true
       },
@@ -3109,7 +3116,7 @@
         "chinese": "但也确实是已经枯萎了啊"
       },
       {
-        "japanese": "晴（は）れる微笑（びしょう）を与（あた）う災（さい）な物語（ものがたり）りは",
+        "japanese": "晴（は）れる微笑（びしょう）を与（あた）う災（さい）な物語（ものがた）りは",
         "chinese": "在晴天的微笑与灾难的故事里面"
       },
       {
@@ -3377,7 +3384,7 @@
       },
       {
         "japanese": "Let's search it, DREAMERS!!",
-        "chinese": "Let's search it, DREAMERS!!"
+        "chinese": "追梦的人啊，一起去寻找吧！"
       },
       {
         "japanese": "一人（ひとり）じゃないんだってわかれば",
@@ -3389,7 +3396,7 @@
       },
       {
         "japanese": "The SAME FLAVORS!!",
-        "chinese": "The SAME FLAVORS!!"
+        "chinese": "那相同的味道！"
       },
       {
         "japanese": "僕（ぼく）がいたって証明（しょうめい）",
@@ -3405,7 +3412,7 @@
       },
       {
         "japanese": "Let's search it, BELIEVERS!!",
-        "chinese": "Let's search it, BELIEVERS!!"
+        "chinese": "心怀信念的人啊，一起去寻找吧！"
       },
       {
         "japanese": "一人（ひとり）じゃないんだって思（おも）えば",
@@ -3417,7 +3424,7 @@
       },
       {
         "japanese": "The SAME FLAVORS!!",
-        "chinese": "The SAME FLAVORS!!"
+        "chinese": "那相同的味道！"
       },
       {
         "japanese": "君（きみ）がいたって証明（しょうめい）",
@@ -3467,7 +3474,7 @@
       },
       {
         "japanese": "Let's search it, DREAMERS!!",
-        "chinese": "Let's search it, DREAMERS!!"
+        "chinese": "追梦的人啊，一起去寻找吧！"
       },
       {
         "japanese": "一人（ひとり）じゃないんだってわかれば",
@@ -3479,7 +3486,7 @@
       },
       {
         "japanese": "The SAME FLAVORS!!",
-        "chinese": "The SAME FLAVORS!!"
+        "chinese": "那相同的味道！"
       },
       {
         "japanese": "僕（ぼく）がいたって証明（しょうめい）",
@@ -3495,7 +3502,7 @@
       },
       {
         "japanese": "Let's search it, BELIEVERS!!",
-        "chinese": "Let's search it, BELIEVERS!!"
+        "chinese": "心怀信念的人啊，一起去寻找吧！"
       },
       {
         "japanese": "一人（ひとり）じゃないんだって思（おも）えば",
@@ -3507,14 +3514,14 @@
       },
       {
         "japanese": "The SAME FLAVORS!!",
-        "chinese": "The SAME FLAVORS!!"
+        "chinese": "那相同的味道！"
       },
       {
         "japanese": "君（きみ）がいたって証明（しょうめい）",
         "chinese": "你曾存在的证明"
       },
       {
-        "japanese": "忘（わす）れないで きっと実（み）を成（なる）せ",
+        "japanese": "忘（わす）れないで きっと実（み）を成（な）せ",
         "chinese": "请别忘记 因为它一定能结成果实的啊"
       }
     ]
@@ -4156,7 +4163,7 @@
         "chinese": "你拒绝这终结"
       },
       {
-        "japanese": "咲（さ）カセ死（し）ニ花（ばな）",
+        "japanese": "咲（さ）カセ死（し）ニ花（はな）",
         "chinese": "死亡之花也会开放"
       },
       {
@@ -5242,7 +5249,7 @@
         "chinese": "这个没有意义可言的世界"
       },
       {
-        "japanese": "ラムネ色満（み）たしたこの水槽（すいそう）で",
+        "japanese": "ラムネ色（いろ） 満（み）たしたこの水槽（すいそう）で",
         "chinese": "在这充满着波子汽水色的水槽裹",
         "breakBefore": true
       },
@@ -5378,7 +5385,7 @@
         "chinese": "就这样完结的话太寂寞了"
       },
       {
-        "japanese": "ラムネ色満（み）たしたこの水槽（すいそう）で",
+        "japanese": "ラムネ色（いろ） 満（み）たしたこの水槽（すいそう）で",
         "chinese": "在这充满着波子汽水色的水槽裹",
         "breakBefore": true
       },
@@ -7296,11 +7303,11 @@
     "lines": [
       {
         "japanese": "降（ふ）り出（だ）した雨（あめ）の音（おと）",
-        "chinese": "来访大地的雨水之声"
+        "chinese": "雨刚落下的声音"
       },
       {
         "japanese": "誰（だれ）もいない夜（よる）の底（そこ）",
-        "chinese": "空无一人的深夜底层"
+        "chinese": "空无一人的深夜里"
       },
       {
         "japanese": "今日（きょう）が来（き）てしまう前（まえ）に",
@@ -7878,7 +7885,7 @@
         "chinese": "「没有改变呢"
       },
       {
-        "japanese": "空（そら）も星（ほし）も その泣（な）き顔（かお）も",
+        "japanese": "空（そら）も星（ほし）も その泣（な）き顔（がお）も",
         "chinese": "不管是天空或繁星　还有那流泪的脸庞」"
       },
       {
@@ -7944,7 +7951,7 @@
       },
       {
         "japanese": "I know this sky loves you",
-        "chinese": "I know this sky loves you",
+        "chinese": "我知道，这片天空爱着你",
         "breakBefore": true
       },
       {
