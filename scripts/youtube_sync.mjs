@@ -8,6 +8,8 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import sharp from 'sharp'
 
+import { isExcludedYouTubeChannel } from './youtube-channel-exclusions.mjs'
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const ROOT = path.resolve(__dirname, '..')
@@ -542,10 +544,13 @@ async function syncSubscriptions(accessToken) {
   console.log('[*] 读取已授权账号的 YouTube 订阅…')
   const fetchedSubscriptions = await getSubscriptions(accessToken)
   const subscriptions = fetchedSubscriptions.filter((subscription) => {
-    const title = subscription.snippet?.title?.trim() || ''
+    const snippet = subscription.snippet
+    const title = snippet?.title?.trim() || ''
+    const id = snippet?.resourceId?.channelId
     const normalizedTitle = title.normalize('NFKC').toLowerCase().replace(/\s+/g, '')
-    if (!EXCLUDED_NORMALIZED_SUBSCRIPTION_TITLES.has(normalizedTitle)) return true
-    console.log(`  [-] 按排除规则跳过 ${title}`)
+    const excludedByTitle = EXCLUDED_NORMALIZED_SUBSCRIPTION_TITLES.has(normalizedTitle)
+    if (!isExcludedYouTubeChannel(id) && !excludedByTitle) return true
+    console.log(`  [-] 按排除规则跳过 ${title || id}`)
     return false
   })
   await Promise.all([

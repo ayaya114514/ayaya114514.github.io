@@ -50,6 +50,9 @@ Takeout fallback 只接受原始三列表头
 或 URL 都会 fail closed；频道页或头像暂时无法下载时则保留有效频道，并使用已有
 thumbnail 或无图占位。正式 JSON 采用同目录 temporary file + rename 写入。
 
+API 同步和 Takeout fallback 都通过 `youtube-channel-exclusions.mjs` 按频道 ID 排除指定订阅。
+排除规则在下载头像前应用，数据校验也会检查发布列表中的频道 ID。
+
 ## 豆瓣
 
 把豆瓣"看过的电影 / 读过的书"同步到博客的 `娱乐` 板块。
@@ -123,10 +126,10 @@ npm run sync:entertainment
 
 ## 图片与网络边界
 
-- 页面真正发布的娱乐头像只放在 `public/{youtube-avatars,band-avatars}/thumbs/`。
-- YouTube 和乐队头像原图分别位于 `assets/raw/youtube-avatars/`、
-  `assets/raw/band-avatars/`；桌搭设备原图位于 `assets/raw/device/`。这些 source
-  assets 会被 git 跟踪，但不会进入 GitHub Pages artifact。
+- YouTube 头像缩略图发布在 `public/youtube-avatars/thumbs/`。
+- YouTube 头像、乐队存档和桌搭设备的原图分别在 `assets/raw/youtube-avatars/`、
+  `assets/raw/band-avatars/` 和 `assets/raw/device/`。这些 source assets 由 git 跟踪，
+  存在 GitHub Pages artifact 之外。
 - Node 同步脚本的请求使用 15 秒 timeout，对 429/5xx 最多额外重试两次；图片必须
   返回 `image/*` MIME，且 header 和实际 streamed body 都不能超过 8 MiB。
 - 已缓存的头像 thumbnail 必须是 regular、非空、可由 Sharp 完整解码的 160×160

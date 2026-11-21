@@ -2,6 +2,8 @@ import { readdir, readFile, stat } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+import { isExcludedYouTubeChannel } from './youtube-channel-exclusions.mjs'
+
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const PUBLIC_DIR = path.join(ROOT, 'public')
 const failures = []
@@ -11,22 +13,14 @@ const referencedAssets = new Map()
 
 const datasets = [
   {
-    label: 'bands',
-    file: 'src/data/bands.json',
-    required: ['slug', 'display', 'link'],
-    unique: ['slug', 'link'],
-    urls: ['link'],
-    asset: 'avatar',
-    assetDir: 'band-avatars/thumbs'
-  },
-  {
     label: 'YouTube subscriptions',
     file: 'src/data/youtube-subs.json',
     required: ['id', 'title', 'url'],
     unique: ['id', 'url'],
     urls: ['url'],
     asset: 'avatar',
-    assetDir: 'youtube-avatars/thumbs'
+    assetDir: 'youtube-avatars/thumbs',
+    excludesId: isExcludedYouTubeChannel
   },
   {
     label: 'Douban movies',
@@ -127,6 +121,10 @@ async function validateDataset(spec) {
     if (!item || typeof item !== 'object' || Array.isArray(item)) {
       report(`${spec.label} item ${index + 1}: item must be an object`)
       continue
+    }
+
+    if (spec.excludesId?.(item.id)) {
+      report(`${spec.label} item ${index + 1}: excluded channel ID ${item.id}`)
     }
 
     for (const field of spec.required) {

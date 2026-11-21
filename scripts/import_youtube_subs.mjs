@@ -12,6 +12,8 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import sharp from 'sharp'
 
+import { isExcludedYouTubeChannel } from './youtube-channel-exclusions.mjs'
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const ROOT = path.resolve(__dirname, '..')
@@ -399,7 +401,11 @@ async function main() {
   }
   const csv = await fs.readFile(csvPath, 'utf8')
   const rows = parseCsv(csv)
-  const channels = validateTakeoutRows(rows)
+  const channels = validateTakeoutRows(rows).filter(({ id, title }) => {
+    if (!isExcludedYouTubeChannel(id)) return true
+    console.log(`  [-] 按排除规则跳过 ${title}`)
+    return false
+  })
   assertNoLargeDrop(await readJsonIfPresent(OUT_JSON), channels.length, allowLargeDrop)
   console.log(`[*] 表头: ${EXPECTED_HEADER.join(' | ')}`)
   console.log(`[*] 共 ${channels.length} 个频道`)
