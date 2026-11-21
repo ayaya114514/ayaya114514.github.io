@@ -103,6 +103,9 @@ npm run sync:entertainment
 - `src/data/douban/movies.json`
 - `src/data/douban/books.json`
 
+默认账号的电影与图书日期隐藏规则在 `douban_sync.py` 的 `HIDDEN_DATE_SUBJECT_IDS` 中维护。
+同步时按豆瓣条目 ID 将这些记录的日期写为 `null`。新条目使用抓取到的日期。
+
 同步会增量复用已下载封面；如果 Cookie 失效、任意分页解析为空、关键字段缺失
 或结果重复，会立即停止并保留原 JSON，避免用空数据或不完整数据覆盖博客。
 `all` 模式会先完整抓取、验证和本地化电影与图书，最后才 batch commit 两个 JSON；

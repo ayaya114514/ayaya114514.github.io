@@ -39,7 +39,56 @@ from bs4 import BeautifulSoup
 # ---------- 配置 ----------
 
 # 你的豆瓣用户 ID（从 profile URL 取，如 https://www.douban.com/people/290893353/）
-USER_ID = os.environ.get("DOUBAN_USER_ID", "290893353")
+DEFAULT_USER_ID = "290893353"
+USER_ID = os.environ.get("DOUBAN_USER_ID", DEFAULT_USER_ID)
+
+# 站点上已隐藏标记日期的豆瓣条目，按 subject ID 匹配。
+HIDDEN_DATE_SUBJECT_IDS = {
+    "movie": frozenset(
+        {
+            "1291561",
+            "1291583",
+            "1291838",
+            "1292219",
+            "1297359",
+            "1304970",
+            "1307793",
+            "1308807",
+            "1309079",
+            "1310177",
+            "1395091",
+            "1865703",
+            "1866479",
+            "1889243",
+            "2043546",
+            "3541415",
+            "6791750",
+            "10741834",
+            "20470074",
+            "24773958",
+            "25662329",
+            "26607693",
+            "26683290",
+            "30402296",
+            "30453095",
+            "35371261",
+            "35772573",
+        }
+    ),
+    "book": frozenset(
+        {
+            "25920952",
+            "25960668",
+            "26595242",
+            "27068767",
+            "27200257",
+            "27666853",
+            "30422587",
+            "35818897",
+            "36808421",
+        }
+    ),
+}
 
 # Cookie 默认保存在 repo 外。把整段 Cookie（一行）放进去
 # 怎么拿 Cookie：浏览器登录豆瓣后 → F12 → Network → 选任意 douban.com 请求
@@ -175,6 +224,19 @@ def parse_date(li_block) -> str | None:
     """标记日期通常在 <span class="date">2024-01-15</span>。"""
     date_span = li_block.find("span", class_="date")
     return date_span.get_text(strip=True) if date_span else None
+
+
+def hide_selected_dates(
+    items: list[dict[str, Any]], kind: str, user_id: str
+) -> None:
+    if user_id != DEFAULT_USER_ID:
+        return
+
+    hidden_ids = HIDDEN_DATE_SUBJECT_IDS[kind]
+    for item in items:
+        subject = re.fullmatch(r"/subject/([0-9]+)/?", urlparse(item["url"]).path)
+        if subject and subject[1] in hidden_ids:
+            item["date"] = None
 
 
 def parse_comment(li_block) -> str | None:
@@ -706,6 +768,7 @@ def main() -> None:
     # 两类封面也处理完后，才进入带 rollback 的 JSON batch commit。
     for label, display_label, items, path in datasets:
         assert_no_large_drop(items, path, display_label, allow_large_drop)
+        hide_selected_dates(items, label, USER_ID)
         print(f"=== 下载{display_label}封面（共 {len(items)} 张） ===")
         localize_covers(items, label)
 
