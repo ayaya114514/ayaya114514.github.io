@@ -2168,7 +2168,7 @@
       },
       {
         "japanese": "直喩（ちょくゆ）のまま 直喩（ちょくゆ）のまま",
-        "chinese": "知无不言 无需顾虑”"
+        "chinese": "知无不言 无需顾虑"
       },
       {
         "japanese": "何度（なんど）でも何度（なんど）でも 話（はな）すんだ 僕（ぼく）らしく",
@@ -6131,8 +6131,7 @@
       },
       {
         "japanese": "深（ふか）く青（あお）い",
-        "chinese": "深深的蓝色",
-        "breakBefore": true
+        "chinese": "深深的蓝色"
       },
       {
         "japanese": "青（あお）い青（あお）いという絶高（ぜっこう）の",
@@ -6174,8 +6173,7 @@
       },
       {
         "japanese": "深（ふか）く青（あお）い",
-        "chinese": "深深的蓝色",
-        "breakBefore": true
+        "chinese": "深深的蓝色"
       },
       {
         "japanese": "青（あお）い青（あお）いという絶高（ぜっこう）の",
@@ -6254,8 +6252,7 @@
       },
       {
         "japanese": "深（ふか）く青（あお）い",
-        "chinese": "深深的蓝色",
-        "breakBefore": true
+        "chinese": "深深的蓝色"
       },
       {
         "japanese": "青（あお）い青（あお）いという絶（ぜっ）高（こう）の",
@@ -7905,12 +7902,12 @@
       },
       {
         "japanese": "ラララ",
-        "chinese": "啦啦啦"
+        "chinese": "啦啦啦",
+        "breakBefore": true
       },
       {
         "japanese": "ずっと僕（ぼく）が",
-        "chinese": "始终是我",
-        "breakBefore": true
+        "chinese": "始终是我"
       },
       {
         "japanese": "待（ま）ち焦（こ）がれる",
@@ -7980,12 +7977,12 @@
       },
       {
         "japanese": "ラララ",
-        "chinese": "啦啦啦"
+        "chinese": "啦啦啦",
+        "breakBefore": true
       },
       {
         "japanese": "きっと僕（ぼく）が",
-        "chinese": "一定是我",
-        "breakBefore": true
+        "chinese": "一定是我"
       },
       {
         "japanese": "踊（おど）り暮（く）れる",
@@ -8013,12 +8010,12 @@
       },
       {
         "japanese": "ラララ",
-        "chinese": "啦啦啦"
+        "chinese": "啦啦啦",
+        "breakBefore": true
       },
       {
         "japanese": "きっと僕（ぼく）が",
-        "chinese": "一定是我",
-        "breakBefore": true
+        "chinese": "一定是我"
       },
       {
         "japanese": "踊（おど）り暮（く）れる",
@@ -8030,12 +8027,12 @@
       },
       {
         "japanese": "ラララ",
-        "chinese": "啦啦啦"
+        "chinese": "啦啦啦",
+        "breakBefore": true
       },
       {
         "japanese": "ずっと僕（ぼく）が",
-        "chinese": "始终是我",
-        "breakBefore": true
+        "chinese": "始终是我"
       },
       {
         "japanese": "踊（おど）り暮（く）れる",
@@ -16720,12 +16717,12 @@
       },
       {
         "japanese": "ずっと",
-        "chinese": "一直"
+        "chinese": "一直",
+        "breakBefore": true
       },
       {
         "japanese": "ずっと",
-        "chinese": "一直",
-        "breakBefore": true
+        "chinese": "一直"
       },
       {
         "japanese": "この言葉（ことば）を",

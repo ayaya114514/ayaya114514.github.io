@@ -544,7 +544,7 @@
       },
       {
         "japanese": "だから君（きみ）の姿（すがた）・形（かたち）・香（かお）り・ふるまい",
-        "chinese": "所以你的样子|身影|香味|举止"
+        "chinese": "所以你的样子、身影、香味、举止"
       },
       {
         "japanese": "全部（ぜんぶ） 全部（ぜんぶ）が...  全部（ぜんぶ） 全部（ぜんぶ）が.. 全部（ぜんぶ）",
@@ -618,8 +618,7 @@
       },
       {
         "japanese": "だから僕（ぼく）は惹（ひ）かれてったんだ",
-        "chinese": "于是我被你吸引了",
-        "breakBefore": true
+        "chinese": "于是我被你吸引了"
       }
     ]
   },
@@ -2577,16 +2576,14 @@
         "chinese": "我们不知何为惧、妒、恨的昔日一般闪耀"
       },
       {
-        "japanese": "la- la- la- la- la- la- la- la- la- la- la-",
-        "chinese": "~"
+        "japanese": "la- la- la- la- la- la- la- la- la- la- la-"
       },
       {
         "japanese": "There's a wish that I want it to become",
         "chinese": "有一个我想要实现的愿望"
       },
       {
-        "japanese": "sha- la- la- la- la- la- la- la- la- la- la-",
-        "chinese": "~"
+        "japanese": "sha- la- la- la- la- la- la- la- la- la- la-"
       },
       {
         "japanese": "gather all our hearts and shine as one",
@@ -4733,7 +4730,7 @@
     "lines": [
       {
         "japanese": "This intension I can find inside (someone's listening)",
-        "chinese": "我可以在内心找到这个内涵(某人正听着呢）"
+        "chinese": "我可以在内心找到这个内涵（某人正听着呢）"
       },
       {
         "japanese": "But I found an answer without a reason beneath in me",
@@ -4750,7 +4747,7 @@
       },
       {
         "japanese": "All this tension I desire to come (someone's whispering)",
-        "chinese": "我渴求所有的紧绷感的涌来（某人正咬着耳朵)",
+        "chinese": "我渴求所有的紧绷感的涌来（某人正咬着耳朵）",
         "breakBefore": true
       },
       {
@@ -7783,7 +7780,7 @@
       },
       {
         "japanese": "but I don't wanna be your ex-friend",
-        "chinese": "但我不想成为你的”前朋友“"
+        "chinese": "但我不想成为你的“前朋友”"
       },
       {
         "japanese": "Don't you know this guy who sang a song",
@@ -11656,7 +11653,7 @@
       },
       {
         "japanese": "「いいでしょう?」",
-        "chinese": "「你觉得如何？"
+        "chinese": "「你觉得如何？」"
       },
       {
         "japanese": "またまた僕（ぼく）はお願（ねが）いしたんだ",
@@ -12214,7 +12211,7 @@
         "chinese": "也把那句没把握的“下次见”"
       },
       {
-        "japanese": "「叫（さけ）べ",
+        "japanese": "叫（さけ）べ",
         "chinese": "喊出来"
       },
       {
@@ -13849,7 +13846,7 @@
       },
       {
         "japanese": "目（め）一杯（いっぱい）の「ウソ」をクローゼットから",
-        "chinese": "尽量把“”谎话“从衣柜里"
+        "chinese": "尽量把“谎话”从衣柜里"
       },
       {
         "japanese": "引（ひ）っ張（ぱ）り出（だ）して身（み）に纏（まと）って",
@@ -14086,7 +14083,7 @@
       },
       {
         "japanese": "まだ 「すぐ?」 いつかのため蓄（たくわ）えんの",
-        "chinese": "” 等等 “马上？” 我在为了某一刻积蓄力量"
+        "chinese": "等等 “马上？” 我在为了某一刻积蓄力量"
       },
       {
         "japanese": "どこのどいつも なぜ見（み）くびんの?",
@@ -14986,8 +14983,8 @@
         "chinese": "关掉手机"
       },
       {
-        "japanese": "僕（ぼく）に「お帰（かえ）り",
-        "chinese": "」对自己说“欢迎回来”"
+        "japanese": "僕（ぼく）に「お帰（かえ）り」",
+        "chinese": "对自己说“欢迎回来”"
       },
       {
         "japanese": "こんなものがなければ",
@@ -15964,7 +15961,7 @@
       },
       {
         "japanese": "「もう無理（むり）、不可（ふか）、否（いな） こんな場所（ばしょ）に一秒（いちびょう）だっていられるわけない",
-        "chinese": "『“我已经受够了，不行了，不对 我已经无法在这样的地方再多待一秒』",
+        "chinese": "『我已经受够了，不行了，不对 我已经无法在这样的地方再多待一秒』",
         "breakBefore": true
       },
       {
@@ -18392,7 +18389,7 @@
       },
       {
         "japanese": "そんなの起（お）こってみなきゃ分（わ）からないと言（い）う",
-        "chinese": "”那样的事没发生的话怎么会知道“"
+        "chinese": "“那样的事没发生的话怎么会知道”"
       },
       {
         "japanese": "少（すこ）し怒（おこ）ったような顔（かお）で 君（きみ）は言（い）う",
@@ -18434,7 +18431,7 @@
       },
       {
         "japanese": "当（あ）たり前（まえ）の日々（ひび）などいらないと言（い）う",
-        "chinese": "我说：”我不需要理所当然的日子“",
+        "chinese": "我说：“我不需要理所当然的日子”",
         "breakBefore": true
       },
       {
@@ -22339,12 +22336,12 @@
       },
       {
         "japanese": "見（み）えてるものより見（み）えないもの",
-        "chinese": "“比起见过的事物那些没见过的事物“",
+        "chinese": "“比起见过的事物那些没见过的事物”",
         "breakBefore": true
       },
       {
         "japanese": "知（し）ってることより知（し）らないことの方（ほう）が",
-        "chinese": "”比起已知的事物那些未知的事物“"
+        "chinese": "“比起已知的事物那些未知的事物”"
       },
       {
         "japanese": "多（おお）いとは言（い）うが そりゃどうだろうかもう",
@@ -23663,7 +23660,7 @@
       },
       {
         "japanese": "「さよなら」のないハローと　「仕方（しかた）ない」のない未来（みらい）と",
-        "chinese": "不存在”永别“的Hello和 不存在”没办法“的未来",
+        "chinese": "不存在“永别”的Hello和 不存在“没办法”的未来",
         "breakBefore": true
       },
       {
@@ -24224,7 +24221,7 @@
       },
       {
         "japanese": "「さよなら」のないハローと　「仕方（しかた）ない」のない未来（みらい）と",
-        "chinese": "不存在”永别“的Hello和 不存在”没办法“的未来",
+        "chinese": "不存在“永别”的Hello和 不存在“没办法”的未来",
         "breakBefore": true
       },
       {
@@ -27151,8 +27148,7 @@
       },
       {
         "japanese": "これを超（こ）える気持（きも）ちが今（いま）も　生（う）まれない",
-        "chinese": "直到现在 也没有什么能超越这些感情",
-        "breakBefore": true
+        "chinese": "直到现在 也没有什么能超越这些感情"
       },
       {
         "japanese": "僕（ぼく）は生（い）きてるよ　君（きみ）のいない世界（せかい）で",
@@ -27277,8 +27273,7 @@
       },
       {
         "japanese": "これを超（こ）える気持（きも）ちはきっと",
-        "chinese": "能够超越这些的情感",
-        "breakBefore": true
+        "chinese": "能够超越这些的情感"
       },
       {
         "japanese": "この世（よ）のどこにもないと　わかっているよ",
@@ -31420,11 +31415,11 @@
       },
       {
         "japanese": "「OH NO!!」 she's going for another one lady",
-        "chinese": "“哦不！！“她又开始搜寻另一个目标了"
+        "chinese": "“哦不！！”她又开始搜寻另一个目标了"
       },
       {
         "japanese": "「YELL OUT!!」 that's what I said to her but she goes now",
-        "chinese": "“呼喊吧！！“我向她这么说道，而她转头离去",
+        "chinese": "“呼喊吧！！”我向她这么说道，而她转头离去",
         "breakBefore": true
       },
       {
@@ -34674,21 +34669,17 @@
       },
       {
         "japanese": "La La La Ta Ta   La u Lu La La",
-        "chinese": ".",
         "breakBefore": true
       },
       {
-        "japanese": "La La La Ta Ta   Ow Oww Ow",
-        "chinese": "."
+        "japanese": "La La La Ta Ta   Ow Oww Ow"
       },
       {
         "japanese": "La La La Ta Ta   La u Lu La La",
-        "chinese": ".",
         "breakBefore": true
       },
       {
-        "japanese": "La La La Ta Ta   Ow Oww Ow",
-        "chinese": "."
+        "japanese": "La La La Ta Ta   Ow Oww Ow"
       }
     ]
   }
