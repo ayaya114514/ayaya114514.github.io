@@ -406,7 +406,8 @@ async function main() {
     console.log(`  [-] 按排除规则跳过 ${title}`)
     return false
   })
-  assertNoLargeDrop(await readJsonIfPresent(OUT_JSON), channels.length, allowLargeDrop)
+  const previous = await readJsonIfPresent(OUT_JSON)
+  assertNoLargeDrop(previous, channels.length, allowLargeDrop)
   console.log(`[*] 表头: ${EXPECTED_HEADER.join(' | ')}`)
   console.log(`[*] 共 ${channels.length} 个频道`)
 
@@ -430,8 +431,11 @@ async function main() {
     throw new Error('频道处理结果不完整；为避免覆盖旧数据，本次停止')
   }
 
-  // 按标题字母 / 假名 / 拼音排序，保持稳定
-  items.sort((a, b) => a.title.localeCompare(b.title, 'zh-Hans-CN'))
+  // Takeout CSV 只有频道信息，沿用上一次同步的顺序，新出现的频道放在末尾。
+  const previousItems = Array.isArray(previous?.items) ? previous.items : []
+  const previousOrder = new Map(previousItems.map(({ id }, index) => [id, index]))
+  const rank = (id) => previousOrder.get(id) ?? previousItems.length
+  items.sort((a, b) => rank(a.id) - rank(b.id) || a.title.localeCompare(b.title, 'zh-Hans-CN'))
 
   const payload = {
     count: items.length,

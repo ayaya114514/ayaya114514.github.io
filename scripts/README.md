@@ -52,6 +52,8 @@ thumbnail 或无图占位。正式 JSON 采用同目录 temporary file + rename 
 
 API 同步和 Takeout fallback 都通过 `youtube-channel-exclusions.mjs` 按频道 ID 排除指定订阅。
 排除规则在下载头像前应用，数据校验也会检查发布列表中的频道 ID。
+API 同步按 `snippet.publishedAt` 将最近订阅的频道排在前面，发布 JSON 保存排序后的频道列表。
+Takeout CSV 缺少订阅日期，导入时按频道 ID 沿用上一次同步的顺序，并把未知顺序的频道放在末尾。
 
 ## 豆瓣
 

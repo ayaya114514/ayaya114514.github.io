@@ -426,6 +426,11 @@ async function getSubscriptions(accessToken) {
   return items
 }
 
+function subscriptionTimestamp(subscription) {
+  const timestamp = Date.parse(subscription.snippet?.publishedAt ?? '')
+  return Number.isFinite(timestamp) ? timestamp : Number.NEGATIVE_INFINITY
+}
+
 function bestThumbnail(thumbnails = {}) {
   return thumbnails.high?.url || thumbnails.medium?.url || thumbnails.default?.url || null
 }
@@ -553,6 +558,12 @@ async function syncSubscriptions(accessToken) {
     console.log(`  [-] 按排除规则跳过 ${title || id}`)
     return false
   })
+  subscriptions.sort((a, b) => {
+    const first = subscriptionTimestamp(a)
+    const second = subscriptionTimestamp(b)
+    if (first !== second) return second - first
+    return (a.snippet?.title ?? '').localeCompare(b.snippet?.title ?? '', 'zh-Hans-CN')
+  })
   await Promise.all([
     fs.mkdir(AVATAR_SOURCE_DIR, { recursive: true }),
     fs.mkdir(AVATAR_THUMB_DIR, { recursive: true })
@@ -593,7 +604,6 @@ async function syncSubscriptions(accessToken) {
   }
   assertNoLargeDrop(previous, items.length, 'YouTube subscriptions')
 
-  items.sort((a, b) => a.title.localeCompare(b.title, 'zh-Hans-CN'))
   const now = new Date()
   const localTime = new Date(now.getTime() - now.getTimezoneOffset() * 60_000)
   const payload = {
